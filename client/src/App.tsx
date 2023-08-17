@@ -9,12 +9,8 @@ function App() {
     <div>
       <Header />
       <Nav />
-      <InfoNav />
-    </div>
-  );
-  return (
-    <div>
       <Book name="나의 라임 오렌지나무" />
+      <InfoNav />
     </div>
   );
 }
