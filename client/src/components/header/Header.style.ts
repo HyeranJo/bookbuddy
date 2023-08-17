@@ -8,8 +8,8 @@ export const Styled_Header = {
 
     align-items: center;
     justify-content: space-between;
-    padding-left: 127px;
-    padding-right: 127px;
+    padding-left: 50px;
+    padding-right: 50px;
   `,
   Menu: styled.div`
     display: flex;
