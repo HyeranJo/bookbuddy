@@ -15,7 +15,6 @@ const Styled_Book = {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-bottom: 5px; */
     cursor: pointer;
   `,
   img: styled.img`
