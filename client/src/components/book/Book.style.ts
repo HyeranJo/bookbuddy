@@ -4,6 +4,7 @@ const Styled_Book = {
   container: styled.div`
     width: 170px;
     height: 270px;
+    gap: 5px;
     display: flex;
     flex-direction: column;
   `,
@@ -14,7 +15,7 @@ const Styled_Book = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     cursor: pointer;
   `,
   img: styled.img`
