@@ -1,16 +1,16 @@
 import React from 'react';
 import Nav from './components/nav/Nav';
-import Header from './components/header/Header';
 import InfoNav from './components/info_nav/InfoNav';
 import Book from './components/book/Book';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <Header />
+    <div className="App">
+      <Outlet />
       <Nav />
-      <Book name="나의 라임 오렌지나무" />
       <InfoNav />
+      <Book name="나의 라임 오렌지나무" />
     </div>
   );
 }
