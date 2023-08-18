@@ -1,10 +1,11 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Nav from './components/nav/Nav';
 import InfoNav from './components/info_nav/InfoNav';
 import MypageTable from './components/category/MypageTable';
 import CartTable from './components/category/CartTable';
 import Book from './components/book/Book';
-import { Outlet } from 'react-router-dom';
+import MypageSidebar from './components/sidebar/MypageSidebar';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       />
       <CartTable />
       <Book name="나의 라임 오렌지나무" />
+      <MypageSidebar />
     </div>
   );
 }
