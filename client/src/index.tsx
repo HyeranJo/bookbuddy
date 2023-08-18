@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
+import { RecoilRoot } from 'recoil';
 
 const router = createBrowserRouter([
   {
@@ -24,9 +25,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  <RecoilRoot>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </RecoilRoot>,
 );
 
 // If you want to start measuring performance in your app, pass a function
