@@ -1,8 +1,15 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
 
   /* color */
   --primary-background-color: #F54D42;
   --category-color: #EAEFED;
+  --book-background-color: #E2E2E2;
 
   /* font-size */
   --title-font-size: 36px; 
@@ -14,11 +21,19 @@
   --order-book-title-font-size: 32px;
   --order-quantity-font-size: 24px;
   --order-price-font-size: 24px;
-  
+
 }
 
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
