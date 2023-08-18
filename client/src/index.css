@@ -8,7 +8,8 @@
 
   /* color */
   --primary-background-color: #F54D42;
-  --category-color: #EAEFED
+  --category-color: #EAEFED;
+  --book-background-color: #E2E2E2;
 
   /* font-size */
   --title-font-size: 36px; 
