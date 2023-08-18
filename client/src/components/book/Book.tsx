@@ -22,7 +22,13 @@ const Book = (props: BookProps) => {
         <Styled_Book.img src={image} />
       </Styled_Book.wrapper>
       <Styled_Book.icon onClick={ClickBookmark}>
-        <Bookmark fill={isClick ? '#F54D42' : '#E2E2E2'} />
+        <Bookmark
+          fill={
+            isClick
+              ? 'var(--primary-background-color)'
+              : 'var(--book-background-color)'
+          }
+        />
       </Styled_Book.icon>
       <Styled_Book.content>
         <Styled_Book.name>{props.name}</Styled_Book.name>
