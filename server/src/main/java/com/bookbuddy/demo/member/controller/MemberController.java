@@ -25,13 +25,6 @@ public class MemberController {
     public void postMember(@RequestBody MemberDto.Post memberDto) {
         // member로 변환
         Member member = mapper.memberPostDtoToMember(memberDto);
-        // member에 대한 권한을 만들어서 db에 저장
-        List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        // email이 admin mail일 경우 admin 권한
-        if(member.getEmail() == "admin@gmail.com") {
-            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }
         // service에서 create
     }
 }
