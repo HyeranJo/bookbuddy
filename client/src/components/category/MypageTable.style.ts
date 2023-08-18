@@ -1,6 +1,15 @@
 import { styled } from 'styled-components';
 
 export const Styled_MypageTable = {
+  H1: styled.h1`
+    font-size: var(--title-font-size);
+    margin-bottom: 20px;
+    display: inline-block;
+  `,
+  MessageSpan: styled.span`
+    margin-left: 15px;
+    font-size: var(--message-font-size);
+  `,
   Table: styled.table`
     width: 1095px;
     font-size: var(--basic-font-size);

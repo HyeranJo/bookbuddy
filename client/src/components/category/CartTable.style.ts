@@ -1,6 +1,11 @@
 import { styled } from 'styled-components';
 
 export const Styled_CartTable = {
+  H1: styled.h1`
+    font-size: var(--title-font-size);
+    margin-bottom: 20px;
+    display: inline-block;
+  `,
   Table: styled.table`
     width: 1095px;
     font-size: var(--basic-font-size);

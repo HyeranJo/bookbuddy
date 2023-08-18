@@ -6,6 +6,7 @@ import image from '../.././images/나의 라임 오렌지나무.jpg';
 const CartTable = () => {
   return (
     <div>
+      <Styled_CartTable.H1>장바구니</Styled_CartTable.H1>
       <Styled_CartTable.Table>
         <colgroup>
           <col style={{ width: '8%' }}></col>

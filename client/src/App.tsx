@@ -12,7 +12,10 @@ function App() {
       <Outlet />
       <Nav />
       <InfoNav />
-      <MypageTable />
+      <MypageTable
+        title="배송정보"
+        message="상품취소는 배송준비중인 상태에서만 가능합니다"
+      />
       <CartTable />
       <Book name="나의 라임 오렌지나무" />
     </div>
