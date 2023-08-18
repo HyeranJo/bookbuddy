@@ -2,7 +2,8 @@ import React from 'react';
 import Nav from './components/nav/Nav';
 import Header from './components/header/Header';
 import InfoNav from './components/info_nav/InfoNav';
-import { MypageCategory, CartCategory } from './components/category/Category';
+import MypageTable from './components/category/MypageTable';
+import CartTable from './components/category/CartTable';
 
 function App() {
   return (
@@ -10,8 +11,8 @@ function App() {
       <Header />
       <Nav />
       <InfoNav />
-      <MypageCategory />
-      <CartCategory />
+      <MypageTable />
+      <CartTable />
     </div>
   );
 }
