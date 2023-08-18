@@ -21,4 +21,11 @@ export const Styled_MypageTable = {
   Th: styled.th`
     background-color: var(--category-color);
   `,
+  BookListDiv: styled.div`
+    display: flex;
+    flex-flow: column;
+  `,
+  Tr: styled.tr`
+    border-bottom: 1px solid gray;
+  `,
 };
