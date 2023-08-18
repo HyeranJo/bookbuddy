@@ -8,9 +8,6 @@ function App() {
   return (
     <div className="App">
       <Outlet />
-      <Nav />
-      <InfoNav />
-      <Book name="나의 라임 오렌지나무" />
     </div>
   );
 }
