@@ -24,8 +24,8 @@ import java.util.List;
 @RequestMapping
 @RequiredArgsConstructor
 public class MemberController {
-    private MemberMapper mapper;
-    private MemberService memberService;
+    private final MemberMapper mapper;
+    private final MemberService memberService;
 
     /* 회원가입 */
     @PostMapping("/signup")

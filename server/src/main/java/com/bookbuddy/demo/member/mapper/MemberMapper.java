@@ -8,7 +8,18 @@ import org.springframework.http.HttpStatus;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MemberMapper {
-    Member memberPostDtoToMember(MemberDto.Post memberDto);
+    default Member memberPostDtoToMember(MemberDto.Post memberDto) {
+        Member member = new Member(
+            memberDto.getEmail(),
+            memberDto.getPassword()
+        );
+        return member;
+    }
 
-    MemberDto.Response memberToMemberResponseDto(Member member);
+    default MemberDto.Response memberToMemberResponseDto(Member member) {
+        return new MemberDto.Response(
+            member.getEmail(),
+            member.getPassword()
+        );
+    }
 }
