@@ -27,13 +27,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = findMember.orElseThrow(() ->
                 new BusinessException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        // 회원에 대한 권한 추가
+        // DB에 저장된 권한으로 설정
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-        // email이 admin 계정일 경우 admin 권한 추가
-        if(username.equals("admin@gmail.com")) {
-            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        for(String role : member.getRoles()) {
+            roles.add(new SimpleGrantedAuthority(role));
         }
 
         // User 반환
