@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().ignoringAntMatchers("/h2/**")
-                .and()
+                .csrf().disable()
                 .headers().frameOptions().sameOrigin();
     }
 }
