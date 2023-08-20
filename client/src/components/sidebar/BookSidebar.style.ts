@@ -10,6 +10,7 @@ export const Styled_Sidebar = {
     display: flex;
     flex-flow: column;
     position: sticky;
+    top: calc(133px + 58px);
 
     font-size: var(--basic-font-size);
     text-align: center;
