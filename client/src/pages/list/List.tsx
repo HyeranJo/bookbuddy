@@ -1,6 +1,7 @@
 import React from 'react';
-import BookSidebar from '../../components/sidebar/BookSidebar';
 import { Styled_List } from './List.style';
+import BookSidebar from '../../components/sidebar/BookSidebar';
+import Book from '../../components/book/Book';
 
 const List = () => {
   return (
@@ -8,77 +9,28 @@ const List = () => {
       <Styled_List.Div>
         <BookSidebar />
         <Styled_List.Content>
-          <div>이것은 리스트 페이지 시작</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지</div>
-          <div>이것은 리스트 페이지 끝</div>
+          <Styled_List.Title>
+            <Styled_List.H1>문학</Styled_List.H1>
+            <ul>
+              <Styled_List.SortList>인기순</Styled_List.SortList>
+              <Styled_List.SortList>가격높은순</Styled_List.SortList>
+              <Styled_List.SortList>가격낮은순</Styled_List.SortList>
+            </ul>
+          </Styled_List.Title>
+          <Styled_List.BookGroup>
+            <Styled_List.Books>
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+              <Book />
+            </Styled_List.Books>
+          </Styled_List.BookGroup>
         </Styled_List.Content>
       </Styled_List.Div>
     </Styled_List.Container>
