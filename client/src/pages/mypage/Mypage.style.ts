@@ -1,0 +1,47 @@
+import { styled } from 'styled-components';
+
+export const Styled_Mypage = {
+  Content: styled.section`
+    margin-left: 200px;
+    padding-left: 53.5px;
+    padding-right: 53.5px;
+    padding-top: 22px;
+    width: 1512px;
+  `,
+  Title: styled.div`
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0px;
+  `,
+  H1: styled.h1`
+    font-size: var(--title-font-size);
+    display: inline-block;
+  `,
+  Point: styled.div`
+    width: 1095px;
+    padding: 10px 0px;
+    font-size: var(--mypage-font-size);
+    text-align: end;
+  `,
+  Detail: styled.div`
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 50px;
+  `,
+  BookGroup: styled.div`
+    display: flex;
+    justify-content: start;
+    width: 1095px;
+  `,
+  Books: styled.div`
+    display: flex;
+    justify-content: start;
+    white-space: nowrap;
+    overflow: auto;
+
+    gap: 36px;
+  `,
+};

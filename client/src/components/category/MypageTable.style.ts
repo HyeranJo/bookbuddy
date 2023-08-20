@@ -1,6 +1,9 @@
 import { styled } from 'styled-components';
 
 export const Styled_MypageTable = {
+  Container: styled.div`
+    width: 1095px;
+  `,
   H1: styled.h1`
     font-size: var(--title-font-size);
     margin-bottom: 20px;

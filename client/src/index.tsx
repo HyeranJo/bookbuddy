@@ -8,6 +8,7 @@ import Home from './pages/home/Home';
 import { RecoilRoot } from 'recoil';
 import List from './pages/list/List';
 import Order from './pages/order/Order';
+import Mypage from './pages/mypage/Mypage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/order',
         element: <Order />,
+      },
+      {
+        path: '/mypage',
+        element: <Mypage />,
       },
     ],
   },
