@@ -59,6 +59,7 @@ export const Styled_CartTable = {
     }
     &:last-child {
       font-size: var(--detail-full-amount-font-size);
+      border-bottom: 0px;
     }
   `,
 };
