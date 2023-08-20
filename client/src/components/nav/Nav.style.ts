@@ -10,6 +10,9 @@ export const Styled_Nav = {
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
+
+    position: sticky;
+    top: 133px;
   `,
   SpanDiv: styled.div`
     display: flex;

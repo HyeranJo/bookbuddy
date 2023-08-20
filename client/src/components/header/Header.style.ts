@@ -5,11 +5,15 @@ export const Styled_Header = {
     display: flex;
     width: 1512px;
     height: 133px;
+    background-color: white;
 
     align-items: center;
     justify-content: space-between;
     padding-left: 50px;
     padding-right: 50px;
+
+    position: sticky;
+    top: 0px;
   `,
   Menu: styled.div`
     display: flex;
