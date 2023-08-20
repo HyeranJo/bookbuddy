@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import { RecoilRoot } from 'recoil';
 import List from './pages/list/List';
+import Order from './pages/order/Order';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/list',
         element: <List />,
+      },
+      {
+        path: '/order',
+        element: <Order />,
       },
     ],
   },
