@@ -1,6 +1,12 @@
 import { styled } from 'styled-components';
 
 export const Styled_Nav = {
+  Container: styled.div`
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 133px;
+  `,
   Div: styled.div`
     width: 1512px;
     height: 58px;
@@ -10,9 +16,6 @@ export const Styled_Nav = {
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
-
-    position: sticky;
-    top: 133px;
   `,
   SpanDiv: styled.div`
     display: flex;

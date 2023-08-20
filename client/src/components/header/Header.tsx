@@ -5,14 +5,16 @@ import SearchBar from '../search/SearchBar';
 
 const Header = () => {
   return (
-    <Styled_Header.Div>
-      <Logo />
-      <Styled_Header.Menu>
-        <SearchBar />
-        <Styled_Header.Span>나의정보</Styled_Header.Span>
-        <Styled_Header.Span>고객센터</Styled_Header.Span>
-      </Styled_Header.Menu>
-    </Styled_Header.Div>
+    <Styled_Header.Container>
+      <Styled_Header.Div>
+        <Logo />
+        <Styled_Header.Menu>
+          <SearchBar />
+          <Styled_Header.Span>나의정보</Styled_Header.Span>
+          <Styled_Header.Span>고객센터</Styled_Header.Span>
+        </Styled_Header.Menu>
+      </Styled_Header.Div>
+    </Styled_Header.Container>
   );
 };
 
