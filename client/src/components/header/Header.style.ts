@@ -6,6 +6,7 @@ export const Styled_Header = {
     justify-content: center;
     position: sticky;
     top: 0px;
+    z-index: 99;
   `,
   Div: styled.div`
     display: flex;

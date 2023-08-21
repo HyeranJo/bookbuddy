@@ -6,6 +6,7 @@ export const Styled_Nav = {
     justify-content: center;
     position: sticky;
     top: 133px;
+    z-index: 99;
   `,
   Div: styled.div`
     width: 1512px;

@@ -30,18 +30,33 @@ export const Styled_Mypage = {
     flex-flow: column;
     align-items: center;
     gap: 50px;
+    position: relative;
   `,
-  BookGroup: styled.div`
+  BookmarkTitle: styled.div`
     display: flex;
     justify-content: start;
     width: 1095px;
   `,
   Books: styled.div`
-    display: flex;
-    justify-content: start;
-    white-space: nowrap;
-    overflow: auto;
+    height: 1095px;
+    width: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transform: rotate(90deg);
 
-    gap: 36px;
+    position: absolute;
+    top: 430px;
+
+    // 스크롤바 숨기기
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
+  `,
+  Book: styled.div`
+    transform: rotate(-90deg);
+    height: 206px;
+    width: 270px;
   `,
 };
