@@ -5,3 +5,7 @@ spring:
       path: /h2
   datasource:
     url: jdbc:h2:mem:test
+jwt:
+  secret: cHJvamVjdC1ib29rYnVkZHktc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXkK
+  access-token-expired-minutes: 30
+  refresh-token-expired-minutes: 420
