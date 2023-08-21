@@ -1,4 +1,4 @@
-package com.bookbuddy.demo.global.security;
+package com.bookbuddy.demo.global.security.utils;
 
 import com.bookbuddy.demo.member.entity.Member;
 import org.springframework.security.core.GrantedAuthority;

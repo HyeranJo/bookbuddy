@@ -1,7 +1,8 @@
-package com.bookbuddy.demo.global.security;
+package com.bookbuddy.demo.global.security.service;
 
 import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.global.exception.ExceptionCode;
+import com.bookbuddy.demo.global.security.utils.AccountContext;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
