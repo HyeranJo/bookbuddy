@@ -20,9 +20,7 @@ const Mypage = () => {
       bookmarkScrollRef.current.scrollTop =
         bookmarkScrollRef.current.scrollHeight;
     }
-  });
 
-  useEffect(() => {
     // sidebar scroll
     if (navScrollListRef.current) {
       navScrollListRef.current[navScrollIndex].scrollIntoView({
