@@ -1,5 +1,7 @@
 package com.bookbuddy.demo.member.service;
 
+import com.bookbuddy.demo.global.exception.BusinessException;
+import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.bookbuddy.demo.global.exception.ExceptionCode.MEMBER_NOT_FOUND;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -38,5 +42,15 @@ public class MemberServiceImpl implements MemberService{
         member.setRoles(roles);
 
         return memberRepository.save(member);
+    }
+
+    @Override
+    public Member findMember(long memberId) {
+        return findVerifyMember(memberId);
+    }
+
+    private Member findVerifyMember(long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(()-> new BusinessException(MEMBER_NOT_FOUND));
     }
 }

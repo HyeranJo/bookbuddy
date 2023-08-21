@@ -4,6 +4,7 @@ import com.bookbuddy.demo.global.dto.LoginDto;
 import com.bookbuddy.demo.member.entity.Member;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
@@ -35,9 +37,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
 
+        log.info(loginDto.toString());
+
         // 인증 토큰 생성
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+
+        log.info(authenticationToken.toString());
 
         return authenticationManager.authenticate(authenticationToken);
     }

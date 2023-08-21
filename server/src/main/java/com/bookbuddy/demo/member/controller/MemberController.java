@@ -8,16 +8,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -33,5 +32,14 @@ public class MemberController {
         Member member = memberService.createMember(mapper.memberPostDtoToMember(memberDto));
 
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(member), HttpStatus.CREATED);
+    }
+    /* 로그인 */
+    @GetMapping("/signin")
+    public ResponseEntity getMember(Authentication authentication) {
+        Map<String, Object> principal = (Map) authentication.getPrincipal();
+
+        long memberId = (long) principal.get("memberId");
+        Member member = memberService.findMember(memberId);
+        return new ResponseEntity<>(mapper.memberToMemberResponseDto(member), HttpStatus.OK);
     }
 }

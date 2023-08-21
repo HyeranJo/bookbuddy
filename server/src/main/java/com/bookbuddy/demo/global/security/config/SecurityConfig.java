@@ -18,12 +18,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity // security 활성화
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtTokenizer jwtTokenizer;
+    private final UserDetailsService userDetailsService;
+    private final JwtTokenizer jwtTokenizer;
+
+    public SecurityConfig(UserDetailsService userDetailsService, JwtTokenizer jwtTokenizer) {
+        this.userDetailsService = userDetailsService;
+        this.jwtTokenizer = jwtTokenizer;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,13 +47,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .apply(new CustomFilterConfigurer());
+
+        http
+                .formLogin()
+                .loginPage("/signin");
     }
 
 
     private class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
+            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+            jwtAuthenticationFilter.setFilterProcessesUrl("/signin");
             builder.addFilter(jwtAuthenticationFilter);
         }
     }

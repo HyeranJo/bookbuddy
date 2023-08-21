@@ -2,10 +2,11 @@ package com.bookbuddy.demo.global.security.service;
 
 import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.global.exception.ExceptionCode;
-import com.bookbuddy.demo.global.security.utils.AccountContext;
+import com.bookbuddy.demo.global.security.utils.UserDetail;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
@@ -35,6 +37,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         // User 반환
-        return new AccountContext(member, roles);
+        return new UserDetail(member, roles);
     }
 }
