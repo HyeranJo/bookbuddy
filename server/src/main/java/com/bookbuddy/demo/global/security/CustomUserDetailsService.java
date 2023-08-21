@@ -1,8 +1,7 @@
-package com.bookbuddy.demo.global.security.service;
+package com.bookbuddy.demo.global.security;
 
 import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.global.exception.ExceptionCode;
-import com.bookbuddy.demo.global.security.utils.UserDetail;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,17 +11,21 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
+@Component
 public class CustomUserDetailsService implements UserDetailsService {
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
+
+    public CustomUserDetailsService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 회원 정보 조회
@@ -30,13 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = findMember.orElseThrow(() ->
                 new BusinessException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        // DB에 저장된 권한으로 설정
-        List<GrantedAuthority> roles = new ArrayList<>();
-        for(String role : member.getRoles()) {
-            roles.add(new SimpleGrantedAuthority(role));
-        }
-
         // User 반환
-        return new UserDetail(member, roles);
+        return new MemberDetails(member);
     }
 }
