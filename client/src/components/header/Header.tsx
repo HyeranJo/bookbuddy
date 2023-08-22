@@ -2,12 +2,15 @@ import React from 'react';
 import { Styled_Header } from './Header.style';
 import Logo from '../../icons/Logo';
 import SearchBar from '../search/SearchBar';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <Styled_Header.Container>
       <Styled_Header.Div>
-        <Logo />
+        <Link to={'/list'}>
+          <Logo />
+        </Link>
         <Styled_Header.Menu>
           <SearchBar />
           <Styled_Header.Span>나의정보</Styled_Header.Span>
