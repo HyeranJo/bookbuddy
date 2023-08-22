@@ -16,13 +16,15 @@
   --basic-font-size: 20px;
   --input-font-size: 18px;
   --error-font-size: 14px;
-
+  --message-font-size: 15px;
   --detail-book-title-font-size: 40px;
   --detail-basic-font-size: 24px;
   --detail-full-amount-font-size: 36px;
-  --order-book-title-font-size: 32px;
+  --order-book-title-font-size: 28px;
   --order-quantity-font-size: 24px;
-  --order-price-font-size: 24px;
+  --order-font-size: 24px; 
+  --detail-full-amount-font-size: 40px; 
+  --mypage-font-size: 24px;
 
 }
 

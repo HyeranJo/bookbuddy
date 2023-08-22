@@ -52,8 +52,6 @@ const Signup = () => {
 
   return (
     <>
-      <Header />
-      <Nav />
       <Styled_Sign.Main>
         <Styled_Sign.Title>회원가입</Styled_Sign.Title>
         <Styled_Signup.Wrapper>

@@ -37,8 +37,6 @@ const Signin = () => {
 
   return (
     <>
-      <Header />
-      <Nav />
       <Styled_Sign.Main>
         <Styled_Sign.Title>로그인</Styled_Sign.Title>
         <Styled_Signin.Wrapper>
