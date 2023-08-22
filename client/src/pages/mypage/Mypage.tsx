@@ -6,6 +6,7 @@ import MypageTable from '../../components/category/MypageTable';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/NavScroll';
+import AskTable from '../../components/category/AskTable';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
@@ -62,7 +63,7 @@ const Mypage = () => {
                 navScrollListRef.current[2] = el;
               }}
             >
-              <MypageTable title="1:1 문의 내역" />
+              <AskTable title="1:1 문의 내역" />
             </div>
 
             <Styled_Mypage.BookmarkTitle
