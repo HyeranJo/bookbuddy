@@ -5,6 +5,9 @@ import Header from '../../components/header/Header';
 import Nav from '../../components/nav/Nav';
 import RedButton from '../../components/buttons/RedButton';
 import Input from '../../components/input/Input';
+import { useQuery, useMutation } from 'react-query';
+import axios from 'axios';
+import { useState } from 'react';
 
 interface IFormData {
   id: string;
@@ -13,6 +16,7 @@ interface IFormData {
 }
 
 const Signup = () => {
+  const [isDuplicate, setIsDuplicate] = useState(false);
   const {
     control,
     getValues,
@@ -20,16 +24,29 @@ const Signup = () => {
     formState: { errors },
   } = useForm<IFormData>();
 
+  const onDuplicate = () => {
+    const idValue = getValues('id');
+    // 가져온 값을 서버로 연결해서 중복된 여부 확인 성공하면 true 실패하면 초기화
+    setIsDuplicate(true);
+    console.log(idValue);
+  };
+
+  function signupUser(userData: IFormData) {
+    return axios.post('/signup', userData).then(response => response.data);
+  }
+  const { mutate } = useMutation(signupUser);
+
   const onSubmit: SubmitHandler<IFormData> = data => {
     // 데이터를 서버에 전달하는 함수 필요
     // 중복확인 버튼 눌렀는지 여부를 확인하여 분기
-    console.log(data);
-  };
-
-  const onDuplicate = () => {
-    const idValue = getValues('id');
-    // 가져온 값을 서버로 연결해서 중복된 여부 확인
-    console.log(idValue);
+    if (isDuplicate === true) {
+      mutate(data);
+      console.log(data);
+      console.log(isDuplicate);
+    } else {
+      console.log('중복확인해주세요');
+      console.log(isDuplicate);
+    }
   };
 
   return (
