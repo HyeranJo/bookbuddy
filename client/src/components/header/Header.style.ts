@@ -23,15 +23,10 @@ export const Styled_Header = {
     display: flex;
     align-items: center;
     gap: 30px;
-
-    /* &:hover > .myinfo {
-      & > div {
-        display: block;
-      }
-    } */
   `,
   Span: styled.span`
     cursor: pointer;
+    position: relative;
 
     &:hover > div {
       display: block;
@@ -42,8 +37,8 @@ export const Styled_Header = {
 
     z-index: 100;
     position: absolute;
-    top: 50px;
-    right: 85px;
+    top: 0px;
+    right: -50px;
 
     width: 150px;
     padding-top: 50px;

@@ -13,7 +13,6 @@ export const Styled_MypageSidebar = {
 
     display: flex;
     flex-flow: column;
-    position: sticky;
   `,
   TitleDiv: styled.div`
     font-size: var(--basic-font-size);
