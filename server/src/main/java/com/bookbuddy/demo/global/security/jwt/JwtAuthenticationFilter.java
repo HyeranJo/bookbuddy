@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.global.security.jwt;
 
 import com.bookbuddy.demo.global.dto.LoginDto;
+import com.bookbuddy.demo.global.dto.LoginResponseDto;
 import com.bookbuddy.demo.member.entity.Member;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -61,6 +62,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setHeader("Authorization", "Bearer "+accessToken);
         response.setHeader("Refresh", refreshToken);
+
+        LoginResponseDto responseDto = new LoginResponseDto(member.getEmail(), member.getPassword());
+        ObjectMapper objectMapper = new ObjectMapper();
+        String responseResult = objectMapper.writeValueAsString(responseDto);
+
+        response.getWriter().println(responseResult);
     }
     private String delegateAccessToken(Member member) {
         Map<String, Object> claims = new HashMap<>();
