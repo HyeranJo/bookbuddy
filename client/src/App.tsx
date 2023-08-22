@@ -1,7 +1,4 @@
 import React from 'react';
-import Nav from './components/nav/Nav';
-import InfoNav from './components/info_nav/InfoNav';
-import Book from './components/book/Book';
 import { Outlet } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
