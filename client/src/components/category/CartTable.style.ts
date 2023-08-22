@@ -7,8 +7,9 @@ export const Styled_CartTable = {
     display: inline-block;
   `,
   Table: styled.table`
-    width: 1095px;
-    font-size: var(--basic-font-size);
+    /* width: 1095px; */
+    width: 1300px;
+    font-size: var(--order-font-size);
     text-align: center;
     line-height: 34px;
     border-collapse: collapse; //표 테두리 삭제
@@ -18,14 +19,21 @@ export const Styled_CartTable = {
     background-color: var(--category-color);
   `,
   Tr: styled.tr`
-    border-bottom: 1px solid gray;
     line-height: 50px;
 
     & > .booktitle {
       text-align: left;
+      font-size: var(--order-book-title-font-size);
     }
+  `,
+  DeleteTr: styled.tr`
+    border-bottom: 1px solid gray;
+    line-height: 50px;
+
     & > .delete {
       cursor: pointer;
+      text-align: left;
+      font-size: var(--basic-font-size);
     }
   `,
   Td: styled.td`
@@ -40,5 +48,19 @@ export const Styled_CartTable = {
   Input: styled.input`
     cursor: pointer;
     transform: scale(1.5);
+  `,
+  AmountTr: styled.tr`
+    border-bottom: 1px solid gray;
+    line-height: 50px;
+    text-align: right;
+
+    & > td {
+      padding-right: 30px;
+      padding: 15px;
+    }
+    &:last-child {
+      font-size: var(--detail-full-amount-font-size);
+      border-bottom: 0px;
+    }
   `,
 };

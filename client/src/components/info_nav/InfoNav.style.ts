@@ -5,6 +5,7 @@ export const Styled_InfoNav = {
     width: 150px;
     height: 188px;
     border: 1px solid var(--primary-background-color);
+    background-color: white;
 
     display: flex;
     flex-flow: column;
@@ -14,7 +15,7 @@ export const Styled_InfoNav = {
     font-size: var(--basic-font-size);
     gap: 20px;
 
-    position: relative;
+    position: fixed;
 
     &::after {
       border-color: white transparent;

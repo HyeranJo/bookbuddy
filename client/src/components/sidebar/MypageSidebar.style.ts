@@ -1,6 +1,10 @@
 import { styled } from 'styled-components';
 
 export const Styled_MypageSidebar = {
+  Container: styled.div`
+    position: fixed;
+    top: calc(133px + 58px);
+  `,
   Div: styled.div`
     width: 200px;
     height: calc(100vh - 133px - 58px);
@@ -9,7 +13,6 @@ export const Styled_MypageSidebar = {
 
     display: flex;
     flex-flow: column;
-    position: sticky;
   `,
   TitleDiv: styled.div`
     font-size: var(--basic-font-size);

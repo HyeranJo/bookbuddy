@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const Styled_MypageTable = {
+export const Styled_AskTable = {
   Container: styled.div`
     width: 1095px;
   `,
@@ -19,15 +19,10 @@ export const Styled_MypageTable = {
     text-align: center;
     line-height: 34px;
     border-collapse: collapse; //표 테두리 삭제
+    table-layout: fixed; //테이블 크기 고정
 
-    & > .date {
-      width: 200px;
-    }
-    & > .number {
-      width: 250px;
-    }
-    & > .status {
-      width: 200px;
+    & .title-body {
+      text-align: left;
     }
   `,
   Th: styled.th`
@@ -39,5 +34,10 @@ export const Styled_MypageTable = {
   `,
   Tr: styled.tr`
     border-bottom: 1px solid gray;
+  `,
+  Td: styled.td`
+    white-space: nowrap; //줄바꿈 방지
+    overflow: hidden; //넘치는 텍스트 숨기기
+    text-overflow: ellipsis; //말줄임 기호(...)넣기
   `,
 };
