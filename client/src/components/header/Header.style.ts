@@ -6,7 +6,7 @@ export const Styled_Header = {
     justify-content: center;
     position: sticky;
     top: 0px;
-    z-index: 99;
+    z-index: 100;
   `,
   Div: styled.div`
     display: flex;
@@ -23,8 +23,29 @@ export const Styled_Header = {
     display: flex;
     align-items: center;
     gap: 30px;
+
+    /* &:hover > .myinfo {
+      & > div {
+        display: block;
+      }
+    } */
   `,
   Span: styled.span`
     cursor: pointer;
+
+    &:hover > div {
+      display: block;
+    }
+  `,
+  Info: styled.div`
+    display: none;
+
+    z-index: 100;
+    position: absolute;
+    top: 50px;
+    right: 85px;
+
+    width: 150px;
+    padding-top: 50px;
   `,
 };
