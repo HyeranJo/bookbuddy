@@ -10,7 +10,7 @@ export const Styled_Order = {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    padding-top: 22px;
+    padding-top: 44px;
   `,
   Submit: styled.div`
     display: flex;

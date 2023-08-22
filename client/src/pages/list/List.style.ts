@@ -13,7 +13,7 @@ export const Styled_List = {
     margin-left: 200px;
     padding-left: 53.5px;
     padding-right: 53.5px;
-    padding-top: 22px;
+    padding-top: 44px;
   `,
   Title: styled.div`
     display: flex;

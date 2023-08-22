@@ -7,7 +7,8 @@ export const Styled_CartTable = {
     display: inline-block;
   `,
   Table: styled.table`
-    width: 1095px;
+    /* width: 1095px; */
+    width: 1300px;
     font-size: var(--order-font-size);
     text-align: center;
     line-height: 34px;
