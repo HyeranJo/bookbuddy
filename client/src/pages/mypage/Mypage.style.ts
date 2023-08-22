@@ -30,6 +30,8 @@ export const Styled_Mypage = {
     flex-flow: column;
     align-items: center;
     gap: 100px;
+  `,
+  BookmarkList: styled.div`
     position: relative;
   `,
   BookmarkTitle: styled.div`
@@ -45,7 +47,8 @@ export const Styled_Mypage = {
     transform: rotate(90deg);
 
     position: absolute;
-    top: 497px;
+    top: -325px;
+    right: 370px;
 
     // 스크롤바 숨기기
     -ms-overflow-style: none; /* IE and Edge */

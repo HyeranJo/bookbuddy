@@ -66,52 +66,56 @@ const Mypage = () => {
               <AskTable title="1:1 문의 내역" />
             </div>
 
-            <Styled_Mypage.BookmarkTitle
-              style={{ scrollMarginTop: '240px' }}
-              ref={el => {
-                navScrollListRef.current[3] = el;
-              }}
-            >
-              <Styled_Mypage.H1>북마크 리스트</Styled_Mypage.H1>
-            </Styled_Mypage.BookmarkTitle>
-            <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-              <Styled_Mypage.Book>
-                <Book />
-              </Styled_Mypage.Book>
-            </Styled_Mypage.Books>
+            <Styled_Mypage.BookmarkList>
+              <Styled_Mypage.BookmarkTitle
+                style={{ scrollMarginTop: '240px' }}
+                ref={el => {
+                  navScrollListRef.current[3] = el;
+                }}
+              >
+                <Styled_Mypage.H1 className="bookmarklist">
+                  북마크 리스트
+                </Styled_Mypage.H1>
+              </Styled_Mypage.BookmarkTitle>
+              <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+                <Styled_Mypage.Book>
+                  <Book />
+                </Styled_Mypage.Book>
+              </Styled_Mypage.Books>
+            </Styled_Mypage.BookmarkList>
           </Styled_Mypage.Detail>
         </Styled_Mypage.Content>
       </Styled_Layout.Div>
