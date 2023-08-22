@@ -9,21 +9,16 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Nav />
-      <Outlet />
-      {/* <ReactQueryDevtools /> */}
-    </div>
-  );
-}
-// ReactQueryDevtools사용하면 에러가 나서 주석처리
-/** QueryClientProvider는 App을 감싸줘야하는데 Router-dom으로 index.tsx에 App이없어서 App.tsx로 왔으며, AppWrapper()로 App컴포넌트를 QueryClientProvider로 감싸게 해서 사용 */
-export default function AppWrapper() {
-  return (
     <QueryClientProvider client={queryClient}>
-      <App />
-      {/* <ReactQueryDevtools /> */}
+      <div className="App">
+        <Header />
+        <Nav />
+        <Outlet />
+        {/* ReactQueryDevtools사용하면 에러가 나서 주석처리 */}
+        {/* <ReactQueryDevtools /> */}
+      </div>
     </QueryClientProvider>
   );
 }
+
+export default App;
