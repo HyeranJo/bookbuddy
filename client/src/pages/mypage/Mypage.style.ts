@@ -29,7 +29,7 @@ export const Styled_Mypage = {
     display: flex;
     flex-flow: column;
     align-items: center;
-    gap: 50px;
+    gap: 100px;
     position: relative;
   `,
   BookmarkTitle: styled.div`
@@ -45,7 +45,7 @@ export const Styled_Mypage = {
     transform: rotate(90deg);
 
     position: absolute;
-    top: 430px;
+    top: 497px;
 
     // 스크롤바 숨기기
     -ms-overflow-style: none; /* IE and Edge */
