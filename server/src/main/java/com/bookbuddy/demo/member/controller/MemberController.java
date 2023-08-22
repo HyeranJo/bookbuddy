@@ -7,6 +7,7 @@ import com.bookbuddy.demo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,6 +34,7 @@ public class MemberController {
 
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(member), HttpStatus.CREATED);
     }
+
     /* 로그인 */
     @GetMapping("/signin")
     public ResponseEntity getMember(Authentication authentication) {
@@ -41,5 +43,12 @@ public class MemberController {
         long memberId = (long) principal.get("memberId");
         Member member = memberService.findMember(memberId);
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(member), HttpStatus.OK);
+    }
+
+    /* 이메일 중복확인 */
+    @PostMapping(value = "/duplicate/email")
+    public ResponseEntity duplicateEmail(@RequestParam String email) {
+        boolean isMember = memberService.duplicateEmail(email);
+        return new ResponseEntity<>(isMember, HttpStatus.OK);
     }
 }

@@ -6,4 +6,6 @@ public interface MemberService {
     Member createMember(Member member);
 
     Member findMember(long memberId);
+
+    boolean duplicateEmail(String email);
 }
