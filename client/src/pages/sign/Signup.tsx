@@ -1,4 +1,5 @@
 import Styled_Signup from './Signup.style';
+import Styled_Sign from './Sign.style';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { idRegExp, passwordRegExp } from '../../utils/RegExp';
 import Header from '../../components/header/Header';
@@ -53,11 +54,11 @@ const Signup = () => {
     <>
       <Header />
       <Nav />
-      <Styled_Signup.Main>
-        <Styled_Signup.Title>회원가입</Styled_Signup.Title>
+      <Styled_Sign.Main>
+        <Styled_Sign.Title>회원가입</Styled_Sign.Title>
         <Styled_Signup.Wrapper>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Styled_Signup.Container>
+            <Styled_Sign.Container>
               {/* onSubmit에 영향 주는거 막기 */}
               <Styled_Signup.Duplicate
                 onClick={e => {
@@ -67,7 +68,7 @@ const Signup = () => {
               >
                 중복확인
               </Styled_Signup.Duplicate>
-              <Styled_Signup.Lable>아이디</Styled_Signup.Lable>
+              <Styled_Sign.Lable>아이디</Styled_Sign.Lable>
               <Controller
                 control={control}
                 name="id"
@@ -91,12 +92,10 @@ const Signup = () => {
                   );
                 }}
               />
-              <Styled_Signup.ErrorMsg>
-                {errors?.id?.message}
-              </Styled_Signup.ErrorMsg>
-            </Styled_Signup.Container>
-            <Styled_Signup.Container>
-              <Styled_Signup.Lable>비밀번호</Styled_Signup.Lable>
+              <Styled_Sign.ErrorMsg>{errors?.id?.message}</Styled_Sign.ErrorMsg>
+            </Styled_Sign.Container>
+            <Styled_Sign.Container>
+              <Styled_Sign.Lable>비밀번호</Styled_Sign.Lable>
               <Controller
                 control={control}
                 name="password"
@@ -119,12 +118,12 @@ const Signup = () => {
                   );
                 }}
               />
-              <Styled_Signup.ErrorMsg>
+              <Styled_Sign.ErrorMsg>
                 {errors?.password?.message}
-              </Styled_Signup.ErrorMsg>
-            </Styled_Signup.Container>
-            <Styled_Signup.Container>
-              <Styled_Signup.Lable>비밀번호 확인</Styled_Signup.Lable>
+              </Styled_Sign.ErrorMsg>
+            </Styled_Sign.Container>
+            <Styled_Sign.Container>
+              <Styled_Sign.Lable>비밀번호 확인</Styled_Sign.Lable>
               <Controller
                 control={control}
                 name="password_confirm"
@@ -147,16 +146,16 @@ const Signup = () => {
                   );
                 }}
               />
-              <Styled_Signup.ErrorMsg>
+              <Styled_Sign.ErrorMsg>
                 {errors?.password_confirm?.message}
-              </Styled_Signup.ErrorMsg>
-            </Styled_Signup.Container>
+              </Styled_Sign.ErrorMsg>
+            </Styled_Sign.Container>
             <Styled_Signup.SubmitBtn>
-              <RedButton name="회원가입하기" width={415} height={60} />
+              <RedButton name="회원가입" width={415} height={60} />
             </Styled_Signup.SubmitBtn>
           </form>
         </Styled_Signup.Wrapper>
-      </Styled_Signup.Main>
+      </Styled_Sign.Main>
     </>
   );
 };
