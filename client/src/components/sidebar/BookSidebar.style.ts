@@ -9,7 +9,7 @@ export const Styled_Sidebar = {
     width: 200px;
     height: calc(100vh - 133px - 58px);
 
-    border-right: 1px solid var(--primary-background-color);
+    border-right: 2px solid var(--light-gray-color);
 
     display: flex;
     flex-flow: column;
