@@ -14,7 +14,7 @@ const Header = () => {
             <Logo />
           </Link>
           <Styled_Header.Menu>
-            <SearchBar />
+            <SearchBar iconSize={18} width={250} />
             <Styled_Header.Span className="myinfo">
               나의정보
               <Styled_Header.Info className="info">
