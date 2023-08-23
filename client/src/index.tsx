@@ -11,6 +11,7 @@ import { RecoilRoot } from 'recoil';
 import List from './pages/list/List';
 import Order from './pages/order/Order';
 import Mypage from './pages/mypage/Mypage';
+import Payment from './pages/payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,6 @@ const router = createBrowserRouter([
     errorElement: 'Notfound',
     children: [
       { index: true, element: <List /> },
-      /* 예시
-      {path: '/signin', element: <SignIn/>,}
-      */
       { path: '/signup', element: <Signup /> },
       { path: '/signin', element: <Signin /> },
       {
@@ -35,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/mypage',
         element: <Mypage />,
+      },
+      {
+        path: '/payment',
+        element: <Payment />,
       },
     ],
   },
