@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { emailRegExp, passwordRegExp } from '../../utils/RegExp';
 import RedButton from '../../components/buttons/RedButton';
 import Input from '../../components/input/Input';
-import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

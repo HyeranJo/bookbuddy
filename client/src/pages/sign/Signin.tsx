@@ -4,10 +4,10 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { emailRegExp, passwordRegExp } from '../../utils/RegExp';
 import RedButton from '../../components/buttons/RedButton';
 import Input from '../../components/input/Input';
-import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCookie } from '../../utils/cookie';
+import { setCookie, getCookie } from '../../utils/cookie';
 
 interface IFormData {
   email: string;
@@ -23,6 +23,7 @@ const Signin = () => {
   } = useForm<IFormData>();
 
   const navigate = useNavigate();
+  const userInfo = getCookie('userInfo');
 
   function signinUser(userData: IFormData) {
     return axios
@@ -59,6 +60,7 @@ const Signin = () => {
           });
           alert('[로그인 성공] 메인 페이지로 이동합니다');
           navigate('/');
+          console.log(userInfo.userId);
         } else {
           alert('입력하신 정보가 일치하지 않습니다.');
         }
