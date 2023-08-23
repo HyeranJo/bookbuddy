@@ -11,6 +11,7 @@ import { RecoilRoot } from 'recoil';
 import List from './pages/list/List';
 import Order from './pages/order/Order';
 import Mypage from './pages/mypage/Mypage';
+import Bookinfo from './pages/bookinfo/Bookinfo';
 
 const router = createBrowserRouter([
   {
@@ -20,22 +21,14 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <List /> },
       /* 예시
-      {path: '/signin', element: <SignIn/>,}
+      {path: '/signin', element: <SignIn/>}
       */
       { path: '/signup', element: <Signup /> },
       { path: '/signin', element: <Signin /> },
-      {
-        path: '/list',
-        element: <List />,
-      },
-      {
-        path: '/order',
-        element: <Order />,
-      },
-      {
-        path: '/mypage',
-        element: <Mypage />,
-      },
+      { path: '/list', element: <List /> },
+      { path: '/bookinfo', element: <Bookinfo /> },
+      { path: '/order', element: <Order /> },
+      { path: '/mypage', element: <Mypage /> },
     ],
   },
 ]);

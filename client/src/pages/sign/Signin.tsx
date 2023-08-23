@@ -1,17 +1,16 @@
 import Styled_Signin from './Signin.style';
 import Styled_Sign from './Sign.style';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { idRegExp, passwordRegExp } from '../../utils/RegExp';
-import Header from '../../components/header/Header';
-import Nav from '../../components/nav/Nav';
+import { emailRegExp, passwordRegExp } from '../../utils/RegExp';
 import RedButton from '../../components/buttons/RedButton';
 import Input from '../../components/input/Input';
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { setCookie } from '../../utils/cookie';
 
 interface IFormData {
-  id: string;
+  email: string;
   password: string;
   password_confirm: string;
 }
@@ -23,16 +22,55 @@ const Signin = () => {
     formState: { errors },
   } = useForm<IFormData>();
 
+  const navigate = useNavigate();
+
   function signinUser(userData: IFormData) {
-    return axios.post('/signin', userData).then(response => response.data);
+    return axios
+      .post('https://6850-210-106-53-186.ngrok-free.app/signin', userData, {
+        headers: {
+          'Content-Type': 'application/json',
+          // 'ngrok-skip-browser-warning': true,
+        },
+      })
+      .then(response => {
+        // authorization 소문자로 적어야함.
+        const accessToken = response.headers['authorization'];
+        if (response.status === 200) {
+          // axios.defaults.headers.common['authorization'] = `${accessToken}`;
+          // authInstance.defaults.headers.common[
+          //   'Authorization'
+          // ] = `${accessToken}`;
+          setCookie(
+            'userInfo',
+            JSON.stringify({
+              userId: response.data.userId,
+            }),
+            { path: '/' },
+          );
+          setCookie('accessToken', `${accessToken}`, {
+            path: '/',
+            sameSite: 'strict',
+            secure: true,
+          });
+          setCookie('refreshToken', response.data.refreshToken, {
+            path: '/',
+            sameSite: 'strict',
+            secure: true,
+          });
+          alert('[로그인 성공] 메인 페이지로 이동합니다');
+          navigate('/');
+        } else {
+          alert('입력하신 정보가 일치하지 않습니다.');
+        }
+      })
+      .catch(() => {
+        alert('입력하신 정보가 일치하지 않습니다.');
+      });
   }
   const { mutate } = useMutation(signinUser);
 
   const onSubmit: SubmitHandler<IFormData> = data => {
-    // 데이터를 서버에 전달하는 함수 필요
-    // 중복확인 버튼 눌렀는지 여부를 확인하여 분기
     mutate(data);
-    console.log('중복확인해주세요');
   };
 
   return (
@@ -46,13 +84,13 @@ const Signin = () => {
                 <Styled_Sign.Lable>아이디</Styled_Sign.Lable>
                 <Controller
                   control={control}
-                  name="id"
+                  name="email"
                   /* Controller를 사용할 때 초기에 값이 없으면 undefined로서 uncontrolled 상태가 되기 때문에 waring메시지가 뜸 따라서 defaultValue를 설정해서 해결*/
                   defaultValue=""
                   rules={{
                     required: '아이디를 입력해주세요.',
                     pattern: {
-                      value: idRegExp,
+                      value: emailRegExp,
                       message: '특수문자, 띄어쓰기는 사용하실 수 없습니다.',
                     },
                   }}
@@ -68,7 +106,7 @@ const Signin = () => {
                   }}
                 />
                 <Styled_Sign.ErrorMsg>
-                  {errors?.id?.message}
+                  {errors?.email?.message}
                 </Styled_Sign.ErrorMsg>
               </Styled_Sign.Container>
               <Styled_Sign.Container>
