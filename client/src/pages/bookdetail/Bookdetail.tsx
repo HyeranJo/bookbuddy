@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 
-const Bookinfo = () => {
+const Bookdetail = () => {
   return (
     <div>
       <BookSidebar />
@@ -9,6 +9,6 @@ const Bookinfo = () => {
   );
 };
 
-export default Bookinfo;
+export default Bookdetail;
 
-const Styled_Bookinfo = {};
+const Styled_Bookdetail = {};
