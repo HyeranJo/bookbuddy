@@ -18,7 +18,6 @@ public class MemberDto {
         @Pattern(regexp = "^[a-zA-Z0-9@.]{8,20}+$", message = "이메일 형식에 맞지 않습니다.")
         private String email;
         @NotBlank
-        @Range(min=8, max=20, message="비밀번호는 8글자 이상, 20글자 이하여야 합니다.")
         private String password;
     }
 
