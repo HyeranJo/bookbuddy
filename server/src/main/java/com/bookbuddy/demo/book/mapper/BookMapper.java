@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface BookMapper {
-    default List<BookDto.Response> BookToBookResponseDto(List<Book> dataList) {
+    default List<BookDto.Response> BooksToBookResponseDtos(List<Book> dataList) {
         return dataList.stream()
                 .map(e-> new BookDto.Response(
                             e.getId(),
@@ -21,5 +21,17 @@ public interface BookMapper {
                             e.getDate(),
                             e.getImgSrc()
                     )).collect(Collectors.toList());
+    }
+
+    default BookDto.Response BookToBookResponseDto(Book findBook) {
+        return new BookDto.Response(
+                findBook.getId(),
+                findBook.getName(),
+                findBook.getAuthor(),
+                findBook.getPublisher(),
+                findBook.getPrice(),
+                findBook.getDate(),
+                findBook.getImgSrc()
+        );
     }
 }

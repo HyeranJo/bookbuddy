@@ -2,6 +2,7 @@ package com.bookbuddy.demo.book.controller;
 
 import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.mapper.BookMapper;
+import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.global.crawling.CrawlingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,22 @@ import java.util.List;
 public class BookController {
     private final CrawlingService crawlingService;
     private final BookMapper mapper;
+    private final BookService bookService;
     
     /* 도서 리스트 */
     @GetMapping("/list")
-    public ResponseEntity getMember(@RequestParam("page") @Positive int page,
+    public ResponseEntity getMembers(@RequestParam("page") @Positive int page,
                                     @RequestParam("size") @Positive int size) throws ParseException, InterruptedException {
         log.info("# 도서리스트");
         log.info("# page: "+page+","+"size: "+size);
         List<Book> dataList = crawlingService.process(page, size);
-        return new ResponseEntity(mapper.BookToBookResponseDto(dataList), HttpStatus.CREATED);
+        return new ResponseEntity(mapper.BooksToBookResponseDtos(dataList), HttpStatus.CREATED);
+    }
+
+    /* 도서 상세 */
+    @GetMapping("/{book-id}")
+    public ResponseEntity getMember(@PathVariable("book-id") @Positive String bookId) {
+        Book findBook = bookService.findVerifyBook(bookId);
+        return new ResponseEntity(mapper.BookToBookResponseDto(findBook), HttpStatus.CREATED);
     }
 }

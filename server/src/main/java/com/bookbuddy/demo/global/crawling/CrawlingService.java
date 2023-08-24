@@ -55,35 +55,36 @@ public class CrawlingService {
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         for(WebElement element : productList) {
+            Thread.sleep(10);
             // 아이디
             String id = element.getAttribute("data-id");
 
             if(bookService.isVerifiedBook(id)) {
                 bookList.add(bookService.findVerifyBook(id));
             }
-
+            Thread.sleep(10);
             // 책 이름
             String name = element.findElement(By.className("prod_name")).getText();
-
+            Thread.sleep(10);
             // 가격
             String priceStr = element.findElement(By.className("price")).findElement(By.className("val")).getText()
                     .replaceAll(",", "");
             int price = Integer.parseInt(priceStr);
-
+            Thread.sleep(10);
             // 작성자
             String author = element.findElement(By.className("prod_author")).findElement(By.tagName("a")).getText();
-
+            Thread.sleep(10);
             // 출판사
             String publisher = element.findElement(By.className("prod_author")).getText().split(" · ")[1];
-
+            Thread.sleep(10);
             // 발행일
             String dateStr = element.findElement(By.className("date")).getText().trim().replaceAll("·","");
             SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
             Date date = new Date(format.parse(dateStr).getTime());
-
+            Thread.sleep(10);
             // 이미지
             String imgSrc = element.findElement(By.className("img_box")).findElement(By.tagName("img")).getAttribute("src");
-
+            Thread.sleep(10);
             Book book = new Book(id, name, author, publisher, price, date, imgSrc);
             bookRepository.save(book);
             bookList.add(book);
