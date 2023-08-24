@@ -54,11 +54,11 @@ public class CrawlingService {
 
         // 대기
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        webDriverWait.until(
-                ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("prod_item"))
-        );
+        webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("prod_item")));
 
+        Thread.sleep(1000);
         for(WebElement element : productList) {
+            Thread.sleep(100);
             // 아이디
             String id = element.getAttribute("data-id");
 
@@ -72,12 +72,12 @@ public class CrawlingService {
             String priceStr = element.findElement(By.className("price")).findElement(By.className("val")).getText()
                     .replaceAll(",", "");
             int price = Integer.parseInt(priceStr);
-            // 작성자
-            String author = element.findElement(By.className("prod_author")).findElement(By.tagName("a")).getText();
-            // 출판사
-            String publisher = element.findElement(By.className("prod_author")).getText().split(" · ")[1];
-            // 발행일
-            String dateStr = element.findElement(By.className("date")).getText().trim().replaceAll("·","");
+
+            String[] info = element.findElement(By.className("prod_author")).getText().split(" · ");
+
+            String author = info[0]; // 작성자
+            String publisher = info[1]; // 출판사
+            String dateStr = info[2]; // 발행일
             SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
             Date date = new Date(format.parse(dateStr).getTime());
             // 이미지
