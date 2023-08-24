@@ -70,7 +70,7 @@ const Payment = () => {
                       name="inputstyle"
                       id="새로입력"
                       value="새로입력"
-                      checked
+                      defaultChecked
                     />
                     <label htmlFor="inputstyle">새로 입력</label>
                     <input

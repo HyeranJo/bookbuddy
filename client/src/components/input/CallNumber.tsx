@@ -26,7 +26,6 @@ const CallNumber = ({ defaultValue }: CallNumberProps) => {
         />
       ) : (
         // 일반전화
-
         <Styled_PhoneNumber.Select name="score">
           <option value="02">02</option>
           <option value="031">031</option>
