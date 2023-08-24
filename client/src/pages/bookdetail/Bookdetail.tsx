@@ -10,7 +10,7 @@ interface BookProps {
   title?: string;
   price?: number;
   author?: string;
-  publicher?: string;
+  publisher?: string;
   date?: string;
   quantity?: number;
   deliveryFee?: number;
@@ -57,7 +57,7 @@ const Bookdetail = (props: BookProps) => {
                     저자: {props.author || 'J.M. 바스콘셀루스'}
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
-                    출판사: {props.publicher || '동녁주니어'}원
+                    출판사: {props.publisher || '동녁주니어'}원
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
                     발행일: {props.date || '2012년12월19일'}

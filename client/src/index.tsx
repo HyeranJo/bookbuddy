@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Home from './pages/home/Home';
+// import Home from './pages/home/Home';
 import Signup from './pages/sign/Signup';
 import Signin from './pages/sign/Signin';
 import { RecoilRoot } from 'recoil';
