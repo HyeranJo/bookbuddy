@@ -33,14 +33,12 @@ const CallNumber = ({ defaultValue }: CallNumberProps) => {
       const copy = [...cellPhoneNumber];
       copy[index] = value;
       setCellPhoneNumber(copy);
-      console.log(cellPhoneNumber);
     }
     // 일반 전화일 경우
     else {
       const copy = [...telephoneNumber];
       copy[index] = value;
       setTelephoneNumber(copy);
-      console.log(telephoneNumber);
     }
   };
 
@@ -58,7 +56,11 @@ const CallNumber = ({ defaultValue }: CallNumberProps) => {
         />
       ) : (
         // 일반전화
-        <Styled_PhoneNumber.Select name="score">
+        <Styled_PhoneNumber.Select
+          onChange={(e: any) => {
+            CallNumberCollecter(e, 0);
+          }}
+        >
           <option value="02">02</option>
           <option value="031">031</option>
           <option value="032">032</option>
