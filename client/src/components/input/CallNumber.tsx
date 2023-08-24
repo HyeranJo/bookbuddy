@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
+import { CellPhoneNumberAtom, TelephoneNumberAtom } from '../../recoil/Payment';
 
 // 휴대폰일경우 defaultValue 필수
 interface CallNumberProps {
@@ -8,10 +10,37 @@ interface CallNumberProps {
 
 const CallNumber = ({ defaultValue }: CallNumberProps) => {
   const number2Ref = useRef<HTMLInputElement>(null);
+  const [cellPhoneNumber, setCellPhoneNumber] =
+    useRecoilState(CellPhoneNumberAtom);
+  const [telephoneNumber, setTelephoneNumber] =
+    useRecoilState(TelephoneNumberAtom);
 
+  /** 전화번호 앞자리 입력시 뒷자리로 자동 탭 해주는 함수  */
   const number1Value = (e: any) => {
     if (e.target.value.length === 4 && number2Ref.current) {
       number2Ref.current.focus();
+    }
+  };
+
+  /** 전화번호 input들을 모아 변수에 배열로 저장하는 함수 */
+  const CallNumberCollecter = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const value = e.target.value;
+    // 휴대폰일 경우
+    if (defaultValue) {
+      const copy = [...cellPhoneNumber];
+      copy[index] = value;
+      setCellPhoneNumber(copy);
+      console.log(cellPhoneNumber);
+    }
+    // 일반 전화일 경우
+    else {
+      const copy = [...telephoneNumber];
+      copy[index] = value;
+      setTelephoneNumber(copy);
+      console.log(telephoneNumber);
     }
   };
 
@@ -23,6 +52,9 @@ const CallNumber = ({ defaultValue }: CallNumberProps) => {
           type="number"
           defaultValue={defaultValue}
           maxLength={3}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            CallNumberCollecter(e, 0);
+          }}
         />
       ) : (
         // 일반전화
@@ -51,7 +83,10 @@ const CallNumber = ({ defaultValue }: CallNumberProps) => {
         type="number"
         pattern="\d*"
         maxLength={4}
-        onChange={number1Value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          number1Value(e);
+          CallNumberCollecter(e, 1);
+        }}
       />
       -
       <Styled_PhoneNumber.Input
@@ -59,6 +94,9 @@ const CallNumber = ({ defaultValue }: CallNumberProps) => {
         pattern="\d*"
         maxLength={4}
         ref={number2Ref}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          CallNumberCollecter(e, 2);
+        }}
       />
     </div>
   );
