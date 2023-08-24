@@ -28,8 +28,6 @@ public class BookController {
     @GetMapping("/list")
     public ResponseEntity getMembers(@RequestParam("page") @Positive int page,
                                     @RequestParam("size") @Positive int size) throws ParseException, InterruptedException {
-        log.info("# 도서리스트");
-        log.info("# page: "+page+","+"size: "+size);
         List<Book> dataList = crawlingService.process(page, size);
         return new ResponseEntity(mapper.BooksToBookResponseDtos(dataList), HttpStatus.CREATED);
     }
