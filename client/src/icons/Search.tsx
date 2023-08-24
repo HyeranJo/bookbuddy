@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface SearchProps {
-  iconSize: number;
+  $iconSize: number;
 }
-const Search = ({ iconSize }: SearchProps) => {
+const Search = ({ $iconSize }: SearchProps) => {
   return (
     <svg
-      width={`${iconSize}`}
-      height={`${iconSize}`}
+      width={`${$iconSize}`}
+      height={`${$iconSize}`}
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
