@@ -15,21 +15,27 @@ public class Book {
     @Column
     private String name;
     @Column
-    private String writer;
+    private String author;
     @Column
     private String publisher;
     @Column
     private int price;
     @Column
     private Date date;
+    @Column
+    private String imgSrc;
 
-    public Book(long id, String name, String writer, String publisher, int price, Date date) {
+    public Book() {
+    }
+
+    public Book(long id, String name, String author, String publisher, int price, Date date, String imgSrc) {
         this.id = id;
         this.name = name;
-        this.writer = writer;
+        this.author = author;
         this.publisher = publisher;
         this.price = price;
         this.date = date;
+        this.imgSrc = imgSrc;
     }
 
 
@@ -38,7 +44,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", writer='" + writer + '\'' +
+                ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", price=" + price +
                 ", date=" + date +

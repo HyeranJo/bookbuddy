@@ -1,6 +1,8 @@
 package com.bookbuddy.demo.global.controller;
 
 import com.bookbuddy.demo.book.entity.Book;
+import com.bookbuddy.demo.book.repository.BookRepository;
+import com.bookbuddy.demo.member.repository.MemberRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +32,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/crawling")
 public class CrawlingController {
+    private final BookRepository bookRepository;
     private WebDriver driver;
     private final String url = "https://product.kyobobook.co.kr/category/KOR/0801#?page=1&type=all&per=20&sort=new";
     private final String chromePath = "C:/chromedriver-win64/chromedriver.exe";
 
+    public CrawlingController(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
     @GetMapping
-    public ResponseEntity process() throws InterruptedException, JsonProcessingException, ParseException {
+    public void process() throws InterruptedException, JsonProcessingException, ParseException {
         System.setProperty("webdriver.chrome.driver", chromePath);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
@@ -44,18 +51,14 @@ public class CrawlingController {
         driver = new ChromeDriver(chromeOptions);
         driver.get(url);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Book> response = getDataList();
-
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        getDataList();
     }
 
-    private List<Book> getDataList() throws InterruptedException, ParseException {
+    private void getDataList() throws InterruptedException, ParseException {
         Thread.sleep(100);
 
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<WebElement> productList = driver.findElements(By.className("prod_item"));
-        List<Book> bookList = new ArrayList<>();
         long id = 0;
         for(WebElement element : productList) {
             String name = element.findElement(By.className("prod_name")).getText();
@@ -64,18 +67,20 @@ public class CrawlingController {
                     .replaceAll(",", "");
             int price = Integer.parseInt(priceStr);
 
-            String[] author = element.findElement(By.cssSelector(".prod_author")).getText().split(" · ");
+            String[] authorStr = element.findElement(By.cssSelector(".prod_author")).getText().split(" · ");
 
-            String writer = author[0];
-            String publisher = author[1];
-            String dateStr = author[2];
+            String author = authorStr[0];
+            String publisher = authorStr[1];
+            String dateStr = authorStr[2];
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
             Date date = new Date(format.parse(dateStr).getTime());
 
-            Book book = new Book(++id, name, writer, publisher, price, date);
-            bookList.add(book);
+            String imgSrc = element.findElement(By.cssSelector(".img_box img")).getAttribute("src");
+
+            Book book = new Book(++id, name, author, publisher, price, date, imgSrc
+            );
+            bookRepository.save(book);
         }
-        return bookList;
     }
 }
