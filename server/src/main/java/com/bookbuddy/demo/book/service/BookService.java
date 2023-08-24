@@ -14,6 +14,14 @@ import static com.bookbuddy.demo.global.exception.ExceptionCode.BOOK_NOT_FOUND;
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
+
+    public Book findBook(String id) {
+        return findVerifyBook(id);
+    }
+
+    public boolean isFindBook(String id) {
+        return isVerifiedBook(id);
+    }
     public boolean isVerifiedBook(String id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if(optionalBook.isPresent()) {

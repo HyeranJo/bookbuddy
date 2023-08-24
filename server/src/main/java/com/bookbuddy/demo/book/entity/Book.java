@@ -41,4 +41,11 @@ public class Book {
         this.date = date;
         this.imgSrc = imgSrc;
     }
+
+    public void addBookmark(Bookmark bookmark) {
+        bookmarks.add(bookmark);
+        if(bookmark.getBook() != this) {
+            bookmark.addBook(this);
+        }
+    }
 }

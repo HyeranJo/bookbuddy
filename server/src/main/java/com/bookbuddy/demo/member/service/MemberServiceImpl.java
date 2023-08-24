@@ -1,12 +1,9 @@
 package com.bookbuddy.demo.member.service;
 
 import com.bookbuddy.demo.global.exception.BusinessException;
-import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -51,12 +48,22 @@ public class MemberServiceImpl implements MemberService{
     public Member findMember(long memberId) {
         return findVerifyMember(memberId);
     }
+
     @Override
-    public boolean duplicateEmail(String email) {
-        return isVerifiedMember(email);
+    public Member findMember(String email) {
+        return findVerifyMemberByEmail(email);
+    }
+    @Override
+    public boolean isFindMember(String email) {
+        return isVerifiedMemberByEmail(email);
     }
 
-    private boolean isVerifiedMember(String email) {
+    @Override
+    public boolean duplicateEmail(String email) {
+        return isVerifiedMemberByEmail(email);
+    }
+
+    private boolean isVerifiedMemberByEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if(member.isPresent()) {
             return true;
@@ -66,6 +73,10 @@ public class MemberServiceImpl implements MemberService{
 
     private Member findVerifyMember(long memberId) {
         return memberRepository.findById(memberId)
+                .orElseThrow(()-> new BusinessException(MEMBER_NOT_FOUND));
+    }
+    private Member findVerifyMemberByEmail(String email) {
+        return memberRepository.findByEmail(email)
                 .orElseThrow(()-> new BusinessException(MEMBER_NOT_FOUND));
     }
 }

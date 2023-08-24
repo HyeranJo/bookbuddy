@@ -8,4 +8,7 @@ public interface MemberService {
     Member findMember(long memberId);
 
     boolean duplicateEmail(String email);
+
+    Member findMember(String email);
+    boolean isFindMember(String email);
 }

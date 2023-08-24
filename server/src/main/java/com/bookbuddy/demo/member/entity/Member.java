@@ -39,13 +39,10 @@ public class Member {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
+    public void addBookmark(Bookmark bookmark) {
+        bookmarks.add(bookmark);
+        if(bookmark.getMember() != this) {
+            bookmark.addMember(this);
+        }
     }
 }
