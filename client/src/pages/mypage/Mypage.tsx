@@ -32,7 +32,7 @@ const Mypage = () => {
 
   return (
     <Styled_Layout.Container>
-      <Styled_Layout.Div>
+      <Styled_Layout.Div_WithSidebar>
         <MypageSidebar />
         <Styled_Mypage.Content>
           <Styled_Mypage.Title>
@@ -118,7 +118,7 @@ const Mypage = () => {
             </Styled_Mypage.BookmarkList>
           </Styled_Mypage.Detail>
         </Styled_Mypage.Content>
-      </Styled_Layout.Div>
+      </Styled_Layout.Div_WithSidebar>
     </Styled_Layout.Container>
   );
 };

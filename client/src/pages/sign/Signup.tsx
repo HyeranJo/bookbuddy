@@ -1,52 +1,86 @@
 import Styled_Signup from './Signup.style';
 import Styled_Sign from './Sign.style';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { idRegExp, passwordRegExp } from '../../utils/RegExp';
-import Header from '../../components/header/Header';
-import Nav from '../../components/nav/Nav';
+import { emailRegExp, passwordRegExp } from '../../utils/RegExp';
 import RedButton from '../../components/buttons/RedButton';
 import Input from '../../components/input/Input';
-import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface IFormData {
-  id: string;
+  email: string;
   password: string;
   password_confirm: string;
 }
 
 const Signup = () => {
   const [isDuplicate, setIsDuplicate] = useState(false);
+  const [emailValue, setEmailValue] = useState('');
   const {
     control,
     getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormData>();
+  const navigate = useNavigate();
 
   const onDuplicate = () => {
-    const idValue = getValues('id');
+    const idValue = getValues('email');
     // 가져온 값을 서버로 연결해서 중복된 여부 확인 성공하면 true 실패하면 초기화
-    setIsDuplicate(true);
-    console.log(idValue);
+    return axios
+      .post(
+        'https://6850-210-106-53-186.ngrok-free.app/duplicate/email',
+        idValue,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // 'ngrok-skip-browser-warning': true,
+          },
+        },
+      )
+      .then(response => {
+        if (response.status === 200) {
+          // 사용가능한 email
+          if (response.data === false) {
+            setIsDuplicate(true);
+            // 지금 작성한 email값을 저장
+            setEmailValue(idValue);
+            // 사용 불가능한 email
+            alert('중복확인 성공');
+          } else if (response.data === true) {
+            alert('이미 사용중인 이메일입니다.');
+            setIsDuplicate(false);
+          }
+        }
+      })
+      .catch(() => {
+        alert('올바른 형식이 아닙니다.');
+      });
   };
 
   function signupUser(userData: IFormData) {
-    return axios.post('/signup', userData).then(response => response.data);
+    const { password_confirm, ...otherData } = userData;
+    return axios
+      .post('https://6850-210-106-53-186.ngrok-free.app/signup', otherData, {
+        headers: {
+          'Content-Type': 'application/json',
+          // 'ngrok-skip-browser-warning': true,
+        },
+      })
+      .then(response => response.data);
   }
   const { mutate } = useMutation(signupUser);
 
   const onSubmit: SubmitHandler<IFormData> = data => {
-    // 데이터를 서버에 전달하는 함수 필요
-    // 중복확인 버튼 눌렀는지 여부를 확인하여 분기
-    if (isDuplicate === true) {
+    const idValue = getValues('email');
+    // 데이터를 서버에 전달하는 함수 필요 중복확인 버튼 눌렀는지 여부를 확인하여 분기
+    if (isDuplicate === true && emailValue === idValue) {
       mutate(data);
-      console.log(data);
-      console.log(isDuplicate);
+      navigate('/signin');
     } else {
-      console.log('중복확인해주세요');
-      console.log(isDuplicate);
+      alert('중복확인해주세요');
     }
   };
 
@@ -66,31 +100,33 @@ const Signup = () => {
               >
                 중복확인
               </Styled_Signup.Duplicate>
-              <Styled_Sign.Lable>아이디</Styled_Sign.Lable>
+              <Styled_Sign.Lable>이메일</Styled_Sign.Lable>
               <Controller
                 control={control}
-                name="id"
+                name="email"
                 /* Controller를 사용할 때 초기에 값이 없으면 undefined로서 uncontrolled 상태가 되기 때문에 waring메시지가 뜸 따라서 defaultValue를 설정해서 해결*/
                 defaultValue=""
                 rules={{
-                  required: '아이디를 입력해주세요.',
+                  required: '이메일을 입력해주세요.',
                   pattern: {
-                    value: idRegExp,
-                    message: '특수문자, 띄어쓰기는 사용하실 수 없습니다.',
+                    value: emailRegExp,
+                    message: '이메일형식으로 작성해주세요. ex)test@test.com ',
                   },
                 }}
                 render={({ field }) => {
                   return (
                     <Input
                       type="text"
-                      placeholder="아이디"
+                      placeholder="이메일"
                       value={field.value}
                       onChange={field.onChange}
                     />
                   );
                 }}
               />
-              <Styled_Sign.ErrorMsg>{errors?.id?.message}</Styled_Sign.ErrorMsg>
+              <Styled_Sign.ErrorMsg>
+                {errors?.email?.message}
+              </Styled_Sign.ErrorMsg>
             </Styled_Sign.Container>
             <Styled_Sign.Container>
               <Styled_Sign.Lable>비밀번호</Styled_Sign.Lable>
