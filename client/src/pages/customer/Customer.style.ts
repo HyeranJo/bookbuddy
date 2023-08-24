@@ -11,6 +11,7 @@ const Styled_Customer = {
     flex-direction: column;
     align-items: flex-start;
     margin-left: 30px;
+    margin-bottom: 200px;
     gap: 100px;
   `,
   Title: styled.h1`
