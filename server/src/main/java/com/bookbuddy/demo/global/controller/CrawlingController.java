@@ -55,32 +55,37 @@ public class CrawlingController {
     }
 
     private void getDataList() throws InterruptedException, ParseException {
-        Thread.sleep(100);
-
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<WebElement> productList = driver.findElements(By.className("prod_item"));
         long id = 0;
-        for(WebElement element : productList) {
-            String name = element.findElement(By.className("prod_name")).getText();
 
-            String priceStr = element.findElement(By.cssSelector(".price .val")).getText()
-                    .replaceAll(",", "");
-            int price = Integer.parseInt(priceStr);
+        int page = 1;
+        int endPage = 5;
+        while(page <= endPage) {
+            for(WebElement element : productList) {
+                String name = element.findElement(By.className("prod_name")).getText();
 
-            String[] authorStr = element.findElement(By.cssSelector(".prod_author")).getText().split(" · ");
+                String priceStr = element.findElement(By.cssSelector(".price .val")).getText()
+                        .replaceAll(",", "");
+                int price = Integer.parseInt(priceStr);
 
-            String author = authorStr[0];
-            String publisher = authorStr[1];
-            String dateStr = authorStr[2];
+                String[] authorStr = element.findElement(By.cssSelector(".prod_author")).getText().split(" · ");
 
-            SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-            Date date = new Date(format.parse(dateStr).getTime());
+                String author = authorStr[0];
+                String publisher = authorStr[1];
+                String dateStr = authorStr[2];
 
-            String imgSrc = element.findElement(By.cssSelector(".img_box img")).getAttribute("src");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+                Date date = new Date(format.parse(dateStr).getTime());
 
-            Book book = new Book(++id, name, author, publisher, price, date, imgSrc
-            );
-            bookRepository.save(book);
+                String imgSrc = element.findElement(By.cssSelector(".img_box img")).getAttribute("src");
+
+                Book book = new Book(++id, name, author, publisher, price, date, imgSrc);
+                bookRepository.save(book);
+
+            }
+            ++page;
+           // driver.findElement(By.cssSelector(".btn_page.next")).click();
         }
     }
 }
