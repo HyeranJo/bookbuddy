@@ -1,6 +1,7 @@
 import React from 'react';
 import { Styled_Payment } from './Payment.styled';
 import { Styled_Layout } from '../BlankPageLayout';
+import CallNumber from '../../components/input/CallNumber';
 
 const Payment = () => {
   return (
@@ -8,7 +9,7 @@ const Payment = () => {
       <Styled_Layout.Container className="container">
         <Styled_Layout.Div_WithNoSidebar>
           <Styled_Payment.Content>
-            <Styled_Layout.H1>hello</Styled_Layout.H1>
+            <Styled_Layout.H1>배송주소</Styled_Layout.H1>
             <Styled_Payment.Address>
               <div className="shipping-ddress">
                 <Styled_Payment.Table id="shipping-ddress-table">
@@ -19,15 +20,16 @@ const Payment = () => {
                   </colgroup>
                   <tbody>
                     <tr>
-                      <td>이름</td>
+                      <td>이름*</td>
                       <td colSpan={2}>
                         <input />
                       </td>
                     </tr>
                     <tr>
-                      <td>배송주소</td>
+                      <td>배송주소*</td>
                       <td colSpan={2}>
                         <input />
+                        <button>주소찾기</button>
                       </td>
                     </tr>
                     <tr>
@@ -45,15 +47,15 @@ const Payment = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td>휴대폰</td>
+                      <td>휴대폰*</td>
                       <td colSpan={2}>
-                        <input />-<input />-<input />
+                        <CallNumber defaultValue="010" />
                       </td>
                     </tr>
                     <tr>
                       <td>일반전화</td>
                       <td colSpan={2}>
-                        <input />-<input />-<input />
+                        <CallNumber />
                       </td>
                     </tr>
                   </tbody>
@@ -95,19 +97,19 @@ const Payment = () => {
                     <tr>
                       <td>휴대폰</td>
                       <td>
-                        <input />
+                        <CallNumber defaultValue="010" />
                       </td>
                     </tr>
                     <tr>
                       <td>일반전화</td>
                       <td>
-                        <input />-<input />-<input />
+                        <CallNumber />
                       </td>
                     </tr>
                     <tr>
                       <td>이메일</td>
                       <td>
-                        <input />-<input />-<input />
+                        <input />
                       </td>
                     </tr>
                   </tbody>
