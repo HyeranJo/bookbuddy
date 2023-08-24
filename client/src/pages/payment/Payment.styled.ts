@@ -16,7 +16,7 @@ export const Styled_Payment = {
       align-items: center;
       background-color: var(--category-color);
     }
-    & > .shipping-ddress {
+    & > .shipping-address {
       width: 722px;
       height: 472px;
     }
@@ -34,7 +34,7 @@ export const Styled_Payment = {
     border-collapse: collapse; //표 테두리 삭제
     table-layout: fixed; //테이블 크기 고정
 
-    &#shipping-ddress-table {
+    &#shipping-address-table {
       width: 650px;
       height: 350px;
     }
