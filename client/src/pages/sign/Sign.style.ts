@@ -2,7 +2,8 @@ import { styled } from 'styled-components';
 
 const Styled_Sign = {
   Main: styled.main`
-    width: 1512px;
+    /* max-width: 1512px; */
+    width: 100%;
   `,
   Title: styled.h1`
     display: flex;

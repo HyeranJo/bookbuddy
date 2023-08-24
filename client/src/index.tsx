@@ -12,6 +12,7 @@ import List from './pages/list/List';
 import Order from './pages/order/Order';
 import Mypage from './pages/mypage/Mypage';
 import Payment from './pages/payment/Payment';
+import Bookdetail from './pages/bookdetail/Bookdetail';
 
 const router = createBrowserRouter([
   {
@@ -20,24 +21,15 @@ const router = createBrowserRouter([
     errorElement: 'Notfound',
     children: [
       { index: true, element: <List /> },
+      /* 예시
+      {path: '/signin', element: <SignIn/>}
+      */
       { path: '/signup', element: <Signup /> },
       { path: '/signin', element: <Signin /> },
-      {
-        path: '/list',
-        element: <List />,
-      },
-      {
-        path: '/order',
-        element: <Order />,
-      },
-      {
-        path: '/mypage',
-        element: <Mypage />,
-      },
-      {
-        path: '/payment',
-        element: <Payment />,
-      },
+      { path: '/list', element: <List /> },
+      { path: '/bookdetail', element: <Bookdetail /> },
+      { path: '/order', element: <Order /> },
+      { path: '/mypage', element: <Mypage /> },
     ],
   },
 ]);
