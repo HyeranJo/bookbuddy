@@ -61,6 +61,7 @@ const Signup = () => {
   };
 
   function signupUser(userData: IFormData) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password_confirm, ...otherData } = userData;
     return axios
       .post('https://6850-210-106-53-186.ngrok-free.app/signup', otherData, {

@@ -15,13 +15,23 @@ const Header = () => {
           </Link>
           <Styled_Header.Menu>
             <SearchBar iconSize={18} width={250} />
-            <Styled_Header.Span className="myinfo">
-              나의정보
-              <Styled_Header.Info className="info">
-                <InfoNav />
-              </Styled_Header.Info>
-            </Styled_Header.Span>
-            <Styled_Header.Span>고객센터</Styled_Header.Span>
+            <Link
+              to={'/signin'}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              <Styled_Header.Span className="myinfo">
+                나의정보
+                <Styled_Header.Info className="info">
+                  <InfoNav />
+                </Styled_Header.Info>
+              </Styled_Header.Span>
+            </Link>
+            <Link
+              to={'/customer'}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              <Styled_Header.Span>고객센터</Styled_Header.Span>
+            </Link>
           </Styled_Header.Menu>
         </Styled_Header.Div>
       </Styled_Header.Container>

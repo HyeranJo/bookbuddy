@@ -18,7 +18,9 @@ const InfoNav = () => {
         >
           <Styled_InfoNav.Span>장바구니</Styled_InfoNav.Span>
         </Link>
-        <Styled_InfoNav.Span>로그아웃</Styled_InfoNav.Span>
+        <Link to={'/'} style={{ textDecorationLine: 'none', color: 'black' }}>
+          <Styled_InfoNav.Span>로그아웃</Styled_InfoNav.Span>
+        </Link>
       </Styled_InfoNav.Div>
     </div>
   );
