@@ -29,3 +29,13 @@ export const Tel_Cstmr_Atom = atom({
   key: 'Tel_Cstmr_Atom',
   default: ['02'],
 });
+
+export const ShipInputs = atom({
+  key: 'ShipInputs',
+  default: { name: '', address1: '', address2: '' },
+});
+
+export const OrdererInputs = atom({
+  key: 'OrdererInputs',
+  default: { orderName: '', email: '' },
+});

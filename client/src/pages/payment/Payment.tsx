@@ -1,27 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Styled_Payment } from './Payment.styled';
 import { Styled_Layout } from '../BlankPageLayout';
 import CallNumber from '../../components/input/CallNumber';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  Cell_Ship_Atom,
-  Tel_Ship_Atom,
-  Cell_Cstmr_Atom,
-  Tel_Cstmr_Atom,
-  radio_Atom,
-} from '../../recoil/Payment';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { OrdererInputs, ShipInputs, radio_Atom } from '../../recoil/Payment';
+import Input from '../../components/input/Input';
 
 const Payment = () => {
-  const a = useRecoilValue(Cell_Ship_Atom);
-  const b = useRecoilValue(Tel_Ship_Atom);
-  const c = useRecoilValue(Cell_Cstmr_Atom);
-  const d = useRecoilValue(Tel_Cstmr_Atom);
   const setRadioValue = useSetRecoilState(radio_Atom);
+  const [shipInputs, setShipInputs] = useRecoilState(ShipInputs);
+  const [ordererInputs, setOrdererInputs] = useRecoilState(OrdererInputs);
+  const { name, address1, address2 } = shipInputs;
+  const { orderName, email } = ordererInputs;
 
-  console.log(`배송지폰: ${a}, 배송지전번: ${b}, 고객폰: ${c}, 고객전번: ${d}`);
-
+  /* 라디오 버튼 값 변경 사항을 변수에 저장하는 함수 **/
   const radioHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioValue(e.target.value);
+  };
+
+  /** input handler */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    console.log(ordererInputs, shipInputs);
+    if (name === 'orderName' || name === 'email') {
+      setOrdererInputs({
+        ...ordererInputs,
+        [name]: value,
+      });
+    } else {
+      setShipInputs({
+        ...shipInputs,
+        [name]: value,
+      });
+    }
   };
 
   return (
@@ -29,6 +40,7 @@ const Payment = () => {
       <Styled_Layout.Container className="container">
         <Styled_Layout.Div_WithNoSidebar>
           <Styled_Payment.Content>
+            {/* =================shipping-address==================== */}
             <Styled_Layout.H1>배송주소</Styled_Layout.H1>
             <Styled_Payment.Address>
               <div className="shipping-address">
@@ -42,13 +54,25 @@ const Payment = () => {
                     <tr>
                       <td>이름*</td>
                       <td colSpan={2}>
-                        <input />
+                        <Input
+                          type="text"
+                          name="name"
+                          value={name}
+                          height={40}
+                          onChange={handleChange}
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td>배송주소*</td>
                       <td colSpan={2}>
-                        <input />
+                        <Input
+                          type="text"
+                          name="address1"
+                          value={address1}
+                          height={40}
+                          onChange={handleChange}
+                        />
                         <button>주소찾기</button>
                       </td>
                     </tr>
@@ -56,14 +80,26 @@ const Payment = () => {
                       <td></td>
                       <td>도로명 주소</td>
                       <td>
-                        <input />
+                        <Input
+                          type="text"
+                          name="address1"
+                          value={address1}
+                          height={40}
+                          onChange={handleChange}
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td></td>
                       <td>지번 주소</td>
                       <td>
-                        <input />
+                        <Input
+                          type="text"
+                          name="address2"
+                          value={address2}
+                          height={40}
+                          onChange={handleChange}
+                        />
                       </td>
                     </tr>
                     <tr>
@@ -81,6 +117,7 @@ const Payment = () => {
                   </tbody>
                 </Styled_Payment.Table>
               </div>
+              {/* =================orderer-info-radiobutton============ */}
               <div className="orderer-info">
                 <Styled_Payment.SubTitle>
                   <h2>주문고객</h2>
@@ -108,6 +145,7 @@ const Payment = () => {
                     <label htmlFor="inputstyle">배송정보와 동일</label>
                   </form>
                 </Styled_Payment.SubTitle>
+                {/* =================orderer-info==================== */}
                 <Styled_Payment.Table id="orderer-info-table">
                   <colgroup>
                     <col style={{ width: '25%' }}></col>
@@ -115,13 +153,20 @@ const Payment = () => {
                   </colgroup>
                   <tbody>
                     <tr>
-                      <td>이름</td>
+                      <td>이름*</td>
                       <td>
-                        <input />
+                        <Input
+                          type="text"
+                          name="orderName"
+                          value={orderName}
+                          height={40}
+                          width={278}
+                          onChange={handleChange}
+                        />
                       </td>
                     </tr>
                     <tr>
-                      <td>휴대폰</td>
+                      <td>휴대폰*</td>
                       <td>
                         <CallNumber defaultValue="010" infoType="customer" />
                       </td>
@@ -133,9 +178,16 @@ const Payment = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td>이메일</td>
+                      <td>이메일*</td>
                       <td>
-                        <input />
+                        <Input
+                          type="text"
+                          name="email"
+                          value={email}
+                          height={40}
+                          width={278}
+                          onChange={handleChange}
+                        />
                       </td>
                     </tr>
                   </tbody>
