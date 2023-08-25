@@ -9,7 +9,7 @@ export const Styled_CartTable = {
   Table: styled.table`
     /* width: 1095px; */
     width: 1300px;
-    font-size: var(--order-font-size);
+    font-size: var(--basic-font-size);
     text-align: center;
     line-height: 34px;
     border-collapse: collapse; //표 테두리 삭제
@@ -23,7 +23,7 @@ export const Styled_CartTable = {
 
     & > .booktitle {
       text-align: left;
-      font-size: var(--order-book-title-font-size);
+      font-size: var(--subtitle-font-size);
     }
   `,
   DeleteTr: styled.tr`
@@ -57,9 +57,11 @@ export const Styled_CartTable = {
     & > td {
       padding-right: 30px;
       padding: 15px;
+      font-size: var(--third-title-font-size);
     }
     &:last-child {
-      font-size: var(--detail-full-amount-font-size);
+      // 이친구 폰트사이즈 적용이 안되고 있음
+      font-size: var(--subtitle-font-size);
       border-bottom: 0px;
     }
   `,

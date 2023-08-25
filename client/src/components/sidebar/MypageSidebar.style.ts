@@ -15,7 +15,7 @@ export const Styled_MypageSidebar = {
     flex-flow: column;
   `,
   TitleDiv: styled.div`
-    font-size: var(--basic-font-size);
+    font-size: var(--third-title-font-size);
     font-weight: bold;
     text-align: center;
     gap: 40px;

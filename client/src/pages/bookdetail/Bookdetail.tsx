@@ -48,9 +48,6 @@ const Bookdetail = (props: BookProps) => {
                       />
                     </Styled_Bookdetail.icon>
                   </Styled_Bookdetail.Horizontalitydiv>
-                  <Styled_Bookdetail.Content>
-                    {props.price || '11,700'}원
-                  </Styled_Bookdetail.Content>
                 </Styled_Bookdetail.Topdiv>
                 <Styled_Bookdetail.Middiv>
                   <Styled_Bookdetail.Content>
@@ -95,6 +92,7 @@ const Bookdetail = (props: BookProps) => {
                     14,700원
                   </Styled_Bookdetail.TotalPrice>
                 </Styled_Bookdetail.Horizontalitydiv>
+                <Styled_Bookdetail.ButtonContainer></Styled_Bookdetail.ButtonContainer>
                 <Styled_Bookdetail.Horizontalitydiv>
                   <RedButton name="장바구니 담기" />
                   <RedButton name="바로 결제하기" />

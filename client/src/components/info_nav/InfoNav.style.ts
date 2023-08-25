@@ -45,5 +45,6 @@ export const Styled_InfoNav = {
   `,
   Span: styled.span`
     cursor: pointer;
+    font-size: var(--basic-font-size);
   `,
 };
