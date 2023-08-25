@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Styled_PhoneNumber } from './CallNumber.style';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { styled } from 'styled-components';
 import {
   Cell_Ship_Atom,
   Tel_Ship_Atom,
@@ -181,30 +181,6 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
       )}
     </div>
   );
-};
-
-export const Styled_PhoneNumber = {
-  Input: styled.input<{ $backGroundColor?: boolean }>`
-    width: 80px;
-    height: 40px;
-    text-align: center;
-    font-size: var(--input-font-size);
-    border: 1px solid var(--light-gray-color);
-    background-color: ${props =>
-      props.$backGroundColor ? 'var(--light-gray-color)' : 'white'};
-
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  `,
-  Select: styled.select`
-    width: 80px;
-    height: 40px;
-    text-align: center;
-    font-size: var(--input-font-size);
-    border: 1px solid var(--light-gray-color);
-  `,
 };
 
 export default CallNumber;
