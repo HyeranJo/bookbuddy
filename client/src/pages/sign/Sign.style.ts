@@ -20,7 +20,7 @@ const Styled_Sign = {
     font-size: var(--basic-font-size);
   `,
   ErrorMsg: styled.p`
-    font-size: var(--error-font-size);
+    font-size: var(--message-font-size);
     color: var(--primary-background-color);
     margin-bottom: 20px;
   `,

@@ -43,21 +43,18 @@ const Styled_Bookdetail = {
     cursor: pointer;
   `,
   Title: styled.p`
-    font-size: var(--order-book-title-font-size);
+    font-size: var(--subtitle-font-size);
   `,
   Content: styled.p`
-    font-size: var(--detail-basic-font-size);
+    font-size: var(--third-title-font-size);
   `,
   TotalPrice: styled.p`
-    font-size: var(--detail-full-amount-font-size);
-    padding-top: 20px;
-    padding-bottom: 40px;
+    font-size: var(--subtitle-font-size);
   `,
   Topdiv: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   `,
   Middiv: styled.div`
     display: flex;
@@ -76,6 +73,9 @@ const Styled_Bookdetail = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  `,
+  ButtonContainer: styled.div`
+    padding-top: 50px;
   `,
 };
 

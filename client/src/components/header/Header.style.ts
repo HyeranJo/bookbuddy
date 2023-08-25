@@ -27,6 +27,7 @@ export const Styled_Header = {
   Span: styled.span`
     cursor: pointer;
     position: relative;
+    font-size: var(--basic-font-size);
 
     &:hover > div {
       display: block;

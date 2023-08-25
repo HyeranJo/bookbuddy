@@ -27,7 +27,7 @@ export const Styled_Nav = {
     padding-right: 50px;
   `,
   Span: styled.span`
-    font-size: var(--basic-font-size);
+    font-size: var(--third-title-font-size);
     color: white;
     cursor: pointer;
   `,

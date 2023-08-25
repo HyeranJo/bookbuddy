@@ -5,7 +5,7 @@ export const Styled_MypageTable = {
     width: 1095px;
   `,
   H1: styled.h1`
-    font-size: var(--title-font-size);
+    font-size: var(--subtitle-font-size);
     margin-bottom: 20px;
     display: inline-block;
   `,

@@ -7,7 +7,7 @@ const Styled_FQA = {
   `,
   Title: styled.h1`
     margin-bottom: 20px;
-    font-size: var(--title-font-size);
+    font-size: var(--subtitle-font-size);
   `,
   Question: styled.div`
     width: 1095px;
@@ -18,7 +18,7 @@ const Styled_FQA = {
     padding-left: 25px;
   `,
   QuestionTitle: styled.h2`
-    font-size: var(--question-title-font-size);
+    font-size: var(--third-title-font-size);
   `,
   ArrowWrapper: styled.div`
     display: flex;

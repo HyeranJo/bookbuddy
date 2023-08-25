@@ -22,7 +22,7 @@ export const Styled_Mypage = {
   Point: styled.div`
     width: 1095px;
     padding: 10px 0px;
-    font-size: var(--mypage-font-size);
+    font-size: var(--third-title-font-size);
     text-align: end;
   `,
   Detail: styled.div`
@@ -38,6 +38,10 @@ export const Styled_Mypage = {
     display: flex;
     justify-content: start;
     width: 1095px;
+  `,
+  H2: styled.h2`
+    font-size: var(--subtitle-font-size);
+    display: inline-block;
   `,
   Books: styled.div`
     height: 1095px;
