@@ -2,8 +2,12 @@ import React from 'react';
 import { Styled_List } from './List.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
+import { getCookie } from '../../utils/cookie';
 
 const List = () => {
+  const userInfo = getCookie('userInfo');
+  console.log(userInfo.userId);
+
   return (
     <Styled_List.Container>
       <Styled_List.Div>

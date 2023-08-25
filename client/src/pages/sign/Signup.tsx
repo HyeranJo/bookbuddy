@@ -31,7 +31,7 @@ const Signup = () => {
     // 가져온 값을 서버로 연결해서 중복된 여부 확인 성공하면 true 실패하면 초기화
     return axios
       .post(
-        'https://6850-210-106-53-186.ngrok-free.app/duplicate/email',
+        'https://29a6-210-106-53-186.ngrok-free.app/duplicate/email',
         idValue,
         {
           headers: {
@@ -64,13 +64,19 @@ const Signup = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password_confirm, ...otherData } = userData;
     return axios
-      .post('https://6850-210-106-53-186.ngrok-free.app/signup', otherData, {
+      .post('https://29a6-210-106-53-186.ngrok-free.app/signup', otherData, {
         headers: {
           'Content-Type': 'application/json',
           // 'ngrok-skip-browser-warning': true,
         },
       })
-      .then(response => response.data);
+      .then(response => {
+        response.data;
+        alert('[회원가입 성공] 로그인 페이지로 이동합니다');
+      })
+      .catch(err => {
+        alert(`erro: ${err}`);
+      });
   }
   const { mutate } = useMutation(signupUser);
 
@@ -79,10 +85,10 @@ const Signup = () => {
     // 데이터를 서버에 전달하는 함수 필요 중복확인 버튼 눌렀는지 여부를 확인하여 분기
     if (isDuplicate === true && emailValue === idValue) {
       mutate(data);
-      navigate('/signin');
     } else {
       alert('중복확인해주세요');
     }
+    navigate('/signin');
   };
 
   return (
