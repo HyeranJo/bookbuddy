@@ -21,7 +21,6 @@ const Payment = () => {
   /** input handler */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    console.log(ordererInputs, shipInputs);
     if (name === 'orderName' || name === 'email') {
       setOrdererInputs({
         ...ordererInputs,
