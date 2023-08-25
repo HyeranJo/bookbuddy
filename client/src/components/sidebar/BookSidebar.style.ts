@@ -20,4 +20,17 @@ export const Styled_Sidebar = {
     padding-top: 44px;
     cursor: pointer;
   `,
+  Span: styled.button`
+    border: 0;
+    background-color: white;
+    font-size: var(--basic-font-size);
+
+    &:hover {
+      color: var(--primary-background-color);
+    }
+    &:focus {
+      color: var(--primary-background-color);
+      font-weight: bold;
+    }
+  `,
 };
