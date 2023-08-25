@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Styled_PhoneNumber } from './CallNumber.style';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  Cell_Ship_Atom,
-  Tel_Ship_Atom,
-  Cell_Cstmr_Atom,
-  Tel_Cstmr_Atom,
+  Ship_Mobile_Atom,
+  Ship_Tel_Atom,
+  Cstmr_Mobile_Atom,
+  Cstmr_Tel_Atom,
   radio_Atom,
 } from '../../recoil/Payment';
+import { AreaCode } from '../../utils/AreaCode';
 
 interface CallNumberProps {
   // 휴대폰일경우
@@ -18,35 +19,33 @@ interface CallNumberProps {
 
 const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
   const number2Ref = useRef<HTMLInputElement>(null);
-  const [cell_Ship, setCell_Ship] = useRecoilState(Cell_Ship_Atom);
-  const [tel_Ship, setTel_Ship] = useRecoilState(Tel_Ship_Atom);
-  const [cell_Cstmr, setCell_Cstmr] = useRecoilState(Cell_Cstmr_Atom);
-  const [tel_Cstmr, setTel_Cstmr] = useRecoilState(Tel_Cstmr_Atom);
+  const [shipMobile, setShipMobile] = useRecoilState(Ship_Mobile_Atom);
+  const [shipTel, setShipTel] = useRecoilState(Ship_Tel_Atom);
+  const [cstmrMobile, setCstmrMobile] = useRecoilState(Cstmr_Mobile_Atom);
+  const [cstmrTel, setCstmrTel] = useRecoilState(Cstmr_Tel_Atom);
   const radioValue = useRecoilValue(radio_Atom);
-  const [inputValue1, setInputValue1] = useState('');
-  const [inputValue2, setInputValue2] = useState('');
 
   useEffect(() => {
     // 배송정보와 동일 클릭시
     if (radioValue === '배송정보와동일') {
       // '휴대폰 && 주문자' 정보에 '휴대폰 && 배송지' 정보 입력
-      const copy1 = [...cell_Cstmr];
-      copy1[0] = cell_Ship[0];
-      copy1[1] = cell_Ship[1];
-      copy1[2] = cell_Ship[2];
-      setCell_Cstmr(copy1);
+      const copy1 = [...cstmrMobile];
+      copy1[0] = shipMobile[0];
+      copy1[1] = shipMobile[1];
+      copy1[2] = shipMobile[2];
+      setCstmrMobile(copy1);
 
       // '일반전화 && 주문자' 정보에 '일반전화 && 배송지' 정보 입력
-      const copy2 = [...tel_Cstmr];
-      copy2[0] = tel_Ship[0];
-      copy2[1] = tel_Ship[1];
-      copy2[2] = tel_Ship[2];
-      setTel_Cstmr(copy2);
+      const copy2 = [...cstmrTel];
+      copy2[0] = shipTel[0];
+      copy2[1] = shipTel[1];
+      copy2[2] = shipTel[2];
+      setCstmrTel(copy2);
     }
   }, [radioValue]);
 
   /** 전화번호 앞자리 입력시 뒷자리로 자동 탭 해주는 함수  */
-  const number1Value = (e: any) => {
+  const autoTab = (e: any) => {
     if (e.target.value.length === 4 && number2Ref.current) {
       number2Ref.current.focus();
     }
@@ -58,29 +57,35 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
     index: number,
   ) => {
     const value = e.target.value;
-    // 휴대폰 && 배송지
-    if (defaultValue && infoType === 'ship') {
-      const copy = [...cell_Ship];
-      copy[index] = value;
-      setCell_Ship(copy);
+    // 배송지
+    if (infoType === 'ship') {
+      // 휴대폰
+      if (defaultValue) {
+        const copy = [...shipMobile];
+        copy[index] = value;
+        setShipMobile(copy);
+      }
+      // 일반 전화
+      else if (!defaultValue) {
+        const copy = [...shipTel];
+        copy[index] = value;
+        setShipTel(copy);
+      }
     }
-    // 일반 전화 && 배송지
-    else if (!defaultValue && infoType === 'ship') {
-      const copy = [...tel_Ship];
-      copy[index] = value;
-      setTel_Ship(copy);
-    }
-    // 휴대폰 && 주문자
-    else if (defaultValue && infoType === 'customer') {
-      const copy = [...cell_Cstmr];
-      copy[index] = value;
-      setCell_Cstmr(copy);
-    }
-    // 일반 전화 && 주문자
-    else if (!defaultValue && infoType === 'customer') {
-      const copy = [...tel_Cstmr];
-      copy[index] = value;
-      setTel_Cstmr(copy);
+    // 주문자
+    else if (infoType === 'customer') {
+      // 휴대폰
+      if (defaultValue) {
+        const copy = [...cstmrMobile];
+        copy[index] = value;
+        setCstmrMobile(copy);
+      }
+      // 일반 전화
+      else if (!defaultValue) {
+        const copy = [...cstmrTel];
+        copy[index] = value;
+        setCstmrTel(copy);
+      }
     }
   };
 
@@ -92,7 +97,7 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
         radioValue === '배송정보와동일' && infoType === 'customer' ? (
           <Styled_PhoneNumber.Input
             $backGroundColor={true}
-            value={cell_Cstmr[0]}
+            value={cstmrMobile[0]}
             readOnly
           />
         ) : (
@@ -110,7 +115,7 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
       radioValue === '배송정보와동일' && infoType === 'customer' ? (
         <Styled_PhoneNumber.Input
           $backGroundColor={true}
-          value={tel_Cstmr[0]}
+          value={cstmrTel[0]}
           readOnly
         />
       ) : (
@@ -120,30 +125,20 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
             CallNumberCollecter(e, 0);
           }}
         >
-          <option value="02">02</option>
-          <option value="031">031</option>
-          <option value="032">032</option>
-          <option value="033">033</option>
-          <option value="041">041</option>
-          <option value="042">042</option>
-          <option value="043">043</option>
-          <option value="044">044</option>
-          <option value="051">051</option>
-          <option value="052">052</option>
-          <option value="053">053</option>
-          <option value="054">054</option>
-          <option value="055">055</option>
-          <option value="061">061</option>
-          <option value="062">062</option>
-          <option value="063">063</option>
-          <option value="064">064</option>
+          {AreaCode.map((v, i) => {
+            return (
+              <option value={v} key={i}>
+                {v}
+              </option>
+            );
+          })}
         </Styled_PhoneNumber.Select>
       )}
       {/* =======================전화번호 앞자리========================= */}-
       {radioValue === '배송정보와동일' && infoType === 'customer' ? (
         <Styled_PhoneNumber.Input
           $backGroundColor={true}
-          value={defaultValue ? cell_Cstmr[1] : tel_Cstmr[1]}
+          value={defaultValue ? cstmrMobile[1] : cstmrTel[1]}
           readOnly
         />
       ) : (
@@ -151,10 +146,17 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
           type="text"
           pattern="\d*"
           maxLength={4}
-          value={inputValue1 || ''}
+          value={
+            defaultValue
+              ? infoType === 'ship'
+                ? shipMobile[1]
+                : cstmrMobile[1]
+              : infoType === 'ship'
+              ? shipTel[1]
+              : cstmrTel[1]
+          }
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setInputValue1(e.target.value);
-            number1Value(e);
+            autoTab(e);
             CallNumberCollecter(e, 1);
           }}
         />
@@ -163,7 +165,7 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
       {radioValue === '배송정보와동일' && infoType === 'customer' ? (
         <Styled_PhoneNumber.Input
           $backGroundColor={true}
-          value={defaultValue ? cell_Cstmr[1] : tel_Cstmr[2]}
+          value={defaultValue ? cstmrMobile[2] : cstmrTel[2]}
           readOnly
         />
       ) : (
@@ -171,10 +173,17 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
           type="text"
           pattern="\d*"
           maxLength={4}
-          value={inputValue2 || ''}
+          value={
+            defaultValue
+              ? infoType === 'ship'
+                ? shipMobile[2]
+                : cstmrMobile[2]
+              : infoType === 'ship'
+              ? shipTel[2]
+              : cstmrTel[2]
+          }
           ref={number2Ref}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setInputValue2(e.target.value);
             CallNumberCollecter(e, 2);
           }}
         />

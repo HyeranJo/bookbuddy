@@ -6,36 +6,36 @@ export const radio_Atom = atom({
   default: '새로입력',
 });
 
-/** 휴대폰 && 배송지 */
-export const Cell_Ship_Atom = atom({
-  key: 'Cell_Ship_Atom',
-  default: ['010'],
+/** 배송지 && 휴대폰 */
+export const Ship_Mobile_Atom = atom({
+  key: 'Ship_Mobile_Atom',
+  default: ['010', '', ''],
 });
 
-/** 일반전화 && 배송지 */
-export const Tel_Ship_Atom = atom({
-  key: 'Tel_Ship_Atom',
-  default: ['02'],
+/** 배송지 && 일반전화 */
+export const Ship_Tel_Atom = atom({
+  key: 'Ship_Tel_Atom',
+  default: ['02', '', ''],
 });
 
-/** 휴대폰 && 주문자 */
-export const Cell_Cstmr_Atom = atom({
-  key: 'Cell_Cstmr_Atom',
-  default: ['010'],
+/** 주문자 && 휴대폰 */
+export const Cstmr_Mobile_Atom = atom({
+  key: 'Cstmr_Mobile_Atom',
+  default: ['010', '', ''],
 });
 
-/** 일반전화 && 주문자 */
-export const Tel_Cstmr_Atom = atom({
-  key: 'Tel_Cstmr_Atom',
-  default: ['02'],
+/** 주문자 && 일반전화 */
+export const Cstmr_Tel_Atom = atom({
+  key: 'Cstmr_Tel_Atom',
+  default: ['02', '', ''],
 });
 
-export const ShipInputs = atom({
+export const ShipInputsAtom = atom({
   key: 'ShipInputs',
-  default: { name: '', address1: '', address2: '' },
+  default: { shipName: '', address1: '', address2: '' },
 });
 
-export const OrdererInputs = atom({
-  key: 'OrdererInputs',
-  default: { orderName: '', email: '' },
+export const CstmrInputsAtom = atom({
+  key: 'CstmrInputs',
+  default: { cstmrName: '', email: '' },
 });

@@ -3,15 +3,21 @@ import { Styled_Payment } from './Payment.styled';
 import { Styled_Layout } from '../BlankPageLayout';
 import CallNumber from '../../components/input/CallNumber';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { OrdererInputs, ShipInputs, radio_Atom } from '../../recoil/Payment';
+import {
+  CstmrInputsAtom,
+  ShipInputsAtom,
+  radio_Atom,
+} from '../../recoil/Payment';
 import Input from '../../components/input/Input';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
-  const [shipInputs, setShipInputs] = useRecoilState(ShipInputs);
-  const [ordererInputs, setOrdererInputs] = useRecoilState(OrdererInputs);
-  const { name, address1, address2 } = shipInputs;
-  const { orderName, email } = ordererInputs;
+  const [shipInputs, setShipInputs] = useRecoilState(ShipInputsAtom);
+  const [cstmrInputs, setCstmrInputs] = useRecoilState(CstmrInputsAtom);
+  const { shipName, address1, address2 } = shipInputs;
+  const { cstmrName, email } = cstmrInputs;
+
+  console.log(shipInputs, cstmrInputs);
 
   /* 라디오 버튼 값 변경 사항을 변수에 저장하는 함수 **/
   const radioHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +27,9 @@ const Payment = () => {
   /** input handler */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    if (name === 'orderName' || name === 'email') {
-      setOrdererInputs({
-        ...ordererInputs,
+    if (name === 'cstmrName' || name === 'email') {
+      setCstmrInputs({
+        ...cstmrInputs,
         [name]: value,
       });
     } else {
@@ -55,8 +61,8 @@ const Payment = () => {
                       <td colSpan={2}>
                         <Input
                           type="text"
-                          name="name"
-                          value={name}
+                          name="shipName"
+                          value={shipName}
                           height={40}
                           onChange={handleChange}
                         />
@@ -156,8 +162,8 @@ const Payment = () => {
                       <td>
                         <Input
                           type="text"
-                          name="orderName"
-                          value={orderName}
+                          name="cstmrName"
+                          value={cstmrName}
                           height={40}
                           width={278}
                           onChange={handleChange}
