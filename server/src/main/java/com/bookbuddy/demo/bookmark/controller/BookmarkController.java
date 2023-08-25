@@ -16,7 +16,7 @@ import javax.validation.constraints.Positive;
 public class BookmarkController {
     private BookmarkService bookmarkService;
     @PostMapping("/{book-id}")
-    public void postBookmark(Authentication authentication, @PathVariable("book-id") @Positive long bookId) {
+    public void postBookmark(Authentication authentication, @PathVariable("book-id") @Positive String bookId) {
         String email = authentication.getPrincipal().toString();
         bookmarkService.createBookmark(email, bookId);
     }
