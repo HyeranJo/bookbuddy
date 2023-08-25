@@ -5,13 +5,16 @@ import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
 import { getList } from '../../api/BookList';
+import { useRecoilValue } from 'recoil';
+import { SidebarIdAtom } from '../../recoil/BookList';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
 
   useEffect(() => {
-    getList({ setListData, setIsLoading });
+    getList({ setListData, setIsLoading, sidebarIdAtom });
   }, []);
 
   return (

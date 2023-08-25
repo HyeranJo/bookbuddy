@@ -16,7 +16,7 @@ export const Styled_Sidebar = {
 
     font-size: var(--basic-font-size);
     text-align: center;
-    gap: 13px;
+    gap: 20px;
     padding-top: 44px;
     cursor: pointer;
   `,
