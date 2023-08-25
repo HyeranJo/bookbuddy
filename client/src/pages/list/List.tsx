@@ -2,33 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Styled_List } from './List.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
-import axios from 'axios';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+import { getList } from '../../api/BookList';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const getList = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${SERVER_HOST}/book/list?page=1&size=20`,
-          { headers: { 'ngrok-skip-browser-warning': true } },
-        );
-        const result = await response.data;
-        setListData(result);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getList();
+    getList({ setListData, setIsLoading });
   }, []);
 
   return (
