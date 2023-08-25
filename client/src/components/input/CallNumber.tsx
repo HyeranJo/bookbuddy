@@ -42,6 +42,22 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
       copy2[2] = shipTel[2];
       setCstmrTel(copy2);
     }
+    // 새로입력 클릭시
+    else {
+      // '휴대폰 && 주문자' 정보에 '휴대폰 && 배송지' 정보 입력
+      const copy1 = [...cstmrMobile];
+      copy1[0] = '010';
+      copy1[1] = '';
+      copy1[2] = '';
+      setCstmrMobile(copy1);
+
+      // '일반전화 && 주문자' 정보에 '일반전화 && 배송지' 정보 입력
+      const copy2 = [...cstmrTel];
+      copy2[0] = '02';
+      copy2[1] = '';
+      copy2[2] = '';
+      setCstmrTel(copy2);
+    }
   }, [radioValue]);
 
   /** 전화번호 앞자리 입력시 뒷자리로 자동 탭 해주는 함수  */
