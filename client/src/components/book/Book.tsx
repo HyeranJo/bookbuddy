@@ -19,7 +19,7 @@ const Book = (props: BookProps) => {
   return (
     <Styled_Book.container>
       <Styled_Book.wrapper>
-        <Styled_Book.img src={image} />
+        <Styled_Book.img src={props.image} />
       </Styled_Book.wrapper>
       <Styled_Book.icon onClick={ClickBookmark}>
         <Bookmark
