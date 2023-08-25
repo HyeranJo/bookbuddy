@@ -26,7 +26,7 @@ export const getList = async ({
     setListData(result);
     setIsLoading(false);
   } catch (error) {
-    console.error(error);
+    alert(error);
     setIsLoading(false);
   }
 };
