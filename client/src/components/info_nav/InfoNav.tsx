@@ -1,13 +1,16 @@
 import React from 'react';
 import { Styled_InfoNav } from './InfoNav.style';
 import { Link } from 'react-router-dom';
+import { getCookie } from '../../utils/cookie';
 
 const InfoNav = () => {
+  const userInfo = getCookie('userInfo');
+
   return (
     <div>
       <Styled_InfoNav.Div>
         <Link
-          to={'/mypage'}
+          to={`/mypage/${userInfo?.email}`}
           style={{ textDecorationLine: 'none', color: 'black' }}
         >
           <Styled_InfoNav.Span>마이페이지</Styled_InfoNav.Span>
