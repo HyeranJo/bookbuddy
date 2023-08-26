@@ -9,6 +9,7 @@ import {
   radio_Atom,
 } from '../../recoil/Payment';
 import Input from '../../components/input/Input';
+import RedButton from '../../components/buttons/RedButton';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -199,6 +200,9 @@ const Payment = () => {
                 </Styled_Payment.Table>
               </div>
             </Styled_Payment.Address>
+            <div className="redButton">
+              <RedButton name="결제하기" />
+            </div>
           </Styled_Payment.Content>
         </Styled_Layout.Div_WithNoSidebar>
       </Styled_Layout.Container>

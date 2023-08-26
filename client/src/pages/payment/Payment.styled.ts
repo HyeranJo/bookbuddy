@@ -5,6 +5,12 @@ export const Styled_Payment = {
     display: flex;
     flex-flow: column;
     width: 1300px;
+
+    & > .redButton {
+      display: flex;
+      justify-content: end;
+      margin-top: 42px;
+    }
   `,
   Address: styled.div`
     display: flex;
