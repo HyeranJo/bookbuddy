@@ -1,0 +1,32 @@
+[
+  { 
+    "id" :1, 
+    "name": "책", 
+    "author": "사람", 
+    "publisher": "출판사", 
+    "price":5000, 
+    "date": "날짜", 
+    "imgSrc": "./나의 라임 오렌지나무.jpg",
+    "quantity": 1 
+  },
+  { 
+    "id" :2, 
+    "name": "책", 
+    "author": "사람", 
+    "publisher": "출판사", 
+    "price":3000, 
+    "date": "날짜", 
+    "imgSrc": "./나의 라임 오렌지나무.jpg",
+    "quantity": 2  
+  },
+  { 
+    "id" :3, 
+    "name": "책", 
+    "author": "사람", 
+    "publisher": "출판사", 
+    "price":7000, 
+    "date": "날짜", 
+    "imgSrc": "./나의 라임 오렌지나무.jpg",
+    "quantity": 1  
+  }
+]
