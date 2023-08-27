@@ -23,7 +23,8 @@ export const Styled_CartTable = {
 
     & > .booktitle {
       text-align: left;
-      font-size: var(--subtitle-font-size);
+      font-size: var(--third-title-font-size);
+      padding-top: 5px;
     }
   `,
   DeleteTr: styled.tr`
@@ -55,14 +56,16 @@ export const Styled_CartTable = {
     text-align: right;
 
     & > td {
-      padding-right: 30px;
-      padding: 15px;
+      padding: 15px 30px;
       font-size: var(--third-title-font-size);
     }
     &:last-child {
-      // 이친구 폰트사이즈 적용이 안되고 있음
-      font-size: var(--subtitle-font-size);
       border-bottom: 0px;
+
+      & > td {
+        font-size: var(--subtitle-font-size);
+        font-weight: bold;
+      }
     }
   `,
 };

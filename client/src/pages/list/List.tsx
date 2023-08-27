@@ -6,7 +6,6 @@ import { getCookie } from '../../utils/cookie';
 
 const List = () => {
   const userInfo = getCookie('userInfo');
-  console.log(userInfo.userId);
 
   return (
     <Styled_List.Container>
