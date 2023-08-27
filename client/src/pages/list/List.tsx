@@ -6,15 +6,17 @@ import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
 import { getList } from '../../api/BookList';
 import { useRecoilValue } from 'recoil';
-import { SidebarIdAtom } from '../../recoil/BookList';
+import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
+import PaginationBox from '../../components/pagination_box/PaginationBox';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
+  const page = useRecoilValue(PageAtom);
 
   useEffect(() => {
-    getList({ setListData, setIsLoading, sidebarIdAtom });
+    getList({ setListData, setIsLoading, sidebarIdAtom, page });
   }, []);
 
   return (
@@ -46,6 +48,7 @@ const List = () => {
                 })}
             </Styled_List.Books>
           </Styled_List.BookGroup>
+          <PaginationBox />
         </Styled_List.Content>
       </Styled_List.Div>
     </Styled_List.Container>
