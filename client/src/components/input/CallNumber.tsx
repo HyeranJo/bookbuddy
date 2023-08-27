@@ -61,7 +61,7 @@ const CallNumber = ({ defaultValue, infoType }: CallNumberProps) => {
   }, [radioValue]);
 
   /** 전화번호 앞자리 입력시 뒷자리로 자동 탭 해주는 함수  */
-  const autoTab = (e: any) => {
+  const autoTab = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 4 && number2Ref.current) {
       number2Ref.current.focus();
     }
