@@ -18,8 +18,6 @@ const Payment = () => {
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
 
-  console.log(shipInputs, cstmrInputs);
-
   /* 라디오 버튼 값 변경 사항을 변수에 저장하는 함수 **/
   const radioHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioValue(e.target.value);
@@ -123,7 +121,7 @@ const Payment = () => {
                   </tbody>
                 </Styled_Payment.Table>
               </div>
-              {/* =================orderer-info-radiobutton============ */}
+              {/* =================customer-info-radiobutton============ */}
               <div className="orderer-info">
                 <Styled_Payment.SubTitle>
                   <h2>주문고객</h2>
@@ -151,7 +149,7 @@ const Payment = () => {
                     <label htmlFor="inputstyle">배송정보와 동일</label>
                   </form>
                 </Styled_Payment.SubTitle>
-                {/* =================orderer-info==================== */}
+                {/* =================customer-info==================== */}
                 <Styled_Payment.Table id="orderer-info-table">
                   <colgroup>
                     <col style={{ width: '25%' }}></col>
