@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const Styled_QuantityInput = {
   Input: styled.input`
-    font-size: var(--basic-font-size);
+    font-size: var(--third-title-font-size);
     border: 0px;
     outline: none;
     text-align: center;

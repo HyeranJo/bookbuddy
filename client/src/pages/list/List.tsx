@@ -8,12 +8,14 @@ import { getList } from '../../api/BookList';
 import { useRecoilValue } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
+import { getCookie } from '../../utils/cookie';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
+  const userInfo = getCookie('userInfo');
 
   useEffect(() => {
     getList({ setListData, setIsLoading, sidebarIdAtom, page });
