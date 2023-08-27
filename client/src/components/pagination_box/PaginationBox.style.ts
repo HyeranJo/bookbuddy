@@ -27,14 +27,14 @@ export const Styled_PaginationBox = {
         &:nth-last-child(1),
         &:nth-last-child(2) {
           a {
-            font-size: var(--detail-basic-font-size);
+            font-size: var(--third-title-font-size);
           }
         }
 
         a {
           text-decoration: none;
           color: black;
-          font-size: var(--detail-basic-font-size);
+          font-size: var(--third-title-font-size);
         }
       }
     }
