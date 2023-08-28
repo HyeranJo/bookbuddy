@@ -27,7 +27,7 @@ public class BookController {
     
     /* 도서 리스트 */
     @GetMapping("/list")
-    public ResponseEntity getMembers(@RequestParam("page") @Positive @Max(10) int page,
+    public ResponseEntity getBooks(@RequestParam("page") @Positive @Max(10) int page,
                                     @RequestParam("size") @Positive int size) throws ParseException, InterruptedException {
         List<Book> dataList = crawlingService.process(page, size);
         return new ResponseEntity(mapper.BooksToBookResponseDtos(dataList), HttpStatus.CREATED);
@@ -35,7 +35,7 @@ public class BookController {
 
     /* 도서 상세 */
     @GetMapping("/{book-id}")
-    public ResponseEntity getMember(@PathVariable("book-id") @Positive String bookId) {
+    public ResponseEntity getBook(@PathVariable("book-id") @Positive String bookId) {
         Book findBook = bookService.findVerifyBook(bookId);
         return new ResponseEntity(mapper.BookToBookResponseDto(findBook), HttpStatus.CREATED);
     }

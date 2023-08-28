@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/order")
@@ -17,9 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
+    /* 주문하기 */
     @PostMapping
-    public ResponseEntity postOrder(@RequestBody OrderDto.Post orderDto) {
-        Order createdOrder = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto), orderDto);
-        return new ResponseEntity(mapper.orderToOrderResponseDto(createdOrder), HttpStatus.CREATED);
+    public ResponseEntity postOrder(@RequestBody List<OrderDto.Post> orderDto) {
+        List<Order> createdOrder = orderService.createOrder(mapper.orderPostDtosToOrders(orderDto), orderDto);
+        return new ResponseEntity(mapper.ordersToOrderResponseDtos(createdOrder), HttpStatus.CREATED);
     }
 }
