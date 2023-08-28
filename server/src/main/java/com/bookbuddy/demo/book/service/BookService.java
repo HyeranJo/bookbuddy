@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.bookbuddy.demo.global.exception.ExceptionCode.BOOK_NOT_FOUND;
@@ -36,5 +37,9 @@ public class BookService {
         Optional<Book> optionalBook = bookRepository.findById(id);
         return optionalBook.orElseThrow(()->
                 new BusinessException(BOOK_NOT_FOUND));
+    }
+
+    public List<Book> findAllByKeyword(String keyword) {
+        return bookRepository.findAllByKeyword(keyword);
     }
 }
