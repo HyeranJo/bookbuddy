@@ -1,12 +1,12 @@
 package com.bookbuddy.demo.order.entity;
 
 import com.bookbuddy.demo.book.entity.Book;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Getter
 @Table(name="ORDERS")
 @Entity
@@ -16,10 +16,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @JoinColumn(name="BOOK_ID", nullable = true)
+    @JsonManagedReference
+    @JoinColumn(name="BOOK_ID")
     @ManyToOne
     private Book book;
+    @Column
     private int quantity;
+    @Column
     private int price;
 
     public Order(int quantity, int price) {

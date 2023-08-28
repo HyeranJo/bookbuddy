@@ -18,7 +18,7 @@ public class OrderDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private String bookId;
+        private Book book;
         private int quantity;
         private int price;
     }

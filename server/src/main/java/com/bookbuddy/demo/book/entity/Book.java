@@ -2,6 +2,7 @@ package com.bookbuddy.demo.book.entity;
 
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
 import com.bookbuddy.demo.order.entity.Order;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,7 @@ public class Book {
     private String imgSrc;
     @OneToMany(mappedBy = "book")
     private List<Bookmark> bookmarks;
+    @JsonBackReference
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 

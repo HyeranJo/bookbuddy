@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrderMapper {
     default Order orderPostDtoToOrder(OrderDto.Post orderDto) {
         return new Order(
@@ -17,5 +17,11 @@ public interface OrderMapper {
         );
     }
 
-    OrderDto.Response orderToOrderResponseDto(Order order);
+    default OrderDto.Response orderToOrderResponseDto(Order order) {
+        return new OrderDto.Response(
+                order.getBook(),
+                order.getQuantity(),
+                order.getPrice()
+        );
+    }
 }
