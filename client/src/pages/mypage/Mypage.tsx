@@ -73,9 +73,9 @@ const Mypage = () => {
                   navScrollListRef.current[3] = el;
                 }}
               >
-                <Styled_Mypage.H1 className="bookmarklist">
+                <Styled_Mypage.H2 className="bookmarklist">
                   북마크 리스트
-                </Styled_Mypage.H1>
+                </Styled_Mypage.H2>
               </Styled_Mypage.BookmarkTitle>
               <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
                 <Styled_Mypage.Book>

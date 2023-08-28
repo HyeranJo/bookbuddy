@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Home from './pages/home/Home';
+// import Home from './pages/home/Home';
 import Signup from './pages/sign/Signup';
 import Signin from './pages/sign/Signin';
 import { RecoilRoot } from 'recoil';
@@ -13,6 +13,7 @@ import Order from './pages/order/Order';
 import Mypage from './pages/mypage/Mypage';
 import Payment from './pages/payment/Payment';
 import Bookdetail from './pages/bookdetail/Bookdetail';
+import Customer from './pages/customer/Customer';
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,9 @@ const router = createBrowserRouter([
       { path: '/list', element: <List /> },
       { path: '/bookdetail', element: <Bookdetail /> },
       { path: '/order', element: <Order /> },
-      { path: '/mypage', element: <Mypage /> },
       { path: '/payment', element: <Payment /> },
+      { path: '/mypage/:email', element: <Mypage /> },
+      { path: '/customer', element: <Customer /> },
     ],
   },
 ]);

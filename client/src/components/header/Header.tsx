@@ -4,6 +4,7 @@ import Logo from '../../icons/Logo';
 import SearchBar from '../search/SearchBar';
 import { Link } from 'react-router-dom';
 import InfoNav from '../info_nav/InfoNav';
+import { getCookie } from '../../utils/cookie';
 
 const Header = () => {
   return (
@@ -15,13 +16,27 @@ const Header = () => {
           </Link>
           <Styled_Header.Menu>
             <SearchBar $iconSize={18} width={250} />
-            <Styled_Header.Span className="myinfo">
-              나의정보
-              <Styled_Header.Info className="info">
-                <InfoNav />
-              </Styled_Header.Info>
-            </Styled_Header.Span>
-            <Styled_Header.Span>고객센터</Styled_Header.Span>
+            {getCookie('accessToken') ? (
+              <Styled_Header.Span className="myinfo">
+                나의정보
+                <Styled_Header.Info className="info">
+                  <InfoNav />
+                </Styled_Header.Info>
+              </Styled_Header.Span>
+            ) : (
+              <Link
+                to={'/signin'}
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                <Styled_Header.Span>로그인</Styled_Header.Span>
+              </Link>
+            )}
+            <Link
+              to={'/customer'}
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              <Styled_Header.Span>고객센터</Styled_Header.Span>
+            </Link>
           </Styled_Header.Menu>
         </Styled_Header.Div>
       </Styled_Header.Container>

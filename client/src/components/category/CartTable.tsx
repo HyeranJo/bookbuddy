@@ -40,7 +40,9 @@ const CartTable = () => {
             <td rowSpan={2}>
               <QuantityInput />
             </td>
-            <td rowSpan={2}>3000 원</td>
+            <td rowSpan={2} style={{ fontSize: '24px' }}>
+              3000 원
+            </td>
           </Styled_CartTable.Tr>
           <Styled_CartTable.DeleteTr>
             <Styled_CartTable.Td className="delete">
@@ -61,7 +63,9 @@ const CartTable = () => {
             <td rowSpan={2}>
               <QuantityInput />
             </td>
-            <td rowSpan={2}>3000 원</td>
+            <td rowSpan={2} style={{ fontSize: '24px' }}>
+              3000 원
+            </td>
           </Styled_CartTable.Tr>
           <Styled_CartTable.DeleteTr>
             <Styled_CartTable.Td className="delete">

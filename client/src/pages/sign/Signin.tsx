@@ -7,7 +7,7 @@ import Input from '../../components/input/Input';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCookie, getCookie } from '../../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 
 interface IFormData {
   email: string;
@@ -23,11 +23,10 @@ const Signin = () => {
   } = useForm<IFormData>();
 
   const navigate = useNavigate();
-  const userInfo = getCookie('userInfo');
 
   function signinUser(userData: IFormData) {
     return axios
-      .post('https://6850-210-106-53-186.ngrok-free.app/signin', userData, {
+      .post('https://29a6-210-106-53-186.ngrok-free.app/signin', userData, {
         headers: {
           'Content-Type': 'application/json',
           // 'ngrok-skip-browser-warning': true,
@@ -44,7 +43,7 @@ const Signin = () => {
           setCookie(
             'userInfo',
             JSON.stringify({
-              userId: response.data.userId,
+              email: response.data.email,
             }),
             { path: '/' },
           );
@@ -60,14 +59,11 @@ const Signin = () => {
           });
           alert('[로그인 성공] 메인 페이지로 이동합니다');
           navigate('/');
-          console.log(userInfo.userId);
-        } else {
-          alert('입력하신 정보가 일치하지 않습니다.');
         }
-      })
-      .catch(() => {
-        alert('입력하신 정보가 일치하지 않습니다.');
       });
+    // .catch(() => {
+    //   alert('입력하신 정보가 일치하지 않습니다.');
+    // });
   }
   const { mutate } = useMutation(signinUser);
 
