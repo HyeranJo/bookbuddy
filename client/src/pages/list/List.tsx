@@ -19,7 +19,7 @@ const List = () => {
 
   useEffect(() => {
     getList({ setListData, setIsLoading, sidebarIdAtom, page });
-  }, []);
+  }, [page]);
 
   return (
     <Styled_List.Container>
@@ -36,8 +36,10 @@ const List = () => {
           </Styled_List.Title>
           <Styled_List.BookGroup>
             <Styled_List.Books>
-              {isLoading ? <Loading /> : null}
-              {listData &&
+              {isLoading ? (
+                <Loading />
+              ) : (
+                listData &&
                 listData.map((v: BookList, i) => {
                   return (
                     <Book
@@ -47,7 +49,8 @@ const List = () => {
                       image={v.imgSrc}
                     />
                   );
-                })}
+                })
+              )}
             </Styled_List.Books>
           </Styled_List.BookGroup>
           <PaginationBox />

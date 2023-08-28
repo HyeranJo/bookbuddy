@@ -10,7 +10,7 @@ export const Styled_List = {
     display: flex;
   `,
   Content: styled.section`
-    width: 1512px;
+    width: 1312px;
     margin-left: 200px;
     padding-left: 53.5px;
     padding-right: 53.5px;
@@ -50,5 +50,6 @@ export const Styled_List = {
     flex-wrap: wrap;
 
     gap: 36px;
+    /* gap: 88px; */
   `,
 };
