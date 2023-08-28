@@ -26,7 +26,7 @@ const CartTable = () => {
   const [isMount, setIsMount] = useState(false);
   const [selectAll, setSelectAll] = useState(true);
   const [quantityList, setQuantityList] =
-    useRecoilState<number[]>(QuantityAtom);
+    useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
 
   console.log(quantityList);
 
@@ -47,7 +47,7 @@ const CartTable = () => {
 
   useEffect(() => {
     // 첫 렌더링시
-    if (checkedList.length === 0 && quantityList.length === 0 && !isMount) {
+    if (checkedList.length === 0 && !isMount) {
       // checklist 채우기 (첫 렌더링시 전체선택 상태)
       const arr = Array(orderList.length)
         .fill(1)
@@ -60,7 +60,7 @@ const CartTable = () => {
       const arr2 = Array(orderList.length)
         .fill(1)
         .map((v, i) => {
-          return orderList[i].quantity;
+          return { id: orderList[i].id, quantity: orderList[i].quantity };
         });
       setQuantityList(arr2);
 
@@ -74,6 +74,7 @@ const CartTable = () => {
     for (let i = 0; i < checkedList.length; i++) {
       for (let j = 0; j < orderList.length; j++) {
         if (checkedList[i] === orderList[j].id) {
+          // arr.push(orderList[j].quantity * orderList[j].price);
           arr.push(orderList[j].quantity * orderList[j].price);
         }
       }
@@ -178,10 +179,10 @@ const CartTable = () => {
                       {v.name}
                     </Styled_CartTable.Td>
                     <td rowSpan={2}>
-                      <QuantityInput idx={i} />
+                      <QuantityInput idx={i} id={v.id} />
                     </td>
                     <td rowSpan={2} style={{ fontSize: '24px' }}>
-                      {v.price * v.quantity} 원
+                      {v.price} 원
                     </td>
                   </Styled_CartTable.Tr>
                   <Styled_CartTable.DeleteTr>

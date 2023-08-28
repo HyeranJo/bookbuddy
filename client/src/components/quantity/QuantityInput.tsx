@@ -5,16 +5,17 @@ import { QuantityAtom } from '../../recoil/Quantity';
 
 interface QuantityType {
   idx: number;
+  id: string;
 }
 
-const QuantityInput = ({ idx }: QuantityType) => {
+const QuantityInput = ({ idx, id }: QuantityType) => {
   const [quantityList, setQuantityList] =
-    useRecoilState<number[]>(QuantityAtom);
+    useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
+  console.log(quantityList);
 
   const Minus = (num: number) => {
     if (num > 0) {
       num -= 1;
-
       QuantityHandler(num);
     } else {
       QuantityHandler(0);
@@ -23,13 +24,21 @@ const QuantityInput = ({ idx }: QuantityType) => {
 
   const Plus = (num: number) => {
     num++;
-
     QuantityHandler(num);
   };
 
   const QuantityHandler = (value: number) => {
     const copy = [...quantityList];
-    copy[idx] = value;
+
+    if (copy[idx].id !== null) {
+      // copy[idx].quantity = value;
+      copy[idx] = { ...copy[idx], quantity: value };
+    } else {
+      // copy[idx].id = id;
+      // copy[idx].quantity = value;
+      copy[idx] = { ...copy[idx], id: id, quantity: value };
+    }
+
     setQuantityList(copy);
   };
 
@@ -37,7 +46,7 @@ const QuantityInput = ({ idx }: QuantityType) => {
     <div>
       <Styled_QuantityInput.Button
         onClick={() => {
-          Minus(quantityList[idx]);
+          Minus(quantityList.length !== 0 ? quantityList[idx].quantity : 0);
         }}
       >
         -
@@ -45,15 +54,14 @@ const QuantityInput = ({ idx }: QuantityType) => {
       <Styled_QuantityInput.Input
         type="number"
         min="1"
-        // 숫자 직접 입력시 앞에 0 붙는 현상 방지
-        value={quantityList[idx]}
+        value={quantityList.length !== 0 ? quantityList[idx].quantity : 0}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           QuantityHandler(Number(e.target.value));
         }}
       />
       <Styled_QuantityInput.Button
         onClick={() => {
-          Plus(quantityList[idx]);
+          Plus(quantityList.length !== 0 ? quantityList[idx].quantity : 0);
         }}
       >
         +
