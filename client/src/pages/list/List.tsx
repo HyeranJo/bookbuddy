@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_List } from './List.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
+import { BookList } from '../../model/BookList';
+import Loading from '../../components/loading/Loading';
+import { getList } from '../../api/BookList';
+import { useRecoilValue } from 'recoil';
+import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
+import PaginationBox from '../../components/pagination_box/PaginationBox';
 import { getCookie } from '../../utils/cookie';
 
 const List = () => {
+  const [listData, setListData] = useState<BookList[] | null>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
+  const page = useRecoilValue(PageAtom);
   const userInfo = getCookie('userInfo');
-  console.log(userInfo.userId);
+
+  useEffect(() => {
+    getList({ setListData, setIsLoading, sidebarIdAtom, page });
+  }, [page]);
 
   return (
     <Styled_List.Container>
@@ -23,18 +36,24 @@ const List = () => {
           </Styled_List.Title>
           <Styled_List.BookGroup>
             <Styled_List.Books>
-              <Book />
-              <Book />
-              <Book />
-              <Book />
-              <Book />
-              <Book />
-              <Book />
-              <Book />
-              <Book />
-              <Book />
+              {isLoading ? (
+                <Loading />
+              ) : (
+                listData &&
+                listData.map((v: BookList, i) => {
+                  return (
+                    <Book
+                      key={i}
+                      name={v.name}
+                      price={v.price}
+                      image={v.imgSrc}
+                    />
+                  );
+                })
+              )}
             </Styled_List.Books>
           </Styled_List.BookGroup>
+          <PaginationBox />
         </Styled_List.Content>
       </Styled_List.Div>
     </Styled_List.Container>

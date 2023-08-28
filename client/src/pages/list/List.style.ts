@@ -10,6 +10,7 @@ export const Styled_List = {
     display: flex;
   `,
   Content: styled.section`
+    width: 1312px;
     margin-left: 200px;
     padding-left: 53.5px;
     padding-right: 53.5px;
@@ -19,7 +20,7 @@ export const Styled_List = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
@@ -43,11 +44,13 @@ export const Styled_List = {
   BookGroup: styled.div`
     display: flex;
     justify-content: center;
+    padding: 0 37px;
   `,
   Books: styled.div`
     display: flex;
     flex-wrap: wrap;
 
-    gap: 36px;
+    /* gap: 36px; */
+    gap: 70px;
   `,
 };
