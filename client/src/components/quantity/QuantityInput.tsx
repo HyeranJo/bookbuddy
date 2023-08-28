@@ -11,7 +11,6 @@ interface QuantityType {
 const QuantityInput = ({ idx, id }: QuantityType) => {
   const [quantityList, setQuantityList] =
     useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
-  console.log(quantityList);
 
   const Minus = (num: number) => {
     if (num > 0) {
@@ -31,11 +30,8 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
     const copy = [...quantityList];
 
     if (copy[idx].id !== null) {
-      // copy[idx].quantity = value;
       copy[idx] = { ...copy[idx], quantity: value };
     } else {
-      // copy[idx].id = id;
-      // copy[idx].quantity = value;
       copy[idx] = { ...copy[idx], id: id, quantity: value };
     }
 

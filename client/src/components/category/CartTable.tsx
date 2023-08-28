@@ -28,8 +28,6 @@ const CartTable = () => {
   const [quantityList, setQuantityList] =
     useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
 
-  console.log(quantityList);
-
   useEffect(() => {
     if (orderList.length === 0) {
       const getOrderList = async () => {
@@ -47,7 +45,7 @@ const CartTable = () => {
 
   useEffect(() => {
     // 첫 렌더링시
-    if (checkedList.length === 0 && !isMount) {
+    if (checkedList.length === 0 && quantityList.length === 0 && !isMount) {
       // checklist 채우기 (첫 렌더링시 전체선택 상태)
       const arr = Array(orderList.length)
         .fill(1)
@@ -62,10 +60,10 @@ const CartTable = () => {
         .map((v, i) => {
           return { id: orderList[i].id, quantity: orderList[i].quantity };
         });
-      setQuantityList(arr2);
 
       if (arr.length !== 0 && arr2.length !== 0) {
         setIsMount(true);
+        setQuantityList(arr2);
       }
     }
 
@@ -74,11 +72,14 @@ const CartTable = () => {
     for (let i = 0; i < checkedList.length; i++) {
       for (let j = 0; j < orderList.length; j++) {
         if (checkedList[i] === orderList[j].id) {
-          // arr.push(orderList[j].quantity * orderList[j].price);
-          arr.push(orderList[j].quantity * orderList[j].price);
+          const bookQuan = quantityList.find(data => {
+            return data.id === checkedList[i];
+          });
+          arr.push(bookQuan ? bookQuan.quantity * orderList[j].price : 0);
         }
       }
     }
+
     // 수량*금액한 arr을 다 더해서 총합에 리턴
     if (arr.length !== 0) {
       setTotalPrice(
@@ -89,7 +90,7 @@ const CartTable = () => {
     } else {
       setTotalPrice(0);
     }
-  }, [checkedList]);
+  }, [checkedList, quantityList]);
 
   const checkedItemHandler = (value: string, isChecked: boolean) => {
     if (isChecked) {
