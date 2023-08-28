@@ -4,6 +4,8 @@ import QuantityInput from '../quantity/QuantityInput';
 import image from '../.././images/나의 라임 오렌지나무.jpg';
 import axios from 'axios';
 
+const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+
 interface OrderListType {
   id: string;
   name: string;
@@ -28,6 +30,7 @@ const CartTable = () => {
       const getOrderList = async () => {
         try {
           const response = await axios.get('./dummy/orderDummy.json');
+          // const response = await axios.post(`${SERVER_HOST}/order`);
           setOrderList(response.data);
         } catch (err) {
           console.log(err);
