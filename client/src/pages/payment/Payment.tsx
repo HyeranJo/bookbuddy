@@ -2,14 +2,17 @@ import React from 'react';
 import { Styled_Payment } from './Payment.styled';
 import { Styled_Layout } from '../BlankPageLayout';
 import CallNumber from '../../components/input/CallNumber';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   CstmrInputsAtom,
+  AllDataSelector,
   ShipInputsAtom,
   radio_Atom,
 } from '../../recoil/Payment';
 import Input from '../../components/input/Input';
 import RedButton from '../../components/buttons/RedButton';
+import { postPaymentData } from '../../api/PostApi';
+import { PaymentType } from '../../model/paymentType';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -17,6 +20,7 @@ const Payment = () => {
   const [cstmrInputs, setCstmrInputs] = useRecoilState(CstmrInputsAtom);
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
+  const allData = useRecoilValue<PaymentType>(AllDataSelector);
 
   /* 라디오 버튼 값 변경 사항을 변수에 저장하는 함수 **/
   const radioHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +41,17 @@ const Payment = () => {
         [name]: value,
       });
     }
+  };
+
+  /** payment 데이터를 서버로 전송하고 응답을 처리하는 함수 */
+  const buttonClickHandler = () => {
+    postPaymentData(allData)
+      .then((data: any) => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error);
+      });
   };
 
   return (
@@ -199,7 +214,7 @@ const Payment = () => {
               </div>
             </Styled_Payment.Address>
             <div className="redButton">
-              <RedButton name="결제하기" />
+              <RedButton name="결제하기" onClick={buttonClickHandler} />
             </div>
           </Styled_Payment.Content>
         </Styled_Layout.Div_WithNoSidebar>
