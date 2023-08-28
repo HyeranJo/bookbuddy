@@ -18,7 +18,7 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
     public ResponseEntity postOrder(@RequestParam OrderDto.Post orderDto) {
-        Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto));
+        Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto), orderDto.getBookId());
         return new ResponseEntity(mapper.orderToOrderResponseDto(order), HttpStatus.CREATED);
     }
 }

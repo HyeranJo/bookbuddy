@@ -2,13 +2,10 @@ package com.bookbuddy.demo.book.entity;
 
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
 import com.bookbuddy.demo.order.entity.Order;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +29,12 @@ public class Book {
     private String imgSrc;
     @OneToMany(mappedBy = "book")
     private List<Bookmark> bookmarks;
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Order> orders;
+
+    public Book(String id) {
+        this.id = id;
+    }
 
     public Book(String id, String name, String author, String publisher, int price, Date date, String imgSrc) {
         this.id = id;
@@ -49,6 +50,12 @@ public class Book {
         bookmarks.add(bookmark);
         if(bookmark.getBook() != this) {
             bookmark.addBook(this);
+        }
+    }
+    public void addOrder(Order order) {
+        orders.add(order);
+        if(order.getBook() != this) {
+            order.addBook(this);
         }
     }
 }

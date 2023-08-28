@@ -60,7 +60,7 @@ public class CrawlingService {
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("prod_item")));
 
-        Thread.sleep(3000);
+        Thread.sleep(4000);
         for(WebElement element : productList) {
             Thread.sleep(2);
             // 아이디
