@@ -37,11 +37,15 @@ public class CrawlingService {
 
     public List<Book> process(int page, int size) throws InterruptedException, ParseException {
         System.setProperty("webdriver.chrome.driver", chromePath);
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        chromeOptions.addArguments("headless");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
 
-        driver = new ChromeDriver(chromeOptions);
+        options.addArguments("--disable-popup-blocking");               // 팝업 안띄움
+        options.addArguments("headless");                               // 브라우저 안띄움
+        options.addArguments("--disable-gpu");			                // gpu 비활성화
+        options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 안띄움
+
+        driver = new ChromeDriver(options);
         driver.get("https://product.kyobobook.co.kr/category/KOR/0801#?type=all&per="+size+"&sort=new&page="+page);
 
         return getDataList(page, size);
@@ -56,9 +60,9 @@ public class CrawlingService {
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         webDriverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("prod_item")));
 
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         for(WebElement element : productList) {
-            Thread.sleep(100);
+            Thread.sleep(2);
             // 아이디
             String id = element.getAttribute("data-id");
 
@@ -66,23 +70,34 @@ public class CrawlingService {
                 bookList.add(bookService.findVerifyBook(id));
                 continue;
             }
+            Thread.sleep(2);
+
             // 책 이름
             String name = element.findElement(By.className("prod_name")).getText();
+            Thread.sleep(2);
+
             // 가격
             String priceStr = element.findElement(By.className("price")).findElement(By.className("val")).getText()
                     .replaceAll(",", "");
             int price = Integer.parseInt(priceStr);
+            Thread.sleep(2);
 
             String[] info = element.findElement(By.className("prod_author")).getText().split(" · ");
 
             String author = info[0]; // 작성자
             String publisher = info[1]; // 출판사
             String dateStr = info[2]; // 발행일
+            Thread.sleep(2);
+
             SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
             Date date = new Date(format.parse(dateStr).getTime());
+            Thread.sleep(2);
+
             // 이미지
             String imgSrc = element.findElement(By.className("img_box")).findElement(By.tagName("img")).getAttribute("src");
             Book book = new Book(id, name, author, publisher, price, date, imgSrc);
+            Thread.sleep(2);
+
             bookRepository.save(book);
             bookList.add(book);
         }

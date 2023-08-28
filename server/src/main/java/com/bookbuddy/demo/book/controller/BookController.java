@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.text.ParseException;
 import java.util.List;
@@ -26,7 +27,7 @@ public class BookController {
     
     /* 도서 리스트 */
     @GetMapping("/list")
-    public ResponseEntity getMembers(@RequestParam("page") @Positive int page,
+    public ResponseEntity getMembers(@RequestParam("page") @Positive @Max(10) int page,
                                     @RequestParam("size") @Positive int size) throws ParseException, InterruptedException {
         List<Book> dataList = crawlingService.process(page, size);
         return new ResponseEntity(mapper.BooksToBookResponseDtos(dataList), HttpStatus.CREATED);

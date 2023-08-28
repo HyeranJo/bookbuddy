@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.book.entity;
 
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
+import com.bookbuddy.demo.order.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +32,8 @@ public class Book {
     private String imgSrc;
     @OneToMany(mappedBy = "book")
     private List<Bookmark> bookmarks;
+    @OneToMany(mappedBy = "book")
+    private List<Order> orders;
 
     public Book(String id, String name, String author, String publisher, int price, Date date, String imgSrc) {
         this.id = id;
