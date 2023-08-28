@@ -5,7 +5,7 @@ import image from '../.././images/나의 라임 오렌지나무.jpg';
 import axios from 'axios';
 
 interface OrderListType {
-  id: number;
+  id: string;
   name: string;
   author: string;
   publisher: string;
@@ -16,8 +16,9 @@ interface OrderListType {
 }
 const CartTable = () => {
   const [orderList, setOrderList] = useState<OrderListType[]>([]);
-  const [checkList, setCheckList] = useState<number[]>([]);
   const [totalPrice, settotalPrice] = useState(0);
+  const [checkedList, setCheckedList] = useState<string[]>([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     if (orderList.length === 0) {
@@ -34,22 +35,29 @@ const CartTable = () => {
   }, []);
 
   useEffect(() => {
-    // 처음 한 번만 0 or 1 체크리스트 배열 만들기
-    if (checkList.length === 0) {
+    // 첫 렌더링시 (첫 렌더링시 전체선택 상태) 또는
+    // 전체 체크 해제한 경우 (이 경우 주문할 수 없도록)
+    // checklist 채우기
+    if (checkedList.length === 0) {
       const arr = Array(orderList.length)
         .fill(1)
-        .map(v => v);
+        .map((v, i) => {
+          return orderList[i].id;
+        });
 
-      setCheckList(arr);
+      setCheckedList(arr);
     }
 
-    // 체크리스트에 1인 아이들만 orderlist에서 찾아서 수량*금액 다 더해서 총합에 리턴
+    // 체크리스트에 있는 아이들만 orderlist에서 찾아서 수량*금액
     const arr = [];
-    for (let i = 0; i < checkList.length; i++) {
-      if (checkList[i] === 1) {
-        arr.push(orderList[i].quantity * orderList[i].price);
+    for (let i = 0; i < checkedList.length; i++) {
+      for (let j = 0; j < orderList.length; j++) {
+        if (checkedList[i] === orderList[j].id) {
+          arr.push(orderList[j].quantity * orderList[j].price);
+        }
       }
     }
+    // 수량*금액한 arr을 다 더해서 총합에 리턴
     if (arr.length !== 0) {
       settotalPrice(
         arr.reduce((acc: number, cur: number) => {
@@ -57,15 +65,23 @@ const CartTable = () => {
         }),
       );
     }
-  }, [checkList]);
+  }, [checkedList]);
 
-  // checkbox 수정하는 함수
-  const checkListHandler = (index: number) => {
-    const copy = [...checkList];
-    copy[index] = 0;
-    console.log(copy);
-    /** @todo: checkbox check 푸는 로직  */
-    setCheckList(copy);
+  const checkedItemHandler = (value: string, isChecked: boolean) => {
+    if (isChecked) {
+      setCheckedList(prev => [...prev, value]);
+    }
+    if (!isChecked && checkedList.includes(value)) {
+      setCheckedList(checkedList.filter(item => item !== value));
+    }
+  };
+
+  const checkHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    value: string,
+  ) => {
+    setIsChecked(!isChecked);
+    checkedItemHandler(value, e.target.checked);
   };
 
   return (
@@ -99,10 +115,13 @@ const CartTable = () => {
                     <td rowSpan={2}>
                       <Styled_CartTable.Input
                         type="checkbox"
-                        onChange={() => {
-                          checkListHandler(i);
+                        name="order"
+                        id={v.id}
+                        checked={checkedList.includes(v.id)}
+                        onChange={e => {
+                          // checkListHandler(i);
+                          checkHandler(e, v.id);
                         }}
-                        checked
                       />
                     </td>
                     <td rowSpan={2}>
