@@ -5,6 +5,8 @@ import com.bookbuddy.demo.order.dto.OrderDto;
 import com.bookbuddy.demo.order.entity.Order;
 import com.bookbuddy.demo.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -16,10 +18,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final BookService bookService;
     public Order createOrder(Order order, OrderDto.Post orderDto) {
-            String bookId = orderDto.getBookId();
-            order.addBook(bookService.findVerifyBook(bookId));
-            orderRepository.save(order);
+        String bookId = orderDto.getBookId();
+        order.addBook(bookService.findVerifyBook(bookId));
 
-        return order;
+        return orderRepository.save(order);
+    }
+
+    public Page<Order> findOrders(PageRequest pageRequest) {;
+        return orderRepository.findAll(pageRequest);
     }
 }
