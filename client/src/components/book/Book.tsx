@@ -21,7 +21,7 @@ const Book = (props: BookProps) => {
     <Styled_Book.container>
       <Link to={'/bookdetail'}>
         <Styled_Book.wrapper>
-          <Styled_Book.img src={image} />
+          <Styled_Book.img src={props.image} />
         </Styled_Book.wrapper>
       </Link>
       <Styled_Book.icon onClick={ClickBookmark}>
