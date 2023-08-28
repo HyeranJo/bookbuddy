@@ -4,6 +4,7 @@ import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Order } from './Order.style';
 import RedButton from '../../components/buttons/RedButton';
 
+/** @todo 버튼클릭시 quantityList에 null이 없는지 확인 필요 */
 const Order = () => {
   return (
     <Styled_Layout.Container>

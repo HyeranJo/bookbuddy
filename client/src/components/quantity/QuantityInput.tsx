@@ -13,11 +13,11 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
     useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
 
   const Minus = (num: number) => {
-    if (num > 0) {
+    if (num > 1) {
       num -= 1;
       QuantityHandler(num);
     } else {
-      QuantityHandler(0);
+      QuantityHandler(1);
     }
   };
 
@@ -49,8 +49,13 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
       </Styled_QuantityInput.Button>
       <Styled_QuantityInput.Input
         type="number"
-        min="1"
-        value={quantityList.length !== 0 ? quantityList[idx].quantity : 0}
+        value={
+          quantityList.length !== 0
+            ? quantityList[idx].quantity
+              ? quantityList[idx].quantity
+              : '' // 직접 수정시 글자 지웠을 때 0 뜨는 현상 방지
+            : 0
+        }
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           QuantityHandler(Number(e.target.value));
         }}
