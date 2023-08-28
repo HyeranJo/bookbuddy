@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_CartTable } from './CartTable.style';
 import QuantityInput from '../quantity/QuantityInput';
-import image from '../.././images/나의 라임 오렌지나무.jpg';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { QuantityAtom } from '../../recoil/Quantity';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -24,13 +25,17 @@ const CartTable = () => {
   // 첫 렌더링 여부 확인
   const [isMount, setIsMount] = useState(false);
   const [selectAll, setSelectAll] = useState(true);
+  const [quantityList, setQuantityList] =
+    useRecoilState<number[]>(QuantityAtom);
+
+  console.log(quantityList);
 
   useEffect(() => {
     if (orderList.length === 0) {
       const getOrderList = async () => {
         try {
           const response = await axios.get('./dummy/orderDummy.json');
-          // const response = await axios.post(`${SERVER_HOST}/order`);
+          // const response = await axios.get(`${SERVER_HOST}/order`);
           setOrderList(response.data);
         } catch (err) {
           console.log(err);
@@ -41,16 +46,25 @@ const CartTable = () => {
   }, []);
 
   useEffect(() => {
-    // 첫 렌더링시 (첫 렌더링시 전체선택 상태) checklist 채우기
-    if (checkedList.length === 0 && !isMount) {
+    // 첫 렌더링시
+    if (checkedList.length === 0 && quantityList.length === 0 && !isMount) {
+      // checklist 채우기 (첫 렌더링시 전체선택 상태)
       const arr = Array(orderList.length)
         .fill(1)
         .map((v, i) => {
           return orderList[i].id;
         });
-
       setCheckedList(arr);
-      if (arr.length !== 0) {
+
+      // quantitylist 채우기
+      const arr2 = Array(orderList.length)
+        .fill(1)
+        .map((v, i) => {
+          return orderList[i].quantity;
+        });
+      setQuantityList(arr2);
+
+      if (arr.length !== 0 && arr2.length !== 0) {
         setIsMount(true);
       }
     }
@@ -131,7 +145,7 @@ const CartTable = () => {
               <Styled_CartTable.Input
                 type="checkbox"
                 checked={selectAll}
-                onClick={selectAllHandler}
+                onChange={selectAllHandler}
               />
             </Styled_CartTable.Th>
             <Styled_CartTable.Th colSpan={2}>도서</Styled_CartTable.Th>
@@ -164,7 +178,7 @@ const CartTable = () => {
                       {v.name}
                     </Styled_CartTable.Td>
                     <td rowSpan={2}>
-                      <QuantityInput />
+                      <QuantityInput idx={i} />
                     </td>
                     <td rowSpan={2} style={{ fontSize: '24px' }}>
                       {v.price * v.quantity} 원

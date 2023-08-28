@@ -1,32 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Styled_QuantityInput } from './QuantityInput.style';
 import { useRecoilState } from 'recoil';
 import { QuantityAtom } from '../../recoil/Quantity';
 
-const QuantityInput = () => {
-  const [n, setN] = useState(1);
-  const [Num, SetNum] = useRecoilState(QuantityAtom);
+interface QuantityType {
+  idx: number;
+}
+
+const QuantityInput = ({ idx }: QuantityType) => {
+  const [quantityList, setQuantityList] =
+    useRecoilState<number[]>(QuantityAtom);
 
   const Minus = (num: number) => {
     if (num > 0) {
-      setN(num - 1);
-      SetNum(num - 1);
+      num -= 1;
+
+      QuantityHandler(num);
     } else {
-      setN(0);
-      SetNum(0);
+      QuantityHandler(0);
     }
   };
 
   const Plus = (num: number) => {
-    setN(num + 1);
-    SetNum(num + 1);
+    num++;
+
+    QuantityHandler(num);
+  };
+
+  const QuantityHandler = (value: number) => {
+    const copy = [...quantityList];
+    copy[idx] = value;
+    setQuantityList(copy);
   };
 
   return (
     <div>
       <Styled_QuantityInput.Button
         onClick={() => {
-          Minus(n);
+          Minus(quantityList[idx]);
         }}
       >
         -
@@ -34,15 +45,15 @@ const QuantityInput = () => {
       <Styled_QuantityInput.Input
         type="number"
         min="1"
-        defaultValue={`${n}`}
-        value={`${n}`}
-        onChange={e => {
-          setN(Number(e.target.value));
+        // 숫자 직접 입력시 앞에 0 붙는 현상 방지
+        value={quantityList[idx]}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          QuantityHandler(Number(e.target.value));
         }}
       />
       <Styled_QuantityInput.Button
         onClick={() => {
-          Plus(n);
+          Plus(quantityList[idx]);
         }}
       >
         +
