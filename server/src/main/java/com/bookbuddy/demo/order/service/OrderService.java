@@ -15,13 +15,11 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final BookService bookService;
-    public List<Order> createOrder(List<Order> orders, List<OrderDto.Post> orderDtos) {
-        for(int i = 0; i < orders.size(); ++i) {
-            String bookId = orderDtos.get(i).getBookId();
-            orders.get(i).addBook(bookService.findVerifyBook(bookId));
-            orderRepository.save(orders.get(i));
-        }
+    public Order createOrder(Order order, OrderDto.Post orderDto) {
+            String bookId = orderDto.getBookId();
+            order.addBook(bookService.findVerifyBook(bookId));
+            orderRepository.save(order);
 
-        return orders;
+        return order;
     }
 }
