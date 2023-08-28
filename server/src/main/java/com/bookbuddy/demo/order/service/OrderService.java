@@ -8,15 +8,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
 
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final BookService bookService;
+    @Transactional
     public Order createOrder(Order order, OrderDto.Post orderDto) {
         String bookId = orderDto.getBookId();
         order.addBook(bookService.findVerifyBook(bookId));

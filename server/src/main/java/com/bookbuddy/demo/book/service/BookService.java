@@ -5,11 +5,13 @@ import com.bookbuddy.demo.book.repository.BookRepository;
 import com.bookbuddy.demo.global.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 import static com.bookbuddy.demo.global.exception.ExceptionCode.BOOK_NOT_FOUND;
 
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class BookService {

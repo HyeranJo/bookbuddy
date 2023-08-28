@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static com.bookbuddy.demo.global.exception.ExceptionCode.MEMBER_NOT_FOUND;
 
+@Transactional(readOnly = true)
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -26,6 +28,8 @@ public class MemberServiceImpl implements MemberService{
     private PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+    @Transactional
     @Override
     public Member createMember(Member member) {
         // 비밀번호 암호화
