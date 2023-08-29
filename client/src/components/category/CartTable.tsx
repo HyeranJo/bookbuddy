@@ -118,7 +118,7 @@ const CartTable = () => {
         <thead>
           <tr>
             <Styled_CartTable.Th>
-              <Styled_CartTable.Input
+              <input
                 type="checkbox"
                 checked={selectAll}
                 onChange={selectAllHandler}
@@ -137,7 +137,8 @@ const CartTable = () => {
                 <React.Fragment key={v.book.id}>
                   <Styled_CartTable.Tr>
                     <td rowSpan={2}>
-                      <Styled_CartTable.Input
+                      <input
+                        className="checkbox"
                         type="checkbox"
                         name="order"
                         id={v.book.id}
@@ -148,27 +149,23 @@ const CartTable = () => {
                       />
                     </td>
                     <td rowSpan={2}>
-                      <Styled_CartTable.Img src={v.book.imgSrc} />
+                      <img src={v.book.imgSrc} />
                     </td>
-                    <Styled_CartTable.Td className="booktitle">
-                      {v.book.name}
-                    </Styled_CartTable.Td>
+                    <td className="booktitle">{v.book.name}</td>
                     <td rowSpan={2}>
                       <QuantityInput idx={i} id={v.book.id} />
                     </td>
-                    <td rowSpan={2} style={{ fontSize: '24px' }}>
-                      {v.price} 원
-                    </td>
+                    <td rowSpan={2}>{v.price} 원</td>
                   </Styled_CartTable.Tr>
                   <Styled_CartTable.DeleteTr>
-                    <Styled_CartTable.Td
+                    <td
                       className="delete"
                       onClick={() => {
                         DeleteOrderItem(v.orderId);
                       }}
                     >
                       삭제하기
-                    </Styled_CartTable.Td>
+                    </td>
                   </Styled_CartTable.DeleteTr>
                 </React.Fragment>
               );
