@@ -14,18 +14,25 @@ const Order = () => {
     useRecoilValue<{ id: string; quantity: number }[]>(QuantityListAtom);
   const FinalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
 
-  /** 0인 수량이 있는지 확인하는 함수 */
+  /** 주문하기 버튼 함수 */
   const onClickHandler = () => {
-    let cnt = 0;
-    for (let i = 0; i < quantityList.length; i++) {
-      if (quantityList[i].quantity === 0) {
-        alert('수량은 비어서는 안됩니다');
-      } else {
-        cnt++;
-      }
+    // 결제할 도서가 1개 이상 선택되었는지 확인
+    if (FinalPaymentDetail.length === 1) {
+      alert('구매하실 도서를 선택해주세요');
     }
-    if (cnt === quantityList.length) {
-      navigate('/ship');
+    // 0인 수량이 있는지 확인(선택하지 않은 경우 포함)
+    else {
+      let cnt = 0; // 수량이 비어있지 않은 도서 개수
+      for (let i = 0; i < quantityList.length; i++) {
+        if (quantityList[i].quantity === 0) {
+          alert('수량은 비어서는 안됩니다');
+        } else {
+          cnt++;
+        }
+      }
+      if (cnt === quantityList.length) {
+        navigate('/ship');
+      }
     }
   };
 
