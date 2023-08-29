@@ -27,7 +27,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Page<Order> findOrders(PageRequest pageRequest) {;
-        return orderRepository.findAll(pageRequest);
+    public List<Order> findOrders() {;
+        return orderRepository.findAll();
     }
 }

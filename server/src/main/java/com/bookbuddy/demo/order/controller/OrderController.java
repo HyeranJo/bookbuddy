@@ -32,11 +32,9 @@ public class OrderController {
     }
     /* 장바구니 내역 */
     @GetMapping
-    public ResponseEntity getOrders(@RequestParam("page") @Positive int page,
-                                    @RequestParam("size") @Positive int size) {
-        PageRequest pageRequest = PageRequest.of(page-1, size);
-        Page<Order> ordersPage = orderService.findOrders(pageRequest);
+    public ResponseEntity getOrders() {
+        List<Order> orders = orderService.findOrders();
 
-        return new ResponseEntity(new MultiResponseDto(ordersPage.getContent(), ordersPage), HttpStatus.OK);
+        return new ResponseEntity(mapper.ordersToOrderResponseDtos(orders), HttpStatus.OK);
     }
 }

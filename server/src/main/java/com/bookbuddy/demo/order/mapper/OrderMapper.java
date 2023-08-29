@@ -24,4 +24,13 @@ public interface OrderMapper {
                 order.getPrice()
         );
     }
+
+    default List<OrderDto.Response> ordersToOrderResponseDtos(List<Order> orders) {
+        return orders.stream()
+                .map(e->new OrderDto.Response(
+                        e.getBook(),
+                        e.getQuantity(),
+                        e.getPrice()
+                )).collect(Collectors.toList());
+    }
 }
