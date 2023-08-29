@@ -4,16 +4,17 @@ import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Order } from './Order.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { QuantityAtom } from '../../recoil/Quantity';
+import { useRecoilValue } from 'recoil';
+import { QuantityListAtom } from '../../recoil/Quantity';
 import { FinalPaymentDetailsAtom } from '../../recoil/CartItem';
 
 const Order = () => {
   const navigate = useNavigate();
   const quantityList =
-    useRecoilValue<{ id: string; quantity: number }[]>(QuantityAtom);
+    useRecoilValue<{ id: string; quantity: number }[]>(QuantityListAtom);
   const FinalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
 
+  /** 0인 수량이 있는지 확인하는 함수 */
   const onClickHandler = () => {
     let cnt = 0;
     for (let i = 0; i < quantityList.length; i++) {

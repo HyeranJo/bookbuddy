@@ -1,46 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_CartTable } from './CartTable.style';
 import QuantityInput from '../quantity/QuantityInput';
-import axios from 'axios';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { QuantityAtom } from '../../recoil/Quantity';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { QuantityListAtom } from '../../recoil/Quantity';
 import { OrderListType } from '../../model/OrderList';
 import {
   CheckedListAtom,
   OrderListAtom,
   TotalPriceSelector,
 } from '../../recoil/CartItem';
-import { arrayBuffer } from 'stream/consumers';
-
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+import { getOrderList } from '../../api/GetApi';
 
 const CartTable = () => {
-  const [orderList, setOrderList] =
-    useRecoilState<OrderListType[]>(OrderListAtom);
-  const [checkedList, setCheckedList] =
-    useRecoilState<string[]>(CheckedListAtom);
+  // ===============================================================================
+  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
+  const [checkedList, setCheckedList] = useRecoilState(CheckedListAtom);
   const [isChecked, setIsChecked] = useState(false); // input cheked 설정
   const [isMount, setIsMount] = useState(false); // 첫 렌더링 여부 확인
   const [selectAll, setSelectAll] = useState(true);
-  const [quantityList, setQuantityList] =
-    useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
+  const setQuantityList = useSetRecoilState(QuantityListAtom);
   const totalPrice = useRecoilValue(TotalPriceSelector);
 
+  // ==================================== useEffect ================================
+
+  // ---------------------------------- api randering ------------------------------
   useEffect(() => {
     if (orderList.length === 0) {
-      const getOrderList = async () => {
-        try {
-          const response = await axios.get('./dummy/orderDummy.json');
-          // const response = await axios.get(`${SERVER_HOST}/order`);
-          setOrderList(response.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      getOrderList();
+      getOrderList(setOrderList);
     }
   }, []);
 
+  // ---------------------- 사용할 check list, quantity list 설정 ---------------------
   useEffect(() => {
     // 첫 렌더링시
     if (orderList.length !== 0 && !isMount) {
@@ -66,17 +56,21 @@ const CartTable = () => {
     }
   }, [orderList]);
 
+  // ==================================== 함수 ====================================
+
+  // ------------------------------ 개별 checkbox ---------------------------------
+  /** 체크 리스트 변경 함수 */
   const checkedItemHandler = (value: string, isChecked: boolean) => {
     if (isChecked) {
       setCheckedList(prev => [...prev, value]);
     }
     if (!isChecked && checkedList.includes(value)) {
       setCheckedList(checkedList.filter(item => item !== value));
-      // 하나라도 체크가 안 된 경우 전체선택 false
-      setSelectAll(false);
+      setSelectAll(false); // 하나라도 체크가 안 된 경우 전체선택 false
     }
   };
 
+  /** 체크 변경 함수 */
   const checkHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
     value: string,
@@ -85,6 +79,8 @@ const CartTable = () => {
     checkedItemHandler(value, e.target.checked);
   };
 
+  // ------------------------------ 전체선택 checkbox -------------------------------
+  /** 전체선택 checkbox 함수 */
   const selectAllHandler = () => {
     // 체크 false일시 true로 바꾸고 checked리스트 채우기
     if (!selectAll) {
@@ -103,6 +99,8 @@ const CartTable = () => {
       setCheckedList([]);
     }
   };
+
+  // ==================================== HTML ====================================
 
   return (
     <>

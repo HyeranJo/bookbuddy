@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { QuantityAtom } from './Quantity';
+import { QuantityListAtom } from './Quantity';
 import { OrderListType } from '../model/OrderList';
 
 /** 장바구니 선택 리스트 */
@@ -14,18 +14,12 @@ export const OrderListAtom = atom<OrderListType[]>({
   default: [],
 });
 
-/** 배송비 제외 전체 금액 */
-// export const TotalPriceAtom = atom<number>({
-//   key: 'TotalPriceAtom',
-//   default: 0,
-// });
-
 /** 최종 결제할 도서,수량 리스트 */
 export const FinalPaymentDetailsAtom = selector({
   key: 'FinalPaymentDetailsAtom',
   get: ({ get }) => {
     const checkedList = get(CheckedListAtom);
-    const quantityList = get(QuantityAtom);
+    const quantityList = get(QuantityListAtom);
     const totalPrice = get(TotalPriceSelector);
 
     let arr: (
@@ -56,7 +50,7 @@ export const TotalPriceSelector = selector({
   get: ({ get }) => {
     const checkedList = get(CheckedListAtom);
     const orderList = get(OrderListAtom);
-    const quantityList = get(QuantityAtom);
+    const quantityList = get(QuantityListAtom);
 
     // 체크리스트에 있는 아이들만 orderlist에서 찾아서 수량*금액
     const arr = [];

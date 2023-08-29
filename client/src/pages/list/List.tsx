@@ -4,7 +4,7 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getList } from '../../api/BookList';
+import { getBookList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
@@ -18,7 +18,7 @@ const List = () => {
   const userInfo = getCookie('userInfo');
 
   useEffect(() => {
-    getList({ setListData, setIsLoading, sidebarIdAtom, page });
+    getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
   }, [page]);
 
   return (

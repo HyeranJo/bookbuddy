@@ -1,7 +1,7 @@
 import React from 'react';
 import { Styled_QuantityInput } from './QuantityInput.style';
 import { useRecoilState } from 'recoil';
-import { QuantityAtom } from '../../recoil/Quantity';
+import { QuantityListAtom } from '../../recoil/Quantity';
 
 interface QuantityType {
   idx: number;
@@ -10,7 +10,7 @@ interface QuantityType {
 
 const QuantityInput = ({ idx, id }: QuantityType) => {
   const [quantityList, setQuantityList] =
-    useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
+    useRecoilState<{ id: string; quantity: number }[]>(QuantityListAtom);
 
   const Minus = (num: number) => {
     if (num > 1) {
