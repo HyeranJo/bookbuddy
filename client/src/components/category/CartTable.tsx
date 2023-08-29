@@ -2,31 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { Styled_CartTable } from './CartTable.style';
 import QuantityInput from '../quantity/QuantityInput';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { QuantityAtom } from '../../recoil/Quantity';
+import { OrderListType } from '../../model/OrderList';
+import {
+  CheckedListAtom,
+  OrderListAtom,
+  TotalPriceSelector,
+} from '../../recoil/CartItem';
+import { arrayBuffer } from 'stream/consumers';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
-interface OrderListType {
-  id: string;
-  name: string;
-  author: string;
-  publisher: string;
-  price: number;
-  date: string;
-  imgSrc: string;
-  quantity: number;
-}
 const CartTable = () => {
-  const [orderList, setOrderList] = useState<OrderListType[]>([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [checkedList, setCheckedList] = useState<string[]>([]);
-  const [isChecked, setIsChecked] = useState(false);
-  // 첫 렌더링 여부 확인
-  const [isMount, setIsMount] = useState(false);
+  const [orderList, setOrderList] =
+    useRecoilState<OrderListType[]>(OrderListAtom);
+  const [checkedList, setCheckedList] =
+    useRecoilState<string[]>(CheckedListAtom);
+  const [isChecked, setIsChecked] = useState(false); // input cheked 설정
+  const [isMount, setIsMount] = useState(false); // 첫 렌더링 여부 확인
   const [selectAll, setSelectAll] = useState(true);
   const [quantityList, setQuantityList] =
     useRecoilState<{ id: string; quantity: number }[]>(QuantityAtom);
+  const totalPrice = useRecoilValue(TotalPriceSelector);
 
   useEffect(() => {
     if (orderList.length === 0) {
@@ -45,12 +43,12 @@ const CartTable = () => {
 
   useEffect(() => {
     // 첫 렌더링시
-    if (checkedList.length === 0 && quantityList.length === 0 && !isMount) {
+    if (orderList.length !== 0 && !isMount) {
       // checklist 채우기 (첫 렌더링시 전체선택 상태)
       const arr = Array(orderList.length)
         .fill(1)
         .map((v, i) => {
-          return orderList[i].id;
+          return orderList[i].book.id;
         });
       setCheckedList(arr);
 
@@ -58,7 +56,7 @@ const CartTable = () => {
       const arr2 = Array(orderList.length)
         .fill(1)
         .map((v, i) => {
-          return { id: orderList[i].id, quantity: orderList[i].quantity };
+          return { id: orderList[i].book.id, quantity: orderList[i].quantity };
         });
 
       if (arr.length !== 0 && arr2.length !== 0) {
@@ -66,31 +64,7 @@ const CartTable = () => {
         setQuantityList(arr2);
       }
     }
-
-    // 체크리스트에 있는 아이들만 orderlist에서 찾아서 수량*금액
-    const arr = [];
-    for (let i = 0; i < checkedList.length; i++) {
-      for (let j = 0; j < orderList.length; j++) {
-        if (checkedList[i] === orderList[j].id) {
-          const bookQuan = quantityList.find(data => {
-            return data.id === checkedList[i];
-          });
-          arr.push(bookQuan ? bookQuan.quantity * orderList[j].price : 0);
-        }
-      }
-    }
-
-    // 수량*금액한 arr을 다 더해서 총합에 리턴
-    if (arr.length !== 0) {
-      setTotalPrice(
-        arr.reduce((acc: number, cur: number) => {
-          return acc + cur;
-        }),
-      );
-    } else {
-      setTotalPrice(0);
-    }
-  }, [checkedList, quantityList]);
+  }, [orderList]);
 
   const checkedItemHandler = (value: string, isChecked: boolean) => {
     if (isChecked) {
@@ -118,7 +92,7 @@ const CartTable = () => {
       const arr = Array(orderList.length)
         .fill(1)
         .map((v, i) => {
-          return orderList[i].id;
+          return orderList[i].book.id;
         });
 
       setCheckedList(arr);
@@ -160,27 +134,27 @@ const CartTable = () => {
           {orderList &&
             orderList.map((v: OrderListType, i) => {
               return (
-                <React.Fragment key={v.id}>
+                <React.Fragment key={v.book.id}>
                   <Styled_CartTable.Tr>
                     <td rowSpan={2}>
                       <Styled_CartTable.Input
                         type="checkbox"
                         name="order"
-                        id={v.id}
-                        checked={checkedList.includes(v.id)}
+                        id={v.book.id}
+                        checked={checkedList.includes(v.book.id)}
                         onChange={e => {
-                          checkHandler(e, v.id);
+                          checkHandler(e, v.book.id);
                         }}
                       />
                     </td>
                     <td rowSpan={2}>
-                      <Styled_CartTable.Img src={v.imgSrc} />
+                      <Styled_CartTable.Img src={v.book.imgSrc} />
                     </td>
                     <Styled_CartTable.Td className="booktitle">
-                      {v.name}
+                      {v.book.name}
                     </Styled_CartTable.Td>
                     <td rowSpan={2}>
-                      <QuantityInput idx={i} id={v.id} />
+                      <QuantityInput idx={i} id={v.book.id} />
                     </td>
                     <td rowSpan={2} style={{ fontSize: '24px' }}>
                       {v.price} 원
