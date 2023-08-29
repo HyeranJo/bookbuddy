@@ -10,6 +10,7 @@ import {
   TotalPriceSelector,
 } from '../../recoil/CartItem';
 import { getOrderList } from '../../api/GetApi';
+import { DeleteOrderItem } from '../../api/DeleteApi';
 
 const CartTable = () => {
   // ===============================================================================
@@ -20,6 +21,7 @@ const CartTable = () => {
   const [selectAll, setSelectAll] = useState(true);
   const setQuantityList = useSetRecoilState(QuantityListAtom);
   const totalPrice = useRecoilValue(TotalPriceSelector);
+  const [orderId, setOrderId] = useState('');
 
   // ==================================== useEffect ================================
 
@@ -159,7 +161,12 @@ const CartTable = () => {
                     </td>
                   </Styled_CartTable.Tr>
                   <Styled_CartTable.DeleteTr>
-                    <Styled_CartTable.Td className="delete">
+                    <Styled_CartTable.Td
+                      className="delete"
+                      onClick={() => {
+                        DeleteOrderItem(v.orderId);
+                      }}
+                    >
                       삭제하기
                     </Styled_CartTable.Td>
                   </Styled_CartTable.DeleteTr>
