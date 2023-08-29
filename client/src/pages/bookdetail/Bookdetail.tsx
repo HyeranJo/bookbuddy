@@ -17,6 +17,7 @@ interface BookProps {
 }
 
 const Bookdetail = (props: BookProps) => {
+  // const date = new Date(props.date as string);
   const [isClick, setIsClick] = useState(false);
 
   function ClickBookmark() {
@@ -30,7 +31,7 @@ const Bookdetail = (props: BookProps) => {
           <Styled_Bookdetail.Wrapper>
             <Styled_Bookdetail.Container>
               <Styled_Bookdetail.ImageWrapper>
-                <Styled_Bookdetail.ImageContainer src={image} />
+                <Styled_Bookdetail.ImageContainer src={props.image || image} />
               </Styled_Bookdetail.ImageWrapper>
               <Styled_Bookdetail.InfoWrapper>
                 <Styled_Bookdetail.Topdiv>
@@ -57,6 +58,7 @@ const Bookdetail = (props: BookProps) => {
                     출판사: {props.publisher || '동녁주니어'}원
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
+                    {/* date.toLocaleDateString() */}
                     발행일: {props.date || '2012년12월19일'}
                   </Styled_Bookdetail.Content>
                 </Styled_Bookdetail.Middiv>
@@ -72,6 +74,7 @@ const Bookdetail = (props: BookProps) => {
                       도서 금액:
                     </Styled_Bookdetail.Content>
                     <Styled_Bookdetail.Content>
+                      {/* props.price.toLocaleString() */}
                       {props.price || '11,700'}원
                     </Styled_Bookdetail.Content>
                   </Styled_Bookdetail.Horizontalitydiv>
@@ -90,6 +93,7 @@ const Bookdetail = (props: BookProps) => {
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.TotalPrice>
                     14,700원
+                    {/* {props?.price + props?.deliveryFee || '14,700'}원 */}
                   </Styled_Bookdetail.TotalPrice>
                 </Styled_Bookdetail.Horizontalitydiv>
                 <Styled_Bookdetail.ButtonContainer></Styled_Bookdetail.ButtonContainer>

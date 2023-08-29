@@ -44,6 +44,7 @@ const List = () => {
                   return (
                     <Book
                       key={i}
+                      id={v.id}
                       name={v.name}
                       price={v.price}
                       image={v.imgSrc}

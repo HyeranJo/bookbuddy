@@ -9,6 +9,8 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { setCookie } from '../../utils/cookie';
 
+const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+
 interface IFormData {
   email: string;
   password: string;
@@ -24,9 +26,9 @@ const Signin = () => {
 
   const navigate = useNavigate();
 
-  function signinUser(userData: IFormData) {
+  const signinUser = (userData: IFormData) => {
     return axios
-      .post('https://29a6-210-106-53-186.ngrok-free.app/signin', userData, {
+      .post(`${SERVER_HOST}/signin`, userData, {
         headers: {
           'Content-Type': 'application/json',
           // 'ngrok-skip-browser-warning': true,
@@ -64,7 +66,7 @@ const Signin = () => {
     // .catch(() => {
     //   alert('입력하신 정보가 일치하지 않습니다.');
     // });
-  }
+  };
   const { mutate } = useMutation(signinUser);
 
   const onSubmit: SubmitHandler<IFormData> = data => {
