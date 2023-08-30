@@ -1,5 +1,5 @@
 import React from 'react';
-import CartTable from '../../components/category/CartTable';
+import CartTable from '../../components/table/CartTable';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Order } from './Order.style';
 import RedButton from '../../components/buttons/RedButton';
