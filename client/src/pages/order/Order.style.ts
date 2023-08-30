@@ -11,10 +11,19 @@ export const Styled_Order = {
     flex-flow: column;
     justify-content: center;
     padding-top: 44px;
-  `,
-  Submit: styled.div`
-    display: flex;
-    justify-content: end;
-    margin-top: 25px;
+
+    & > .submit {
+      display: flex;
+      justify-content: end;
+      margin-top: 25px;
+    }
+
+    & > .emptyItem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - (344px * 2));
+      font-size: var(--third-title-font-size);
+    }
   `,
 };
