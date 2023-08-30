@@ -1,5 +1,5 @@
 export interface OrderListType {
-  orderId: string;
+  id: string;
   book: {
     id: string;
     name: string;

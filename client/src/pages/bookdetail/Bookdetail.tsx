@@ -2,7 +2,7 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { ReactComponent as Bookmark } from '../../icons/icon.svg';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { BookInfo } from '../../recoil/Book';
 import axios from 'axios';
@@ -19,8 +19,10 @@ const Bookdetail = () => {
   };
 
   const postBookDetail = async (detailInfo: bookdetail) => {
+    const data = { id: detailInfo.id, price: detailInfo.price, quantity: 1 };
+    console.log(data);
     try {
-      const response = await axios.post(`${SERVER_HOST}`, detailInfo, {
+      const response = await axios.post(`${SERVER_HOST}/order`, data, {
         headers: {
           'Content-Type': 'application/json',
         },

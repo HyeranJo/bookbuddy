@@ -39,11 +39,10 @@ export const getOrderList = async (
   setOrderList: (orderList: OrderListType[]) => void,
 ) => {
   try {
-    // const response = await axios.get(`${SERVER_HOST}/order`),
-    const response = await axios.get('./dummy/orderDummy.json', {
+    const response = await axios.get(`${SERVER_HOST}/order`, {
       headers: {
-        'ngrok-skip-browser-warning': 'true',
-        Authorization: getCookie('accessToken'),
+        'ngrok-skip-browser-warning': true,
+        // Authorization: getCookie('accessToken'),
       },
     });
     setOrderList(response.data);

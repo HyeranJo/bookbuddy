@@ -27,10 +27,8 @@ const CartTable = () => {
 
   // ---------------------------------- api randering ------------------------------
   useEffect(() => {
-    if (orderList.length === 0) {
-      getOrderList(setOrderList);
-    }
-  }, []);
+    getOrderList(setOrderList);
+  }, [orderList]);
 
   // ---------------------- 사용할 check list, quantity list 설정 ---------------------
   useEffect(() => {
@@ -161,7 +159,7 @@ const CartTable = () => {
                     <td
                       className="delete"
                       onClick={() => {
-                        DeleteOrderItem(v.orderId);
+                        DeleteOrderItem(v.id);
                       }}
                     >
                       삭제하기
@@ -172,10 +170,10 @@ const CartTable = () => {
             })}
 
           <Styled_CartTable.AmountTr className="delivery">
-            <td colSpan={5}>배송비 3,000원</td>
+            <td colSpan={5}>배송비 3,000 원</td>
           </Styled_CartTable.AmountTr>
           <Styled_CartTable.AmountTr className="total">
-            <td colSpan={5}>합계 {totalPrice + 3000}원</td>
+            <td colSpan={5}>합계 {totalPrice + 3000} 원</td>
           </Styled_CartTable.AmountTr>
         </tbody>
       </Styled_CartTable.Table>
