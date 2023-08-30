@@ -14,6 +14,7 @@ import Mypage from './pages/mypage/Mypage';
 import Bookdetail from './pages/bookdetail/Bookdetail';
 import Customer from './pages/customer/Customer';
 import Search from './pages/search/Search';
+import Apply from './pages/apply/Apply';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: '/mypage/:email', element: <Mypage /> },
       { path: '/customer', element: <Customer /> },
       { path: '/search', element: <Search /> },
+      { path: '/apply', element: <Apply /> },
     ],
   },
 ]);

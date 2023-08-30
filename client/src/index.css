@@ -20,6 +20,9 @@
   --basic-font-size: 20px;
   --input-font-size: 18px;
   --message-font-size: 15px;
+
+  /* 사이트 가로폭 */
+  --site-width: 1512px
 }
 
 body {
