@@ -17,13 +17,35 @@ export const Styled_CartTable = {
   `,
   Th: styled.th`
     background-color: var(--category-color);
+
+    & > input {
+      cursor: pointer;
+      transform: scale(1.5);
+    }
   `,
   Tr: styled.tr`
     line-height: 50px;
 
     & > .booktitle {
       text-align: left;
-      font-size: var(--subtitle-font-size);
+      font-size: var(--third-title-font-size);
+      padding-top: 5px;
+    }
+    & * .checkbox {
+      cursor: pointer;
+      transform: scale(1.5);
+    }
+    & * img {
+      height: 130px;
+      margin-top: 15px;
+    }
+    & > .booktitle {
+      white-space: nowrap; //줄바꿈 방지
+      overflow: hidden; //넘치는 텍스트 숨기기
+      text-overflow: ellipsis; //말줄임 기호(...)넣기
+    }
+    & :last-child {
+      font-size: var(--third-title-font-size);
     }
   `,
   DeleteTr: styled.tr`
@@ -36,33 +58,22 @@ export const Styled_CartTable = {
       font-size: var(--basic-font-size);
     }
   `,
-  Td: styled.td`
-    white-space: nowrap; //줄바꿈 방지
-    overflow: hidden; //넘치는 텍스트 숨기기
-    text-overflow: ellipsis; //말줄임 기호(...)넣기
-  `,
-  Img: styled.img`
-    height: 130px;
-    margin-top: 15px;
-  `,
-  Input: styled.input`
-    cursor: pointer;
-    transform: scale(1.5);
-  `,
   AmountTr: styled.tr`
     border-bottom: 1px solid gray;
     line-height: 50px;
     text-align: right;
 
     & > td {
-      padding-right: 30px;
-      padding: 15px;
+      padding: 15px 30px;
       font-size: var(--third-title-font-size);
     }
     &:last-child {
-      // 이친구 폰트사이즈 적용이 안되고 있음
-      font-size: var(--subtitle-font-size);
       border-bottom: 0px;
+
+      & > td {
+        font-size: var(--subtitle-font-size);
+        font-weight: bold;
+      }
     }
   `,
 };

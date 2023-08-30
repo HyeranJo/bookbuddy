@@ -43,8 +43,9 @@ const BookDetail = () => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
 
-  const postBookDetail = async (bookDetail: any) => {
-    const data = { id: bookDetail.id, price: bookDetail.price, quantity: 1 };
+  const postBookDetail = async (detailInfo: any) => {
+    const data = { id: detailInfo.id, price: detailInfo.price, quantity: 1 };
+    console.log(data);
     try {
       const response = await axios.post(`${SERVER_HOST}/order`, data, {
         headers: {
@@ -114,7 +115,6 @@ const BookDetail = () => {
                     </Styled_Bookdetail.TotalPrice>
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.Botdiv>
-
                 <Styled_Bookdetail.ButtonContainer>
                   <Styled_Bookdetail.Horizontalitydiv>
                     <RedButton

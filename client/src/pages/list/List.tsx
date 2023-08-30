@@ -4,7 +4,7 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getBookList } from '../../api/BookList';
+import { getBookList } from '../../api/GetApi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
@@ -47,16 +47,16 @@ const List = () => {
                 <Loading />
               ) : (
                 listData &&
-                listData.map((v: BookList, i) => {
+                listData.map((v: BookList) => {
                   return (
                     <div
-                      key={i}
+                      key={v.id}
                       onClick={() => {
                         updateBookState(v.id);
                       }}
                     >
                       <Book
-                        key={i}
+                        key={v.id}
                         id={v.id}
                         name={v.name}
                         price={v.price}
