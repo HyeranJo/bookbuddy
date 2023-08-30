@@ -4,6 +4,7 @@ import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.global.crawling.CrawlingService;
+import com.bookbuddy.demo.order.dto.OrderDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,5 +39,11 @@ public class BookController {
     public ResponseEntity getBook(@PathVariable("book-id") @Positive String bookId) {
         Book findBook = bookService.findVerifyBook(bookId);
         return new ResponseEntity(mapper.BookToBookResponseDto(findBook), HttpStatus.CREATED);
+    }
+    /* 도서 삭제 */
+    @DeleteMapping("/{book-id}")
+    public ResponseEntity deleteBook(@PathVariable("book-id") @Positive String bookId) {
+        bookService.deleteBook(bookId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

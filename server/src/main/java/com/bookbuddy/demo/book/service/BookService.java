@@ -42,4 +42,9 @@ public class BookService {
     public List<Book> findAllByKeyword(String keyword) {
         return bookRepository.findAllByKeyword(keyword);
     }
+
+    public void deleteBook(String bookId) {
+        Book book = findVerifyBook(bookId);
+        bookRepository.delete(book);
+    }
 }

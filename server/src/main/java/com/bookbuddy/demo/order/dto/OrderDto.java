@@ -10,7 +10,7 @@ public class OrderDto {
     @Getter
     @AllArgsConstructor
     public static class Post {
-        private String bookId;
+        private String id;
         private int quantity;
         private int price;
     }

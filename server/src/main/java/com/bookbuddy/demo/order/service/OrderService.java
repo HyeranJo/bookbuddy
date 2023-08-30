@@ -23,7 +23,7 @@ public class OrderService {
     private final BookService bookService;
     @Transactional
     public Order createOrder(Order order, OrderDto.Post orderDto) {
-        String bookId = orderDto.getBookId();
+        String bookId = orderDto.getId();
         order.addBook(bookService.findVerifyBook(bookId));
 
         return orderRepository.save(order);
