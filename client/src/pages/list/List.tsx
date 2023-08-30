@@ -4,12 +4,11 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getBookList } from '../../api/BookList';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { getBookList } from '../../api/GetApi';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
 import { getCookie } from '../../utils/cookie';
-// import { FinalPaymentDetailsAtom } from '../../recoil/CartItem';
 import { BookInfo } from '../../recoil/Book';
 import { bookdetail } from '../../model/Bookdetail';
 
@@ -19,9 +18,7 @@ const List = () => {
   const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
   const userInfo = getCookie('userInfo');
-  // const Final = useRecoilValue(FinalPaymentDetailsAtom);
-  // console.log(Final);
-  const [bookDetail, setBookDetail] = useRecoilState<bookdetail>(BookInfo);
+  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
@@ -45,7 +42,6 @@ const List = () => {
       publisher: publisher,
       date: date,
     });
-    console.log('id');
   };
 
   return (
@@ -67,10 +63,10 @@ const List = () => {
                 <Loading />
               ) : (
                 listData &&
-                listData.map((v: BookList, i) => {
+                listData.map((v: BookList) => {
                   return (
                     <div
-                      key={i}
+                      key={v.id}
                       onClick={() => {
                         updateBookState(
                           v.id,
@@ -84,7 +80,6 @@ const List = () => {
                       }}
                     >
                       <Book
-                        key={i}
                         id={v.id}
                         name={v.name}
                         price={v.price}

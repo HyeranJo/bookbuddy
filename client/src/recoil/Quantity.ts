@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-/** Input 수량 */
-export const QuantityAtom = atom({
-  key: 'QuantityAtom',
-  default: 0,
+/** Quantity Input 수량 */
+export const QuantityListAtom = atom<{ id: string; quantity: number }[]>({
+  key: 'QuantitListAtom',
+  default: [],
 });
