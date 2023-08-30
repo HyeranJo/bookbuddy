@@ -8,7 +8,6 @@ interface BookProps {
   name?: string;
   price?: number;
   image?: string;
-  // onClick?: () => void;
 }
 
 const Book = (props: BookProps) => {
@@ -44,7 +43,7 @@ const Book = (props: BookProps) => {
             navigate(`/book/${props.id}`);
           }}
         >
-          {props.name || '나의 라임오렌지 나무'}
+          {props.name}
         </Styled_Book.name>
         <Styled_Book.price>{props.price || 5000}원</Styled_Book.price>
       </Styled_Book.content>
