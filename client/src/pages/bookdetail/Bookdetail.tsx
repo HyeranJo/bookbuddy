@@ -1,9 +1,8 @@
 import BookSidebar from '../../components/sidebar/BookSidebar';
-import image from '../.././images/나의 라임 오렌지나무.jpg';
 import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { ReactComponent as Bookmark } from '../../icons/icon.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { BookInfo } from '../../recoil/Book';
 import axios from 'axios';
@@ -13,8 +12,6 @@ const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 const Bookdetail = () => {
   const detailInfo = useRecoilValue<bookdetail>(BookInfo);
-  console.log(detailInfo);
-  // const date = new Date(props.date as string);
   const [isClick, setIsClick] = useState(false);
 
   const ClickBookmark = () => {
@@ -42,15 +39,13 @@ const Bookdetail = () => {
           <Styled_Bookdetail.Wrapper>
             <Styled_Bookdetail.Container>
               <Styled_Bookdetail.ImageWrapper>
-                <Styled_Bookdetail.ImageContainer
-                  src={detailInfo.imgSrc || image}
-                />
+                <Styled_Bookdetail.ImageContainer src={detailInfo.imgSrc} />
               </Styled_Bookdetail.ImageWrapper>
               <Styled_Bookdetail.InfoWrapper>
                 <Styled_Bookdetail.Topdiv>
                   <Styled_Bookdetail.Horizontalitydiv>
                     <Styled_Bookdetail.Title>
-                      {detailInfo.name || '나의 라임오렌지 나무'}
+                      {detailInfo.name}
                     </Styled_Bookdetail.Title>
                     <Styled_Bookdetail.icon onClick={ClickBookmark}>
                       <Bookmark
@@ -65,25 +60,17 @@ const Bookdetail = () => {
                 </Styled_Bookdetail.Topdiv>
                 <Styled_Bookdetail.Middiv>
                   <Styled_Bookdetail.Content>
-                    저자: {detailInfo.author || 'J.M. 바스콘셀루스'}
+                    저자: {detailInfo.author}
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
-                    출판사: {detailInfo.publisher || '동녁주니어'}원
+                    출판사: {detailInfo.publisher}원
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
                     {/* date.toLocaleDateString() */}
-                    발행일: {detailInfo.date || '2012년12월19일'}
+                    발행일: {detailInfo.date}
                   </Styled_Bookdetail.Content>
                 </Styled_Bookdetail.Middiv>
                 <Styled_Bookdetail.Botdiv>
-                  <Styled_Bookdetail.Horizontalitydiv>
-                    <Styled_Bookdetail.Content>
-                      도서 금액:
-                    </Styled_Bookdetail.Content>
-                    <Styled_Bookdetail.Content>
-                      {detailInfo.price || '11,700'}원
-                    </Styled_Bookdetail.Content>
-                  </Styled_Bookdetail.Horizontalitydiv>
                   <Styled_Bookdetail.Horizontalitydiv>
                     <Styled_Bookdetail.Content>
                       배송비:
@@ -94,9 +81,11 @@ const Bookdetail = () => {
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.Botdiv>
                 <Styled_Bookdetail.Horizontalitydiv>
-                  <Styled_Bookdetail.Content>금액:</Styled_Bookdetail.Content>
+                  <Styled_Bookdetail.Content className="totalPrice">
+                    도서 금액:
+                  </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.TotalPrice>
-                    {detailInfo.price || '11,700'}원
+                    {detailInfo.price}원
                   </Styled_Bookdetail.TotalPrice>
                 </Styled_Bookdetail.Horizontalitydiv>
                 <Styled_Bookdetail.ButtonContainer></Styled_Bookdetail.ButtonContainer>

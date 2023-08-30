@@ -8,7 +8,7 @@ interface BookProps {
   name?: string;
   price?: number;
   image?: string;
-  onClick?: () => void;
+  // onClick?: () => void;
 }
 
 const Book = (props: BookProps) => {

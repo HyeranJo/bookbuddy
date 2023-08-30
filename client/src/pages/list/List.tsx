@@ -21,7 +21,7 @@ const List = () => {
   const userInfo = getCookie('userInfo');
   // const Final = useRecoilValue(FinalPaymentDetailsAtom);
   // console.log(Final);
-  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
+  const [bookDetail, setBookDetail] = useRecoilState<bookdetail>(BookInfo);
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
@@ -45,6 +45,7 @@ const List = () => {
       publisher: publisher,
       date: date,
     });
+    console.log('id');
   };
 
   return (
@@ -68,7 +69,8 @@ const List = () => {
                 listData &&
                 listData.map((v: BookList, i) => {
                   return (
-                    <Book
+                    <div
+                      key={i}
                       onClick={() => {
                         updateBookState(
                           v.id,
@@ -80,12 +82,15 @@ const List = () => {
                           v.date,
                         );
                       }}
-                      key={i}
-                      id={v.id}
-                      name={v.name}
-                      price={v.price}
-                      image={v.imgSrc}
-                    />
+                    >
+                      <Book
+                        key={i}
+                        id={v.id}
+                        name={v.name}
+                        price={v.price}
+                        image={v.imgSrc}
+                      />
+                    </div>
                   );
                 })
               )}
