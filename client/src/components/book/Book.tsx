@@ -46,6 +46,7 @@ const Book = (props: BookProps) => {
         >
           {props.name || '나의 라임오렌지 나무'}
         </Styled_Book.name>
+
         <Styled_Book.price>{props.price || 5000}원</Styled_Book.price>
       </Styled_Book.content>
     </Styled_Book.container>
