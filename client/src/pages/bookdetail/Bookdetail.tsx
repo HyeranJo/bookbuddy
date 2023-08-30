@@ -2,7 +2,7 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { ReactComponent as Bookmark } from '../../icons/icon.svg';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { BookInfo } from '../../recoil/Book';
 import axios from 'axios';
@@ -12,6 +12,7 @@ const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 const Bookdetail = () => {
   const detailInfo = useRecoilValue<bookdetail>(BookInfo);
+  const date = new Date(detailInfo.date);
   const [isClick, setIsClick] = useState(false);
 
   const ClickBookmark = () => {
@@ -63,11 +64,11 @@ const Bookdetail = () => {
                     저자: {detailInfo.author}
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
-                    출판사: {detailInfo.publisher}원
+                    출판사: {detailInfo.publisher}
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
                     {/* date.toLocaleDateString() */}
-                    발행일: {detailInfo.date}
+                    발행일: {date.toLocaleDateString()}
                   </Styled_Bookdetail.Content>
                 </Styled_Bookdetail.Middiv>
                 <Styled_Bookdetail.Botdiv>
@@ -79,23 +80,25 @@ const Bookdetail = () => {
                       3,000원
                     </Styled_Bookdetail.Content>
                   </Styled_Bookdetail.Horizontalitydiv>
+                  <Styled_Bookdetail.Horizontalitydiv>
+                    <Styled_Bookdetail.Content className="totalPrice">
+                      도서 금액:
+                    </Styled_Bookdetail.Content>
+                    <Styled_Bookdetail.TotalPrice>
+                      {detailInfo.price.toLocaleString()}원
+                    </Styled_Bookdetail.TotalPrice>
+                  </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.Botdiv>
-                <Styled_Bookdetail.Horizontalitydiv>
-                  <Styled_Bookdetail.Content className="totalPrice">
-                    도서 금액:
-                  </Styled_Bookdetail.Content>
-                  <Styled_Bookdetail.TotalPrice>
-                    {detailInfo.price}원
-                  </Styled_Bookdetail.TotalPrice>
-                </Styled_Bookdetail.Horizontalitydiv>
-                <Styled_Bookdetail.ButtonContainer></Styled_Bookdetail.ButtonContainer>
-                <Styled_Bookdetail.Horizontalitydiv>
-                  <RedButton
-                    name="장바구니 담기"
-                    onClick={() => postBookDetail(detailInfo)}
-                  />
-                  <RedButton name="바로 결제하기" />
-                </Styled_Bookdetail.Horizontalitydiv>
+
+                <Styled_Bookdetail.ButtonContainer>
+                  <Styled_Bookdetail.Horizontalitydiv>
+                    <RedButton
+                      name="장바구니 담기"
+                      onClick={() => postBookDetail(detailInfo)}
+                    />
+                    <RedButton name="바로 결제하기" />
+                  </Styled_Bookdetail.Horizontalitydiv>
+                </Styled_Bookdetail.ButtonContainer>
               </Styled_Bookdetail.InfoWrapper>
             </Styled_Bookdetail.Container>
           </Styled_Bookdetail.Wrapper>
