@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MypageSidebar from '../../components/sidebar/MypageSidebar';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Mypage } from './Mypage.style';
@@ -7,11 +7,18 @@ import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/NavScroll';
 import AskTable from '../../components/category/AskTable';
+import { BookList } from '../../model/BookList';
+import { getBookmarkList } from '../../api/GetApi';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
   const navScrollListRef = useRef<any>([]);
   const navScrollIndex = useRecoilValue(NavScrollAtom);
+  const [bookmarkList, setBookmarkList] = useState<BookList[]>([]);
+
+  useEffect(() => {
+    getBookmarkList(setBookmarkList);
+  }, []);
 
   useEffect(() => {
     // bookmark scroll
@@ -28,7 +35,7 @@ const Mypage = () => {
         behavior: 'smooth',
       });
     }
-  });
+  }, [bookmarkScrollRef, navScrollIndex]);
 
   return (
     <Styled_Layout.Container>
@@ -78,42 +85,18 @@ const Mypage = () => {
                 </Styled_Mypage.H2>
               </Styled_Mypage.BookmarkTitle>
               <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
-                <Styled_Mypage.Book>
-                  <Book />
-                </Styled_Mypage.Book>
+                {bookmarkList.map((v: BookList) => {
+                  return (
+                    <Styled_Mypage.Book key={v.id}>
+                      <Book
+                        key={v.id}
+                        name={v.name}
+                        price={v.price}
+                        image={v.imgSrc}
+                      />
+                    </Styled_Mypage.Book>
+                  );
+                })}
               </Styled_Mypage.Books>
             </Styled_Mypage.BookmarkList>
           </Styled_Mypage.Detail>
