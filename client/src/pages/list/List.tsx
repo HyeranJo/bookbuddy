@@ -4,11 +4,14 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getList } from '../../api/BookList';
-import { useRecoilValue } from 'recoil';
+import { getBookList } from '../../api/BookList';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
 import { getCookie } from '../../utils/cookie';
+// import { FinalPaymentDetailsAtom } from '../../recoil/CartItem';
+import { BookInfo } from '../../recoil/Book';
+import { bookdetail } from '../../model/Bookdetail';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
@@ -16,10 +19,33 @@ const List = () => {
   const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
   const userInfo = getCookie('userInfo');
+  // const Final = useRecoilValue(FinalPaymentDetailsAtom);
+  // console.log(Final);
+  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
 
   useEffect(() => {
-    getList({ setListData, setIsLoading, sidebarIdAtom, page });
+    getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
   }, [page]);
+
+  const updateBookState = (
+    id: string,
+    name: string,
+    price: number,
+    imgSrc: string,
+    author: string,
+    publisher: string,
+    date: string,
+  ) => {
+    setBookDetail({
+      id: id,
+      name: name,
+      price: price,
+      imgSrc: imgSrc,
+      author: author,
+      publisher: publisher,
+      date: date,
+    });
+  };
 
   return (
     <Styled_List.Container>
@@ -43,6 +69,17 @@ const List = () => {
                 listData.map((v: BookList, i) => {
                   return (
                     <Book
+                      onClick={() => {
+                        updateBookState(
+                          v.id,
+                          v.name,
+                          v.price,
+                          v.imgSrc,
+                          v.author,
+                          v.publisher,
+                          v.date,
+                        );
+                      }}
                       key={i}
                       id={v.id}
                       name={v.name}

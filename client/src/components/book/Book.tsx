@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface BookProps {
-  id?: number;
+  id?: string;
   name?: string;
   price?: number;
   image?: string;
+  onClick?: () => void;
 }
 
 const Book = (props: BookProps) => {
@@ -20,16 +21,16 @@ const Book = (props: BookProps) => {
 
   return (
     <Styled_Book.container>
-      <Link to={'/bookdetail'}>
-        <Styled_Book.wrapper>
-          <Styled_Book.img
-            src={props.image}
-            onClick={() => {
-              navigate(`/bookdetail/${props.id}`);
-            }}
-          />
-        </Styled_Book.wrapper>
-      </Link>
+      {/* <Link to={'/bookdetail'}> */}
+      <Styled_Book.wrapper>
+        <Styled_Book.img
+          src={props.image}
+          onClick={() => {
+            navigate(`/book/${props.id}`);
+          }}
+        />
+      </Styled_Book.wrapper>
+      {/* </Link> */}
       <Styled_Book.icon onClick={ClickBookmark}>
         <Bookmark
           fill={
