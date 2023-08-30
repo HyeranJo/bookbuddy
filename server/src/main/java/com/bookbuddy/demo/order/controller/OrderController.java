@@ -37,4 +37,10 @@ public class OrderController {
 
         return new ResponseEntity(mapper.ordersToOrderResponseDtos(orders), HttpStatus.OK);
     }
+    /* 장바구니 삭제 */
+    @DeleteMapping("/{order-id}")
+    public ResponseEntity deleteOrder(@PathVariable("order-id") @Positive long orderId) {
+        orderService.deleteOrder(orderId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

@@ -1,6 +1,8 @@
 package com.bookbuddy.demo.order.service;
 
 import com.bookbuddy.demo.book.service.BookService;
+import com.bookbuddy.demo.global.exception.BusinessException;
+import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.order.dto.OrderDto;
 import com.bookbuddy.demo.order.entity.Order;
 import com.bookbuddy.demo.order.repository.OrderRepository;
@@ -29,5 +31,15 @@ public class OrderService {
 
     public List<Order> findOrders() {;
         return orderRepository.findAll();
+    }
+
+    public void deleteOrder(long orderId) {
+        Order findOrder = findVerifyOrder(orderId);
+        orderRepository.delete(findOrder);
+    }
+
+    private Order findVerifyOrder(long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(()->new BusinessException(ExceptionCode.ORDER_NOT_FOUND));
     }
 }

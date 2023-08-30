@@ -19,6 +19,7 @@ public interface OrderMapper {
 
     default OrderDto.Response orderToOrderResponseDto(Order order) {
         return new OrderDto.Response(
+                order.getId(),
                 order.getBook(),
                 order.getQuantity(),
                 order.getPrice()
@@ -28,6 +29,7 @@ public interface OrderMapper {
     default List<OrderDto.Response> ordersToOrderResponseDtos(List<Order> orders) {
         return orders.stream()
                 .map(e->new OrderDto.Response(
+                        e.getId(),
                         e.getBook(),
                         e.getQuantity(),
                         e.getPrice()
