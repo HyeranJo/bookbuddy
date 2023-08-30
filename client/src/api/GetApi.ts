@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { BookList } from '../model/BookList';
 import { OrderListType } from '../model/OrderList';
+import { getCookie } from '../utils/cookie';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -40,7 +41,10 @@ export const getOrderList = async (
   try {
     // const response = await axios.get(`${SERVER_HOST}/order`),
     const response = await axios.get('./dummy/orderDummy.json', {
-      headers: { 'ngrok-skip-browser-warning': 'true' },
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+        Authorization: getCookie('accessToken'),
+      },
     });
     setOrderList(response.data);
   } catch (err) {
