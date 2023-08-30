@@ -1,7 +1,7 @@
 export interface BookList {
-  id: number;
+  id: string;
   author: string;
-  date?: string;
+  date: string;
   imgSrc: string;
   name: string;
   price: number;

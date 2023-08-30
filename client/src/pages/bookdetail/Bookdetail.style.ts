@@ -44,12 +44,14 @@ const Styled_Bookdetail = {
   `,
   Title: styled.p`
     font-size: var(--subtitle-font-size);
+    font-weight: bold;
   `,
   Content: styled.p`
     font-size: var(--third-title-font-size);
   `,
   TotalPrice: styled.p`
     font-size: var(--subtitle-font-size);
+    font-weight: bold;
   `,
   Topdiv: styled.div`
     display: flex;
@@ -73,6 +75,9 @@ const Styled_Bookdetail = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    & > .totalPrice {
+      font-weight: bold;
+    }
   `,
   ButtonContainer: styled.div`
     padding-top: 50px;
