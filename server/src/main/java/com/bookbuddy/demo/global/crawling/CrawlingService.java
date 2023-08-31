@@ -35,7 +35,7 @@ public class CrawlingService {
         this.bookService = bookService;
     }
 
-    public List<Book> process(int page, int size) throws InterruptedException, ParseException {
+    public List<Book> process() throws InterruptedException, ParseException {
         System.setProperty("webdriver.chrome.driver", chromePath);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -46,12 +46,12 @@ public class CrawlingService {
         options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 안띄움
 
         driver = new ChromeDriver(options);
-        driver.get("https://product.kyobobook.co.kr/category/KOR/0801#?type=all&per="+size+"&sort=new&page="+page);
+        driver.get("https://product.kyobobook.co.kr/category/KOR/0801#?type=all&per=20&sort=new&page=1");
 
-        return getDataList(page, size);
+        return getDataList();
     }
 
-    public List<Book> getDataList(int page, int size) throws ParseException, InterruptedException {
+    public List<Book> getDataList() throws ParseException, InterruptedException {
         List<Book> bookList = new ArrayList<>();
         for(int i = 0; i < 5; ++i) {
             // List 초기값 세팅

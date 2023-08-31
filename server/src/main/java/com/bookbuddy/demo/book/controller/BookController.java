@@ -4,10 +4,13 @@ import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.global.crawling.CrawlingService;
+import com.bookbuddy.demo.global.dto.MultiResponseDto;
 import com.bookbuddy.demo.order.dto.OrderDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +32,10 @@ public class BookController {
     /* 도서 리스트 */
     @GetMapping("/list")
     public ResponseEntity getBooks(@RequestParam("page") @Positive @Max(10) int page,
-                                    @RequestParam("size") @Positive int size) throws ParseException, InterruptedException {
-        List<Book> dataList = crawlingService.process(page, size);
-        return new ResponseEntity(mapper.BooksToBookResponseDtos(dataList), HttpStatus.CREATED);
+                                    @RequestParam("size") @Positive int size) {
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        Page<Book> findBook = bookService.findBook(pageRequest);
+        return new ResponseEntity(new MultiResponseDto<>(mapper.BooksToBookResponseDtos(findBook.getContent()), findBook), HttpStatus.CREATED);
     }
 
     /* 도서 상세 */

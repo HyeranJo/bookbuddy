@@ -4,6 +4,8 @@ import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.repository.BookRepository;
 import com.bookbuddy.demo.global.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,10 @@ public class BookService {
 
     public Book findBook(String id) {
         return findVerifyBook(id);
+    }
+
+    public Page<Book> findBook(PageRequest pageRequest) {
+        return bookRepository.findAll(pageRequest);
     }
 
     public boolean isFindBook(String id) {
