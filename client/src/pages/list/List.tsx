@@ -8,39 +8,23 @@ import { getBookList } from '../../api/GetApi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
-import { getCookie } from '../../utils/cookie';
-import { BookInfo } from '../../recoil/Book';
-import { bookdetail } from '../../model/Bookdetail';
+import { BookId } from '../../recoil/BookId';
+import { Infotype } from '../../model/Bookdetail';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
-  const userInfo = getCookie('userInfo');
-  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
+  const setBookDetail = useSetRecoilState<Infotype>(BookId);
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
   }, [page]);
 
-  const updateBookState = (
-    id: string,
-    name: string,
-    price: number,
-    imgSrc: string,
-    author: string,
-    publisher: string,
-    date: string,
-  ) => {
+  const updateBookState = (id: string) => {
     setBookDetail({
       id: id,
-      name: name,
-      price: price,
-      imgSrc: imgSrc,
-      author: author,
-      publisher: publisher,
-      date: date,
     });
   };
 
@@ -50,7 +34,7 @@ const List = () => {
         <BookSidebar />
         <Styled_List.Content>
           <Styled_List.Title>
-            <Styled_List.H1>문학</Styled_List.H1>
+            <Styled_List.H1>요리</Styled_List.H1>
             <ul>
               <Styled_List.SortList>인기순</Styled_List.SortList>
               <Styled_List.SortList>가격높은순</Styled_List.SortList>
@@ -68,18 +52,11 @@ const List = () => {
                     <div
                       key={v.id}
                       onClick={() => {
-                        updateBookState(
-                          v.id,
-                          v.name,
-                          v.price,
-                          v.imgSrc,
-                          v.author,
-                          v.publisher,
-                          v.date,
-                        );
+                        updateBookState(v.id);
                       }}
                     >
                       <Book
+                        key={v.id}
                         id={v.id}
                         name={v.name}
                         price={v.price}

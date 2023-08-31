@@ -8,8 +8,8 @@ import Loading from '../../components/loading/Loading';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 // import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 // import { getCookie } from '../../utils/cookie';
-import { BookInfo } from '../../recoil/Book';
-import { bookdetail } from '../../model/Bookdetail';
+import { BookId } from '../../recoil/BookId';
+import { Infotype } from '../../model/Bookdetail';
 import SearchBar from '../../components/search/SearchBar';
 
 const Search = () => {
@@ -18,7 +18,7 @@ const Search = () => {
   // const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
   // const page = useRecoilValue(PageAtom);
   // const userInfo = getCookie('userInfo');
-  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
+  const setBookDetail = useSetRecoilState<Infotype>(BookId);
 
   // useEffect(() => {
   //   getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
