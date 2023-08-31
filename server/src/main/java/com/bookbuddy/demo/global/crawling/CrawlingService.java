@@ -45,7 +45,7 @@ public class CrawlingService {
         options.addArguments("--remote-allow-origins=*");
 
         options.addArguments("--disable-popup-blocking");               // 팝업 안띄움
-        //options.addArguments("headless");                               // 브라우저 안띄움
+        options.addArguments("headless");                               // 브라우저 안띄움
         options.addArguments("--disable-gpu");			                // gpu 비활성화
         options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 안띄움
 
@@ -72,7 +72,7 @@ public class CrawlingService {
             driver.get(category.getLink());
             Thread.sleep(1000);
 
-            label:for(int i = 0; i < 5; ++i) {
+            label:for(int i = 0; i <= 5; ++i) {
                 // List 초기값 세팅
                 List<WebElement> productList = driver.findElements(By.className("prod_item"));
 
