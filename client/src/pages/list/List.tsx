@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Styled_List } from './List.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
@@ -16,14 +16,14 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(false);
   const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
-  const setBookDetail = useSetRecoilState<Infotype>(BookId);
+  const setBookId = useSetRecoilState<Infotype>(BookId);
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
   }, [page]);
 
   const updateBookState = (id: string) => {
-    setBookDetail({
+    setBookId({
       id: id,
     });
   };

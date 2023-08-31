@@ -2,6 +2,7 @@ import axios from 'axios';
 import { BookList } from '../model/BookList';
 import { OrderListType } from '../model/OrderList';
 import { getCookie } from '../utils/cookie';
+import { Infotype } from '../model/Bookdetail';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -69,5 +70,20 @@ export const getBookSearchList = async ({
   } catch (error) {
     alert(error);
     setIsLoading(false);
+  }
+};
+
+export const getBookDetail = async (setDetailInfo: any, bookId: Infotype) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/book/detail/${bookId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true,
+      },
+    });
+    const result = response.data;
+    setDetailInfo(result);
+  } catch (error) {
+    alert(error);
   }
 };

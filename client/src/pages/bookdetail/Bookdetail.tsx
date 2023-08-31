@@ -5,10 +5,9 @@ import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { BookId } from '../../recoil/BookId';
-import axios from 'axios';
 import { Infotype } from '../../model/Bookdetail';
-
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+import { getBookDetail } from '../../api/GetApi';
+import { postBookDetail } from '../../api/PostApi';
 
 const BookDetail = () => {
   const bookId = useRecoilValue<Infotype>(BookId);
@@ -19,23 +18,6 @@ const BookDetail = () => {
     setIsClick(isClick => !isClick);
   };
 
-  const getBookDetail = async (setDetailInfo: any, bookId: Infotype) => {
-    try {
-      const response = await axios.get(`${SERVER_HOST}/book/detail/${bookId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': true,
-        },
-      });
-      const result = response.data;
-      console.log(result);
-      setDetailInfo(result);
-      // return result;
-    } catch (error) {
-      alert(error);
-    }
-  };
-
   const date = new Date(detailInfo?.date as string);
   const price = new Date(detailInfo?.price as number);
 
@@ -43,21 +25,6 @@ const BookDetail = () => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
 
-  const postBookDetail = async (detailInfo: any) => {
-    const data = { id: detailInfo.id, price: detailInfo.price, quantity: 1 };
-    console.log(data);
-    try {
-      const response = await axios.post(`${SERVER_HOST}/order`, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const result = response.data;
-      return result;
-    } catch (error) {
-      alert(error);
-    }
-  };
   return (
     <>
       <Styled_Bookdetail.Main>

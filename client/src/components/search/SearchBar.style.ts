@@ -19,7 +19,7 @@ export const Styled_SearchBar = {
     display: inline-block;
     vertical-align: bottom;
     padding-bottom: 5px;
-
+    cursor: pointer;
     width: ${props => props.iconSize + 5}px;
     border-bottom: 3px solid;
     border-color: var(--primary-background-color);
