@@ -33,6 +33,7 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    @Transactional
     public void deleteOrder(long orderId) {
         Order findOrder = findVerifyOrder(orderId);
         orderRepository.delete(findOrder);

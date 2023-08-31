@@ -43,6 +43,7 @@ public class BookService {
         return bookRepository.findAllByKeyword(keyword);
     }
 
+    @Transactional
     public void deleteBook(String bookId) {
         Book book = findVerifyBook(bookId);
         bookRepository.delete(book);
