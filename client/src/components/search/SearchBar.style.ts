@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 interface InputProps {
   width: number;
   iconSize: number;
+  fontSize?: number;
 }
 
 export const Styled_SearchBar = {
@@ -10,7 +11,7 @@ export const Styled_SearchBar = {
     border-width: 0px 0px 3px 0px;
     border-color: var(--primary-background-color);
     width: ${props => props.width - props.iconSize}px;
-    font-size: 20px;
+    font-size: ${props => props.fontSize}px;
     outline: none;
     padding: 0px 15px;
   `,

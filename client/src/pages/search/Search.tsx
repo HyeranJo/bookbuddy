@@ -1,46 +1,29 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-// import { getBookList } from '../../api/BookList';
+import { getBookSearchList } from '../../api/GetApi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-// import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
-// import { getCookie } from '../../utils/cookie';
 import { BookId } from '../../recoil/BookId';
 import { Infotype } from '../../model/Bookdetail';
 import SearchBar from '../../components/search/SearchBar';
+import { SearchValue } from '../../recoil/SearchValue';
 
 const Search = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
-  // const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
-  // const page = useRecoilValue(PageAtom);
-  // const userInfo = getCookie('userInfo');
   const setBookDetail = useSetRecoilState<Infotype>(BookId);
+  const InputValue = useRecoilValue(SearchValue);
 
-  // useEffect(() => {
-  //   getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
-  // }, [page]);
+  useEffect(() => {
+    getBookSearchList({ setListData, setIsLoading, InputValue });
+  }, [InputValue]);
 
-  const updateBookState = (
-    id: string,
-    name: string,
-    price: number,
-    imgSrc: string,
-    author: string,
-    publisher: string,
-    date: string,
-  ) => {
+  const updateBookState = (id: string) => {
     setBookDetail({
       id: id,
-      name: name,
-      price: price,
-      imgSrc: imgSrc,
-      author: author,
-      publisher: publisher,
-      date: date,
     });
   };
 
@@ -49,7 +32,9 @@ const Search = () => {
       <Styled_Search.Main>
         <BookSidebar />
         <Styled_Search.Section>
-          <SearchBar iconSize={30} width={530} />
+          <Styled_Search.SearchbarWrapper>
+            <SearchBar iconSize={30} width={530} fontSize={50} />
+          </Styled_Search.SearchbarWrapper>
           <Styled_Search.Title>
             <Styled_Search.H1>검색결과</Styled_Search.H1>
           </Styled_Search.Title>
@@ -59,24 +44,16 @@ const Search = () => {
                 <Loading />
               ) : (
                 listData &&
-                listData.map((v: BookList, i) => {
+                listData.map((v: BookList) => {
                   return (
                     <div
-                      key={i}
+                      key={v.id}
                       onClick={() => {
-                        updateBookState(
-                          v.id,
-                          v.name,
-                          v.price,
-                          v.imgSrc,
-                          v.author,
-                          v.publisher,
-                          v.date,
-                        );
+                        updateBookState(v.id);
                       }}
                     >
                       <Book
-                        key={i}
+                        key={v.id}
                         id={v.id}
                         name={v.name}
                         price={v.price}
@@ -104,6 +81,12 @@ const Styled_Search = {
   Main: styled.main`
     width: 1512px;
     display: flex;
+  `,
+  SearchbarWrapper: styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
   `,
   Section: styled.section`
     width: 1312px;
