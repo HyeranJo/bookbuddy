@@ -26,7 +26,7 @@ export const getBookList = async ({
       `${SERVER_HOST}/book/list?page=${page}&size=20`,
       { headers: { 'ngrok-skip-browser-warning': true } },
     );
-    const result = response.data;
+    const result = response.data.data;
     setListData(result);
     setIsLoading(false);
   } catch (error) {
