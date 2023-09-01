@@ -2,6 +2,8 @@ package com.bookbuddy.demo.book.service;
 
 import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.repository.BookRepository;
+import com.bookbuddy.demo.category.entity.Category;
+import com.bookbuddy.demo.category.service.CategoryService;
 import com.bookbuddy.demo.global.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,13 +21,20 @@ import static com.bookbuddy.demo.global.exception.ExceptionCode.BOOK_NOT_FOUND;
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
+    private final CategoryService categoryService;
 
     public Book findBook(String id) {
         return findVerifyBook(id);
     }
 
-    public Page<Book> findBook(PageRequest pageRequest) {
+    public Page<Book> findBooks(PageRequest pageRequest) {
         return bookRepository.findAll(pageRequest);
+    }
+
+
+    public Page<Book> findBooksByCategory(PageRequest pageRequest, long categoryId) {
+        Category category = categoryService.findVerifyCategory(categoryId);
+        return bookRepository.findAllByCategory(category, pageRequest);
     }
 
     public boolean isFindBook(String id) {

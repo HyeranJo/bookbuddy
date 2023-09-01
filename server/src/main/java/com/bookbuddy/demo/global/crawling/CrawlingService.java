@@ -67,7 +67,7 @@ public class CrawlingService {
             categoryService.createCategory(category);
         }
 
-        List<Category> findCategorys = categoryService.getCategorys();
+        List<Category> findCategorys = categoryService.findCategorys();
         for(Category category : findCategorys) {
             driver.get(category.getLink());
             Thread.sleep(1000);
@@ -125,7 +125,7 @@ public class CrawlingService {
 
                 try {
                     driver.findElement(By.className("pagination")).findElement(By.className("next")).click();
-                    Thread.sleep(4000);
+                    Thread.sleep(3000);
                 } catch (ElementClickInterceptedException e) {
                     break label;
                 }

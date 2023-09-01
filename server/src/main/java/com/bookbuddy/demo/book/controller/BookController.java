@@ -31,11 +31,22 @@ public class BookController {
     
     /* 도서 리스트 */
     @GetMapping("/list")
-    public ResponseEntity getBooks(@RequestParam("page") @Positive @Max(10) int page,
+    public ResponseEntity getBooks(@RequestParam("page") @Positive int page,
                                     @RequestParam("size") @Positive int size) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Book> findBook = bookService.findBook(pageRequest);
-        return new ResponseEntity(new MultiResponseDto<>(mapper.BooksToBookResponseDtos(findBook.getContent()), findBook), HttpStatus.CREATED);
+        Page<Book> findBook = bookService.findBooks(pageRequest);
+        return new ResponseEntity(new MultiResponseDto<>(mapper.BooksToBookResponseDtos(findBook.getContent()), findBook), HttpStatus.OK);
+    }
+
+    /* 카테고리별 도서 리스트 */
+    @GetMapping("/list/{category-id}")
+    public ResponseEntity getBooksByCategory(@PathVariable("category-id") @Positive long categoryId,
+                                             @RequestParam("page") @Positive int page,
+                                             @RequestParam("size") @Positive int size) {
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        Page<Book> findBook = bookService.findBooksByCategory(pageRequest, categoryId);
+        return new ResponseEntity(new MultiResponseDto<>(mapper.BooksToBookResponseDtos(findBook.getContent()), findBook), HttpStatus.OK);
+
     }
 
     /* 도서 상세 */
