@@ -19,26 +19,17 @@ export const FinalPaymentDetailsAtom = selector({
   key: 'FinalPaymentDetailsAtom',
   get: ({ get }) => {
     const checkedList = get(CheckedListAtom);
-    const quantityList = get(QuantityListAtom);
-    const totalPrice = get(TotalPriceSelector);
+    const orderList = get(OrderListAtom);
 
-    let arr: (
-      | {
-          id: string;
-          quantity: number;
-        }
-      | { totalPrice: number }
-    )[] = [];
+    let arr = [];
 
     for (let i = 0; i < checkedList.length; i++) {
-      for (let j = 0; j < quantityList.length; j++) {
-        if (checkedList[i] === quantityList[j].id) {
-          arr.push(quantityList[j]);
+      for (let j = 0; j < orderList.length; j++) {
+        if (checkedList[i] === orderList[j].book.id) {
+          arr.push(orderList[j].id);
         }
       }
     }
-
-    arr.push({ totalPrice: totalPrice + 3000 });
 
     return arr;
   },

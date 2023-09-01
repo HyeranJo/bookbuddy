@@ -13,6 +13,7 @@ import Input from '../../components/input/Input';
 import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
+import { FinalPaymentDetailsAtom } from '../../recoil/CartItem';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -21,6 +22,7 @@ const Payment = () => {
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
   const allData = useRecoilValue<PaymentType>(AllDataSelector);
+  const FinalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
 
   /* 라디오 버튼 값 변경 사항을 변수에 저장하는 함수 **/
   const radioHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +47,12 @@ const Payment = () => {
 
   /** payment 데이터를 서버로 전송하고 응답을 처리하는 함수 */
   const buttonClickHandler = () => {
-    postPaymentData(allData)
+    const data = {
+      orders: [...FinalPaymentDetail],
+      ...allData,
+    };
+    console.log(data);
+    postPaymentData(data)
       .then((data: any) => {
         console.log(data);
       })

@@ -21,7 +21,6 @@ const CartTable = () => {
   const [selectAll, setSelectAll] = useState(true);
   const setQuantityList = useSetRecoilState(QuantityListAtom);
   const totalPrice = useRecoilValue(TotalPriceSelector);
-  const [orderId, setOrderId] = useState('');
 
   // ==================================== useEffect ================================
 
