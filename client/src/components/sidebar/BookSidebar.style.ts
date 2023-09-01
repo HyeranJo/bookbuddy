@@ -18,12 +18,12 @@ export const Styled_Sidebar = {
     text-align: center;
     gap: 20px;
     padding-top: 44px;
-    cursor: pointer;
   `,
   Span: styled.button`
     border: 0;
     background-color: white;
     font-size: var(--basic-font-size);
+    cursor: pointer;
 
     &:hover {
       color: var(--primary-background-color);
