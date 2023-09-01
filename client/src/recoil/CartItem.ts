@@ -1,5 +1,4 @@
 import { atom, selector } from 'recoil';
-import { QuantityListAtom } from './Quantity';
 import { OrderListType } from '../model/OrderList';
 
 /** 장바구니 선택 리스트 */
@@ -11,6 +10,12 @@ export const CheckedListAtom = atom<string[]>({
 /** 장바구니 리스트 */
 export const OrderListAtom = atom<OrderListType[]>({
   key: 'OrderListAtom',
+  default: [],
+});
+
+/** Quantity Input 수량 */
+export const QuantityListAtom = atom<{ id: string; quantity: number }[]>({
+  key: 'QuantitListAtom',
   default: [],
 });
 

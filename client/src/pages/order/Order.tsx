@@ -5,8 +5,11 @@ import { Styled_Order } from './Order.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { QuantityListAtom } from '../../recoil/Quantity';
-import { FinalPaymentDetailsAtom, OrderListAtom } from '../../recoil/CartItem';
+import {
+  FinalPaymentDetailsAtom,
+  OrderListAtom,
+  QuantityListAtom,
+} from '../../recoil/CartItem';
 
 const Order = () => {
   const navigate = useNavigate();

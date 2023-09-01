@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Styled_CartTable } from './CartTable.style';
 import QuantityInput from '../quantity/QuantityInput';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { QuantityListAtom } from '../../recoil/Quantity';
 import { OrderListType } from '../../model/OrderList';
 import {
   CheckedListAtom,
   OrderListAtom,
+  QuantityListAtom,
   TotalPriceSelector,
 } from '../../recoil/CartItem';
 import { getOrderList } from '../../api/GetApi';
