@@ -1,6 +1,6 @@
 import Styled_Customer from './Customer.style';
-import AskTable from '../../components/category/AskTable';
-import FAQ from '../../components/category/FAQ';
+import AskTable from '../../components/table/AskTable';
+import FAQ from '../../components/table/FAQ';
 
 const Customer = () => {
   return (

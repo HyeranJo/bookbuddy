@@ -44,38 +44,43 @@ const Styled_Bookdetail = {
   `,
   Title: styled.p`
     font-size: var(--subtitle-font-size);
+    font-weight: bold;
   `,
   Content: styled.p`
     font-size: var(--third-title-font-size);
   `,
   TotalPrice: styled.p`
     font-size: var(--subtitle-font-size);
+    font-weight: bold;
   `,
   Topdiv: styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   `,
   Middiv: styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    border-bottom: 1px solid #000000;
-    padding: 20px 0px;
+    padding: 30px 0px;
   `,
   Botdiv: styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 20px 0px;
+    border-top: 1px solid #000000;
+    padding: 30px 0px;
   `,
   Horizontalitydiv: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    & > .totalPrice {
+      font-weight: bold;
+    }
   `,
   ButtonContainer: styled.div`
-    padding-top: 50px;
+    padding-top: 30px;
   `,
 };
 

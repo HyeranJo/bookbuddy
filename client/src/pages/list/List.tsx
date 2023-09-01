@@ -4,22 +4,35 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getList } from '../../api/BookList';
-import { useRecoilValue } from 'recoil';
+import { getBookList } from '../../api/GetApi';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
-import { getCookie } from '../../utils/cookie';
+import { BookInfo } from '../../recoil/Book';
+import { bookdetail } from '../../model/Bookdetail';
+import category from '../../utils/SidebarCategory';
+import { BookId } from '../../recoil/BookId';
+import { Infotype } from '../../model/Bookdetail';
+
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
+  const sidebarId = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
-  const userInfo = getCookie('userInfo');
+  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
+  const setBookDetail = useSetRecoilState<Infotype>(BookId);
+
 
   useEffect(() => {
-    getList({ setListData, setIsLoading, sidebarIdAtom, page });
-  }, [page]);
+    getBookList({ setListData, setIsLoading, sidebarId, page });
+  }, [page, sidebarId]);
+
+  const updateBookState = (id: string) => {
+    setBookDetail({
+      id: id,
+    });
+  };
 
   return (
     <Styled_List.Container>
@@ -27,7 +40,9 @@ const List = () => {
         <BookSidebar />
         <Styled_List.Content>
           <Styled_List.Title>
-            <Styled_List.H1>문학</Styled_List.H1>
+            <Styled_List.H1>
+              {Object.keys(category)[sidebarId - 1]}
+            </Styled_List.H1>
             <ul>
               <Styled_List.SortList>인기순</Styled_List.SortList>
               <Styled_List.SortList>가격높은순</Styled_List.SortList>
@@ -40,14 +55,22 @@ const List = () => {
                 <Loading />
               ) : (
                 listData &&
-                listData.map((v: BookList, i) => {
+                listData.map((v: BookList) => {
                   return (
-                    <Book
-                      key={i}
-                      name={v.name}
-                      price={v.price}
-                      image={v.imgSrc}
-                    />
+                    <div
+                      key={v.id}
+                      onClick={() => {
+                        updateBookState(v.id);
+                      }}
+                    >
+                      <Book
+                        key={v.id}
+                        id={v.id}
+                        name={v.name}
+                        price={v.price}
+                        image={v.imgSrc}
+                      />
+                    </div>
                   );
                 })
               )}
