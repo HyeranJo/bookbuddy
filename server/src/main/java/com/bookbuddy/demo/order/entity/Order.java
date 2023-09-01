@@ -30,6 +30,11 @@ public class Order {
     @ManyToOne(cascade = {CascadeType.REMOVE})
     private Payment payment;
 
+    public Order(long id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
     public Order(int quantity, int price) {
         this.quantity = quantity;
         this.price = price;
@@ -51,5 +56,9 @@ public class Order {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

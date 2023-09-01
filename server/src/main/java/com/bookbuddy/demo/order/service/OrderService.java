@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 @Service
@@ -27,6 +28,16 @@ public class OrderService {
         order.addBook(bookService.findVerifyBook(bookId));
 
         return orderRepository.save(order);
+    }
+
+    @Transactional
+    public Order updateOrder(Order order) {
+        Order findOrder = findVerifyOrder(order.getId());
+
+        Optional.ofNullable(order.getQuantity())
+                        .ifPresent(quantity->findOrder.setQuantity(quantity));
+
+        return orderRepository.save(findOrder);
     }
 
     public List<Order> findOrders() {;

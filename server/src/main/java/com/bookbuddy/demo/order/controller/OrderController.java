@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -29,6 +30,14 @@ public class OrderController {
     public ResponseEntity postOrder(@RequestBody OrderDto.Post orderDto) {
         Order createdOrder = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto), orderDto);
         return new ResponseEntity(mapper.orderToOrderResponseDto(createdOrder), HttpStatus.CREATED);
+    }
+    /* 장바구니 수량 업데이트 */
+    @PatchMapping("/{order-id}")
+    public ResponseEntity patchOrder(@PathVariable("order-id") @Positive long orderId,
+                                     @RequestBody @Valid OrderDto.Patch orderDto) {
+        orderDto.setId(orderId);
+        Order order = orderService.updateOrder(mapper.orderPatchDtoToOrder(orderDto));
+        return new ResponseEntity(mapper.orderToOrderResponseDto(order), HttpStatus.OK);
     }
     /* 장바구니 내역 */
     @GetMapping

@@ -17,6 +17,13 @@ public interface OrderMapper {
         );
     }
 
+    default Order orderPatchDtoToOrder(OrderDto.Patch orderDto) {
+        return new Order(
+                orderDto.getId(),
+                orderDto.getQuantity()
+        );
+    }
+
     default OrderDto.Response orderToOrderResponseDto(Order order) {
         return new OrderDto.Response(
                 order.getId(),
