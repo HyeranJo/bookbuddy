@@ -36,7 +36,7 @@ const Search = () => {
             <SearchBar iconSize={30} width={400} fontSize={25} />
           </Styled_Search.SearchbarWrapper>
           <Styled_Search.Title>
-            <Styled_Search.H1>검색결과과</Styled_Search.H1>
+            <Styled_Search.H1>검색결과</Styled_Search.H1>
           </Styled_Search.Title>
           <Styled_Search.BookGroup>
             <Styled_Search.Books>
