@@ -19,12 +19,12 @@ const BookDetail = () => {
     setIsClick(isClick => !isClick);
   };
 
-  const date = new Date(detailInfo?.date as string);
-  const price = detailInfo?.price as number;
-
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
+  const date = new Date(detailInfo?.date as string);
+  const price = detailInfo?.price as number;
+  const formattedPrice = price ? price.toLocaleString() : '';
 
   return (
     <>
@@ -79,7 +79,7 @@ const BookDetail = () => {
                       도서 금액:
                     </Styled_Bookdetail.Content>
                     <Styled_Bookdetail.TotalPrice>
-                      {price.toLocaleString()}원
+                      {formattedPrice}원
                     </Styled_Bookdetail.TotalPrice>
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.Botdiv>
