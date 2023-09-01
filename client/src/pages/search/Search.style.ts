@@ -49,7 +49,7 @@ const Styled_Search = {
   `,
   BookGroup: styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0 37px;
   `,
   Books: styled.div`
