@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Styled_List } from './List.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
@@ -8,28 +8,23 @@ import { getBookList } from '../../api/GetApi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
-import { BookInfo } from '../../recoil/Book';
-import { bookdetail } from '../../model/Bookdetail';
 import category from '../../utils/SidebarCategory';
 import { BookId } from '../../recoil/BookId';
 import { Infotype } from '../../model/Bookdetail';
-
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const sidebarId = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
-  const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
-  const setBookDetail = useSetRecoilState<Infotype>(BookId);
-
+  const setBookId = useSetRecoilState<Infotype>(BookId);
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarId, page });
   }, [page, sidebarId]);
 
   const updateBookState = (id: string) => {
-    setBookDetail({
+    setBookId({
       id: id,
     });
   };

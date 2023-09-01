@@ -5,13 +5,13 @@ import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { BookId } from '../../recoil/BookId';
-import axios from 'axios';
 import { Infotype } from '../../model/Bookdetail';
-
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+import { getBookDetail } from '../../api/GetApi';
+import { postBookDetail } from '../../api/PostApi';
 
 const BookDetail = () => {
-  const bookId = useRecoilValue<Infotype>(BookId);
+  const bookIdObject = useRecoilValue<Infotype>(BookId);
+  const bookId = bookIdObject.id;
   const [detailInfo, setDetailInfo] = useState<Infotype>();
   const [isClick, setIsClick] = useState(false);
 
@@ -19,45 +19,13 @@ const BookDetail = () => {
     setIsClick(isClick => !isClick);
   };
 
-  const getBookDetail = async (setDetailInfo: any, bookId: Infotype) => {
-    try {
-      const response = await axios.get(`${SERVER_HOST}/book/detail/${bookId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': true,
-        },
-      });
-      const result = response.data;
-      console.log(result);
-      setDetailInfo(result);
-      // return result;
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const date = new Date(detailInfo?.date as string);
-  const price = new Date(detailInfo?.price as number);
-
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
+  const date = new Date(detailInfo?.date as string);
+  const price = detailInfo?.price as number;
+  const formattedPrice = price ? price.toLocaleString() : '';
 
-  const postBookDetail = async (detailInfo: any) => {
-    const data = { id: detailInfo.id, price: detailInfo.price, quantity: 1 };
-    console.log(data);
-    try {
-      const response = await axios.post(`${SERVER_HOST}/order`, data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const result = response.data;
-      return result;
-    } catch (error) {
-      alert(error);
-    }
-  };
   return (
     <>
       <Styled_Bookdetail.Main>
@@ -111,7 +79,7 @@ const BookDetail = () => {
                       도서 금액:
                     </Styled_Bookdetail.Content>
                     <Styled_Bookdetail.TotalPrice>
-                      {price.toLocaleString()}원
+                      {formattedPrice}원
                     </Styled_Bookdetail.TotalPrice>
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.Botdiv>

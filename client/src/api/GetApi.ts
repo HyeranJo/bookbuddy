@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { BookList } from '../model/BookList';
 import { OrderListType } from '../model/OrderList';
-import { getCookie } from '../utils/cookie';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 interface getBookListType {
   setListData: (result: BookList[]) => void;
   setIsLoading: (isloading: boolean) => void;
-  sidebarId: number;
-  page: number;
+  sidebarId?: number;
+  page?: number;
+  InputValue?: string;
 }
 
 export const getBookList = async ({
@@ -48,5 +48,43 @@ export const getOrderList = async (
     setOrderList(response.data);
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getBookSearchList = async ({
+  setListData,
+  setIsLoading,
+  InputValue,
+}: getBookListType) => {
+  setIsLoading(true);
+  try {
+    const response = await axios.get(
+      `${SERVER_HOST}/search?keyword=${InputValue}`,
+      { headers: { 'ngrok-skip-browser-warning': true } },
+    );
+    const result = response.data;
+    setListData(result);
+    setIsLoading(false);
+  } catch (error) {
+    alert(error);
+    setIsLoading(false);
+  }
+};
+
+export const getBookDetail = async (
+  setDetailInfo: any,
+  bookId: string | undefined,
+) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/book/${bookId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true,
+      },
+    });
+    const result = response.data;
+    setDetailInfo(result);
+  } catch (error) {
+    alert(error);
   }
 };
