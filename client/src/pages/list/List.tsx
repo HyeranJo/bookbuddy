@@ -22,7 +22,7 @@ const List = () => {
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
-  }, [page]);
+  }, [page, sidebarIdAtom]);
 
   const updateBookState = (
     id: string,
