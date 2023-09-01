@@ -29,7 +29,12 @@ export const Styled_Apply = {
     }
     #apply_body {
       height: 400px;
-      padding: 20px 30px;
+      width: 100%;
+      .ql-container {
+        height: 360px;
+        font-size: var(--basic-font-size);
+        border-color: var(--book-background-color);
+      }
     }
     & label {
       font-size: var(--third-title-font-size);

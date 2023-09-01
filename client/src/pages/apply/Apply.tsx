@@ -2,6 +2,7 @@ import React from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Apply } from './Apply.styled';
 import RedButton from '../../components/buttons/RedButton';
+import MyComponent from '../../components/input/Editor';
 
 const Apply = () => {
   return (
@@ -20,7 +21,10 @@ const Apply = () => {
 
             <div className="body_group">
               <label htmlFor="apply_title">내용 ►</label>
-              <textarea id="apply_body" placeholder="내용을 입력하세요" />
+              {/* <textarea id="apply_body" placeholder="내용을 입력하세요" /> */}
+              <div id="apply_body">
+                <MyComponent />
+              </div>
             </div>
           </div>
           <div className="submit">
