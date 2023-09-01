@@ -8,7 +8,6 @@ interface BookProps {
   name?: string;
   price?: number;
   image?: string;
-  // onClick?: () => void;
 }
 
 const Book = (props: BookProps) => {
@@ -46,7 +45,7 @@ const Book = (props: BookProps) => {
         >
           {props.name}
         </Styled_Book.name>
-        <Styled_Book.price>{props.price || 5000}원</Styled_Book.price>
+        <Styled_Book.price>{props.price?.toLocaleString()}원</Styled_Book.price>
       </Styled_Book.content>
     </Styled_Book.container>
   );
