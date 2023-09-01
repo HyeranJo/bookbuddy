@@ -28,7 +28,7 @@ export const getBookList = async ({
       `${SERVER_HOST}/book/list?page=${page}&size=20`,
       { headers: { 'ngrok-skip-browser-warning': true } },
     );
-    const result = response.data;
+    const result = response.data.data;
     setListData(result);
     setIsLoading(false);
   } catch (error) {
@@ -73,9 +73,12 @@ export const getBookSearchList = async ({
   }
 };
 
-export const getBookDetail = async (setDetailInfo: any, bookId: Infotype) => {
+export const getBookDetail = async (
+  setDetailInfo: any,
+  bookId: string | undefined,
+) => {
   try {
-    const response = await axios.get(`${SERVER_HOST}/book/detail/${bookId}`, {
+    const response = await axios.get(`${SERVER_HOST}/book/${bookId}`, {
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': true,

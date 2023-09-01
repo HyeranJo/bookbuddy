@@ -10,7 +10,8 @@ import { getBookDetail } from '../../api/GetApi';
 import { postBookDetail } from '../../api/PostApi';
 
 const BookDetail = () => {
-  const bookId = useRecoilValue<Infotype>(BookId);
+  const bookIdObject = useRecoilValue<Infotype>(BookId);
+  const bookId = bookIdObject.id;
   const [detailInfo, setDetailInfo] = useState<Infotype>();
   const [isClick, setIsClick] = useState(false);
 
@@ -19,7 +20,7 @@ const BookDetail = () => {
   };
 
   const date = new Date(detailInfo?.date as string);
-  const price = new Date(detailInfo?.price as number);
+  const price = detailInfo?.price as number;
 
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);

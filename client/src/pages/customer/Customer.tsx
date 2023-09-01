@@ -6,10 +6,12 @@ const Customer = () => {
   return (
     <>
       <Styled_Customer.Main>
-        <Styled_Customer.Title>고객센터</Styled_Customer.Title>
         <Styled_Customer.Section>
-          <FAQ />
-          <AskTable title="1:1 문의내역" />
+          <Styled_Customer.Title>고객센터</Styled_Customer.Title>
+          <Styled_Customer.Warpper>
+            <FAQ />
+            <AskTable title="1:1 문의내역" />
+          </Styled_Customer.Warpper>
         </Styled_Customer.Section>
       </Styled_Customer.Main>
     </>

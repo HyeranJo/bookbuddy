@@ -19,21 +19,18 @@ const Styled_FQA = {
   `,
   QuestionTitle: styled.h2`
     font-size: var(--third-title-font-size);
+    width: 1000px;
   `,
   ArrowWrapper: styled.div`
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 1270px;
     cursor: pointer;
   `,
-  AnswerContainer: styled.div``,
+  AnswerContainer: styled.div`
+    width: 1095px;
+  `,
   Answer: styled.div`
     padding: 25px;
     font-size: var(--basic-font-size);
     background-color: var(--category-color);
-    display: flex;
-    align-items: center;
   `,
 };
 

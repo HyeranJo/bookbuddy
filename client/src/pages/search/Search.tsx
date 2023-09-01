@@ -45,6 +45,7 @@ const Search = () => {
               ) : (
                 listData &&
                 listData.map((v: BookList) => {
+                  console.log(v?.id);
                   return (
                     <div
                       key={v.id}
