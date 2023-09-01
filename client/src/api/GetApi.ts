@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BookList } from '../model/BookList';
+import { getCookie } from '../utils/cookie';
 import { OrderListType } from '../model/OrderList';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
@@ -84,5 +85,21 @@ export const getBookDetail = async (
     setDetailInfo(result);
   } catch (error) {
     alert(error);
+  }
+};
+
+export const getBookmarkList = async (
+  setBookmarkList: (bookmarkList: BookList[]) => void,
+) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/mypage/bookmark`, {
+      headers: {
+        'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    setBookmarkList(response.data);
+  } catch (err) {
+    console.log(err);
   }
 };

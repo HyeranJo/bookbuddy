@@ -22,6 +22,12 @@ const SearchBar = ({ $iconSize, width, fontSize }: SearchBarProps) => {
     setInputText(event.target.value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setInputValue(inputText);
+    }
+  };
+
   return (
     <label>
       <Styled_SearchBar.Input
@@ -30,6 +36,7 @@ const SearchBar = ({ $iconSize, width, fontSize }: SearchBarProps) => {
         fontSize={fontSize}
         value={inputText}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
       />
       <Styled_SearchBar.SearchDiv $iconSize={$iconSize} onClick={handleOnClick}>
         <Search $iconSize={$iconSize} />
