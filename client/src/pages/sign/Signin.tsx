@@ -31,17 +31,11 @@ const Signin = () => {
       .post(`${SERVER_HOST}/signin`, userData, {
         headers: {
           'Content-Type': 'application/json',
-          // 'ngrok-skip-browser-warning': true,
         },
       })
       .then(response => {
-        // authorization 소문자로 적어야함.
         const accessToken = response.headers['authorization'];
         if (response.status === 200) {
-          // axios.defaults.headers.common['authorization'] = `${accessToken}`;
-          // authInstance.defaults.headers.common[
-          //   'Authorization'
-          // ] = `${accessToken}`;
           setCookie(
             'userInfo',
             JSON.stringify({
@@ -61,11 +55,12 @@ const Signin = () => {
           });
           alert('[로그인 성공] 메인 페이지로 이동합니다');
           navigate('/');
+          window.location.reload();
         }
+      })
+      .catch(err => {
+        alert(`${err}`);
       });
-    // .catch(() => {
-    //   alert('입력하신 정보가 일치하지 않습니다.');
-    // });
   };
   const { mutate } = useMutation(signinUser);
 

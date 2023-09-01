@@ -12,6 +12,7 @@ export const Styled_SearchBar = {
     border-color: var(--primary-background-color);
     width: ${props => props.width - props.iconSize}px;
     font-size: ${props => props.fontSize}px;
+    line-height: 30px;
     outline: none;
     padding: 0px 15px;
   `,

@@ -12,8 +12,7 @@ const Styled_Search = {
   SearchbarWrapper: styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 60px;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   `,
   Section: styled.section`
     width: 1312px;
@@ -32,32 +31,25 @@ const Styled_Search = {
     font-size: var(--title-font-size);
     display: inline-block;
   `,
-  SortList: styled.li`
-    list-style: none;
-    float: left;
-
-    &::after {
-      content: '|';
-      float: right;
-      color: gray;
-      padding: 0px 10px;
-    }
-    &:last-child::after {
-      content: '';
-      padding: 0px;
-    }
-  `,
   BookGroup: styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0 37px;
   `,
   Books: styled.div`
     display: flex;
     flex-wrap: wrap;
-
-    /* gap: 36px; */
     gap: 70px;
+  `,
+  Msg: styled.div`
+    font-size: var(--third-title-font-size);
+    color: var(--light-border-color);
+    position: absolute;
+    top: 55%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
   `,
 };
 export default Styled_Search;
