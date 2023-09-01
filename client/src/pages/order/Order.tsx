@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CartTable from '../../components/table/CartTable';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Order } from './Order.style';
@@ -14,6 +14,8 @@ const Order = () => {
     useRecoilValue<{ id: string; quantity: number }[]>(QuantityListAtom);
   const finalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
   const orderList = useRecoilValue(OrderListAtom);
+
+  useEffect(() => {}, [orderList]);
 
   /** 주문하기 버튼 함수 */
   const onClickHandler = () => {
@@ -41,13 +43,23 @@ const Order = () => {
     <Styled_Layout.Container>
       <Styled_Order.Div>
         <Styled_Order.Content>
-          {orderList.length === 0 ? (
+          {orderList.length !== 0 ? (
+            <>
+              <CartTable />
+              <div className="submit">
+                <RedButton name="주문하기" onClick={onClickHandler} />
+              </div>
+            </>
+          ) : (
             <>
               <Styled_Layout.H1 style={{ width: '1300px' }}>
                 장바구니
               </Styled_Layout.H1>
               <div className="emptyItem">
-                장바구니에 담긴 상품이 없습니다 🥲
+                <span style={{ color: 'var(--light-border-color)' }}>
+                  장바구니에 담긴 상품이 없습니다
+                </span>
+                🥲
               </div>
               <div className="submit">
                 <RedButton
@@ -56,13 +68,6 @@ const Order = () => {
                     navigate(-1);
                   }}
                 />
-              </div>
-            </>
-          ) : (
-            <>
-              <CartTable />
-              <div className="submit">
-                <RedButton name="주문하기" onClick={onClickHandler} />
               </div>
             </>
           )}
