@@ -37,6 +37,7 @@ const SearchBar = ({ iconSize, width, fontSize }: SearchBarProps) => {
         value={inputText}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
+
       />
       <Styled_SearchBar.SearchDiv iconSize={iconSize} onClick={handleOnClick}>
         <Search iconSize={iconSize} />
