@@ -8,21 +8,20 @@ import { getBookList } from '../../api/GetApi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
-import { getCookie } from '../../utils/cookie';
 import { BookInfo } from '../../recoil/Book';
 import { bookdetail } from '../../model/Bookdetail';
+import category from '../../utils/SidebarCategory';
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const sidebarIdAtom = useRecoilValue(SidebarIdAtom);
+  const sidebarId = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
-  const userInfo = getCookie('userInfo');
   const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
 
   useEffect(() => {
-    getBookList({ setListData, setIsLoading, sidebarIdAtom, page });
-  }, [page, sidebarIdAtom]);
+    getBookList({ setListData, setIsLoading, sidebarId, page });
+  }, [page, sidebarId]);
 
   const updateBookState = (
     id: string,
@@ -50,7 +49,9 @@ const List = () => {
         <BookSidebar />
         <Styled_List.Content>
           <Styled_List.Title>
-            <Styled_List.H1>문학</Styled_List.H1>
+            <Styled_List.H1>
+              {Object.keys(category)[sidebarId - 1]}
+            </Styled_List.H1>
             <ul>
               <Styled_List.SortList>인기순</Styled_List.SortList>
               <Styled_List.SortList>가격높은순</Styled_List.SortList>
