@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import CartTable from '../../components/table/CartTable';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Order } from './Order.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   FinalPaymentDetailsAtom,
   OrderListAtom,
   QuantityListAtom,
 } from '../../recoil/CartItem';
+import { getOrderList } from '../../api/GetApi';
 
 const Order = () => {
   const navigate = useNavigate();
   const quantityList =
     useRecoilValue<{ id: string; quantity: number }[]>(QuantityListAtom);
   const finalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
-  const orderList = useRecoilValue(OrderListAtom);
+  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
 
-  useEffect(() => {}, [orderList]);
+  // ==================================== useEffect ================================
 
+  // ---------------------------------- api randering ------------------------------
+  useEffect(() => {
+    getOrderList(setOrderList);
+  }, [orderList]);
+
+  // ==================================== 함수 ====================================
   /** 주문하기 버튼 함수 */
   const onClickHandler = () => {
     // 결제할 도서가 1개 이상 선택되었는지 확인
-    if (finalPaymentDetail.length === 1) {
+    if (finalPaymentDetail.length === 0) {
       alert('구매하실 도서를 선택해주세요');
     }
     // 0인 수량이 있는지 확인(선택하지 않은 경우 포함)
@@ -42,6 +49,7 @@ const Order = () => {
     }
   };
 
+  // ==================================== HTML ====================================
   return (
     <Styled_Layout.Container>
       <Styled_Order.Div>

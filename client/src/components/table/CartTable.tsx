@@ -9,12 +9,11 @@ import {
   QuantityListAtom,
   TotalPriceSelector,
 } from '../../recoil/CartItem';
-import { getOrderList } from '../../api/GetApi';
 import { DeleteOrderItem } from '../../api/DeleteApi';
 
 const CartTable = () => {
   // ===============================================================================
-  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
+  const orderList = useRecoilValue(OrderListAtom);
   const [checkedList, setCheckedList] = useRecoilState(CheckedListAtom);
   const [isChecked, setIsChecked] = useState(false); // input cheked 설정
   const [isMount, setIsMount] = useState(false); // 첫 렌더링 여부 확인
@@ -23,11 +22,6 @@ const CartTable = () => {
   const totalPrice = useRecoilValue(TotalPriceSelector);
 
   // ==================================== useEffect ================================
-
-  // ---------------------------------- api randering ------------------------------
-  useEffect(() => {
-    getOrderList(setOrderList);
-  }, [orderList]);
 
   // ---------------------- 사용할 check list, quantity list 설정 ---------------------
   useEffect(() => {
