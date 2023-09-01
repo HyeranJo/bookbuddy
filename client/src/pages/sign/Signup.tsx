@@ -9,6 +9,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+
 interface IFormData {
   email: string;
   password: string;
@@ -30,16 +32,12 @@ const Signup = () => {
     const idValue = getValues('email');
     // 가져온 값을 서버로 연결해서 중복된 여부 확인 성공하면 true 실패하면 초기화
     return axios
-      .post(
-        'https://29a6-210-106-53-186.ngrok-free.app/duplicate/email',
-        idValue,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // 'ngrok-skip-browser-warning': true,
-          },
+      .post(`${SERVER_HOST}/email`, idValue, {
+        headers: {
+          'Content-Type': 'application/json',
+          // 'ngrok-skip-browser-warning': true,
         },
-      )
+      })
       .then(response => {
         if (response.status === 200) {
           // 사용가능한 email
@@ -60,7 +58,7 @@ const Signup = () => {
       });
   };
 
-  function signupUser(userData: IFormData) {
+  const signupUser = (userData: IFormData) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password_confirm, ...otherData } = userData;
     return axios
@@ -77,7 +75,7 @@ const Signup = () => {
       .catch(err => {
         alert(`erro: ${err}`);
       });
-  }
+  };
   const { mutate } = useMutation(signupUser);
 
   const onSubmit: SubmitHandler<IFormData> = data => {

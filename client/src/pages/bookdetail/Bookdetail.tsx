@@ -1,27 +1,31 @@
 import BookSidebar from '../../components/sidebar/BookSidebar';
-import image from '../.././images/나의 라임 오렌지나무.jpg';
 import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { ReactComponent as Bookmark } from '../../icons/icon.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { BookId } from '../../recoil/BookId';
+import { Infotype } from '../../model/Bookdetail';
+import { getBookDetail } from '../../api/GetApi';
+import { postBookDetail } from '../../api/PostApi';
 
-interface BookProps {
-  image?: string;
-  title?: string;
-  price?: number;
-  author?: string;
-  publisher?: string;
-  date?: string;
-  quantity?: number;
-  deliveryFee?: number;
-}
-
-const Bookdetail = (props: BookProps) => {
+const BookDetail = () => {
+  const bookIdObject = useRecoilValue<Infotype>(BookId);
+  const bookId = bookIdObject.id;
+  const [detailInfo, setDetailInfo] = useState<Infotype>();
   const [isClick, setIsClick] = useState(false);
 
-  function ClickBookmark() {
+  const ClickBookmark = () => {
     setIsClick(isClick => !isClick);
-  }
+  };
+
+  useEffect(() => {
+    getBookDetail(setDetailInfo, bookId);
+  }, [bookId]);
+  const date = new Date(detailInfo?.date as string);
+  const price = detailInfo?.price as number;
+  const formattedPrice = price ? price.toLocaleString() : '';
+
   return (
     <>
       <Styled_Bookdetail.Main>
@@ -30,13 +34,13 @@ const Bookdetail = (props: BookProps) => {
           <Styled_Bookdetail.Wrapper>
             <Styled_Bookdetail.Container>
               <Styled_Bookdetail.ImageWrapper>
-                <Styled_Bookdetail.ImageContainer src={image} />
+                <Styled_Bookdetail.ImageContainer src={detailInfo?.imgSrc} />
               </Styled_Bookdetail.ImageWrapper>
               <Styled_Bookdetail.InfoWrapper>
                 <Styled_Bookdetail.Topdiv>
                   <Styled_Bookdetail.Horizontalitydiv>
                     <Styled_Bookdetail.Title>
-                      {props.title || '나의 라임오렌지 나무'}
+                      {detailInfo?.name}
                     </Styled_Bookdetail.Title>
                     <Styled_Bookdetail.icon onClick={ClickBookmark}>
                       <Bookmark
@@ -51,52 +55,45 @@ const Bookdetail = (props: BookProps) => {
                 </Styled_Bookdetail.Topdiv>
                 <Styled_Bookdetail.Middiv>
                   <Styled_Bookdetail.Content>
-                    저자: {props.author || 'J.M. 바스콘셀루스'}
+                    저자: {detailInfo?.author}
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
-                    출판사: {props.publisher || '동녁주니어'}원
+                    출판사: {detailInfo?.publisher}
                   </Styled_Bookdetail.Content>
                   <Styled_Bookdetail.Content>
-                    발행일: {props.date || '2012년12월19일'}
+                    {/* date.toLocaleDateString() */}
+                    발행일: {date.toLocaleDateString()}
                   </Styled_Bookdetail.Content>
                 </Styled_Bookdetail.Middiv>
                 <Styled_Bookdetail.Botdiv>
-                  <Styled_Bookdetail.Horizontalitydiv>
-                    <Styled_Bookdetail.Content>수량:</Styled_Bookdetail.Content>
-                    <Styled_Bookdetail.Content>
-                      {props.quantity || '1'}개
-                    </Styled_Bookdetail.Content>
-                  </Styled_Bookdetail.Horizontalitydiv>
-                  <Styled_Bookdetail.Horizontalitydiv>
-                    <Styled_Bookdetail.Content>
-                      도서 금액:
-                    </Styled_Bookdetail.Content>
-                    <Styled_Bookdetail.Content>
-                      {props.price || '11,700'}원
-                    </Styled_Bookdetail.Content>
-                  </Styled_Bookdetail.Horizontalitydiv>
                   <Styled_Bookdetail.Horizontalitydiv>
                     <Styled_Bookdetail.Content>
                       배송비:
                     </Styled_Bookdetail.Content>
                     <Styled_Bookdetail.Content>
-                      {props.deliveryFee || '3,000'}원
+                      3,000원
                     </Styled_Bookdetail.Content>
                   </Styled_Bookdetail.Horizontalitydiv>
+                  <Styled_Bookdetail.Horizontalitydiv>
+                    <Styled_Bookdetail.Content className="totalPrice">
+                      도서 금액:
+                    </Styled_Bookdetail.Content>
+                    <Styled_Bookdetail.TotalPrice>
+                      {formattedPrice}원
+                    </Styled_Bookdetail.TotalPrice>
+                  </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.Botdiv>
-                <Styled_Bookdetail.Horizontalitydiv>
-                  <Styled_Bookdetail.Content>
-                    전체 금액:
-                  </Styled_Bookdetail.Content>
-                  <Styled_Bookdetail.TotalPrice>
-                    14,700원
-                  </Styled_Bookdetail.TotalPrice>
-                </Styled_Bookdetail.Horizontalitydiv>
-                <Styled_Bookdetail.ButtonContainer></Styled_Bookdetail.ButtonContainer>
-                <Styled_Bookdetail.Horizontalitydiv>
-                  <RedButton name="장바구니 담기" />
-                  <RedButton name="바로 결제하기" />
-                </Styled_Bookdetail.Horizontalitydiv>
+                <Styled_Bookdetail.ButtonContainer>
+                  <Styled_Bookdetail.Horizontalitydiv>
+                    <RedButton
+                      name="장바구니 담기"
+                      onClick={() => {
+                        postBookDetail(detailInfo);
+                      }}
+                    />
+                    <RedButton name="바로 결제하기" />
+                  </Styled_Bookdetail.Horizontalitydiv>
+                </Styled_Bookdetail.ButtonContainer>
               </Styled_Bookdetail.InfoWrapper>
             </Styled_Bookdetail.Container>
           </Styled_Bookdetail.Wrapper>
@@ -106,4 +103,4 @@ const Bookdetail = (props: BookProps) => {
   );
 };
 
-export default Bookdetail;
+export default BookDetail;

@@ -1,27 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Styled_List } from './List.style';
+import Styled_Search from './Search.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getBookList } from '../../api/GetApi';
+import { getBookSearchList } from '../../api/GetApi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
-import PaginationBox from '../../components/pagination_box/PaginationBox';
-import category from '../../utils/SidebarCategory';
 import { BookId } from '../../recoil/BookId';
 import { Infotype } from '../../model/Bookdetail';
+import SearchBar from '../../components/search/SearchBar';
+import { SearchValue } from '../../recoil/SearchValue';
 
-const List = () => {
+const Search = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const sidebarId = useRecoilValue(SidebarIdAtom);
-  const page = useRecoilValue(PageAtom);
   const setBookId = useSetRecoilState<Infotype>(BookId);
+  const InputValue = useRecoilValue(SearchValue);
 
   useEffect(() => {
-    getBookList({ setListData, setIsLoading, sidebarId, page });
-  }, [page, sidebarId]);
+    getBookSearchList({ setListData, setIsLoading, InputValue });
+  }, [InputValue]);
 
   const updateBookState = (id: string) => {
     setBookId({
@@ -30,27 +28,24 @@ const List = () => {
   };
 
   return (
-    <Styled_List.Container>
-      <Styled_List.Div>
+    <Styled_Search.Container>
+      <Styled_Search.Main>
         <BookSidebar />
-        <Styled_List.Content>
-          <Styled_List.Title>
-            <Styled_List.H1>
-              {Object.keys(category)[sidebarId - 1]}
-            </Styled_List.H1>
-            <ul>
-              <Styled_List.SortList>인기순</Styled_List.SortList>
-              <Styled_List.SortList>가격높은순</Styled_List.SortList>
-              <Styled_List.SortList>가격낮은순</Styled_List.SortList>
-            </ul>
-          </Styled_List.Title>
-          <Styled_List.BookGroup>
-            <Styled_List.Books>
+        <Styled_Search.Section>
+          <Styled_Search.SearchbarWrapper>
+            <SearchBar iconSize={30} width={530} fontSize={50} />
+          </Styled_Search.SearchbarWrapper>
+          <Styled_Search.Title>
+            <Styled_Search.H1>검색결과</Styled_Search.H1>
+          </Styled_Search.Title>
+          <Styled_Search.BookGroup>
+            <Styled_Search.Books>
               {isLoading ? (
                 <Loading />
               ) : (
                 listData &&
                 listData.map((v: BookList) => {
+                  console.log(v?.id);
                   return (
                     <div
                       key={v.id}
@@ -69,13 +64,12 @@ const List = () => {
                   );
                 })
               )}
-            </Styled_List.Books>
-          </Styled_List.BookGroup>
-          <PaginationBox />
-        </Styled_List.Content>
-      </Styled_List.Div>
-    </Styled_List.Container>
+            </Styled_Search.Books>
+          </Styled_Search.BookGroup>
+        </Styled_Search.Section>
+      </Styled_Search.Main>
+    </Styled_Search.Container>
   );
 };
 
-export default List;
+export default Search;

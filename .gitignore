@@ -35,3 +35,6 @@ server/out/
 
 ### VS Code ###
 .vscode/
+
+# host
+.env

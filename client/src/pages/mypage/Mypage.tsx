@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import MypageSidebar from '../../components/sidebar/MypageSidebar';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Mypage } from './Mypage.style';
-import MypageTable from '../../components/category/MypageTable';
+import MypageTable from '../../components/table/MypageTable';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/NavScroll';
-import AskTable from '../../components/category/AskTable';
 import { BookList } from '../../model/BookList';
 import { getBookmarkList } from '../../api/GetApi';
+import AskTable from '../../components/table/AskTable';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
