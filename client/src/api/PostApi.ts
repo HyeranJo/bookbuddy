@@ -19,8 +19,8 @@ export const postPaymentData = async (allData: PaymentType) => {
   } catch (err) {
     console.log(err);
     throw 'error';
-
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+  }
+};
 
 export const postBookDetail = async (detailInfo: any) => {
   const data = { id: detailInfo.id, price: detailInfo.price, quantity: 1 };
