@@ -11,6 +11,7 @@ import java.util.List;
 @ToString
 @Getter
 @Entity
+@NoArgsConstructor
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
