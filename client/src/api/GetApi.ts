@@ -72,6 +72,24 @@ export const getBookSearchList = async ({
   }
 };
 
+export const getBookDetail = async (
+  setDetailInfo: any,
+  bookId: string | undefined,
+) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/book/${bookId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': true,
+      },
+    });
+    const result = response.data;
+    setDetailInfo(result);
+  } catch (error) {
+    alert(error);
+  }
+};
+
 export const getBookmarkList = async (
   setBookmarkList: (bookmarkList: BookList[]) => void,
 ) => {
