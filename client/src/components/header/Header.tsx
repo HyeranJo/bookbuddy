@@ -15,7 +15,9 @@ const Header = () => {
             <Logo />
           </Link>
           <Styled_Header.Menu>
-            <SearchBar $iconSize={18} width={250} />
+            <Link to={'/search'}>
+              <SearchBar $iconSize={18} width={250} fontSize={20} />
+            </Link>
             {getCookie('accessToken') ? (
               <Styled_Header.Span className="myinfo">
                 나의정보
