@@ -15,9 +15,7 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
 
   /** 클릭한 input의 order아이디를 검색 */
   const orderIdHandler = () => {
-    const orderId = orderList.filter(v => {
-      v.book.id === id;
-    })[0].id;
+    const orderId = orderList.filter(v => v.book.id === id)[0].id;
 
     return orderId;
   };
@@ -54,8 +52,9 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
     setQuantityList(copy);
   };
 
+  // ==================================== HTML ====================================
   return (
-    <div>
+    <>
       <Styled_QuantityInput.Button
         onClick={() => {
           Minus(quantityList.length !== 0 ? quantityList[idx].quantity : 0);
@@ -83,7 +82,7 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
       >
         +
       </Styled_QuantityInput.Button>
-    </div>
+    </>
   );
 };
 
