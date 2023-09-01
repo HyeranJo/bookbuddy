@@ -89,6 +89,7 @@ const BookDetail = () => {
                       name="장바구니 담기"
                       onClick={() => {
                         postBookDetail(detailInfo);
+                        alert('상품을 장바구니에 추가했습니다');
                       }}
                     />
                     <RedButton name="바로 결제하기" />
