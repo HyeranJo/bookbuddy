@@ -72,7 +72,7 @@ public class CrawlingService {
             driver.get(category.getLink());
             Thread.sleep(1000);
 
-            label:for(int i = 0; i <= 5; ++i) {
+            label:for(int i = 0; i <= 2; ++i) {
                 // List 초기값 세팅
                 List<WebElement> productList = driver.findElements(By.className("prod_item"));
 

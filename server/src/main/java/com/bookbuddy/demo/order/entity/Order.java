@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.order.entity;
 
 import com.bookbuddy.demo.book.entity.Book;
+import com.bookbuddy.demo.payment.entity.Payment;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -24,6 +25,10 @@ public class Order {
     private int quantity;
     @Column
     private int price;
+    @JsonManagedReference
+    @JoinColumn(name="PAYMENT_ID")
+    @ManyToOne(cascade = {CascadeType.REMOVE})
+    private Payment payment;
 
     public Order(int quantity, int price) {
         this.quantity = quantity;
@@ -35,5 +40,16 @@ public class Order {
         if(! book.getOrders().contains(this)) {
             book.getOrders().add(this);
         }
+    }
+
+    public void addPayment(Payment payment) {
+        this.payment = payment;
+        if(! payment.getOrders().contains(this)) {
+            payment.getOrders().add(this);
+        }
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

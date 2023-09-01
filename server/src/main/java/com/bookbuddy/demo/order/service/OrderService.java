@@ -32,6 +32,9 @@ public class OrderService {
     public List<Order> findOrders() {;
         return orderRepository.findAll();
     }
+    public Order findOrder(long orderId) {
+        return findVerifyOrder(orderId);
+    }
 
     @Transactional
     public void deleteOrder(long orderId) {

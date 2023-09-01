@@ -4,6 +4,7 @@ import com.bookbuddy.demo.bookmark.entity.Bookmark;
 import com.bookbuddy.demo.category.entity.Category;
 import com.bookbuddy.demo.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +36,7 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 
+    @JsonManagedReference
     @JoinColumn(name="CATEGORY_ID")
     @ManyToOne
     private Category category;

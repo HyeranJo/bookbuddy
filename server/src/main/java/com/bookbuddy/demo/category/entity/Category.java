@@ -1,6 +1,8 @@
 package com.bookbuddy.demo.category.entity;
 
 import com.bookbuddy.demo.book.entity.Book;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +20,7 @@ public class Category {
     private String name;
     @Column
     private String link;
+    @JsonBackReference
     @OneToMany(mappedBy = "category")
     private List<Book> book;
 
