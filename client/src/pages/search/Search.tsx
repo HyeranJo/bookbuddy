@@ -33,7 +33,7 @@ const Search = () => {
         <BookSidebar />
         <Styled_Search.Section>
           <Styled_Search.SearchbarWrapper>
-            <SearchBar iconSize={30} width={530} fontSize={50} />
+            <SearchBar iconSize={30} width={400} fontSize={25} />
           </Styled_Search.SearchbarWrapper>
           <Styled_Search.Title>
             <Styled_Search.H1>검색결과</Styled_Search.H1>

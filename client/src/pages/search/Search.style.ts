@@ -12,8 +12,7 @@ const Styled_Search = {
   SearchbarWrapper: styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 60px;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   `,
   Section: styled.section`
     width: 1312px;
