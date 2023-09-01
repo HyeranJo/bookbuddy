@@ -11,6 +11,9 @@ import PaginationBox from '../../components/pagination_box/PaginationBox';
 import { BookInfo } from '../../recoil/Book';
 import { bookdetail } from '../../model/Bookdetail';
 import category from '../../utils/SidebarCategory';
+import { BookId } from '../../recoil/BookId';
+import { Infotype } from '../../model/Bookdetail';
+
 
 const List = () => {
   const [listData, setListData] = useState<BookList[] | null>([]);
@@ -18,28 +21,16 @@ const List = () => {
   const sidebarId = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
   const setBookDetail = useSetRecoilState<bookdetail>(BookInfo);
+  const setBookDetail = useSetRecoilState<Infotype>(BookId);
+
 
   useEffect(() => {
     getBookList({ setListData, setIsLoading, sidebarId, page });
   }, [page, sidebarId]);
 
-  const updateBookState = (
-    id: string,
-    name: string,
-    price: number,
-    imgSrc: string,
-    author: string,
-    publisher: string,
-    date: string,
-  ) => {
+  const updateBookState = (id: string) => {
     setBookDetail({
       id: id,
-      name: name,
-      price: price,
-      imgSrc: imgSrc,
-      author: author,
-      publisher: publisher,
-      date: date,
     });
   };
 
@@ -69,18 +60,11 @@ const List = () => {
                     <div
                       key={v.id}
                       onClick={() => {
-                        updateBookState(
-                          v.id,
-                          v.name,
-                          v.price,
-                          v.imgSrc,
-                          v.author,
-                          v.publisher,
-                          v.date,
-                        );
+                        updateBookState(v.id);
                       }}
                     >
                       <Book
+                        key={v.id}
                         id={v.id}
                         name={v.name}
                         price={v.price}
