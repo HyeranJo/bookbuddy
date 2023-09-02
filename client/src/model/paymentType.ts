@@ -3,9 +3,9 @@ export interface PaymentType {
   address1: string;
   address2: string;
   shipMobile: string;
-  shipTel: string;
+  shipTel?: string;
   cstmrName: string;
   cstmrMobile: string;
-  cstmrTel: string;
+  cstmrTel?: string;
   email: string;
 }

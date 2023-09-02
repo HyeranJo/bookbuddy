@@ -14,6 +14,7 @@ import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
 import { FinalPaymentDetailsAtom } from '../../recoil/CartItem';
+import { emailRegExp } from '../../utils/RegExp';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -47,18 +48,40 @@ const Payment = () => {
 
   /** payment 데이터를 서버로 전송하고 응답을 처리하는 함수 */
   const buttonClickHandler = () => {
-    const data = {
-      orders: [...FinalPaymentDetail],
-      ...allData,
-    };
-    console.log(data);
-    postPaymentData(data)
-      .then((data: any) => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.log('An error occurred:', error);
-      });
+    // cstmrTel, shipTel 입력값이 없는 경우 보내는 리스트에서 제외
+    const allDataCopy = { ...allData };
+    if (
+      (allDataCopy.cstmrTel && allDataCopy.cstmrTel.length === 2) ||
+      (allDataCopy.cstmrTel && allDataCopy.cstmrTel.length === 3)
+    ) {
+      delete allDataCopy.cstmrTel;
+    }
+    if (
+      (allDataCopy.shipTel && allDataCopy.shipTel.length === 2) ||
+      (allDataCopy.shipTel && allDataCopy.shipTel.length === 3)
+    ) {
+      delete allDataCopy.shipTel;
+    }
+
+    // 일반전화 제외 모든 항목이 올바르게 입력되었는지 확인
+    const nullValues = Object.values(allDataCopy).filter(v => v.length === 0);
+    if (nullValues.length >= 1) {
+      alert('일반전화 외 모든 항목을 입력해주세요');
+    } else if (!emailRegExp.test(allDataCopy.email)) {
+      alert('이메일 형식에 맞게 작성해주세요');
+    } else {
+      const data = {
+        orders: [...FinalPaymentDetail],
+        ...allDataCopy,
+      };
+      postPaymentData(data)
+        .then((data: any) => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.log('An error occurred:', error);
+        });
+    }
   };
 
   return (
