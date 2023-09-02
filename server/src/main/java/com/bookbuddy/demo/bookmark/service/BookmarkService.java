@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -42,5 +44,11 @@ public class BookmarkService {
             createdBookmark.addBook(findBook);
             bookmarkRepository.save(createdBookmark);
         }
+    }
+
+    public List<Bookmark> findBookmarks(String email) {
+        Member member = memberService.findMember(email);
+        List<Bookmark> bookmarks = bookmarkRepository.findAllByMember(member);
+        return bookmarks;
     }
 }

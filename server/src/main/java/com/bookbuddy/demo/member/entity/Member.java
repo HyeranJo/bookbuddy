@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.member.entity;
 
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class Member {
     private String password;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
+    @JsonBackReference
     @OneToMany(mappedBy = "member")
     private List<Bookmark> bookmarks;
 

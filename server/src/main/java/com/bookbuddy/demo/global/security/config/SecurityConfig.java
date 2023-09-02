@@ -61,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/signin").permitAll()
+                .antMatchers("/crawling").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new CustomFilterConfigurer());

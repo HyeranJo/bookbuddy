@@ -30,6 +30,7 @@ public class Book {
     private Date date;
     @Column
     private String imgSrc;
+    @JsonBackReference
     @OneToMany(mappedBy = "book")
     private List<Bookmark> bookmarks;
     @JsonBackReference

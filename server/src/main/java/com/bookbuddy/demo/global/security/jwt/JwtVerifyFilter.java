@@ -6,29 +6,36 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
-public class JwtVerifyFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtVerifyFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String jws = httpServletRequest.getHeader("Authorization").replace("Bearer ","");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String jws = request.getHeader("Authorization").replace("Bearer ","");
 
         Authentication authentication = null;
         if(StringUtils.hasText(jws) && jwtTokenizer.validationToken(jws)) {
             authentication = jwtTokenizer.getAuthentication(jws);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String authorization = request.getHeader("Authorization");
+        return authorization == null || ! authorization.startsWith("Bearer");
     }
 }
