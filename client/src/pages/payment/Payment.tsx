@@ -304,7 +304,8 @@ const Payment = () => {
               })}
               <br />
               <span>
-                배송비 3,000원, 총합 {totalPrice && totalPrice + 3000}원
+                배송비 3,000원, 총합{' '}
+                {totalPrice && (totalPrice + 3000).toLocaleString()}원
               </span>
               <br />
               <br />

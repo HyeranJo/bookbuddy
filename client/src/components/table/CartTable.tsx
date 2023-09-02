@@ -146,7 +146,7 @@ const CartTable = () => {
                     <td rowSpan={2}>
                       <QuantityInput idx={i} id={v.book.id} />
                     </td>
-                    <td rowSpan={2}>{v.price} 원</td>
+                    <td rowSpan={2}>{v.price.toLocaleString()} 원</td>
                   </Styled_CartTable.Tr>
                   <Styled_CartTable.DeleteTr>
                     <td
@@ -166,7 +166,7 @@ const CartTable = () => {
             <td colSpan={5}>배송비 3,000 원</td>
           </Styled_CartTable.AmountTr>
           <Styled_CartTable.AmountTr className="total">
-            <td colSpan={5}>합계 {totalPrice + 3000} 원</td>
+            <td colSpan={5}>합계 {(totalPrice + 3000).toLocaleString()} 원</td>
           </Styled_CartTable.AmountTr>
         </tbody>
       </Styled_CartTable.Table>
