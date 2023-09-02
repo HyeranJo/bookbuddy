@@ -26,6 +26,7 @@ export const Styled_Apply = {
     #apply_title {
       height: 50px;
       padding: 0 30px;
+      border: 1.5px solid var(--light-gray-color);
     }
     #apply_body {
       height: 400px;

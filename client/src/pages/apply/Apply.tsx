@@ -20,8 +20,7 @@ const Apply = () => {
             </div>
 
             <div className="body_group">
-              <label htmlFor="apply_title">내용 ►</label>
-              {/* <textarea id="apply_body" placeholder="내용을 입력하세요" /> */}
+              <label htmlFor="apply_body">내용 ►</label>
               <div id="apply_body">
                 <MyComponent />
               </div>
