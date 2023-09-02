@@ -22,5 +22,20 @@ public interface PaymentMapper {
                 paymentDto.getEmail());
     }
 
-    PaymentDto.Response paymentToPaymentResponseDto(Payment payment);
+    default PaymentDto.Response paymentToPaymentResponseDto(Payment payment) {
+        List<Long> orders = payment.getOrders().stream()
+                .map(e -> e.getId()).collect(Collectors.toList());
+        return new PaymentDto.Response(
+                payment.getId(),
+                orders,
+                payment.getShipName(),
+                payment.getAddress1(),
+                payment.getAddress2(),
+                payment.getShipMobile(),
+                payment.getShipTel(),
+                payment.getCstmrName(),
+                payment.getCstmrMobile(),
+                payment.getCstmrTel(),
+                payment.getEmail());
+    }
 }

@@ -27,7 +27,8 @@ public class PaymentDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private List<Order> orders;
+        private long id;
+        private List<Long> orders;
         private String shipName;
         private String address1;
         private String address2;
