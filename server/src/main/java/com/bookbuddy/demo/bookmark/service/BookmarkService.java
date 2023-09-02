@@ -7,11 +7,13 @@ import com.bookbuddy.demo.bookmark.repository.BookmarkRepository;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class BookmarkService {
     private final MemberService memberService;
@@ -34,10 +36,11 @@ public class BookmarkService {
         if(findBookmark.isPresent()) {
             bookmarkRepository.delete(findBookmark.get());
         } else {
-            Bookmark bookmark = new Bookmark();
+            Bookmark createdBookmark = new Bookmark();
 
-            bookmark.addMember(findMember);
-            bookmark.addBook(findBook);
+            createdBookmark.addMember(findMember);
+            createdBookmark.addBook(findBook);
+            bookmarkRepository.save(createdBookmark);
         }
     }
 }

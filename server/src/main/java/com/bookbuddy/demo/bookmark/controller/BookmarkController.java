@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.bookmark.controller;
 
 import com.bookbuddy.demo.bookmark.service.BookmarkService;
+import com.bookbuddy.demo.global.security.MemberDetails;
 import com.bookbuddy.demo.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +19,12 @@ import java.util.Map;
 @RequestMapping("/bookmark")
 @RequiredArgsConstructor
 public class BookmarkController {
-    private BookmarkService bookmarkService;
+    private final BookmarkService bookmarkService;
     @PostMapping("/{book-id}")
     public void postBookmark(Authentication authentication, @PathVariable("book-id") @Positive String bookId) {
-        log.info(authentication.getPrincipal().toString());
-//        Map<String, Object> principal = (Map) authentication.getPrincipal();
-//        long memberId = ((Number) principal.get("memberId")).longValue();
+        MemberDetails principal = (MemberDetails) authentication.getPrincipal();
+        log.info("# principal: "+principal.toString());
 
-//        bookmarkService.createBookmark(member.getEmail(), bookId);
+        bookmarkService.createBookmark(principal.getEmail(), bookId);
     }
 }

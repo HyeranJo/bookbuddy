@@ -17,7 +17,6 @@ public class MemberDetails extends Member implements UserDetails {
         setRoles(member.getRoles());
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles().stream().map(e->

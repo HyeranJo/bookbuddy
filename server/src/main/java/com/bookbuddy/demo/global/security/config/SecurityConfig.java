@@ -2,12 +2,11 @@ package com.bookbuddy.demo.global.security.config;
 
 import com.bookbuddy.demo.global.security.jwt.JwtAuthenticationFilter;
 import com.bookbuddy.demo.global.security.jwt.JwtTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import com.bookbuddy.demo.global.security.jwt.JwtVerifyFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +15,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -51,28 +53,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin();
 
         http
+                .cors(withDefaults());
+
+        http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/h2/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/signup").permitAll()
+                .antMatchers("/signin").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .apply(new CustomFilterConfigurer())
-                .and()
-                .cors(withDefaults());
+                .apply(new CustomFilterConfigurer());
 
         http
                 .formLogin()
                 .loginPage("/signin");
     }
 
-
     private class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
-        public void configure(HttpSecurity builder) throws Exception {
-            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-
+        public void configure(HttpSecurity http) throws Exception {
+            AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
             jwtAuthenticationFilter.setFilterProcessesUrl("/signin");
-            builder.addFilter(jwtAuthenticationFilter);
+
+            JwtVerifyFilter jwtVerifyFilter = new JwtVerifyFilter(jwtTokenizer);
+
+            http.addFilter(jwtAuthenticationFilter)
+                    .addFilterBefore(jwtVerifyFilter, JwtAuthenticationFilter.class);
         }
     }
 

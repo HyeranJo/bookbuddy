@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService{
     private final MemberRepository memberRepository;
 
     public CustomUserDetailsService(MemberRepository memberRepository) {
@@ -28,12 +28,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 회원 정보 조회
-        Optional<Member> findMember = memberRepository.findByEmail(username);
-        Member member = findMember.orElseThrow(() ->
+        Optional<Member> optionalMember = memberRepository.findByEmail(username);
+        Member member = optionalMember.orElseThrow(()->
                 new BusinessException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        // User 반환
         return new MemberDetails(member);
     }
 }

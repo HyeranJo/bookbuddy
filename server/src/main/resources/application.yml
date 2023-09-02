@@ -10,5 +10,4 @@ jpa:
     ddl-auto: create
 jwt:
   secret: cHJvamVjdC1ib29rYnVkZHktc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXkK
-  access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 420
+  expiration: 16800

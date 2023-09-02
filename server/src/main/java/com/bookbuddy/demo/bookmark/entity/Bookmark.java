@@ -4,9 +4,11 @@ import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@ToString
 @Getter
 @Entity
 @NoArgsConstructor
