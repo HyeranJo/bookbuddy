@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-// 사용하고 싶은 옵션, 나열 되었으면 하는 순서대로 나열
 const toolbarOptions = [
   ['link', 'image', 'video'],
   [{ header: [1, 2, 3, false] }],
@@ -13,7 +12,6 @@ const toolbarOptions = [
   [{ align: [] }],
 ];
 
-// 옵션에 상응하는 포맷, 추가해주지 않으면 text editor에 적용된 스타일을 볼수 없음
 export const formats = [
   'header',
   'font',
@@ -37,12 +35,49 @@ export const formats = [
 
 function MyComponent() {
   const [value, setValue] = useState('');
+  // console.log(value);
+  const quillRef = useRef(null);
 
-  const modules = {
-    toolbar: {
-      container: toolbarOptions,
-    },
+  const imageHandler = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.addEventListener('change', async () => {
+      let file;
+      if (input.files) {
+        file = input.files[0];
+        console.log(file);
+      }
+
+      try {
+        // const res = await imageApi({ img: file });
+        // const imgUrl = res.data.imgUrl;
+        let editor;
+        if (quillRef.current) {
+          editor = (quillRef.current as any).getEditor();
+        }
+        const range = editor.getSelection();
+        // editor.insertEmbed(range.index, 'image', imgUrl);
+        editor.setSelection(range.index + 1);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: toolbarOptions,
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    [],
+  );
 
   return (
     <ReactQuill
@@ -52,6 +87,7 @@ function MyComponent() {
       value={value || ''}
       modules={modules}
       formats={formats}
+      ref={quillRef}
     />
   );
 }
