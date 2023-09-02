@@ -72,4 +72,15 @@ export const Styled_Payment = {
     font-size: var(--basic-font-size);
     padding: 35px;
   `,
+  AdrBtn: styled.button`
+    width: 109px;
+    height: 40px;
+    margin-left: 20px;
+    font-size: var(--input-font-size);
+    border: 1px solid var(--light-gray-color);
+
+    &:hover {
+      cursor: pointer;
+    }
+  `,
 };
