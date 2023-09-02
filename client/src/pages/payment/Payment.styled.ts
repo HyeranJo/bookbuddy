@@ -65,4 +65,11 @@ export const Styled_Payment = {
       margin-right: 10px;
     }
   `,
+  BookInfo: styled.div`
+    margin-top: 30px;
+    min-height: 150px;
+    background-color: var(--category-color);
+    font-size: var(--basic-font-size);
+    padding: 35px;
+  `,
 };

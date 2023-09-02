@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_Payment } from './Payment.styled';
 import { Styled_Layout } from '../BlankPageLayout';
 import CallNumber from '../../components/input/CallNumber';
@@ -13,8 +13,11 @@ import Input from '../../components/input/Input';
 import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
-import { FinalPaymentDetailsAtom } from '../../recoil/CartItem';
+import { OrderListAtom } from '../../recoil/CartItem';
 import { emailRegExp } from '../../utils/RegExp';
+import { OrderListType } from '../../model/OrderList';
+import { getOrderList } from '../../api/GetApi';
+import { getCookie } from '../../utils/cookie';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -23,7 +26,30 @@ const Payment = () => {
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
   const allData = useRecoilValue<PaymentType>(AllDataSelector);
-  const FinalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
+  const [bookIdsToPay, setBookIdsToPay] = useState<string[]>([]);
+  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
+  const [booksToPay, setBooksToPay] = useState<OrderListType[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>();
+
+  // ==================================== useEffect ================================
+
+  // ---------------------------------- api randering ------------------------------
+  useEffect(() => {
+    // 새로고침시 데이터 유지 위해 다시 api 요청
+    getOrderList(setOrderList);
+    // Cookie에서 가져오는 데이터 저장 (무한 렌더링 방지)
+    setBookIdsToPay(getCookie('books').data);
+    setTotalPrice(getCookie('totalPrice').data);
+  }, []);
+
+  // ----------------------------- 결제할 Book data 저장 ----------------------------
+  useEffect(() => {
+    // orderList에서 결제할 id 리스트와 같은 id를 가진 정보를 booksToPay 에 저장
+    const filteredBooks = orderList.filter(v => bookIdsToPay.includes(v.id));
+    setBooksToPay(filteredBooks);
+  }, [orderList, bookIdsToPay]);
+
+  // ==================================== 함수 ====================================
 
   /* 라디오 버튼 값 변경 사항을 변수에 저장하는 함수 **/
   const radioHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,10 +97,10 @@ const Payment = () => {
       alert('이메일 형식에 맞게 작성해주세요');
     } else {
       const data = {
-        orders: [...FinalPaymentDetail],
+        orders: [...bookIdsToPay],
         ...allDataCopy,
       };
-      postPaymentData(data)
+      postPaymentData(data) // api 전송
         .then((data: any) => {
           console.log(data);
         })
@@ -83,6 +109,8 @@ const Payment = () => {
         });
     }
   };
+
+  // ==================================== HTML ====================================
 
   return (
     <>
@@ -243,6 +271,26 @@ const Payment = () => {
                 </Styled_Payment.Table>
               </div>
             </Styled_Payment.Address>
+            <Styled_Payment.BookInfo>
+              <span>결제하실 도서와 금액은</span>
+              <br />
+              <br />
+              {booksToPay.map((v, i) => {
+                return (
+                  <span key={v.id}>
+                    {v.book.name} - {v.quantity} 권
+                    {i === booksToPay.length - 1 ? null : <span> / </span>}
+                  </span>
+                );
+              })}
+              <br />
+              <span>
+                배송비 3,000원, 총합 {totalPrice && totalPrice + 3000}원
+              </span>
+              <br />
+              <br />
+              <span>입니다.</span>
+            </Styled_Payment.BookInfo>
             <div className="redButton">
               <RedButton name="결제하기" onClick={buttonClickHandler} />
             </div>

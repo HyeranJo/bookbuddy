@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil';
 import { OrderListType } from '../model/OrderList';
+import { setCookie } from '../utils/cookie';
 
 /** 장바구니 선택 리스트 */
 export const CheckedListAtom = atom<string[]>({
@@ -36,6 +37,7 @@ export const FinalPaymentDetailsAtom = selector({
       }
     }
 
+    setCookie('books', JSON.stringify({ data: arr }), { path: '/' }); // 새로고침시 데이터 유실 방지
     return arr;
   },
 });
@@ -69,6 +71,9 @@ export const TotalPriceSelector = selector({
     // 수량*금액한 arr을 다 더해서 총합에 리턴
     if (arr.length !== 0) {
       return arr.reduce((acc: number, cur: number) => {
+        setCookie('totalPrice', JSON.stringify({ data: acc + cur }), {
+          path: '/',
+        }); // 새로고침시 데이터 유실 방지
         return acc + cur;
       });
     } else {
