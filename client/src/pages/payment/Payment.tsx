@@ -18,6 +18,11 @@ import { emailRegExp } from '../../utils/RegExp';
 import { OrderListType } from '../../model/OrderList';
 import { getOrderList } from '../../api/GetApi';
 import { getCookie } from '../../utils/cookie';
+import PostCode from '../../components/input/PostCode';
+import {
+  PostCodeAdrsAtom,
+  PostCodeModalAtom,
+} from '../../recoil/PostCodeModal';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -30,6 +35,8 @@ const Payment = () => {
   const [orderList, setOrderList] = useRecoilState(OrderListAtom);
   const [booksToPay, setBooksToPay] = useState<OrderListType[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>();
+  const setIsOpen = useSetRecoilState(PostCodeModalAtom);
+  const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
 
   // ==================================== useEffect ================================
 
@@ -74,8 +81,11 @@ const Payment = () => {
 
   /** payment 데이터를 서버로 전송하고 응답을 처리하는 함수 */
   const buttonClickHandler = () => {
+    // address1 데이터에 추가
+    setShipInputs({ ...shipInputs, address1: postCodeAdrs.주소 });
+    const allDataCopy = { ...allData, address1: postCodeAdrs.주소 };
+
     // cstmrTel, shipTel 입력값이 없는 경우 보내는 리스트에서 제외
-    const allDataCopy = { ...allData };
     if (
       (allDataCopy.cstmrTel && allDataCopy.cstmrTel.length === 2) ||
       (allDataCopy.cstmrTel && allDataCopy.cstmrTel.length === 3)
@@ -96,6 +106,7 @@ const Payment = () => {
     } else if (!emailRegExp.test(allDataCopy.email)) {
       alert('이메일 형식에 맞게 작성해주세요');
     } else {
+      // api 전송
       const data = {
         orders: [...bookIdsToPay],
         ...allDataCopy,
@@ -108,6 +119,10 @@ const Payment = () => {
           console.log('An error occurred:', error);
         });
     }
+  };
+
+  const postCodeHandler = () => {
+    setIsOpen(true);
   };
 
   // ==================================== HTML ====================================
@@ -146,11 +161,14 @@ const Payment = () => {
                         <Input
                           type="text"
                           name="address1"
-                          value={address1}
+                          value={postCodeAdrs.주소}
                           height={40}
-                          onChange={handleChange}
+                          placeholder="주소검색 버튼을 눌러주세요"
+                          readOnly
                         />
-                        <button>주소찾기</button>
+                        <Styled_Payment.AdrBtn onClick={postCodeHandler}>
+                          주소검색
+                        </Styled_Payment.AdrBtn>
                       </td>
                     </tr>
                     <tr>
@@ -160,9 +178,10 @@ const Payment = () => {
                         <Input
                           type="text"
                           name="address1"
-                          value={address1}
+                          value={postCodeAdrs.주소}
                           height={40}
-                          onChange={handleChange}
+                          placeholder="주소검색 버튼을 눌러주세요"
+                          readOnly
                         />
                       </td>
                     </tr>
@@ -297,6 +316,7 @@ const Payment = () => {
           </Styled_Payment.Content>
         </Styled_Layout.Div_WithNoSidebar>
       </Styled_Layout.Container>
+      <PostCode />
     </>
   );
 };
