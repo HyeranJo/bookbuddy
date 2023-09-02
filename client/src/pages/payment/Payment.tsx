@@ -121,6 +121,7 @@ const Payment = () => {
     }
   };
 
+  /** 주소검색 api handler */
   const postCodeHandler = () => {
     setIsOpen(true);
   };

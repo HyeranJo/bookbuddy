@@ -9,18 +9,12 @@ import {
 } from '../../recoil/PostCodeModal';
 
 const PostCode = () => {
-  // const [openPostcode, setOpenPostcode] = React.useState<boolean>(false);
   const [modalIsOpen, setIsOpen] = useRecoilState(PostCodeModalAtom);
   const postCodeAdrs = useSetRecoilState(PostCodeAdrsAtom);
 
   // 주소 선택 이벤트
   const handle = {
     selectAddress: (data: any) => {
-      // console.log(`
-      //            주소: ${data.address},
-      //            우편번호: ${data.zonecode}
-      //        `);
-      // setOpenPostcode(false);
       postCodeAdrs({ 주소: data.address, 우편번호: data.zonecode });
     },
   };
