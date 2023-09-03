@@ -25,10 +25,17 @@ public class JwtVerifyFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jws = request.getHeader("Authorization").replace("Bearer ","");
 
-        Authentication authentication = null;
-        if(StringUtils.hasText(jws) && jwtTokenizer.validationToken(jws)) {
-            authentication = jwtTokenizer.getAuthentication(jws);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            Authentication authentication = null;
+            if (StringUtils.hasText(jws) && jwtTokenizer.validationToken(jws)) {
+                authentication = jwtTokenizer.getAuthentication(jws);
+                log.info("# verify authentication:"+ authentication.toString());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else {
+                log.info("# verify failed");
+            }
+        } catch(Exception e) {
+            log.info("# verify exception:"+ e.getMessage());
         }
         filterChain.doFilter(request, response);
     }

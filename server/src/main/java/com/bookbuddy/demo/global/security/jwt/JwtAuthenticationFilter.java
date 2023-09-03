@@ -1,6 +1,9 @@
 package com.bookbuddy.demo.global.security.jwt;
 
 import com.bookbuddy.demo.global.dto.LoginDto;
+import com.bookbuddy.demo.global.dto.response.LoginResponseDto;
+import com.bookbuddy.demo.member.entity.Member;
+import com.bookbuddy.demo.member.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -10,16 +13,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.AuthenticationConverter;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.util.StringUtils;
-import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,6 +26,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
+    private final MemberService memberService;
 
     @SneakyThrows
     @Override
@@ -41,6 +39,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
+        log.info("# authentication: "+authenticationToken);
+
         return authenticationManager.authenticate(authenticationToken);
     }
 
@@ -50,6 +50,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String jws = jwtTokenizer.generatedToken(authResult);
         response.setHeader("Authorization","Bearer "+jws);
+
+        // 응답 데이터로 member 반환
+        Member principal = (Member) authResult.getPrincipal();
+        LoginResponseDto loginResponseDto = new LoginResponseDto(principal.getEmail(), principal.getPassword());
+        ObjectMapper objectMapper = new ObjectMapper();
+        String responseStr = objectMapper.writeValueAsString(loginResponseDto);
+
+        response.getWriter().println(responseStr);
     }
 }
 

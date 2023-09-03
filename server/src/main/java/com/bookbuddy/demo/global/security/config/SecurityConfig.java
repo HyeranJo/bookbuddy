@@ -3,8 +3,10 @@ package com.bookbuddy.demo.global.security.config;
 import com.bookbuddy.demo.global.security.jwt.JwtAuthenticationFilter;
 import com.bookbuddy.demo.global.security.jwt.JwtTokenizer;
 import com.bookbuddy.demo.global.security.jwt.JwtVerifyFilter;
+import com.bookbuddy.demo.member.service.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,10 +33,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final JwtTokenizer jwtTokenizer;
+    private final MemberService memberService;
 
-    public SecurityConfig(UserDetailsService userDetailsService, JwtTokenizer jwtTokenizer) {
+    public SecurityConfig(UserDetailsService userDetailsService, JwtTokenizer jwtTokenizer, MemberService memberService) {
         this.userDetailsService = userDetailsService;
         this.jwtTokenizer = jwtTokenizer;
+        this.memberService = memberService;
     }
 
     @Override
@@ -61,26 +65,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/signin").permitAll()
-                .antMatchers("/bookmark/**").hasAnyRole("USER")
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                .antMatchers(HttpMethod.GET,"/bookmark/**").hasRole("USER")
+//                .antMatchers(HttpMethod.POST,"/bookmark/**").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .apply(new CustomFilterConfigurer());
 
         http
-                .formLogin()
-                .loginPage("/signin");
+                .formLogin().disable()
+                .httpBasic().disable();
     }
 
     private class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity http) throws Exception {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer, memberService);
             jwtAuthenticationFilter.setFilterProcessesUrl("/signin");
 
             JwtVerifyFilter jwtVerifyFilter = new JwtVerifyFilter(jwtTokenizer);
 
-            http.addFilter(jwtAuthenticationFilter)
+            http
+                    .addFilter(jwtAuthenticationFilter)
                     .addFilterBefore(jwtVerifyFilter, JwtAuthenticationFilter.class);
         }
     }

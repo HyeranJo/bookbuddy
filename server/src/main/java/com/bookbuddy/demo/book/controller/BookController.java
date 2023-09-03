@@ -4,9 +4,7 @@ import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.global.crawling.CrawlingService;
-import com.bookbuddy.demo.global.dto.MultiResponseDto;
-import com.bookbuddy.demo.order.dto.OrderDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.bookbuddy.demo.global.dto.response.MultiResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -15,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
-import java.text.ParseException;
-import java.util.List;
 
 @Slf4j
 @RestController

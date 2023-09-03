@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.global.security;
 
 import com.bookbuddy.demo.member.entity.Member;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

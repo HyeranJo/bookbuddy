@@ -1,4 +1,4 @@
-package com.bookbuddy.demo.global.dto;
+package com.bookbuddy.demo.global.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

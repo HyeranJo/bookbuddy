@@ -1,5 +1,6 @@
-package com.bookbuddy.demo.global.dto;
+package com.bookbuddy.demo.global.dto.response;
 
+import com.bookbuddy.demo.global.dto.PageInfo;
 import com.bookbuddy.demo.order.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
