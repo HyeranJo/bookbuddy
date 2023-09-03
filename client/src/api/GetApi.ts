@@ -22,9 +22,7 @@ export const getBookList = async ({
   setIsLoading(true);
   try {
     const response = await axios.get(
-      // 카테고리 구현 완료시 사용
       `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20`,
-      // `${SERVER_HOST}/book/list?page=${page}&size=20`,
       { headers: { 'ngrok-skip-browser-warning': true } },
     );
     const result = response.data.data;
@@ -41,6 +39,7 @@ export const getOrderList = async (
 ) => {
   try {
     const response = await axios.get(`${SERVER_HOST}/order`, {
+      // const response = await axios.get('./dummy.json', {
       headers: {
         'ngrok-skip-browser-warning': true,
         // Authorization: getCookie('accessToken'),

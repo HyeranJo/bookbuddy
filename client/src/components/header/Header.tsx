@@ -16,7 +16,7 @@ const Header = () => {
           </Link>
           <Styled_Header.Menu>
             <Link to={'/search'}>
-              <SearchBar iconSize={18} width={250} fontSize={20} />
+              <SearchBar $iconSize={18} width={250} fontSize={20} />
             </Link>
             {getCookie('accessToken') ? (
               <Styled_Header.Span className="myinfo">

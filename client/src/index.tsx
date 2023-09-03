@@ -11,6 +11,7 @@ import { RecoilRoot } from 'recoil';
 import List from './pages/list/List';
 import Order from './pages/order/Order';
 import Mypage from './pages/mypage/Mypage';
+import Payment from './pages/payment/Payment';
 import Bookdetail from './pages/bookdetail/Bookdetail';
 import Customer from './pages/customer/Customer';
 import Search from './pages/search/Search';
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: '/list', element: <List /> },
       { path: '/book/:id', element: <Bookdetail /> },
       { path: '/order', element: <Order /> },
+      { path: '/ship', element: <Payment /> },
       { path: '/mypage', element: <Mypage /> },
       { path: '/customer', element: <Customer /> },
       { path: '/search', element: <Search /> },
