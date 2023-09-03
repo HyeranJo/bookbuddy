@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
-import { QuantityListAtom } from './Quantity';
 import { OrderListType } from '../model/OrderList';
+import { setCookie } from '../utils/cookie';
 
 /** 장바구니 선택 리스트 */
 export const CheckedListAtom = atom<string[]>({
@@ -14,32 +14,30 @@ export const OrderListAtom = atom<OrderListType[]>({
   default: [],
 });
 
+/** Quantity Input 수량 */
+export const QuantityListAtom = atom<{ id: string; quantity: number }[]>({
+  key: 'QuantitListAtom',
+  default: [],
+});
+
 /** 최종 결제할 도서,수량 리스트 */
 export const FinalPaymentDetailsAtom = selector({
   key: 'FinalPaymentDetailsAtom',
   get: ({ get }) => {
     const checkedList = get(CheckedListAtom);
-    const quantityList = get(QuantityListAtom);
-    const totalPrice = get(TotalPriceSelector);
+    const orderList = get(OrderListAtom);
 
-    let arr: (
-      | {
-          id: string;
-          quantity: number;
-        }
-      | { totalPrice: number }
-    )[] = [];
+    let arr = [];
 
     for (let i = 0; i < checkedList.length; i++) {
-      for (let j = 0; j < quantityList.length; j++) {
-        if (checkedList[i] === quantityList[j].id) {
-          arr.push(quantityList[j]);
+      for (let j = 0; j < orderList.length; j++) {
+        if (checkedList[i] === orderList[j].book.id) {
+          arr.push(orderList[j].id);
         }
       }
     }
 
-    arr.push({ totalPrice: totalPrice + 3000 });
-
+    setCookie('books', JSON.stringify({ data: arr }), { path: '/' }); // 새로고침시 데이터 유실 방지
     return arr;
   },
 });
@@ -73,6 +71,9 @@ export const TotalPriceSelector = selector({
     // 수량*금액한 arr을 다 더해서 총합에 리턴
     if (arr.length !== 0) {
       return arr.reduce((acc: number, cur: number) => {
+        setCookie('totalPrice', JSON.stringify({ data: acc + cur }), {
+          path: '/',
+        }); // 새로고침시 데이터 유실 방지
         return acc + cur;
       });
     } else {
