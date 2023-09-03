@@ -10,4 +10,5 @@ jpa:
     ddl-auto: create
 jwt:
   secret: cHJvamVjdC1ib29rYnVkZHktc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXkK
-  expiration: 16800
+  expirationMinutes: 30
+  refreshExpirationMinutes: 450

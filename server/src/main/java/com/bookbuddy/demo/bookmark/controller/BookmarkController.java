@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,10 +28,9 @@ public class BookmarkController {
     private final BookmarkMapper mapper;
     @PostMapping("/{book-id}")
     public ResponseEntity postBookmark(Authentication authentication, @PathVariable("book-id") @Positive String bookId) {
-        MemberDetails principal = (MemberDetails) authentication.getPrincipal();
-        log.info("# principal: "+principal.toString());
+        User principal = (User) authentication.getPrincipal();
 
-        bookmarkService.createBookmark(principal.getEmail(), bookId);
+        bookmarkService.createBookmark(principal.getUsername(), bookId);
         URI uri = UriComponentsBuilder.newInstance()
                 .path("/bookmark")
                 .build()
@@ -40,9 +40,9 @@ public class BookmarkController {
 
     @GetMapping
     public ResponseEntity getBookmark(Authentication authentication) {
-        MemberDetails principal = (MemberDetails) authentication.getPrincipal();
+        User principal = (User) authentication.getPrincipal();
 
-        List<Bookmark> bookmarks = bookmarkService.findBookmarks(principal.getEmail());
+        List<Bookmark> bookmarks = bookmarkService.findBookmarks(principal.getUsername());
         return new ResponseEntity(mapper.bookmarksToBookmarkResponseDtos(bookmarks), HttpStatus.OK);
     }
 }
