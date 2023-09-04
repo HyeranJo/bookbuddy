@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 
 export const screenScale = {
-  tablet: 1.8,
-  desktop: 1.5,
-  bigScreen: 1.2,
+  tablet: 2.5,
+  desktop: 1.8,
+  bigScreen: 1.3,
 };
 
 /** 반응형 분기점
