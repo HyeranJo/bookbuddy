@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BookList } from '../model/BookList';
+import { BookList, MyBookList } from '../model/BookList';
 import { getCookie } from '../utils/cookie';
 import { OrderListType } from '../model/OrderList';
 
@@ -93,13 +93,29 @@ export const getBookmarkList = async (
   setBookmarkList: (bookmarkList: BookList[]) => void,
 ) => {
   try {
-    const response = await axios.get(`${SERVER_HOST}/mypage/bookmark`, {
+    const response = await axios.get(`${SERVER_HOST}/bookmark`, {
       headers: {
         'ngrok-skip-browser-warning': true,
         Authorization: getCookie('accessToken'),
       },
     });
     setBookmarkList(response.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getBookmarkmypage = async (
+  setBookmarkList: (bookmarkList: MyBookList[]) => void,
+) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/bookmark`, {
+      headers: {
+        'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    setBookmarkList(response.data.data);
   } catch (err) {
     console.log(err);
   }
