@@ -41,6 +41,20 @@ const Styled_Input = {
           ? `calc(${props.width}px / ${screenScale.desktop})`
           : `calc(415px / ${screenScale.desktop})`};
     `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--input-font-size) / ${screenScale.tablet});
+      padding: calc(10px / ${screenScale.tablet});
+      
+      height: ${(props: Styled_InputProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.tablet})`
+          : `calc(60px / ${screenScale.tablet})`};
+
+      width: ${(props: Styled_InputProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.tablet})`
+          : `calc(415px / ${screenScale.tablet})`};
+    `}
   `,
 };
 export default Styled_Input;

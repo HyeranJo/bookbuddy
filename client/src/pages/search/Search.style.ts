@@ -16,6 +16,9 @@ const Styled_Search = {
     ${DeviceQuery.desktop`
       width: calc(1512px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1512px / ${screenScale.tablet});
+    `}
   `,
   SearchbarWrapper: styled.div`
     display: flex;
@@ -27,6 +30,9 @@ const Styled_Search = {
     `}
     ${DeviceQuery.desktop`
       margin-bottom: calc(60px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      margin-bottom: calc(60px / ${screenScale.tablet});
     `}
   `,
   Section: styled.section`
@@ -53,6 +59,13 @@ const Styled_Search = {
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(44px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1312px / ${screenScale.tablet});
+      margin-left: calc(200px / ${screenScale.tablet});
+      padding-left: calc(53.5px / ${screenScale.tablet});
+      padding-right: calc(53.5px / ${screenScale.tablet});
+      padding-top: calc(44px / ${screenScale.tablet});
+    `}
   `,
   Title: styled.div`
     display: flex;
@@ -66,6 +79,9 @@ const Styled_Search = {
     ${DeviceQuery.desktop`
       margin-bottom: calc(40px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      margin-bottom: calc(40px / ${screenScale.tablet});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
@@ -76,6 +92,9 @@ const Styled_Search = {
     `}
     ${DeviceQuery.desktop`
       font-size: calc(var(--title-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--title-font-size) / ${screenScale.tablet});
     `}
   `,
 
@@ -89,6 +108,9 @@ const Styled_Search = {
     `}
     ${DeviceQuery.desktop`
       gap: calc(70px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(70px / ${screenScale.tablet});
     `}
   `,
   Msg: styled.div`

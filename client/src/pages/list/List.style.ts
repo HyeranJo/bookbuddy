@@ -16,6 +16,9 @@ export const Styled_List = {
     ${DeviceQuery.desktop`
       width: calc(1512px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1512px / ${screenScale.tablet});
+    `}
   `,
   Content: styled.section`
     width: 1312px;
@@ -38,6 +41,13 @@ export const Styled_List = {
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(44px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1312px / ${screenScale.tablet});
+      margin-left: calc(200px / ${screenScale.tablet});
+      padding-left: calc(53.5px / ${screenScale.tablet});
+      padding-right: calc(53.5px / ${screenScale.tablet});
+      padding-top: calc(44px / ${screenScale.tablet});
+    `}
   `,
   Title: styled.div`
     display: flex;
@@ -51,6 +61,9 @@ export const Styled_List = {
     ${DeviceQuery.desktop`
       margin-bottom: calc(40px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      margin-bottom: calc(40px / ${screenScale.tablet});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
@@ -62,10 +75,24 @@ export const Styled_List = {
     ${DeviceQuery.desktop`
       font-size: calc(var(--title-font-size) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--title-font-size) / ${screenScale.tablet});
+    `}
   `,
   SortList: styled.li`
     list-style: none;
     float: left;
+    font-size: var(--basic-font-size);
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+    `}
 
     &::after {
       content: '|';
@@ -89,6 +116,9 @@ export const Styled_List = {
     ${DeviceQuery.desktop`
       padding: 0 calc(37px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      padding: 0 calc(37px / ${screenScale.tablet});
+    `}
   `,
   Books: styled.div`
     display: flex;
@@ -102,6 +132,9 @@ export const Styled_List = {
     `}
     ${DeviceQuery.desktop`
       gap: calc(70px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(70px / ${screenScale.tablet});
     `}
   `,
 };

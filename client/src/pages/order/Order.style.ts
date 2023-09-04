@@ -13,6 +13,9 @@ export const Styled_Order = {
     ${DeviceQuery.desktop`
       width: calc(1300px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1300px / ${screenScale.tablet});
+    `}
   `,
   Content: styled.div`
     display: flex;
@@ -26,6 +29,9 @@ export const Styled_Order = {
     ${DeviceQuery.desktop`
       padding-top: calc(44px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      padding-top: calc(44px / ${screenScale.tablet});
+    `}
 
     & > .submit {
       display: flex;
@@ -37,6 +43,9 @@ export const Styled_Order = {
       `}
       ${DeviceQuery.desktop`
         margin-top: calc(25px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-top: calc(25px / ${screenScale.tablet});
       `}
     }
 
@@ -54,6 +63,10 @@ export const Styled_Order = {
       ${DeviceQuery.desktop`
         min-height: calc((100vh - (344px * 2)) / ${screenScale.desktop});
         font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        min-height: calc((100vh - (344px * 2)) / ${screenScale.tablet});
+        font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
       `}
     }
   `,

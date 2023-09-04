@@ -12,6 +12,9 @@ export const Styled_Sidebar = {
     ${DeviceQuery.desktop`
       top: calc((133px + 58px) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      top: calc((133px + 58px) / ${screenScale.tablet});
+    `}
   `,
 
   Div: styled.div`
@@ -41,6 +44,12 @@ export const Styled_Sidebar = {
       gap: calc(20px / ${screenScale.desktop});
       padding-top: calc(44px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+      width: calc(200px / ${screenScale.tablet});
+      gap: calc(20px / ${screenScale.tablet});
+      padding-top: calc(44px / ${screenScale.tablet});
+    `}
   `,
 
   Span: styled.button`
@@ -54,6 +63,9 @@ export const Styled_Sidebar = {
     `}
     ${DeviceQuery.desktop`
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
     `}
 
     &:hover {

@@ -15,6 +15,14 @@ const Styled_Sign = {
       margin-top: calc(70px / ${screenScale.bigScreen});
       font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      margin-top: calc(70px / ${screenScale.desktop});
+      font-size: calc(var(--title-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      margin-top: calc(70px / ${screenScale.tablet});
+      font-size: calc(var(--title-font-size) / ${screenScale.tablet});
+    `}
   `,
   Container: styled.div`
     display: flex;
@@ -27,6 +35,12 @@ const Styled_Sign = {
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+    `}
   `,
   ErrorMsg: styled.p`
     font-size: var(--message-font-size);
@@ -36,6 +50,14 @@ const Styled_Sign = {
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--message-font-size) / ${screenScale.bigScreen});
       margin-bottom: calc(20px / ${screenScale.bigScreen})
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--message-font-size) / ${screenScale.desktop});
+      margin-bottom: calc(20px / ${screenScale.desktop})
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--message-font-size) / ${screenScale.tablet});
+      margin-bottom: calc(20px / ${screenScale.tablet})
     `}
   `,
 };

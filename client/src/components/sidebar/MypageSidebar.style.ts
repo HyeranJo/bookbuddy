@@ -12,6 +12,9 @@ export const Styled_MypageSidebar = {
     ${DeviceQuery.desktop`
       top: calc((133px + 58px) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      top: calc((133px + 58px) / ${screenScale.tablet});
+    `}
   `,
   Div: styled.div`
     width: 200px;
@@ -27,6 +30,9 @@ export const Styled_MypageSidebar = {
     `}
     ${DeviceQuery.desktop`
       width: calc(200px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      width: calc(200px / ${screenScale.tablet});
     `}
   `,
   TitleDiv: styled.div`
@@ -47,6 +53,11 @@ export const Styled_MypageSidebar = {
       gap: calc(40px / ${screenScale.desktop});
       padding-top: calc(55px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--third-title-font-size) / ${screenScale.tablet})
+      gap: calc(40px / ${screenScale.tablet});
+      padding-top: calc(55px / ${screenScale.tablet});
+    `}
 
     &::after {
       content: '';
@@ -62,6 +73,10 @@ export const Styled_MypageSidebar = {
       ${DeviceQuery.desktop`
       width: calc(120px / ${screenScale.desktop});
       margin: calc(40px / ${screenScale.desktop}) auto;
+      `}
+      ${DeviceQuery.tablet`
+      width: calc(120px / ${screenScale.tablet});
+      margin: calc(40px / ${screenScale.tablet}) auto;
       `}
     }
   `,
@@ -84,6 +99,11 @@ export const Styled_MypageSidebar = {
       gap: calc(40px / ${screenScale.desktop});
       padding-top: calc(10px / ${screenScale.desktop});
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop})
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(40px / ${screenScale.tablet});
+      padding-top: calc(10px / ${screenScale.tablet});
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet})
     `}
   `,
 };

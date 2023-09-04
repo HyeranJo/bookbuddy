@@ -13,6 +13,9 @@ export const Styled_Payment = {
     ${DeviceQuery.desktop`
       width: calc(1300px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1300px / ${screenScale.tablet});
+    `}
 
     & > .redButton {
       display: flex;
@@ -24,6 +27,9 @@ export const Styled_Payment = {
       `}
       ${DeviceQuery.desktop`
         margin-top: calc(42px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-top: calc(42px / ${screenScale.tablet});
       `}
     }
   `,
@@ -49,6 +55,10 @@ export const Styled_Payment = {
         width: calc(722px / ${screenScale.desktop});
         height: calc(472px / ${screenScale.desktop});
       `}
+      ${DeviceQuery.tablet`
+        width: calc(722px / ${screenScale.tablet});
+        height: calc(472px / ${screenScale.tablet});
+      `}
     }
     & > .orderer-info {
       display: flex;
@@ -63,6 +73,10 @@ export const Styled_Payment = {
       ${DeviceQuery.desktop`
         width: calc(525px / ${screenScale.desktop});
         height: calc(472px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        width: calc(525px / ${screenScale.tablet});
+        height: calc(472px / ${screenScale.tablet});
       `}
     }
   `,
@@ -81,6 +95,10 @@ export const Styled_Payment = {
         font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
         line-height: calc(34px / ${screenScale.desktop});
       `}
+    ${DeviceQuery.tablet`
+        font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+        line-height: calc(34px / ${screenScale.tablet});
+      `}
 
     &#shipping-address-table {
       width: 650px;
@@ -94,6 +112,10 @@ export const Styled_Payment = {
         width: calc(650px / ${screenScale.desktop});
         height: calc(350px / ${screenScale.desktop});
       `}
+      ${DeviceQuery.tablet`
+        width: calc(650px / ${screenScale.tablet});
+        height: calc(350px / ${screenScale.tablet});
+      `}
     }
     &#orderer-info-table {
       width: 453px;
@@ -106,6 +128,10 @@ export const Styled_Payment = {
       ${DeviceQuery.desktop`
         width: calc(453px / ${screenScale.desktop});
         height: calc(280px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        width: calc(453px / ${screenScale.tablet});
+        height: calc(280px / ${screenScale.tablet});
       `}
     }
 
@@ -126,6 +152,10 @@ export const Styled_Payment = {
       width: calc(453px / ${screenScale.desktop});
       margin-bottom: calc(20px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(453px / ${screenScale.tablet});
+      margin-bottom: calc(20px / ${screenScale.tablet});
+    `}
     & > h2 {
       margin: 15px 0;
 
@@ -134,6 +164,9 @@ export const Styled_Payment = {
       `}
       ${DeviceQuery.desktop`
         margin: calc(15px / ${screenScale.desktop}) 0;
+      `}
+      ${DeviceQuery.tablet`
+        margin: calc(15px / ${screenScale.tablet}) 0;
       `}
     }
     & input,
@@ -145,6 +178,9 @@ export const Styled_Payment = {
       `}
       ${DeviceQuery.desktop`
         margin-right: calc(10px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-right: calc(10px / ${screenScale.tablet});
       `}
     }
   `,
@@ -165,6 +201,11 @@ export const Styled_Payment = {
       margin-top: calc(30px / ${screenScale.desktop});
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      min-height: calc(150px / ${screenScale.tablet});
+      margin-top: calc(30px / ${screenScale.tablet});
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+    `}
   `,
   AdrBtn: styled.button`
     width: 109px;
@@ -184,6 +225,12 @@ export const Styled_Payment = {
       height: calc(40px / ${screenScale.desktop});
       margin-left: calc(20px / ${screenScale.desktop});
       font-size: calc(var(--input-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      width: calc(109px / ${screenScale.tablet});
+      height: calc(40px / ${screenScale.tablet});
+      margin-left: calc(20px / ${screenScale.tablet});
+      font-size: calc(var(--input-font-size) / ${screenScale.tablet});
     `}
 
     &:hover {

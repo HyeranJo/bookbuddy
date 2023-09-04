@@ -13,6 +13,9 @@ const Styled_Customer = {
     ${DeviceQuery.desktop`
       padding-left: calc(200px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      padding-left: calc(200px / ${screenScale.tablet});
+    `}
   `,
   Section: styled(Styled_Layout.Div_WithNoSidebar)`
     display: flex;
@@ -27,6 +30,10 @@ const Styled_Customer = {
     ${DeviceQuery.desktop`
       margin-bottom: calc(200px / ${screenScale.desktop});
       gap: calc(100px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      margin-bottom: calc(200px / ${screenScale.tablet});
+      gap: calc(100px / ${screenScale.tablet});
     `}
   `,
   Title: styled.h1`
@@ -44,6 +51,11 @@ const Styled_Customer = {
       margin-bottom: calc(20px / ${screenScale.desktop});
       margin-top: calc(44px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--title-font-size) / ${screenScale.tablet});
+      margin-bottom: calc(20px / ${screenScale.tablet});
+      margin-top: calc(44px / ${screenScale.tablet});
+    `}
   `,
   Warpper: styled.div`
     display: flex;
@@ -56,6 +68,9 @@ const Styled_Customer = {
     `}
     ${DeviceQuery.desktop`
       gap: calc(100px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(100px / ${screenScale.tablet});
     `}
   `,
 };

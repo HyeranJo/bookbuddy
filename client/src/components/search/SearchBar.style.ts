@@ -37,6 +37,16 @@ export const Styled_SearchBar = {
       line-height: calc(30px / ${screenScale.desktop});
       padding: 0px calc(15px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: ${(props: InputProps) => props.width - props.$iconSize}px / ${
+        screenScale.tablet
+      });
+      font-size:  ${(props: InputProps) => props.fontSize}px / ${
+        screenScale.tablet
+      });
+      line-height: calc(30px / ${screenScale.tablet});
+      padding: 0px calc(15px / ${screenScale.tablet});
+    `}
   `,
   SearchDiv: styled.div<{ $iconSize: number }>`
     display: inline-block;
@@ -58,6 +68,12 @@ export const Styled_SearchBar = {
         screenScale.desktop
       });
       padding-bottom: calc(5px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      width: ${(props: { $iconSize: number }) => props.$iconSize + 5}pxpx / ${
+        screenScale.tablet
+      });
+      padding-bottom: calc(5px / ${screenScale.tablet});
     `}
   `,
 };

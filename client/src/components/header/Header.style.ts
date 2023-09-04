@@ -11,8 +11,7 @@ export const Styled_Header = {
   `,
   Div: styled.div`
     display: flex;
-    width: 1512px;
-    min-width: 820px;
+    min-width: 1512px;
     height: 133px;
     background-color: white;
 
@@ -22,16 +21,22 @@ export const Styled_Header = {
     padding-right: 50px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1512px / ${screenScale.bigScreen});
+      min-width: calc(1512px / ${screenScale.bigScreen});
       height: calc(133px / ${screenScale.bigScreen});
       padding-left: calc(50px / ${screenScale.bigScreen});
       padding-right: calc(50px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1512px / ${screenScale.desktop});
+      min-width: calc(1512px / ${screenScale.desktop});
       height: calc(133px / ${screenScale.desktop});
       padding-left: calc(50px / ${screenScale.desktop});
       padding-right: calc(50px / ${screenScale.desktop});
+    `}
+     ${DeviceQuery.tablet`
+      min-width: calc(1512px / ${screenScale.tablet});
+      height: calc(133px / ${screenScale.tablet});
+      padding-left: calc(50px / ${screenScale.tablet});
+      padding-right: calc(50px / ${screenScale.tablet});
     `}
   `,
   Menu: styled.div`
@@ -45,6 +50,9 @@ export const Styled_Header = {
     ${DeviceQuery.desktop`
       gap: calc(30px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      gap: calc(30px / ${screenScale.tablet});
+    `}
   `,
   Span: styled.span`
     cursor: pointer;
@@ -56,6 +64,9 @@ export const Styled_Header = {
     `}
     ${DeviceQuery.desktop`
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
     `}
 
     &:hover > div {
@@ -82,6 +93,11 @@ export const Styled_Header = {
       right: calc(-50px / ${screenScale.desktop});
       width: calc(150px / ${screenScale.desktop});
       padding-top: calc(50px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      right: calc(-50px / ${screenScale.tablet});
+      width: calc(150px / ${screenScale.tablet});
+      padding-top: calc(50px / ${screenScale.tablet});
     `}
   `,
 };

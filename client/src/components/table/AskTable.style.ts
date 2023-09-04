@@ -11,6 +11,9 @@ export const Styled_AskTable = {
     ${DeviceQuery.desktop`
       width: calc(1095px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1095px / ${screenScale.tablet});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);
@@ -25,6 +28,10 @@ export const Styled_AskTable = {
       margin-bottom: calc(20px / ${screenScale.desktop});
       font-size:calc(var(--subtitle-font-size) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      margin-bottom: calc(20px / ${screenScale.tablet});
+      font-size:calc(var(--subtitle-font-size) / ${screenScale.tablet});
+    `}
   `,
   MessageSpan: styled.span`
     margin-left: 15px;
@@ -37,6 +44,10 @@ export const Styled_AskTable = {
     ${DeviceQuery.desktop`
       margin-left: calc(15px / ${screenScale.desktop});
       font-size:calc(var(--message-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      margin-left: calc(15px / ${screenScale.tablet});
+      font-size:calc(var(--message-font-size) / ${screenScale.tablet});
     `}
   `,
   Table: styled.table`
@@ -56,6 +67,11 @@ export const Styled_AskTable = {
       width: calc(1095px / ${screenScale.desktop});
       font-size:calc(var(--basic-font-size) / ${screenScale.desktop});
       line-height: calc(34px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      width: calc(1095px / ${screenScale.tablet});
+      font-size:calc(var(--basic-font-size) / ${screenScale.tablet});
+      line-height: calc(34px / ${screenScale.tablet});
     `}
 
     & .title-body {

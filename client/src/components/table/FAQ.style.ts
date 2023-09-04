@@ -18,6 +18,10 @@ const Styled_FQA = {
       margin-bottom: calc(20px / ${screenScale.desktop});
       font-size: calc(var(--subtitle-font-size) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      margin-bottom: calc(20px / ${screenScale.tablet});
+      font-size: calc(var(--subtitle-font-size) / ${screenScale.tablet});
+    `}
   `,
   Question: styled.div`
     width: 1095px;
@@ -37,6 +41,11 @@ const Styled_FQA = {
       height: calc(50px / ${screenScale.desktop});
       padding-left: calc(25px / ${screenScale.desktop})
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1095px / ${screenScale.tablet});
+      height: calc(50px / ${screenScale.tablet});
+      padding-left: calc(25px / ${screenScale.tablet})
+    `}
   `,
   QuestionTitle: styled.h2`
     font-size: var(--third-title-font-size);
@@ -48,6 +57,10 @@ const Styled_FQA = {
     ${DeviceQuery.desktop`
       width: calc(1000px / ${screenScale.desktop});
       font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      width: calc(1000px / ${screenScale.tablet});
+      font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
     `}
   `,
   ArrowWrapper: styled.div`
@@ -62,6 +75,9 @@ const Styled_FQA = {
     ${DeviceQuery.desktop`
       width: calc(1095px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1095px / ${screenScale.tablet});
+    `}
   `,
   Answer: styled.div`
     padding: 25px;
@@ -75,6 +91,10 @@ const Styled_FQA = {
     ${DeviceQuery.desktop`
       padding: calc(25px / ${screenScale.desktop});
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      padding: calc(25px / ${screenScale.tablet});
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
     `}
   `,
 };

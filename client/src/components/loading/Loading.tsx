@@ -34,6 +34,11 @@ export const Styled_Loading = {
       min-height: calc(100vh - (344px * 2) / ${screenScale.desktop});
       gap: calc(10px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1512px / ${screenScale.tablet});
+      min-height: calc(100vh - (344px * 2) / ${screenScale.tablet});
+      gap: calc(10px / ${screenScale.tablet});
+    `}
 
     & > :first-child {
       font-size: var(--basic-font-size);
@@ -43,6 +48,9 @@ export const Styled_Loading = {
       `}
       ${DeviceQuery.desktop`
         font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
       `}
     }
   `,

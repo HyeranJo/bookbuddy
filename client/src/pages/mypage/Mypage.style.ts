@@ -23,6 +23,13 @@ export const Styled_Mypage = {
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(22px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1512px / ${screenScale.tablet});
+      margin-left: calc(200px / ${screenScale.tablet});
+      padding-left: calc(53.5px / ${screenScale.tablet});
+      padding-right: calc(53.5px / ${screenScale.tablet});
+      padding-top: calc(22px / ${screenScale.tablet});
+    `}
   `,
   Title: styled.div`
     display: flex;
@@ -37,6 +44,9 @@ export const Styled_Mypage = {
     ${DeviceQuery.desktop`
       margin: calc(30px / ${screenScale.desktop}) 0px;
     `}
+    ${DeviceQuery.tablet`
+      margin: calc(30px / ${screenScale.tablet}) 0px;
+    `}
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
@@ -47,6 +57,9 @@ export const Styled_Mypage = {
     `}
     ${DeviceQuery.desktop`
       font-size:calc(var(--title-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size:calc(var(--title-font-size) / ${screenScale.tablet});
     `}
   `,
   Point: styled.div`
@@ -65,6 +78,11 @@ export const Styled_Mypage = {
       padding: calc(10px / ${screenScale.desktop}) 0;
       font-size:calc(var(--third-title-font-size) / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1095px / ${screenScale.tablet});
+      padding: calc(10px / ${screenScale.tablet}) 0;
+      font-size:calc(var(--third-title-font-size) / ${screenScale.tablet});
+    `}
   `,
   Detail: styled.div`
     display: flex;
@@ -77,6 +95,9 @@ export const Styled_Mypage = {
     `}
     ${DeviceQuery.desktop`
       gap: calc(100px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(100px / ${screenScale.tablet});
     `}
   `,
   BookmarkList: styled.div`
@@ -93,6 +114,9 @@ export const Styled_Mypage = {
     ${DeviceQuery.desktop`
       width: calc(1095px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      width: calc(1095px / ${screenScale.tablet});
+    `}
   `,
   H2: styled.h2`
     font-size: var(--subtitle-font-size);
@@ -103,6 +127,9 @@ export const Styled_Mypage = {
     `}
     ${DeviceQuery.desktop`
       font-size: calc(var(--subtitle-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--subtitle-font-size) / ${screenScale.tablet});
     `}
   `,
   Books: styled.div`
@@ -127,6 +154,12 @@ export const Styled_Mypage = {
       top: calc(-325px / ${screenScale.desktop});
       right: calc(370px / ${screenScale.desktop});
     `}
+    ${DeviceQuery.tablet`
+      height: calc(1095px / ${screenScale.tablet});
+      width: calc(350px / ${screenScale.tablet});
+      top: calc(-325px / ${screenScale.tablet});
+      right: calc(370px / ${screenScale.tablet});
+    `}
 
     // 스크롤바 숨기기
     -ms-overflow-style: none; /* IE and Edge */
@@ -147,6 +180,10 @@ export const Styled_Mypage = {
     ${DeviceQuery.desktop`
       height: calc(206px / ${screenScale.desktop});
       width: calc(270px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height: calc(206px / ${screenScale.tablet});
+      width: calc(270px / ${screenScale.tablet});
     `}
   `,
 };
