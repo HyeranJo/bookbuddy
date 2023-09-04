@@ -18,34 +18,37 @@ export const Styled_SearchBar = {
     padding: 0px 15px;
 
     ${DeviceQuery.bigScreen`
-      width: ${(props: InputProps) => props.width - props.$iconSize}px / ${
+      width: calc(${(props: InputProps) => props.width - props.$iconSize}px / ${
         screenScale.bigScreen
       });
-      font-size:  ${(props: InputProps) => props.fontSize}px / ${
+      font-size: calc(${(props: InputProps) => props.fontSize}px / ${
         screenScale.bigScreen
       });
       line-height: calc(30px / ${screenScale.bigScreen});
       padding: 0px calc(15px / ${screenScale.bigScreen});
+      border-width: 0px 0px calc(3px / ${screenScale.bigScreen}) 0px;
     `}
     ${DeviceQuery.desktop`
-      width: ${(props: InputProps) => props.width - props.$iconSize}px / ${
+      width: calc(${(props: InputProps) => props.width - props.$iconSize}px / ${
         screenScale.desktop
       });
-      font-size:  ${(props: InputProps) => props.fontSize}px / ${
+      font-size: calc(${(props: InputProps) => props.fontSize}px / ${
         screenScale.desktop
       });
       line-height: calc(30px / ${screenScale.desktop});
       padding: 0px calc(15px / ${screenScale.desktop});
+      border-width: 0px 0px calc(3px / ${screenScale.desktop}) 0px;
     `}
     ${DeviceQuery.tablet`
-      width: ${(props: InputProps) => props.width - props.$iconSize}px / ${
+      width: calc(${(props: InputProps) => props.width - props.$iconSize}px / ${
         screenScale.tablet
       });
-      font-size:  ${(props: InputProps) => props.fontSize}px / ${
+      font-size: calc(${(props: InputProps) => props.fontSize}px / ${
         screenScale.tablet
       });
       line-height: calc(30px / ${screenScale.tablet});
       padding: 0px calc(15px / ${screenScale.tablet});
+      border-width: 0px 0px calc(3px / ${screenScale.tablet}) 0px;
     `}
   `,
   SearchDiv: styled.div<{ $iconSize: number }>`
@@ -54,26 +57,31 @@ export const Styled_SearchBar = {
     padding-bottom: 5px;
     cursor: pointer;
     width: ${props => props.$iconSize + 5}px;
-    border-bottom: 3px solid;
-    border-color: var(--primary-background-color);
+    border-bottom: 3px solid var(--primary-background-color);
 
     ${DeviceQuery.bigScreen`
-      width: ${(props: { $iconSize: number }) => props.$iconSize + 5}pxpx / ${
-        screenScale.bigScreen
-      });
+      width: calc(${(props: { $iconSize: number }) =>
+        props.$iconSize + 5}px / ${screenScale.bigScreen});
       padding-bottom: calc(5px / ${screenScale.bigScreen});
+      border-bottom: calc(3px / ${
+        screenScale.bigScreen
+      }) solid var(--primary-background-color);
     `}
     ${DeviceQuery.desktop`
-      width: ${(props: { $iconSize: number }) => props.$iconSize + 5}pxpx / ${
-        screenScale.desktop
-      });
+      width: clac(${(props: { $iconSize: number }) =>
+        props.$iconSize + 5}px / ${screenScale.desktop});
       padding-bottom: calc(5px / ${screenScale.desktop});
+      border-bottom: calc(3px / ${
+        screenScale.desktop
+      }) solid var(--primary-background-color);
     `}
     ${DeviceQuery.tablet`
-      width: ${(props: { $iconSize: number }) => props.$iconSize + 5}pxpx / ${
-        screenScale.tablet
-      });
+      width: calc(${(props: { $iconSize: number }) =>
+        props.$iconSize + 5}px / ${screenScale.tablet});
       padding-bottom: calc(5px / ${screenScale.tablet});
+      border-bottom: calc(3px / ${
+        screenScale.tablet
+      }) solid var(--primary-background-color);
     `}
   `,
 };

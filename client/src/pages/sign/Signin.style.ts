@@ -5,16 +5,16 @@ const Styled_Signin = {
   Wrapper: styled.div`
     display: flex;
     justify-content: center;
-    height: calc(100vh - 550px);
+    margin-top: 30px;
 
     ${DeviceQuery.bigScreen`
-      height: calc((100vh - 550px) / ${screenScale.bigScreen});
+      margin-top: calc(50px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      height: calc((100vh - 550px) / ${screenScale.desktop});
+      margin-top: calc(50px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      height: calc((100vh - 550px) / ${screenScale.tablet});
+      margin-top: calc(50px / ${screenScale.tablet});
     `}
   `,
   Form: styled.form`

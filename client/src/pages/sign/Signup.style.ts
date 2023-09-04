@@ -6,16 +6,16 @@ const Styled_Signup = {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh- 350px);
+    margin-top: 30px;
 
     ${DeviceQuery.bigScreen`
-      height: calc((100vh - 350px) / ${screenScale.bigScreen});
+      margin-top: calc(30px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      height: calc((100vh - 350px) / ${screenScale.desktop});
+      margin-top: calc(30px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      height: calc((100vh - 350px) / ${screenScale.tablet});
+      margin-top: calc(30px / ${screenScale.tablet});
     `}
   `,
   Duplicate: styled.button`
