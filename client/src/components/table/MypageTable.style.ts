@@ -8,6 +8,9 @@ export const Styled_MypageTable = {
     ${DeviceQuery.bigScreen`
       width: calc(1095px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1095px / ${screenScale.desktop});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);
@@ -18,6 +21,10 @@ export const Styled_MypageTable = {
       margin-bottom: calc(20px / ${screenScale.bigScreen});
       font-size: calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      margin-bottom: calc(20px / ${screenScale.desktop});
+      font-size: calc(var(--subtitle-font-size) / ${screenScale.desktop});
+    `}
   `,
   MessageSpan: styled.span`
     margin-left: 15px;
@@ -26,6 +33,10 @@ export const Styled_MypageTable = {
     ${DeviceQuery.bigScreen`
       margin-left: calc(15px / ${screenScale.bigScreen});
       font-size: calc(var(--message-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      margin-left: calc(15px / ${screenScale.desktop});
+      font-size: calc(var(--message-font-size) / ${screenScale.desktop});
     `}
   `,
   Table: styled.table`
@@ -40,12 +51,20 @@ export const Styled_MypageTable = {
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
       line-height: calc(34px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1095px / ${screenScale.desktop});
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+      line-height: calc(34px / ${screenScale.desktop});
+    `}
 
     & > .date {
       width: 200px;
 
       ${DeviceQuery.bigScreen`
         width: calc(200px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        width: calc(200px / ${screenScale.desktop});
       `}
     }
     & > .number {
@@ -60,6 +79,9 @@ export const Styled_MypageTable = {
 
       ${DeviceQuery.bigScreen`
         width: calc(200px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        width: calc(200px / ${screenScale.desktop});
       `}
     }
   `,

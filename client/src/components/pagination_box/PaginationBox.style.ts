@@ -15,6 +15,10 @@ export const Styled_PaginationBox = {
         gap: calc(30px / ${screenScale.bigScreen});
         mergin: calc(100px / ${screenScale.bigScreen}) 0px calc(200px / ${screenScale.bigScreen}) 0px ;
       `}
+      ${DeviceQuery.desktop`
+        gap: calc(30px / ${screenScale.desktop});
+        mergin: calc(100px / ${screenScale.desktop}) 0px calc(200px / ${screenScale.desktop}) 0px ;
+      `}
 
       li {
         // .active에 focus 안 주어도 자동 focus됨
@@ -38,6 +42,9 @@ export const Styled_PaginationBox = {
             ${DeviceQuery.bigScreen`
               font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
             `}
+            ${DeviceQuery.desktop`
+              font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
+            `}
           }
         }
 
@@ -48,6 +55,9 @@ export const Styled_PaginationBox = {
 
           ${DeviceQuery.bigScreen`
             font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+          `}
+          ${DeviceQuery.desktop`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
           `}
         }
       }

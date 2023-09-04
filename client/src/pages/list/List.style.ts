@@ -13,6 +13,9 @@ export const Styled_List = {
     ${DeviceQuery.bigScreen`
       width: calc(1512px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1512px / ${screenScale.desktop});
+    `}
   `,
   Content: styled.section`
     width: 1312px;
@@ -28,6 +31,13 @@ export const Styled_List = {
       padding-right: calc(53.5px / ${screenScale.bigScreen});
       padding-top: calc(44px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1312px / ${screenScale.desktop});
+      margin-left: calc(200px / ${screenScale.desktop});
+      padding-left: calc(53.5px / ${screenScale.desktop});
+      padding-right: calc(53.5px / ${screenScale.desktop});
+      padding-top: calc(44px / ${screenScale.desktop});
+    `}
   `,
   Title: styled.div`
     display: flex;
@@ -38,6 +48,9 @@ export const Styled_List = {
     ${DeviceQuery.bigScreen`
       margin-bottom: calc(40px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      margin-bottom: calc(40px / ${screenScale.desktop});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
@@ -45,6 +58,9 @@ export const Styled_List = {
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--title-font-size) / ${screenScale.desktop});
     `}
   `,
   SortList: styled.li`
@@ -70,6 +86,9 @@ export const Styled_List = {
     ${DeviceQuery.bigScreen`
       padding: 0 calc(37px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      padding: 0 calc(37px / ${screenScale.desktop});
+    `}
   `,
   Books: styled.div`
     display: flex;
@@ -80,6 +99,9 @@ export const Styled_List = {
 
     ${DeviceQuery.bigScreen`
       gap: calc(70px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      gap: calc(70px / ${screenScale.desktop});
     `}
   `,
 };

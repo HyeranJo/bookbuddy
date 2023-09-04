@@ -15,6 +15,9 @@ export const Styled_Layout = {
     ${DeviceQuery.bigScreen`
       width: calc(1512px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1512px / ${screenScale.desktop});
+    `}
   `,
   // 선택(sidebar 없는 경우)
   Div_WithNoSidebar: styled.div`
@@ -27,6 +30,10 @@ export const Styled_Layout = {
       width: calc(1300px / ${screenScale.bigScreen});
       padding-top: calc(44px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1300px / ${screenScale.desktop});
+      padding-top: calc(44px / ${screenScale.desktop});
+    `}
   `,
   // H1
   H1: styled.h1`
@@ -38,12 +45,19 @@ export const Styled_Layout = {
       font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
       margin-bottom: calc(20px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--title-font-size) / ${screenScale.desktop});
+      margin-bottom: calc(20px / ${screenScale.desktop});
+    `}
 
     &.noOrderItem {
       width: 1300px;
 
       ${DeviceQuery.bigScreen`
         width: calc(1300px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        width: calc(1300px / ${screenScale.desktop});
       `}
     }
   `,

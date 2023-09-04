@@ -27,6 +27,20 @@ const Styled_Input = {
           ? `calc(${props.width}px / ${screenScale.bigScreen})`
           : `calc(415px / ${screenScale.bigScreen})`};
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--input-font-size) / ${screenScale.desktop});
+      padding: calc(10px / ${screenScale.desktop});
+      
+      height: ${(props: Styled_InputProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.desktop})`
+          : `calc(60px / ${screenScale.desktop})`};
+
+      width: ${(props: Styled_InputProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.desktop})`
+          : `calc(415px / ${screenScale.desktop})`};
+    `}
   `,
 };
 export default Styled_Input;

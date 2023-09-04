@@ -27,6 +27,12 @@ export const Styled_Header = {
       padding-left: calc(50px / ${screenScale.bigScreen});
       padding-right: calc(50px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1512px / ${screenScale.desktop});
+      height: calc(133px / ${screenScale.desktop});
+      padding-left: calc(50px / ${screenScale.desktop});
+      padding-right: calc(50px / ${screenScale.desktop});
+    `}
   `,
   Menu: styled.div`
     display: flex;
@@ -36,6 +42,9 @@ export const Styled_Header = {
     ${DeviceQuery.bigScreen`
       gap: calc(30px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      gap: calc(30px / ${screenScale.desktop});
+    `}
   `,
   Span: styled.span`
     cursor: pointer;
@@ -44,6 +53,9 @@ export const Styled_Header = {
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
     `}
 
     &:hover > div {
@@ -65,6 +77,11 @@ export const Styled_Header = {
       right: calc(-50px / ${screenScale.bigScreen});
       width: calc(150px / ${screenScale.bigScreen});
       padding-top: calc(50px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      right: calc(-50px / ${screenScale.desktop});
+      width: calc(150px / ${screenScale.desktop});
+      padding-top: calc(50px / ${screenScale.desktop});
     `}
   `,
 };

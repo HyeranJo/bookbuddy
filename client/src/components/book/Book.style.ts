@@ -14,6 +14,11 @@ const Styled_Book = {
       height: calc(270px / ${screenScale.bigScreen});
       gap: calc(2px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(170px / ${screenScale.desktop});
+      height: calc(270px / ${screenScale.desktop});
+      gap: calc(2px / ${screenScale.desktop});
+    `}
   `,
   wrapper: styled.div`
     width: 170px;
@@ -28,6 +33,10 @@ const Styled_Book = {
       width: calc(170px / ${screenScale.bigScreen});
       height: calc(220px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(170px / ${screenScale.desktop});
+      height: calc(220px / ${screenScale.desktop});
+    `}
   `,
   img: styled.img`
     width: 140px;
@@ -36,6 +45,10 @@ const Styled_Book = {
     ${DeviceQuery.bigScreen`
       width: calc(140px / ${screenScale.bigScreen});
       height: calc(190px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      width: calc(140px / ${screenScale.desktop});
+      height: calc(190px / ${screenScale.desktop});
     `}
   `,
   icon: styled.div`
@@ -52,6 +65,12 @@ const Styled_Book = {
       left: calc(140px / ${screenScale.bigScreen});
       top: calc(2px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(30px / ${screenScale.desktop});
+      height: calc(30px / ${screenScale.desktop});
+      left: calc(140px / ${screenScale.desktop});
+      top: calc(2px / ${screenScale.desktop});
+    `}
   `,
   content: styled.div`
     width: 170px;
@@ -67,6 +86,13 @@ const Styled_Book = {
       padding-left: calc(5px / ${screenScale.bigScreen});
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(170px / ${screenScale.desktop});
+      height: calc(50px / ${screenScale.desktop});
+      margin-top: calc(-30px / ${screenScale.desktop});
+      padding-left: calc(5px / ${screenScale.desktop});
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
   `,
   name: styled.p`
     width: 140px;
@@ -80,12 +106,18 @@ const Styled_Book = {
     ${DeviceQuery.bigScreen`
       width: calc(140px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(140px / ${screenScale.desktop});
+    `}
   `,
   price: styled.p`
     width: 140px;
 
     ${DeviceQuery.bigScreen`
       width: calc(140px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      width: calc(140px / ${screenScale.desktop});
     `}
   `,
 };

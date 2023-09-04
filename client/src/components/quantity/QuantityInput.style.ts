@@ -13,6 +13,10 @@ export const Styled_QuantityInput = {
       font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
       width: calc(70px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
+      width: calc(70px / ${screenScale.desktop});
+    `}
 
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -27,6 +31,10 @@ export const Styled_QuantityInput = {
     ${DeviceQuery.bigScreen`
       width: calc(27px / ${screenScale.bigScreen});
       height: calc(27px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      width: calc(27px / ${screenScale.desktop});
+      height: calc(27px / ${screenScale.desktop});
     `}
 
     background-color: var(--category-color);

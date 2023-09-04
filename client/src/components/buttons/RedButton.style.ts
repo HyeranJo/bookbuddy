@@ -37,5 +37,18 @@ export const Styled_RedButton = {
           ? `calc(${props.width}px / ${screenScale.bigScreen})`
           : `calc(195px / ${screenScale.bigScreen})`};
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+      
+      height: ${(props: StyledRedButtonProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.desktop})`
+          : `calc(56px / ${screenScale.desktop})`};
+
+      width: ${(props: StyledRedButtonProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.desktop})`
+          : `calc(195px / ${screenScale.desktop})`};
+    `}
   `,
 };

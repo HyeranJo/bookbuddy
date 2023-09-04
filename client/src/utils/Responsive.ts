@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 export const screenScale = {
   tablet: 1.8,
-  laptop: 1.5,
+  desktop: 1.5,
   bigScreen: 1.2,
 };
 

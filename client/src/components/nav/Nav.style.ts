@@ -12,6 +12,9 @@ export const Styled_Nav = {
     ${DeviceQuery.bigScreen`
       top: calc(133px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      top: calc(133px / ${screenScale.desktop});
+    `}
   `,
   Div: styled.div`
     /* width: 1512px; */
@@ -25,6 +28,9 @@ export const Styled_Nav = {
 
     ${DeviceQuery.bigScreen`
       height: calc(58px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height: calc(58px / ${screenScale.desktop});
     `}
   `,
 
@@ -43,6 +49,12 @@ export const Styled_Nav = {
       padding-left: calc(50px / ${screenScale.bigScreen});
       padding-right: calc(50px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      gap: calc(30px / ${screenScale.desktop});
+      max-width: calc(1512px / ${screenScale.desktop});
+      padding-left: calc(50px / ${screenScale.desktop});
+      padding-right: calc(50px / ${screenScale.desktop});
+    `}
   `,
 
   Span: styled.span`
@@ -52,6 +64,9 @@ export const Styled_Nav = {
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
     `}
   `,
 };

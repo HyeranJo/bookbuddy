@@ -10,6 +10,9 @@ const Styled_Signin = {
     ${DeviceQuery.bigScreen`
       height: calc((100vh - 550px) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      height: calc((100vh - 550px) / ${screenScale.desktop});
+    `}
   `,
   Form: styled.form`
     display: flex;
@@ -23,6 +26,9 @@ const Styled_Signin = {
     ${DeviceQuery.bigScreen`
       margin: 0 calc(20px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      margin: 0 calc(20px / ${screenScale.desktop});
+    `}
   `,
   TextWrapper: styled.div`
     width: 100%;
@@ -34,12 +40,18 @@ const Styled_Signin = {
     ${DeviceQuery.bigScreen`
       gap: calc(10px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      gap: calc(10px / ${screenScale.desktop});
+    `}
   `,
   Text: styled.p`
     font-size: var(--basic-font-size);
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
     `}
   `,
   Signup: styled.button`
@@ -53,6 +65,9 @@ const Styled_Signin = {
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
     `}
   `,
 };

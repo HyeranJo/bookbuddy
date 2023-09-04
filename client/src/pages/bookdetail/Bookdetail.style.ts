@@ -15,6 +15,10 @@ const Styled_Bookdetail = {
       margin-left: calc(200px / ${screenScale.bigScreen});
       margin-top: calc(44px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      margin-left: calc(200px / ${screenScale.desktop});
+      margin-top: calc(44px / ${screenScale.desktop});
+    `}
   `,
   Container: styled.div`
     display: flex;
@@ -26,6 +30,10 @@ const Styled_Bookdetail = {
     ${DeviceQuery.bigScreen`
       margin-left: calc(100px / ${screenScale.bigScreen});
       gap: calc(120px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      margin-left: calc(100px / ${screenScale.desktop});
+      gap: calc(120px / ${screenScale.desktop});
     `}
   `,
   ImageWrapper: styled.div`
@@ -40,6 +48,10 @@ const Styled_Bookdetail = {
       width: calc(500px / ${screenScale.bigScreen});
       height: calc(600px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(500px / ${screenScale.desktop});
+      height: calc(600px / ${screenScale.desktop});
+    `}
   `,
   ImageContainer: styled.img`
     object-fit: contain;
@@ -47,6 +59,9 @@ const Styled_Bookdetail = {
 
     ${DeviceQuery.bigScreen`
       width: calc(300px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      width: calc(300px / ${screenScale.desktop});
     `}
   `,
   InfoWrapper: styled.div`
@@ -56,6 +71,9 @@ const Styled_Bookdetail = {
 
     ${DeviceQuery.bigScreen`
       width: calc(400px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      width: calc(400px / ${screenScale.desktop});
     `}
   `,
   icon: styled.div`
@@ -70,6 +88,10 @@ const Styled_Bookdetail = {
       width: calc(50px / ${screenScale.bigScreen});
       height: calc(50px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(50px / ${screenScale.desktop});
+      height: calc(50px / ${screenScale.desktop});
+    `}
   `,
   Title: styled.p`
     font-size: var(--subtitle-font-size);
@@ -78,12 +100,18 @@ const Styled_Bookdetail = {
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--subtitle-font-size) / ${screenScale.desktop});
+    `}
   `,
   Content: styled.p`
     font-size: var(--third-title-font-size);
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
     `}
   `,
   TotalPrice: styled.p`
@@ -93,6 +121,9 @@ const Styled_Bookdetail = {
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--subtitle-font-size) / ${screenScale.desktop});
+    `}
   `,
   Topdiv: styled.div`
     display: flex;
@@ -101,6 +132,9 @@ const Styled_Bookdetail = {
 
     ${DeviceQuery.bigScreen`
       margin-bottom: calc( 40px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      margin-bottom: calc( 40px / ${screenScale.desktop});
     `}
   `,
   Middiv: styled.div`
@@ -113,6 +147,10 @@ const Styled_Bookdetail = {
       gap: calc(5px / ${screenScale.bigScreen});
       padding: calc(30px / ${screenScale.bigScreen}) 0 ;
     `}
+    ${DeviceQuery.desktop`
+      gap: calc(5px / ${screenScale.desktop});
+      padding: calc(30px / ${screenScale.desktop}) 0 ;
+    `}
   `,
   Botdiv: styled.div`
     display: flex;
@@ -124,6 +162,10 @@ const Styled_Bookdetail = {
     ${DeviceQuery.bigScreen`
       gap: calc(5px / ${screenScale.bigScreen});
       padding: calc(30px / ${screenScale.bigScreen}) 0 ;
+    `}
+    ${DeviceQuery.desktop`
+      gap: calc(5px / ${screenScale.desktop});
+      padding: calc(30px / ${screenScale.desktop}) 0 ;
     `}
   `,
   Horizontalitydiv: styled.div`
@@ -139,6 +181,9 @@ const Styled_Bookdetail = {
 
     ${DeviceQuery.bigScreen`
       padding-top: calc(30px / ${screenScale.bigScreen}) 0 ;
+    `}
+    ${DeviceQuery.desktop`
+      padding-top: calc(30px / ${screenScale.desktop}) 0 ;
     `}
   `,
 };

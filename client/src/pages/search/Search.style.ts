@@ -13,6 +13,9 @@ const Styled_Search = {
     ${DeviceQuery.bigScreen`
       width: calc(1512px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1512px / ${screenScale.desktop});
+    `}
   `,
   SearchbarWrapper: styled.div`
     display: flex;
@@ -21,6 +24,9 @@ const Styled_Search = {
 
     ${DeviceQuery.bigScreen`
       margin-bottom: calc(60px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      margin-bottom: calc(60px / ${screenScale.desktop});
     `}
   `,
   Section: styled.section`
@@ -40,6 +46,13 @@ const Styled_Search = {
       padding-right: calc(53.5px / ${screenScale.bigScreen});
       padding-top: calc(44px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1312px / ${screenScale.desktop});
+      margin-left: calc(200px / ${screenScale.desktop});
+      padding-left: calc(53.5px / ${screenScale.desktop});
+      padding-right: calc(53.5px / ${screenScale.desktop});
+      padding-top: calc(44px / ${screenScale.desktop});
+    `}
   `,
   Title: styled.div`
     display: flex;
@@ -50,6 +63,9 @@ const Styled_Search = {
     ${DeviceQuery.bigScreen`
       margin-bottom: calc(40px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      margin-bottom: calc(40px / ${screenScale.desktop});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
@@ -57,6 +73,9 @@ const Styled_Search = {
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--title-font-size) / ${screenScale.desktop});
     `}
   `,
 
@@ -67,6 +86,9 @@ const Styled_Search = {
 
     ${DeviceQuery.bigScreen`
       gap: calc(70px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      gap: calc(70px / ${screenScale.desktop});
     `}
   `,
   Msg: styled.div`

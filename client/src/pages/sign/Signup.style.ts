@@ -11,6 +11,9 @@ const Styled_Signup = {
     ${DeviceQuery.bigScreen`
       height: calc((100vh - 350px) / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      height: calc((100vh - 350px) / ${screenScale.desktop});
+    `}
   `,
   Duplicate: styled.button`
     width: 90px;
@@ -31,12 +34,22 @@ const Styled_Signup = {
       left: calc(330px / ${screenScale.bigScreen});
       bottom: calc(-40px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(90px / ${screenScale.desktop});
+      height: calc(30px / ${screenScale.desktop});
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+      left: calc(330px / ${screenScale.desktop});
+      bottom: calc(-40px / ${screenScale.desktop});
+    `}
   `,
   SubmitBtn: styled.div`
     margin-top: 20px;
 
     ${DeviceQuery.bigScreen`
       margin-top: calc(20px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      margin-top: calc(20px / ${screenScale.desktop});
     `}
   `,
 };

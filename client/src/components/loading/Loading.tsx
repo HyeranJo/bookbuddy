@@ -29,12 +29,20 @@ export const Styled_Loading = {
       min-height: calc(100vh - (344px * 2) / ${screenScale.bigScreen});
       gap: calc(10px / ${screenScale.bigScreen});
     `}
+    ${DeviceQuery.desktop`
+      width: calc(1512px / ${screenScale.desktop});
+      min-height: calc(100vh - (344px * 2) / ${screenScale.desktop});
+      gap: calc(10px / ${screenScale.desktop});
+    `}
 
     & > :first-child {
       font-size: var(--basic-font-size);
 
       ${DeviceQuery.bigScreen`
         font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
       `}
     }
   `,
