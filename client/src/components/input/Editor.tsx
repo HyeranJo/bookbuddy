@@ -1,6 +1,11 @@
 import React, { useMemo, useRef, useState } from 'react';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { ImageActions } from '@xeger/quill-image-actions';
+import { ImageFormats } from '@xeger/quill-image-formats';
+
+Quill.register('modules/imageActions', ImageActions);
+Quill.register('modules/imageFormats', ImageFormats);
 
 const toolbarOptions = [
   ['link', 'image', 'video'],
@@ -30,10 +35,12 @@ export const formats = [
   'link',
   'image',
   'video',
+  'float',
   'width',
+  'height',
 ];
 
-function MyComponent() {
+const Editor = () => {
   const [value, setValue] = useState('');
   // console.log(value);
   const quillRef = useRef(null);
@@ -69,10 +76,12 @@ function MyComponent() {
 
   const modules = useMemo(
     () => ({
+      imageActions: {},
+      imageFormats: {},
       toolbar: {
         container: toolbarOptions,
         handlers: {
-          image: imageHandler,
+          // image: imageHandler,
         },
       },
     }),
@@ -90,6 +99,6 @@ function MyComponent() {
       ref={quillRef}
     />
   );
-}
+};
 
-export default MyComponent;
+export default Editor;
