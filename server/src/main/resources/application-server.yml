@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://bookbuddy.ck5bd9dlr8hl.ap-northeast-2.rds.amazonaws.com:3306/bookbuddy?characterEncoding=UTF-8&serverTimezone=UTC
+    username: admin
+    password: admin1234!
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+jwt:
+  secret: cHJvamVjdC1ib29rYnVkZHktc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXkK
+  expirationMinutes: 30
+  refreshExpirationMinutes: 450
