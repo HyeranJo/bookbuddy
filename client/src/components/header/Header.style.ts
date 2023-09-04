@@ -12,6 +12,7 @@ export const Styled_Header = {
   Div: styled.div`
     display: flex;
     width: 1512px;
+    min-width: 820px;
     height: 133px;
     background-color: white;
 

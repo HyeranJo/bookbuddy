@@ -17,6 +17,7 @@ export const Styled_Nav = {
     /* width: 1512px; */
     width: 100%;
     height: 58px;
+    min-width: 820px;
     background-color: var(--primary-background-color);
 
     display: flex;
