@@ -29,12 +29,8 @@ public class BookmarkController {
         User principal = (User) authentication.getPrincipal();
         log.info("# principal:"+principal.toString());
 
-        bookmarkService.createBookmark(principal.getUsername(), bookId);
-        URI uri = UriComponentsBuilder.newInstance()
-                .path("/bookmark")
-                .build()
-                .toUri();
-        return ResponseEntity.created(uri).build();
+        boolean flag = bookmarkService.createBookmark(principal.getUsername(), bookId);
+        return new ResponseEntity(flag, HttpStatus.OK);
     }
 
     @GetMapping

@@ -28,7 +28,7 @@ public class BookmarkService {
         this.bookmarkRepository = bookmarkRepository;
     }
 
-    public void createBookmark(String email, String bookId) {
+    public boolean createBookmark(String email, String bookId) {
         // 북마크가 이미 있다면 해지
         // 없다면 생성
         Member findMember = memberService.findMember(email);
@@ -37,6 +37,7 @@ public class BookmarkService {
         Optional<Bookmark> findBookmark = bookmarkRepository.findByMemberAndBook(findMember, findBook);
         if(findBookmark.isPresent()) {
             bookmarkRepository.delete(findBookmark.get());
+            return false;
         } else {
             Bookmark createdBookmark = new Bookmark();
 
@@ -44,6 +45,7 @@ public class BookmarkService {
             createdBookmark.addBook(findBook);
             bookmarkRepository.save(createdBookmark);
         }
+        return true;
     }
 
     public List<Bookmark> findBookmarks(String email) {
