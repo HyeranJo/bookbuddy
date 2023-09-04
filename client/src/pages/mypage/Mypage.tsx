@@ -6,18 +6,18 @@ import MypageTable from '../../components/table/MypageTable';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/NavScroll';
-import { BookList } from '../../model/BookList';
-import { getBookmarkList } from '../../api/GetApi';
+import { BookList, MyBookList } from '../../model/BookList';
+import { getBookmarkmypage } from '../../api/GetApi';
 import AskTable from '../../components/table/AskTable';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
   const navScrollListRef = useRef<any>([]);
   const navScrollIndex = useRecoilValue(NavScrollAtom);
-  const [bookmarkList, setBookmarkList] = useState<BookList[]>([]);
+  const [bookmarkList, setBookmarkList] = useState<MyBookList[]>([]);
 
   useEffect(() => {
-    getBookmarkList(setBookmarkList);
+    getBookmarkmypage(setBookmarkList);
   }, []);
 
   useEffect(() => {
@@ -85,14 +85,15 @@ const Mypage = () => {
                 </Styled_Mypage.H2>
               </Styled_Mypage.BookmarkTitle>
               <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
-                {bookmarkList.map((v: BookList) => {
+                {bookmarkList.map((v: MyBookList) => {
                   return (
                     <Styled_Mypage.Book key={v.id}>
                       <Book
-                        key={v.id}
-                        name={v.name}
-                        price={v.price}
-                        image={v.imgSrc}
+                        key={v.book.id}
+                        id={v.book.id}
+                        name={v.book.name}
+                        price={v.book.price}
+                        image={v.book.imgSrc}
                       />
                     </Styled_Mypage.Book>
                   );

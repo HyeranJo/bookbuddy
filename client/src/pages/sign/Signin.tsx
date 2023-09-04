@@ -56,6 +56,7 @@ const Signin = () => {
           alert('[로그인 성공] 메인 페이지로 이동합니다');
           navigate('/');
           window.location.reload();
+          console.log(accessToken);
         }
       })
       .catch(err => {

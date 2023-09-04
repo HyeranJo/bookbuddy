@@ -49,7 +49,6 @@ export const Styled_Mypage = {
     overflow-y: scroll;
     overflow-x: hidden;
     transform: rotate(90deg);
-
     position: absolute;
     top: -325px;
     right: 370px;
