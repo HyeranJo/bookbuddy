@@ -31,7 +31,7 @@ public class CrawlingService {
     private final BookRepository bookRepository;
     private final BookService bookService;
     private WebDriver driver;
-    private final String chromePath = "C:/chromedriver-win64/chromedriver.exe";
+    private final String chromePath = "/usr/bin/chromedriver";
 
     public CrawlingService(CategoryService categoryService, BookRepository bookRepository, BookService bookService) {
         this.categoryService = categoryService;
