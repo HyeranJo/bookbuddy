@@ -1,10 +1,16 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 export const Styled_CartTable = {
   H1: styled.h1`
     font-size: var(--title-font-size);
     margin-bottom: 20px;
     display: inline-block;
+
+    ${DeviceQuery.bigScreen`
+      font-size:calc(var(--title-font-size) / ${screenScale.bigScreen});
+      margin-bottom: calc(20px / ${screenScale.bigScreen});
+    `}
   `,
   Table: styled.table`
     /* width: 1095px; */
@@ -14,6 +20,12 @@ export const Styled_CartTable = {
     line-height: 34px;
     border-collapse: collapse; //표 테두리 삭제
     table-layout: fixed; //테이블 크기 고정
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1300px / ${screenScale.bigScreen});
+      font-size:calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      line-height: calc(34px / ${screenScale.bigScreen});
+    `}
   `,
   Th: styled.th`
     background-color: var(--category-color);
@@ -26,10 +38,19 @@ export const Styled_CartTable = {
   Tr: styled.tr`
     line-height: 50px;
 
+    ${DeviceQuery.bigScreen`
+      line-height: calc(50px / ${screenScale.bigScreen});
+    `}
+
     & > .booktitle {
       text-align: left;
       font-size: var(--third-title-font-size);
       padding-top: 5px;
+
+      ${DeviceQuery.bigScreen`
+        font-size:calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+        padding-top: calc(5px / ${screenScale.bigScreen});
+      `}
     }
     & * .checkbox {
       cursor: pointer;
@@ -38,6 +59,11 @@ export const Styled_CartTable = {
     & * img {
       height: 130px;
       margin-top: 15px;
+
+      ${DeviceQuery.bigScreen`
+        height: calc(130px/ ${screenScale.bigScreen});
+        margin-top: calc(15px / ${screenScale.bigScreen});
+      `}
     }
     & > .booktitle {
       white-space: nowrap; //줄바꿈 방지
@@ -46,16 +72,28 @@ export const Styled_CartTable = {
     }
     & :last-child {
       font-size: var(--third-title-font-size);
+
+      ${DeviceQuery.bigScreen`
+        font-size:calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+      `}
     }
   `,
   DeleteTr: styled.tr`
     border-bottom: 1px solid gray;
     line-height: 50px;
 
+    ${DeviceQuery.bigScreen`
+      line-height: calc(50px / ${screenScale.bigScreen});
+    `}
+
     & > .delete {
       cursor: pointer;
       text-align: left;
       font-size: var(--basic-font-size);
+
+      ${DeviceQuery.bigScreen`
+        font-size:calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      `}
     }
   `,
   AmountTr: styled.tr`
@@ -63,9 +101,18 @@ export const Styled_CartTable = {
     line-height: 50px;
     text-align: right;
 
+    ${DeviceQuery.bigScreen`
+      line-height: calc(50px / ${screenScale.bigScreen});
+    `}
+
     & > td {
       padding: 15px 30px;
       font-size: var(--third-title-font-size);
+
+      ${DeviceQuery.bigScreen`
+        padding: calc(15px / ${screenScale.bigScreen}) calc(30px / ${screenScale.bigScreen});
+        font-size:calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+      `}
     }
     &:last-child {
       border-bottom: 0px;
@@ -73,6 +120,10 @@ export const Styled_CartTable = {
       & > td {
         font-size: var(--subtitle-font-size);
         font-weight: bold;
+
+        ${DeviceQuery.bigScreen`
+          font-size:calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
+        `}
       }
     }
   `,

@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 interface InputProps {
   width: number;
@@ -15,6 +16,17 @@ export const Styled_SearchBar = {
     line-height: 30px;
     outline: none;
     padding: 0px 15px;
+
+    ${DeviceQuery.bigScreen`
+      width: ${(props: InputProps) => props.width - props.$iconSize}px / ${
+        screenScale.bigScreen
+      });
+      font-size:  ${(props: InputProps) => props.fontSize}px / ${
+        screenScale.bigScreen
+      });
+      line-height: calc(30px / ${screenScale.bigScreen});
+      padding: 0px calc(15px / ${screenScale.bigScreen});
+    `}
   `,
   SearchDiv: styled.div<{ $iconSize: number }>`
     display: inline-block;
@@ -24,5 +36,12 @@ export const Styled_SearchBar = {
     width: ${props => props.$iconSize + 5}px;
     border-bottom: 3px solid;
     border-color: var(--primary-background-color);
+
+    ${DeviceQuery.bigScreen`
+      width: ${(props: { $iconSize: number }) => props.$iconSize + 5}pxpx / ${
+        screenScale.bigScreen
+      });
+      padding-bottom: calc(5px / ${screenScale.bigScreen});
+    `}
   `,
 };

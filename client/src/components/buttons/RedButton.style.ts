@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 interface StyledRedButtonProps {
   height?: number;
@@ -22,5 +23,19 @@ export const Styled_RedButton = {
     }
     &:focus {
     }
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      
+      height: ${(props: StyledRedButtonProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.bigScreen})`
+          : `calc(56px / ${screenScale.bigScreen})`};
+
+      width: ${(props: StyledRedButtonProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.bigScreen})`
+          : `calc(195px / ${screenScale.bigScreen})`};
+    `}
   `,
 };

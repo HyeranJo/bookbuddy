@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 export const Styled_Nav = {
   Container: styled.div`
@@ -7,6 +8,10 @@ export const Styled_Nav = {
     position: sticky;
     top: 133px;
     z-index: 99;
+
+    ${DeviceQuery.bigScreen`
+      top: calc(133px / ${screenScale.bigScreen});
+    `}
   `,
   Div: styled.div`
     /* width: 1512px; */
@@ -16,7 +21,12 @@ export const Styled_Nav = {
 
     display: flex;
     align-items: center;
+
+    ${DeviceQuery.bigScreen`
+      height: calc(58px / ${screenScale.bigScreen});
+    `}
   `,
+
   SpanDiv: styled.div`
     display: flex;
     gap: 30px;
@@ -25,10 +35,22 @@ export const Styled_Nav = {
     width: 100%;
     padding-left: 50px;
     padding-right: 50px;
+
+    ${DeviceQuery.bigScreen`
+      gap: calc(30px / ${screenScale.bigScreen});
+      max-width: calc(1512px / ${screenScale.bigScreen});
+      padding-left: calc(50px / ${screenScale.bigScreen});
+      padding-right: calc(50px / ${screenScale.bigScreen});
+    `}
   `,
+
   Span: styled.span`
     font-size: var(--third-title-font-size);
     color: white;
     cursor: pointer;
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+    `}
   `,
 };

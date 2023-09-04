@@ -1,10 +1,15 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 const Styled_Signin = {
   Wrapper: styled.div`
     display: flex;
     justify-content: center;
     height: calc(100vh - 550px);
+
+    ${DeviceQuery.bigScreen`
+      height: calc((100vh - 550px) / ${screenScale.bigScreen});
+    `}
   `,
   Form: styled.form`
     display: flex;
@@ -14,6 +19,10 @@ const Styled_Signin = {
   InputContainer: styled.div``,
   SubmitBtn: styled.div`
     margin: 0 20px;
+
+    ${DeviceQuery.bigScreen`
+      margin: 0 calc(20px / ${screenScale.bigScreen});
+    `}
   `,
   TextWrapper: styled.div`
     width: 100%;
@@ -21,9 +30,17 @@ const Styled_Signin = {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    ${DeviceQuery.bigScreen`
+      gap: calc(10px / ${screenScale.bigScreen});
+    `}
   `,
   Text: styled.p`
     font-size: var(--basic-font-size);
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
   `,
   Signup: styled.button`
     font-size: var(--basic-font-size);
@@ -33,6 +50,10 @@ const Styled_Signin = {
     display: flex;
     justify-content: center;
     cursor: pointer;
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
   `,
 };
 

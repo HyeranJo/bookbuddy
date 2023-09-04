@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 export const Styled_List = {
   Container: styled.div`
@@ -8,6 +9,10 @@ export const Styled_List = {
   Div: styled.div`
     width: 1512px;
     display: flex;
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1512px / ${screenScale.bigScreen});
+    `}
   `,
   Content: styled.section`
     width: 1312px;
@@ -15,16 +20,32 @@ export const Styled_List = {
     padding-left: 53.5px;
     padding-right: 53.5px;
     padding-top: 44px;
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1312px / ${screenScale.bigScreen});
+      margin-left: calc(200px / ${screenScale.bigScreen});
+      padding-left: calc(53.5px / ${screenScale.bigScreen});
+      padding-right: calc(53.5px / ${screenScale.bigScreen});
+      padding-top: calc(44px / ${screenScale.bigScreen});
+    `}
   `,
   Title: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
+
+    ${DeviceQuery.bigScreen`
+      margin-bottom: calc(40px / ${screenScale.bigScreen});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--title-font-size);
     display: inline-block;
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
+    `}
   `,
   SortList: styled.li`
     list-style: none;
@@ -45,6 +66,10 @@ export const Styled_List = {
     display: flex;
     justify-content: center;
     padding: 0 37px;
+
+    ${DeviceQuery.bigScreen`
+      padding: 0 calc(37px / ${screenScale.bigScreen});
+    `}
   `,
   Books: styled.div`
     display: flex;
@@ -52,5 +77,9 @@ export const Styled_List = {
 
     /* gap: 36px; */
     gap: 70px;
+
+    ${DeviceQuery.bigScreen`
+      gap: calc(70px / ${screenScale.bigScreen});
+    `}
   `,
 };

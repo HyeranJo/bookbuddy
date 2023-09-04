@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../utils/Responsive';
 
 export const Styled_Layout = {
   // 필수
@@ -10,6 +11,10 @@ export const Styled_Layout = {
   Div_WithSidebar: styled.div`
     width: 1512px;
     display: flex;
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1512px / ${screenScale.bigScreen});
+    `}
   `,
   // 선택(sidebar 없는 경우)
   Div_WithNoSidebar: styled.div`
@@ -17,11 +22,29 @@ export const Styled_Layout = {
     justify-content: center;
     width: 1300px;
     padding-top: 44px;
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1300px / ${screenScale.bigScreen});
+      padding-top: calc(44px / ${screenScale.bigScreen});
+    `}
   `,
   // H1
   H1: styled.h1`
     font-size: var(--title-font-size);
     margin-bottom: 20px;
     display: inline-block;
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
+      margin-bottom: calc(20px / ${screenScale.bigScreen});
+    `}
+
+    &.noOrderItem {
+      width: 1300px;
+
+      ${DeviceQuery.bigScreen`
+        width: calc(1300px / ${screenScale.bigScreen});
+      `}
+    }
   `,
 };

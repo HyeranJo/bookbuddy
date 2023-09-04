@@ -1,17 +1,32 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 export const Styled_AskTable = {
   Container: styled.div`
     width: 1095px;
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1095px / ${screenScale.bigScreen});
+    `}
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);
     margin-bottom: 20px;
     display: inline-block;
+
+    ${DeviceQuery.bigScreen`
+      margin-bottom: calc(20px / ${screenScale.bigScreen});
+      font-size:calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
+    `}
   `,
   MessageSpan: styled.span`
     margin-left: 15px;
     font-size: var(--message-font-size);
+
+    ${DeviceQuery.bigScreen`
+      margin-left: calc(15px / ${screenScale.bigScreen});
+      font-size:calc(var(--message-font-size) / ${screenScale.bigScreen});
+    `}
   `,
   Table: styled.table`
     width: 1095px;
@@ -20,6 +35,12 @@ export const Styled_AskTable = {
     line-height: 34px;
     border-collapse: collapse; //표 테두리 삭제
     table-layout: fixed; //테이블 크기 고정
+
+    ${DeviceQuery.bigScreen`
+      width: calc(1095px / ${screenScale.bigScreen});
+      font-size:calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      line-height: calc(34px / ${screenScale.bigScreen});
+    `}
 
     & .title-body {
       text-align: left;
