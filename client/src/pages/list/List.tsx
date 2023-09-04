@@ -53,7 +53,6 @@ const List = () => {
                   );
                 })
               )}
-              <Book />
             </Styled_List.Books>
           </Styled_List.BookGroup>
           <PaginationBox />
