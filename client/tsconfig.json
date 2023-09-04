@@ -13,9 +13,11 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "allowJs": true
+    "allowJs": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
   },
-  "typeRoots": ["./node_modules/@types", "./@types"],
+  "typeRoots": ["./node_modules/@types", "./@types", "src/types"],
   "include": ["src", "@types/custom.d.ts"],
   "exclude": ["node_modules", "build"]
 }
