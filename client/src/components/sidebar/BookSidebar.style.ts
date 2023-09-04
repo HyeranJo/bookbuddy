@@ -21,6 +21,7 @@ export const Styled_Sidebar = {
     width: 200px;
     /* height: calc(100vh - 133px - 58px); */
     height: 100vh;
+    background-color: white;
 
     border-right: 2px solid var(--light-gray-color);
 
