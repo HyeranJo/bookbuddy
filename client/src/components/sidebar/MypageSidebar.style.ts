@@ -59,6 +59,13 @@ export const Styled_MypageSidebar = {
       padding-top: calc(55px / ${screenScale.tablet});
     `}
 
+
+    & > span {
+      &:hover {
+        color: var(--primary-background-color);
+      }
+    }
+
     &::after {
       content: '';
       display: block;
@@ -105,5 +112,11 @@ export const Styled_MypageSidebar = {
       padding-top: calc(10px / ${screenScale.tablet});
       font-size: calc(var(--basic-font-size) / ${screenScale.tablet})
     `}
+
+    & > span {
+      &:hover {
+        color: var(--primary-background-color);
+      }
+    }
   `,
 };
