@@ -141,24 +141,30 @@ export const Styled_Mypage = {
     position: absolute;
     top: -325px;
     right: 370px;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 50px 0;
 
     ${DeviceQuery.bigScreen`
       height: calc(1095px / ${screenScale.bigScreen});
       width: calc(350px / ${screenScale.bigScreen});
       top: calc(-325px / ${screenScale.bigScreen});
       right: calc(370px / ${screenScale.bigScreen});
+      padding: calc(50px / ${screenScale.bigScreen}) 0;
     `}
     ${DeviceQuery.desktop`
       height: calc(1095px / ${screenScale.desktop});
       width: calc(350px / ${screenScale.desktop});
       top: calc(-325px / ${screenScale.desktop});
       right: calc(370px / ${screenScale.desktop});
+      padding: calc(50px / ${screenScale.desktop}) 0;
     `}
     ${DeviceQuery.tablet`
       height: calc(1095px / ${screenScale.tablet});
       width: calc(350px / ${screenScale.tablet});
       top: calc(-325px / ${screenScale.tablet});
       right: calc(370px / ${screenScale.tablet});
+      padding: calc(50px / ${screenScale.tablet}) 0;
     `}
 
     // 스크롤바 숨기기
