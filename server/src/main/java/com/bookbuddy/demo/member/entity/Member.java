@@ -1,6 +1,7 @@
 package com.bookbuddy.demo.member.entity;
 
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
+import com.bookbuddy.demo.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,9 @@ public class Member {
     @JsonBackReference
     @OneToMany(mappedBy = "member")
     private List<Bookmark> bookmarks;
+    @JsonBackReference
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders;
 
     public void setPassword(String password) {
         this.password = password;
@@ -47,6 +51,12 @@ public class Member {
         bookmarks.add(bookmark);
         if(bookmark.getMember() != this) {
             bookmark.addMember(this);
+        }
+    }
+    public void addOrder(Order order) {
+        orders.add(order);
+        if(order.getMember() != this) {
+            order.addMember(this);
         }
     }
 }
