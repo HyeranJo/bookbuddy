@@ -6,6 +6,7 @@ export interface BookList {
   name: string;
   price: number;
   publisher: string;
+  bookmark: boolean;
 }
 
 export interface MyBookList {

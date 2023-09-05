@@ -10,13 +10,14 @@ interface BookProps {
   name?: string;
   price?: number;
   image?: string;
+  bookmark: boolean;
 }
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
-  const [isClick, setIsClick] = useState(false);
+  const [isClick, setIsClick] = useState(props.bookmark);
 
   const postBookMark = async (id: string | undefined) => {
     try {
