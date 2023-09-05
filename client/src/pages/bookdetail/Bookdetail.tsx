@@ -3,15 +3,14 @@ import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { BookId } from '../../recoil/BookId';
 import { Infotype } from '../../model/Bookdetail';
 import { getBookDetail } from '../../api/GetApi';
 import { postBookDetail } from '../../api/PostApi';
+import { useParams } from 'react-router-dom';
 
 const BookDetail = () => {
-  const bookIdObject = useRecoilValue<Infotype>(BookId);
-  const bookId = bookIdObject.id;
+  const bookIdParams = useParams();
+  const bookId = bookIdParams.id;
   const [detailInfo, setDetailInfo] = useState<Infotype>();
   const [isClick, setIsClick] = useState(false);
 
@@ -22,6 +21,7 @@ const BookDetail = () => {
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
+
   const date = new Date(detailInfo?.date as string);
   const price = detailInfo?.price as number;
   const formattedPrice = price ? price.toLocaleString() : '';
@@ -89,6 +89,7 @@ const BookDetail = () => {
                       name="장바구니 담기"
                       onClick={() => {
                         postBookDetail(detailInfo);
+                        alert('상품을 장바구니에 추가했습니다');
                       }}
                     />
                     <RedButton name="바로 결제하기" />

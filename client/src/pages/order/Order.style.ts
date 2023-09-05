@@ -4,7 +4,7 @@ export const Styled_Order = {
   Div: styled.div`
     display: flex;
     justify-content: center;
-    width: 1512px;
+    width: 1300px;
   `,
   Content: styled.div`
     display: flex;

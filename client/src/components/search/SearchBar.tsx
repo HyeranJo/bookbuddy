@@ -5,12 +5,12 @@ import { SearchValue } from '../../recoil/SearchValue';
 import { useSetRecoilState } from 'recoil';
 
 interface SearchBarProps {
-  iconSize: number;
+  $iconSize: number;
   width: number;
   fontSize: number;
 }
 
-const SearchBar = ({ iconSize, width, fontSize }: SearchBarProps) => {
+const SearchBar = ({ $iconSize, width, fontSize }: SearchBarProps) => {
   const setInputValue = useSetRecoilState(SearchValue);
   const [inputText, setInputText] = useState('');
 
@@ -22,17 +22,24 @@ const SearchBar = ({ iconSize, width, fontSize }: SearchBarProps) => {
     setInputText(event.target.value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setInputValue(inputText);
+    }
+  };
+
   return (
     <label>
       <Styled_SearchBar.Input
         width={width}
-        iconSize={iconSize}
+        $iconSize={$iconSize}
         fontSize={fontSize}
         value={inputText}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
       />
-      <Styled_SearchBar.SearchDiv iconSize={iconSize} onClick={handleOnClick}>
-        <Search iconSize={iconSize} />
+      <Styled_SearchBar.SearchDiv $iconSize={$iconSize} onClick={handleOnClick}>
+        <Search $iconSize={$iconSize} />
       </Styled_SearchBar.SearchDiv>
     </label>
   );

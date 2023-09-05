@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BookList } from '../model/BookList';
+import { BookList, MyBookList } from '../model/BookList';
 import { getCookie } from '../utils/cookie';
 import { OrderListType } from '../model/OrderList';
 
@@ -22,9 +22,7 @@ export const getBookList = async ({
   setIsLoading(true);
   try {
     const response = await axios.get(
-      // 카테고리 구현 완료시 사용
       `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20`,
-      // `${SERVER_HOST}/book/list?page=${page}&size=20`,
       { headers: { 'ngrok-skip-browser-warning': true } },
     );
     const result = response.data.data;
@@ -41,6 +39,7 @@ export const getOrderList = async (
 ) => {
   try {
     const response = await axios.get(`${SERVER_HOST}/order`, {
+      // const response = await axios.get('./dummy.json', {
       headers: {
         'ngrok-skip-browser-warning': true,
         // Authorization: getCookie('accessToken'),
@@ -94,13 +93,29 @@ export const getBookmarkList = async (
   setBookmarkList: (bookmarkList: BookList[]) => void,
 ) => {
   try {
-    const response = await axios.get(`${SERVER_HOST}/mypage/bookmark`, {
+    const response = await axios.get(`${SERVER_HOST}/bookmark`, {
       headers: {
         'ngrok-skip-browser-warning': true,
         Authorization: getCookie('accessToken'),
       },
     });
     setBookmarkList(response.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getBookmarkmypage = async (
+  setBookmarkList: (bookmarkList: MyBookList[]) => void,
+) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/bookmark`, {
+      headers: {
+        'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    setBookmarkList(response.data.data);
   } catch (err) {
     console.log(err);
   }
