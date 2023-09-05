@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookie';
-import BookMarkIcon from '../../icons/BookMarkIcon';
+// import BookMarkIcon from '../../icons/BookMarkIcon';
 
 interface BookProps {
   id?: string;
