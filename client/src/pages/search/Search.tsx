@@ -29,30 +29,26 @@ const Search = () => {
           <Styled_Search.Title>
             <Styled_Search.H1>검색결과</Styled_Search.H1>
           </Styled_Search.Title>
-          <Styled_Search.BookGroup>
-            <Styled_Search.Books>
-              {isLoading ? (
-                <Loading />
-              ) : listData && listData.length === 0 ? (
-                <Styled_Search.Msg>
-                  검색결과를 찾지못했습니다🥲
-                </Styled_Search.Msg>
-              ) : (
-                listData &&
-                listData.map((v: BookList) => {
-                  return (
-                    <Book
-                      key={v.id}
-                      id={v.id}
-                      name={v.name}
-                      price={v.price}
-                      image={v.imgSrc}
-                    />
-                  );
-                })
-              )}
-            </Styled_Search.Books>
-          </Styled_Search.BookGroup>
+          <Styled_Search.Books>
+            {isLoading ? (
+              <Loading />
+            ) : listData && listData.length === 0 ? (
+              <Styled_Search.Msg>검색결과를 찾지못했습니다🥲</Styled_Search.Msg>
+            ) : (
+              listData &&
+              listData.map((v: BookList) => {
+                return (
+                  <Book
+                    key={v.id}
+                    id={v.id}
+                    name={v.name}
+                    price={v.price}
+                    image={v.imgSrc}
+                  />
+                );
+              })
+            )}
+          </Styled_Search.Books>
         </Styled_Search.Section>
       </Styled_Search.Main>
     </Styled_Search.Container>

@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 interface StyledRedButtonProps {
   height?: number;
@@ -22,5 +23,45 @@ export const Styled_RedButton = {
     }
     &:focus {
     }
+
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      
+      height: ${(props: StyledRedButtonProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.bigScreen})`
+          : `calc(56px / ${screenScale.bigScreen})`};
+
+      width: ${(props: StyledRedButtonProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.bigScreen})`
+          : `calc(195px / ${screenScale.bigScreen})`};
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+      
+      height: ${(props: StyledRedButtonProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.desktop})`
+          : `calc(56px / ${screenScale.desktop})`};
+
+      width: ${(props: StyledRedButtonProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.desktop})`
+          : `calc(195px / ${screenScale.desktop})`};
+    `}
+      ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+      
+      height: ${(props: StyledRedButtonProps) =>
+        props.height
+          ? `calc(${props.height}px / ${screenScale.tablet})`
+          : `calc(56px / ${screenScale.tablet})`};
+
+      width: ${(props: StyledRedButtonProps) =>
+        props.width
+          ? `calc(${props.width}px / ${screenScale.tablet})`
+          : `calc(195px / ${screenScale.tablet})`};
+    `}
   `,
 };
