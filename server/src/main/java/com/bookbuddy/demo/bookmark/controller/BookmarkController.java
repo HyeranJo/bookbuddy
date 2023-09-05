@@ -27,7 +27,6 @@ public class BookmarkController {
     @PostMapping("/{book-id}")
     public ResponseEntity postBookmark(Authentication authentication, @PathVariable("book-id") @Positive String bookId) {
         User principal = (User) authentication.getPrincipal();
-        log.info("# principal:"+principal.toString());
 
         boolean flag = bookmarkService.createBookmark(principal.getUsername(), bookId);
         return new ResponseEntity(flag, HttpStatus.OK);

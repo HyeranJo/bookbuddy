@@ -29,7 +29,6 @@ public class JwtVerifyFilter extends OncePerRequestFilter {
             Authentication authentication = null;
             if (StringUtils.hasText(jws) && jwtTokenizer.validationToken(jws)) {
                 authentication = jwtTokenizer.getAuthentication(jws);
-                log.info("# verify authentication:"+ authentication.toString());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
                 log.info("# verify failed");

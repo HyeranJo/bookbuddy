@@ -11,7 +11,6 @@ import java.util.Date;
 
 public class BookDto {
     @Getter
-    @AllArgsConstructor
     public static class Response {
         private String id;
         private String name;
@@ -20,5 +19,20 @@ public class BookDto {
         private int price;
         private Date date;
         private String imgSrc;
+        private boolean bookmark;
+
+        public void setBookmark(boolean bookmark) {
+            this.bookmark = bookmark;
+        }
+
+        public Response(String id, String name, String author, String publisher, int price, Date date, String imgSrc) {
+            this.id = id;
+            this.name = name;
+            this.author = author;
+            this.publisher = publisher;
+            this.price = price;
+            this.date = date;
+            this.imgSrc = imgSrc;
+        }
     }
 }

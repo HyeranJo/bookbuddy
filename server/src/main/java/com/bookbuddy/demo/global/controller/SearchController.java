@@ -1,12 +1,16 @@
 package com.bookbuddy.demo.global.controller;
 
+import com.bookbuddy.demo.book.dto.BookDto;
 import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
+import com.bookbuddy.demo.bookmark.service.BookmarkService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +27,23 @@ import java.util.List;
 public class SearchController {
     private final BookService bookService;
     private final BookMapper mapper;
+    private final BookmarkService bookmarkService;
     @GetMapping
-    public ResponseEntity getBookByKeyword(@RequestParam(value = "keyword", required = false) String keyword) {
-        List<Book> book = new ArrayList<>();
+    public ResponseEntity getBookByKeyword(@RequestParam(value = "keyword", required = false) String keyword,
+                                           Authentication authentication) {
+        User principal = (User) authentication.getPrincipal();
+
+        List<Book> books = new ArrayList<>();
         if(StringUtils.hasText(keyword)) {
-            book = bookService.findAllByKeyword(keyword);
+            books = bookService.findAllByKeyword(keyword);
         }
 
-        return new ResponseEntity(mapper.BooksToBookResponseDtos(book), HttpStatus.OK);
+        // set isBookmark
+        List<BookDto.Response> responses = mapper.BooksToBookResponseDtos(books);
+        for(BookDto.Response response:responses) {
+            response.setBookmark(bookmarkService.getIsBookmark(response.getId(), principal.getUsername()));
+        }
+
+        return new ResponseEntity(responses, HttpStatus.OK);
     }
 }

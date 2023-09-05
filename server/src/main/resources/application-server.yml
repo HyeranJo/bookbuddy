@@ -5,7 +5,6 @@ spring:
     username: admin
     password: ${ADMIN_PASSWORD}
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: update
 jwt:
