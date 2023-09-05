@@ -59,6 +59,8 @@ public class BookmarkService {
     }
 
     public boolean getIsBookmark(String bookId, String email) {
+        log.info("# bookId:"+bookId);
+        log.info("# email:"+email);
         if(StringUtils.hasText(email)) {
             Member member = memberService.findMember(email);
             Book book = bookService.findBook(bookId);

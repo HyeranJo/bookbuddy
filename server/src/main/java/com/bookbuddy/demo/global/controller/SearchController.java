@@ -5,6 +5,7 @@ import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.bookmark.service.BookmarkService;
+import com.bookbuddy.demo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,11 +29,10 @@ public class SearchController {
     private final BookService bookService;
     private final BookMapper mapper;
     private final BookmarkService bookmarkService;
+    private final MemberService memberService;
     @GetMapping
     public ResponseEntity getBookByKeyword(@RequestParam(value = "keyword", required = false) String keyword,
                                            Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-
         List<Book> books = new ArrayList<>();
         if(StringUtils.hasText(keyword)) {
             books = bookService.findAllByKeyword(keyword);
@@ -41,7 +41,10 @@ public class SearchController {
         // set isBookmark
         List<BookDto.Response> responses = mapper.BooksToBookResponseDtos(books);
         for(BookDto.Response response:responses) {
-            response.setBookmark(bookmarkService.getIsBookmark(response.getId(), principal.getUsername()));
+            response.setBookmark(
+                    bookmarkService.getIsBookmark(response.getId(),
+                    memberService.getEmailByAuthentication(authentication))
+            );
         }
 
         return new ResponseEntity(responses, HttpStatus.OK);

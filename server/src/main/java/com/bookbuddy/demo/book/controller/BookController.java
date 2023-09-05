@@ -6,6 +6,7 @@ import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.bookmark.service.BookmarkService;
 import com.bookbuddy.demo.global.dto.response.MultiResponseDto;
+import com.bookbuddy.demo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -27,14 +28,13 @@ public class BookController {
     private final BookMapper mapper;
     private final BookService bookService;
     private final BookmarkService bookmarkService;
+    private final MemberService memberService;
     
     /* 도서 리스트 */
     @GetMapping("/list")
     public ResponseEntity getBooks(@RequestParam("page") @Positive int page,
                                    @RequestParam("size") @Positive int size,
                                    Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         Page<Book> findBook = bookService.findBooks(pageRequest);
 
@@ -42,7 +42,12 @@ public class BookController {
         List<BookDto.Response> responses = mapper.BooksToBookResponseDtos(findBook.getContent());
         for(BookDto.Response response:responses) {
 
-            response.setBookmark(bookmarkService.getIsBookmark(response.getId(), principal.getUsername()));
+            response.setBookmark(
+                    bookmarkService.getIsBookmark(
+                            response.getId(),
+                            memberService.getEmailByAuthentication(authentication)
+                    )
+            );
         }
 
         return new ResponseEntity(new MultiResponseDto<>(responses, findBook), HttpStatus.OK);
@@ -54,14 +59,15 @@ public class BookController {
                                              @RequestParam("page") @Positive int page,
                                              @RequestParam("size") @Positive int size,
                                              Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         Page<Book> findBook = bookService.findBooksByCategory(pageRequest, categoryId);
 
         List<BookDto.Response> responses = mapper.BooksToBookResponseDtos(findBook.getContent());
         for(BookDto.Response response:responses) {
-            response.setBookmark(bookmarkService.getIsBookmark(response.getId(), principal.getUsername()));
+            response.setBookmark(
+                    bookmarkService.getIsBookmark(response.getId(),
+                    memberService.getEmailByAuthentication(authentication))
+            );
         }
         return new ResponseEntity(new MultiResponseDto<>(responses, findBook), HttpStatus.OK);
 
@@ -71,12 +77,10 @@ public class BookController {
     @GetMapping("/{book-id}")
     public ResponseEntity getBook(@PathVariable("book-id") @Positive String bookId,
                                   Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-
         Book findBook = bookService.findVerifyBook(bookId);
 
         BookDto.Response response = mapper.BookToBookResponseDto(findBook);
-        response.setBookmark(bookmarkService.getIsBookmark(bookId, principal.getUsername()));
+        response.setBookmark(bookmarkService.getIsBookmark(bookId, memberService.getEmailByAuthentication(authentication)));
 
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
