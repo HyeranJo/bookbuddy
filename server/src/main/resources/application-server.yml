@@ -9,5 +9,4 @@ spring:
       ddl-auto: update
 jwt:
   secret: cHJvamVjdC1ib29rYnVkZHktc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXkK
-  expirationMinutes: 30
-  refreshExpirationMinutes: 450
+  expirationMinutes: 400
