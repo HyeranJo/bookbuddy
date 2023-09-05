@@ -10,7 +10,7 @@ interface BookProps {
   name?: string;
   price?: number;
   image?: string;
-  bookmark: boolean;
+  bookmark?: boolean;
 }
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;

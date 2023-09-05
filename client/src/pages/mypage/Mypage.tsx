@@ -94,6 +94,7 @@ const Mypage = () => {
                         name={v.book.name}
                         price={v.book.price}
                         image={v.book.imgSrc}
+                        bookmark={true}
                       />
                     </Styled_Mypage.Book>
                   );
