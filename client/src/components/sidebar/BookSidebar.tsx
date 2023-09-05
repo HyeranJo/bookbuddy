@@ -3,11 +3,13 @@ import { Styled_Sidebar } from './BookSidebar.style';
 import { SidebarIdAtom } from '../../recoil/BookList';
 import { useSetRecoilState } from 'recoil';
 import category from '../../utils/SidebarCategory';
+import { useNavigate } from 'react-router-dom';
 
 const BookSidebar = () => {
   const categoryKeys = Object.keys(category);
   const categoryValues = Object.values(category);
   const setSidebarId = useSetRecoilState(SidebarIdAtom);
+  const navigate = useNavigate();
 
   /** 클릭한 사이드 메뉴 id를 recoil에 저장하는 함수 */
   const onClickHandler = (value: number) => {
@@ -23,6 +25,7 @@ const BookSidebar = () => {
               key={i}
               onClick={() => {
                 onClickHandler(categoryValues[i]);
+                navigate('/list');
               }}
             >
               {v}

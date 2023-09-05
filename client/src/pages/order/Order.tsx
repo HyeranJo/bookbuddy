@@ -63,7 +63,7 @@ const Order = () => {
             </>
           ) : (
             <>
-              <Styled_Layout.H1 style={{ width: '1300px' }}>
+              <Styled_Layout.H1 className="noOrderItem">
                 장바구니
               </Styled_Layout.H1>
               <div className="emptyItem">
