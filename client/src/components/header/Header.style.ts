@@ -41,7 +41,7 @@ export const Styled_Header = {
   `,
   Menu: styled.div`
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 30px;
 
     ${DeviceQuery.bigScreen`
@@ -56,7 +56,7 @@ export const Styled_Header = {
   `,
   Span: styled.span`
     cursor: pointer;
-    position: relative;
+    position: relative; // info-nav랑 연결
     font-size: var(--basic-font-size);
 
     ${DeviceQuery.bigScreen`
