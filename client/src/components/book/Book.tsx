@@ -11,51 +11,30 @@ interface BookProps {
   name?: string;
   price?: number;
   image?: string;
+  bookmark?: boolean;
 }
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
-  const [isClick, setIsClick] = useState(false);
-
-  function ClickBookmark() {
-    setIsClick(isClick => !isClick);
-  }
+  const [isClick, setIsClick] = useState(props.bookmark);
 
   const postBookMark = async (id: string | undefined) => {
     try {
-      if (isClick === false) {
-        const response = await axios.post(
-          `${SERVER_HOST}/bookmark/${id}`,
-          {},
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: getCookie('accessToken'),
-            },
-          },
-        );
-        const result = response.data;
-        return result;
-      }
-    } catch (error) {
-      alert('error');
-    }
-  };
-
-  const deleteBookMark = async (id: string | undefined) => {
-    try {
-      if (isClick === true) {
-        const response = await axios.delete(`${SERVER_HOST}/bookmark/${id}`, {
+      const response = await axios.post(
+        `${SERVER_HOST}/bookmark/${id}`,
+        {},
+        {
           headers: {
             'Content-Type': 'application/json',
             Authorization: getCookie('accessToken'),
           },
-        });
-        const result = response.data;
-        return result;
-      }
+        },
+      );
+      const result = response.data;
+      setIsClick(result);
+      return result;
     } catch (error) {
       alert(error);
     }
@@ -73,13 +52,10 @@ const Book = (props: BookProps) => {
       </Styled_Book.wrapper>
       <Styled_Book.icon
         onClick={() => {
-          ClickBookmark;
           postBookMark(props.id);
-          deleteBookMark(props.id);
-          console.log(isClick);
         }}
       >
-        <Bookmark
+        <BookMarkIcon
           fill={
             isClick
               ? 'var(--primary-background-color)'

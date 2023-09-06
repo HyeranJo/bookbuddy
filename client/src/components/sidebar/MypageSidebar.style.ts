@@ -44,20 +44,27 @@ export const Styled_MypageSidebar = {
     cursor: pointer;
 
     ${DeviceQuery.bigScreen`
-      font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen})
+      font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
       gap: calc(40px / ${screenScale.bigScreen});
       padding-top: calc(55px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      font-size: calc(var(--third-title-font-size) / ${screenScale.desktop})
+      font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
       gap: calc(40px / ${screenScale.desktop});
       padding-top: calc(55px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      font-size: calc(var(--third-title-font-size) / ${screenScale.tablet})
+      font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
       gap: calc(40px / ${screenScale.tablet});
       padding-top: calc(55px / ${screenScale.tablet});
     `}
+
+
+    & > span {
+      &:hover {
+        color: var(--primary-background-color);
+      }
+    }
 
     &::after {
       content: '';
@@ -105,5 +112,11 @@ export const Styled_MypageSidebar = {
       padding-top: calc(10px / ${screenScale.tablet});
       font-size: calc(var(--basic-font-size) / ${screenScale.tablet})
     `}
+
+    & > span {
+      &:hover {
+        color: var(--primary-background-color);
+      }
+    }
   `,
 };

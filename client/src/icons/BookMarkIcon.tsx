@@ -1,13 +1,17 @@
 import React from 'react';
 import { Styled_BookMarkIcon } from './BookMarkIcon.style';
 
-const BookMarkIcon = () => {
+interface BookMarkIconProps {
+  fill: string;
+}
+
+const BookMarkIcon = ({ fill }: BookMarkIconProps) => {
   return (
     <Styled_BookMarkIcon.Svg
       width="30"
       height="40"
       viewBox="0 0 30 40"
-      fill="none"
+      fill={fill}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

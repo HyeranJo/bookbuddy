@@ -2,12 +2,14 @@ import React from 'react';
 import { Styled_InfoNav } from './InfoNav.style';
 import { Link, useNavigate } from 'react-router-dom';
 import { getCookie, removeCookie } from '../../utils/cookie';
+import { getLogout } from '../../api/GetApi';
 
 const InfoNav = () => {
   const userInfo = getCookie('userInfo');
   const navigate = useNavigate();
 
   const logoutHandler = () => {
+    getLogout();
     removeCookie('accessToken', { path: '/' });
     removeCookie('refreshToken', { path: '/' });
     removeCookie('userInfo', { path: '/' });
@@ -18,7 +20,7 @@ const InfoNav = () => {
   };
 
   return (
-    <div>
+    <>
       <Styled_InfoNav.Div>
         <Link
           to={`/mypage/${userInfo?.email}`}
@@ -38,7 +40,7 @@ const InfoNav = () => {
           </Styled_InfoNav.Span>
         </Link>
       </Styled_InfoNav.Div>
-    </div>
+    </>
   );
 };
 
