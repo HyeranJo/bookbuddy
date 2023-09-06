@@ -174,7 +174,7 @@ const Payment = () => {
                     </tr>
                     <tr>
                       <td></td>
-                      <td>도로명 주소</td>
+                      <td>도로명 주소*</td>
                       <td>
                         <Input
                           type="text"
@@ -188,7 +188,7 @@ const Payment = () => {
                     </tr>
                     <tr>
                       <td></td>
-                      <td>지번 주소</td>
+                      <td>지번 주소*</td>
                       <td>
                         <Input
                           type="text"

@@ -53,7 +53,7 @@ export const Styled_Sidebar = {
     `}
   `,
 
-  Span: styled.button`
+  Button: styled.button`
     border: 0;
     background-color: white;
     font-size: var(--basic-font-size);

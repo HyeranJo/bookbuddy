@@ -47,10 +47,21 @@ export const Styled_CartTable = {
   `,
   Th: styled.th`
     background-color: var(--category-color);
+    padding-top: 5px;
 
     & > input {
       cursor: pointer;
       transform: scale(1.5);
+
+      ${DeviceQuery.bigScreen`
+        transform: scale(1.2);
+      `}
+      ${DeviceQuery.desktop`
+        transform: calc(1);
+      `}
+      ${DeviceQuery.tablet`
+        transform: scale(1);
+      `}
     }
   `,
   Tr: styled.tr`
@@ -87,6 +98,16 @@ export const Styled_CartTable = {
     & * .checkbox {
       cursor: pointer;
       transform: scale(1.5);
+
+      ${DeviceQuery.bigScreen`
+        transform: scale(1.2);
+      `}
+      ${DeviceQuery.desktop`
+        transform: calc(1);
+      `}
+      ${DeviceQuery.tablet`
+        transform: scale(1);
+      `}
     }
     & * img {
       height: 130px;

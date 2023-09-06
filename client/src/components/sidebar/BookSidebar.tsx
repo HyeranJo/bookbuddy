@@ -21,7 +21,7 @@ const BookSidebar = () => {
       <Styled_Sidebar.Div>
         {categoryKeys.map((v, i) => {
           return (
-            <Styled_Sidebar.Span
+            <Styled_Sidebar.Button
               key={i}
               onClick={() => {
                 onClickHandler(categoryValues[i]);
@@ -29,7 +29,7 @@ const BookSidebar = () => {
               }}
             >
               {v}
-            </Styled_Sidebar.Span>
+            </Styled_Sidebar.Button>
           );
         })}
       </Styled_Sidebar.Div>
