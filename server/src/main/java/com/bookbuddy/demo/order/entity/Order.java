@@ -28,7 +28,7 @@ public class Order {
     private int price;
     @JsonManagedReference
     @JoinColumn(name="PAYMENT_ID")
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne
     private Payment payment;
     @JsonManagedReference
     @JoinColumn(name="MEMBER_ID")

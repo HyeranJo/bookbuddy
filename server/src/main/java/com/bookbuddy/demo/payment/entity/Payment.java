@@ -17,7 +17,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @JsonBackReference
-    @OneToMany(mappedBy = "payment")
+    @OneToMany(mappedBy = "payment", cascade = {CascadeType.REMOVE})
     private List<Order> orders = new ArrayList<>();
     @Column
     private String shipName;
