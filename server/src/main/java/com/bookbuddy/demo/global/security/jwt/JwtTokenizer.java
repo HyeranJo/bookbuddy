@@ -30,8 +30,7 @@ public class JwtTokenizer {
     private String key;
     @Value("${jwt.expirationMinutes}")
     private int tokenExpiration;
-    @Value("${jwt.refreshExpirationMinutes}")
-    private int tokenRefreshExpiration;
+
     /* secret key 인코딩 */
     public String encodedKey() {
         return Encoders.BASE64.encode(key.getBytes(StandardCharsets.UTF_8));

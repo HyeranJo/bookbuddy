@@ -4,6 +4,8 @@ import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,13 @@ public class MemberServiceImpl implements MemberService{
     private PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
+    public String getEmailByAuthentication(Authentication authentication) {
+        if(authentication != null && authentication.isAuthenticated()) {
+            User principal = (User) authentication.getPrincipal();
+            return principal.getUsername();
+        }
+        return "";
+    }
     @Transactional
     @Override
     public Member createMember(Member member) {

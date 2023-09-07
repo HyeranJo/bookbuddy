@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "book": {
+      "id": "string",
+      "name": "예루살렘의 아이히만",
+      "author": "string",
+      "publisher": "string",
+      "price": 1000,
+      "date": "string",
+      "imgSrc": "string",
+      "bookmarks": "true"
+    },
+    "quantity": 1,
+    "price": 1000
+  },
+  {
+    "id": "2",
+    "book": {
+      "id": "string2",
+      "name": "호모데우스",
+      "author": "string",
+      "publisher": "string",
+      "price": 2000,
+      "date": "string",
+      "imgSrc": "string",
+      "bookmarks": "true"
+    },
+    "quantity": 2,
+    "price": 4000
+  },
+  {
+    "id": "3",
+    "book": {
+      "id": "string3",
+      "name": "지리의 힘",
+      "author": "string",
+      "publisher": "string",
+      "price": 3000,
+      "date": "string",
+      "imgSrc": "string",
+      "bookmarks": "true"
+    },
+    "quantity": 1,
+    "price": 3000
+  }
+]

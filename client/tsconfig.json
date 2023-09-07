@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["es6", "dom"],
+    "rootDir": "src",
+    "outDir": "build",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "target": "es6",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+  },
+  "typeRoots": ["./node_modules/@types", "./@types", "src/types"],
+  "include": ["src", "@types/custom.d.ts"],
+  "exclude": ["node_modules", "build"]
+}

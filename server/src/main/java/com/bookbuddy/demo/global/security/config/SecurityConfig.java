@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/signin").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/order/**").hasRole("USER")
 //                .antMatchers(HttpMethod.GET,"/bookmark/**").hasRole("USER")
 //                .antMatchers(HttpMethod.POST,"/bookmark/**").hasRole("USER")
                 .anyRequest().permitAll()
@@ -74,7 +75,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .formLogin().disable()
-                .httpBasic().disable();
+                .httpBasic().disable()
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true);
     }
 
     private class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
@@ -96,7 +100,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://bookbuddyy.netlify.app"));
 
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.addExposedHeader("Authorization");

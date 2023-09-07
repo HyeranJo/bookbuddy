@@ -2,12 +2,17 @@ package com.bookbuddy.demo.book.service;
 
 import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.repository.BookRepository;
+import com.bookbuddy.demo.bookmark.entity.Bookmark;
+import com.bookbuddy.demo.bookmark.service.BookmarkService;
 import com.bookbuddy.demo.category.entity.Category;
 import com.bookbuddy.demo.category.service.CategoryService;
 import com.bookbuddy.demo.global.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,9 +42,6 @@ public class BookService {
         return bookRepository.findAllByCategory(category, pageRequest);
     }
 
-    public boolean isFindBook(String id) {
-        return isVerifiedBook(id);
-    }
     public boolean isVerifiedBook(String id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if(optionalBook.isPresent()) {
