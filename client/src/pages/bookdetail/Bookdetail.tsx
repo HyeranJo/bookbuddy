@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 import { Infotype } from '../../model/Bookdetail';
 import { getBookDetail, getOrderList } from '../../api/GetApi';
 import { postBookDetail, postBookMark } from '../../api/PostApi';
-import { useParams } from 'react-router-dom';
-import { getCookie } from '../../utils/cookie';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
@@ -20,6 +19,7 @@ const BookDetail = () => {
   const [orderList, setOrderList] = useRecoilState(OrderListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
   const accessToken = useRecoilValue(AccessTokenAtom);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
@@ -32,7 +32,7 @@ const BookDetail = () => {
   }, [detailInfo]);
 
   useEffect(() => {
-    if (getCookie('accessToken')) {
+    if (accessToken) {
       getOrderList(setOrderList);
     }
   }, [orderList]);
@@ -111,7 +111,7 @@ const BookDetail = () => {
                     <RedButton
                       name="장바구니 담기"
                       onClick={() => {
-                        if (getCookie('accessToken')) {
+                        if (accessToken) {
                           if (
                             orderList.filter(v => {
                               return v.book.id === bookId;
@@ -138,8 +138,8 @@ const BookDetail = () => {
                     <RedButton
                       name="바로 결제하기"
                       onClick={() => {
-                        if (getCookie('accessToken')) {
-                          alert('ok');
+                        if (accessToken) {
+                          navigate('/ship');
                         } else {
                           alert('⚠️ 먼저 로그인해 주세요');
                         }

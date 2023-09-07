@@ -52,8 +52,7 @@ const Payment = () => {
   // ----------------------------- 결제할 Book data 저장 ----------------------------
   useEffect(() => {
     // orderList에서 결제할 id 리스트와 같은 id를 가진 정보를 booksToPay 에 저장
-    const filteredBooks = orderList.filter(v => bookIdsToPay.includes(v.id));
-    setBooksToPay(filteredBooks);
+    setBooksToPay(orderList.filter(v => bookIdsToPay.includes(v.id)));
   }, [orderList, bookIdsToPay]);
 
   // ==================================== 함수 ====================================
