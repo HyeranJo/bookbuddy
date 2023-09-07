@@ -1,5 +1,6 @@
 package com.bookbuddy.demo.member.entity;
 
+import com.bookbuddy.demo.board.entity.Board;
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
 import com.bookbuddy.demo.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -33,6 +34,9 @@ public class Member {
     @JsonBackReference
     @OneToMany(mappedBy = "member")
     private List<Order> orders;
+    @JsonBackReference
+    @OneToMany(mappedBy = "member")
+    private List<Board> boards;
 
     public void setPassword(String password) {
         this.password = password;
