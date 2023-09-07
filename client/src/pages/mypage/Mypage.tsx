@@ -5,7 +5,7 @@ import { Styled_Mypage } from './Mypage.style';
 import MypageTable from '../../components/table/MypageTable';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
-import { NavScrollAtom } from '../../recoil/NavScroll';
+import { NavScrollAtom } from '../../recoil/Sidebars';
 import { MyBookList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import AskTable from '../../components/table/AskTable';
