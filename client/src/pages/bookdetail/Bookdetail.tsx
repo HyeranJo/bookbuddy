@@ -1,15 +1,15 @@
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
-import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import { useEffect, useState } from 'react';
 import { Infotype } from '../../model/Bookdetail';
 import { getBookDetail, getOrderList } from '../../api/GetApi';
-import { postBookDetail } from '../../api/PostApi';
+import { postBookDetail, postBookMark } from '../../api/PostApi';
 import { useParams } from 'react-router-dom';
 import { getCookie } from '../../utils/cookie';
 import { useRecoilState } from 'recoil';
 import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
+import BookMarkIcon from '../../icons/BookMarkIcon';
 
 const BookDetail = () => {
   const bookIdParams = useParams();
@@ -19,13 +19,15 @@ const BookDetail = () => {
   const [orderList, setOrderList] = useRecoilState(OrderListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
 
-  const ClickBookmark = () => {
-    setIsClick(isClick => !isClick);
-  };
-
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
+
+  useEffect(() => {
+    if (detailInfo) {
+      setIsClick(detailInfo?.bookmark);
+    }
+  }, [detailInfo]);
 
   useEffect(() => {
     if (getCookie('accessToken')) {
@@ -53,8 +55,12 @@ const BookDetail = () => {
                     <Styled_Bookdetail.Title>
                       {detailInfo?.name}
                     </Styled_Bookdetail.Title>
-                    <Styled_Bookdetail.icon onClick={ClickBookmark}>
-                      <Bookmark
+                    <Styled_Bookdetail.icon
+                      onClick={() => {
+                        postBookMark(bookId, setIsClick);
+                      }}
+                    >
+                      <BookMarkIcon
                         fill={
                           isClick
                             ? 'var(--primary-background-color)'

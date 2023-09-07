@@ -1,10 +1,8 @@
-import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import Styled_Book from './Book.style';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { getCookie } from '../../utils/cookie';
 import BookMarkIcon from '../../icons/BookMarkIcon';
+import { postBookMark } from '../../api/PostApi';
+import { useState } from 'react';
 
 interface BookProps {
   id?: string;
@@ -14,31 +12,9 @@ interface BookProps {
   bookmark?: boolean;
 }
 
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
-
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
   const [isClick, setIsClick] = useState(props.bookmark);
-
-  const postBookMark = async (id: string | undefined) => {
-    try {
-      const response = await axios.post(
-        `${SERVER_HOST}/bookmark/${id}`,
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: getCookie('accessToken'),
-          },
-        },
-      );
-      const result = response.data;
-      setIsClick(result);
-      return result;
-    } catch (error) {
-      alert(error);
-    }
-  };
 
   return (
     <Styled_Book.container>
@@ -52,7 +28,7 @@ const Book = (props: BookProps) => {
       </Styled_Book.wrapper>
       <Styled_Book.icon
         onClick={() => {
-          postBookMark(props.id);
+          postBookMark(props.id, setIsClick);
         }}
       >
         <BookMarkIcon

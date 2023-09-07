@@ -38,3 +38,26 @@ export const postBookDetail = async (detailInfo: any) => {
     alert(error);
   }
 };
+
+export const postBookMark = async (
+  id: string | undefined,
+  setIsClick: (isClick: boolean) => void,
+) => {
+  try {
+    const response = await axios.post(
+      `${SERVER_HOST}/bookmark/${id}`,
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: getCookie('accessToken'),
+        },
+      },
+    );
+    const result = response.data;
+    setIsClick(result);
+    return result;
+  } catch (error) {
+    alert(error);
+  }
+};
