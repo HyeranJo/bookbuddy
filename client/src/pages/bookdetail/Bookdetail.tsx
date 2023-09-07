@@ -7,9 +7,10 @@ import { getBookDetail, getOrderList } from '../../api/GetApi';
 import { postBookDetail, postBookMark } from '../../api/PostApi';
 import { useParams } from 'react-router-dom';
 import { getCookie } from '../../utils/cookie';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
+import { AccessTokenAtom } from '../../recoil/UserInfo';
 
 const BookDetail = () => {
   const bookIdParams = useParams();
@@ -18,6 +19,7 @@ const BookDetail = () => {
   const [isClick, setIsClick] = useState(false);
   const [orderList, setOrderList] = useRecoilState(OrderListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
+  const accessToken = useRecoilValue(AccessTokenAtom);
 
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
@@ -57,7 +59,11 @@ const BookDetail = () => {
                     </Styled_Bookdetail.Title>
                     <Styled_Bookdetail.icon
                       onClick={() => {
-                        postBookMark(bookId, setIsClick);
+                        if (accessToken) {
+                          postBookMark(bookId, setIsClick);
+                        } else {
+                          alert('로그인 후 이용 가능합니다');
+                        }
                       }}
                     >
                       <BookMarkIcon

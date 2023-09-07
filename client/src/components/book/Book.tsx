@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { postBookMark } from '../../api/PostApi';
 import { useState } from 'react';
+import { AccessTokenAtom } from '../../recoil/UserInfo';
+import { useRecoilValue } from 'recoil';
 
 interface BookProps {
   id?: string;
@@ -15,6 +17,7 @@ interface BookProps {
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
   const [isClick, setIsClick] = useState(props.bookmark);
+  const accessToken = useRecoilValue(AccessTokenAtom);
 
   return (
     <Styled_Book.container>
@@ -28,7 +31,11 @@ const Book = (props: BookProps) => {
       </Styled_Book.wrapper>
       <Styled_Book.icon
         onClick={() => {
-          postBookMark(props.id, setIsClick);
+          if (accessToken) {
+            postBookMark(props.id, setIsClick);
+          } else {
+            alert('로그인 후 이용 가능합니다');
+          }
         }}
       >
         <BookMarkIcon
