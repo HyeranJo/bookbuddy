@@ -43,6 +43,31 @@ const BookDetail = () => {
   const price = detailInfo?.price as number;
   const formattedPrice = price ? price.toLocaleString() : '';
 
+  const addCartHandler = () => {
+    if (accessToken) {
+      if (
+        orderList.filter(v => {
+          return v.book.id === bookId;
+        }).length > 0
+      ) {
+        alert('이미 추가한 상품입니다');
+      } else {
+        postBookDetail(detailInfo);
+        bookId &&
+          setQuantityList([
+            ...quantityList,
+            {
+              id: bookId,
+              quantity: 1,
+            },
+          ]);
+        alert('상품을 장바구니에 추가했습니다');
+      }
+    } else {
+      alert('⚠️ 먼저 로그인해 주세요');
+    }
+  };
+
   const payNowHandler = async () => {
     if (accessToken) {
       const orderData = orderList.filter(v => {
@@ -148,33 +173,7 @@ const BookDetail = () => {
                 </Styled_Bookdetail.Botdiv>
                 <Styled_Bookdetail.ButtonContainer>
                   <Styled_Bookdetail.Horizontalitydiv>
-                    <RedButton
-                      name="장바구니 담기"
-                      onClick={() => {
-                        if (accessToken) {
-                          if (
-                            orderList.filter(v => {
-                              return v.book.id === bookId;
-                            }).length > 0
-                          ) {
-                            alert('이미 추가한 상품입니다');
-                          } else {
-                            postBookDetail(detailInfo);
-                            bookId &&
-                              setQuantityList([
-                                ...quantityList,
-                                {
-                                  id: bookId,
-                                  quantity: 1,
-                                },
-                              ]);
-                            alert('상품을 장바구니에 추가했습니다');
-                          }
-                        } else {
-                          alert('⚠️ 먼저 로그인해 주세요');
-                        }
-                      }}
-                    />
+                    <RedButton name="장바구니 담기" onClick={addCartHandler} />
                     <RedButton name="바로 결제하기" onClick={payNowHandler} />
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.ButtonContainer>
