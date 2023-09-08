@@ -141,7 +141,7 @@ const PayNow = () => {
                   <colgroup>
                     <col style={{ width: '15%' }}></col>
                     <col style={{ width: '20%' }}></col>
-                    <col style={{ width: '65%' }}></col>
+                    <col style={{ width: '60%' }}></col>
                   </colgroup>
                   <tbody>
                     <tr>
