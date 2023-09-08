@@ -116,7 +116,7 @@ const Payment = () => {
       postPaymentData(data) // api 전송
         .then((data: any) => {
           console.log(data);
-          alert('주문이 완료되었습니다');
+          alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
           navigate('/');
         })
         .catch(error => {

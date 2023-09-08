@@ -112,7 +112,7 @@ const PayNow = () => {
           // 쿠키 삭제
           removeCookie('PayNow', { path: '/' });
 
-          alert('주문이 완료되었습니다');
+          alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
           navigate('/');
         })
         .catch(error => {
