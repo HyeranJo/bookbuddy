@@ -10,6 +10,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
+import { removeCookie, setCookie } from '../../utils/cookie';
 
 const BookDetail = () => {
   const bookIdParams = useParams();
@@ -23,11 +24,16 @@ const BookDetail = () => {
 
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
+
+    // 쿠키 삭제
+    // 결제 페이지에서 결제 하지 않고 페이지 이동 후 다시 바로결제 시도시
+    // 이전 데이터 남아있는 현상 방지
+    removeCookie('PayNow', { path: '/' });
   }, [bookId]);
 
   useEffect(() => {
     if (detailInfo) {
-      setIsClick(detailInfo?.bookmark);
+      setIsClick(detailInfo.bookmark);
     }
   }, [detailInfo]);
 
@@ -40,6 +46,44 @@ const BookDetail = () => {
   const date = new Date(detailInfo?.date as string);
   const price = detailInfo?.price as number;
   const formattedPrice = price ? price.toLocaleString() : '';
+
+  const payNowHandler = async () => {
+    if (accessToken) {
+      const orderData = orderList.filter(v => {
+        return v.book.id === bookId;
+      });
+
+      if (
+        // 장바구니에 도서가 없는 경우
+        orderData.length === 0
+      ) {
+        // 장바구니에 추가
+        // order Id를 포함한 데이터 얻어서 쿠키에 저장
+        await postBookDetail(detailInfo).then(data => {
+          setCookie('PayNow', JSON.stringify(data), {
+            path: '/',
+          });
+        });
+        bookId &&
+          setQuantityList([
+            ...quantityList,
+            {
+              id: bookId,
+              quantity: 1,
+            },
+          ]);
+      } else {
+        // 장바구니에 이미 도서가 있는 경우
+        // 장바구니 리스트에서 추출 후 쿠키 저장
+        setCookie('PayNow', JSON.stringify(orderData[0]), {
+          path: '/',
+        });
+      }
+      navigate('/paynow/ship');
+    } else {
+      alert('⚠️ 먼저 로그인해 주세요');
+    }
+  };
 
   return (
     <>
@@ -135,16 +179,7 @@ const BookDetail = () => {
                         }
                       }}
                     />
-                    <RedButton
-                      name="바로 결제하기"
-                      onClick={() => {
-                        if (accessToken) {
-                          navigate('/ship');
-                        } else {
-                          alert('⚠️ 먼저 로그인해 주세요');
-                        }
-                      }}
-                    />
+                    <RedButton name="바로 결제하기" onClick={payNowHandler} />
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.ButtonContainer>
               </Styled_Bookdetail.InfoWrapper>

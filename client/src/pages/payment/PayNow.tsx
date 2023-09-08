@@ -13,49 +13,41 @@ import Input from '../../components/input/Input';
 import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
-import { OrderListAtom } from '../../recoil/CartItem';
 import { emailRegExp } from '../../utils/RegExp';
 import { OrderListType } from '../../model/OrderList';
-import { getOrderList } from '../../api/GetApi';
-import { getCookie } from '../../utils/cookie';
+import { getCookie, removeCookie } from '../../utils/cookie';
 import PostCode from '../../components/input/PostCode';
 import {
   PostCodeAdrsAtom,
   PostCodeModalAtom,
 } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';
+import { DeleteOrderItem } from '../../api/DeleteApi';
 
-const Payment = () => {
+// ================================================================================
+// 결제하지않고 페이지 이동하는 경우 쿠키 삭제 안 되는 상황 방지 위해 /ship(payment.tsx)컴포넌트와 분리
+// ================================================================================
+const PayNow = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
   const [shipInputs, setShipInputs] = useRecoilState(ShipInputsAtom);
   const [cstmrInputs, setCstmrInputs] = useRecoilState(CstmrInputsAtom);
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
   const allData = useRecoilValue<PaymentType>(AllDataSelector);
-  const [OrderIdsToPay, setOrderIdsToPay] = useState<string[]>([]);
-  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
-  const [booksToPay, setBooksToPay] = useState<OrderListType[]>([]);
-  const [totalPrice, setTotalPrice] = useState<number>();
   const setIsOpen = useSetRecoilState(PostCodeModalAtom);
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
   const navigate = useNavigate();
+  const [cookieValue, setCookieValue] = useState<OrderListType>();
 
   // ==================================== useEffect ================================
-
-  // ---------------------------------- api randering ------------------------------
-  useEffect(() => {
-    // 새로고침시 데이터 유지 위해 다시 api 요청
-    getOrderList(setOrderList);
-    // Cookie에서 가져오는 데이터 저장 (무한 렌더링 방지)
-    setOrderIdsToPay(getCookie('books').data);
-    setTotalPrice(getCookie('totalPrice').data);
-  }, []);
-
   // ----------------------------- 결제할 Book data 저장 ----------------------------
   useEffect(() => {
-    // orderList에서 결제할 id 리스트와 같은 id를 가진 정보를 booksToPay 에 저장
-    setBooksToPay(orderList.filter(v => OrderIdsToPay.includes(v.id)));
-  }, [orderList, OrderIdsToPay]);
+    if (!getCookie('PayNow')) {
+      location.reload();
+    } else {
+      setCookieValue(getCookie('PayNow'));
+    }
+  }, []);
 
   // ==================================== 함수 ====================================
 
@@ -108,14 +100,18 @@ const Payment = () => {
       alert('이메일 형식에 맞게 작성해주세요');
     } else {
       // api 전송
-      let data = {
-        orders: [...OrderIdsToPay],
+      const data = {
+        orders: [getCookie('PayNow').id],
         ...allDataCopy,
       };
-
       postPaymentData(data) // api 전송
         .then((data: any) => {
           console.log(data);
+          // 장바구니 삭제
+          DeleteOrderItem(getCookie('PayNow').id);
+          // 쿠키 삭제
+          removeCookie('PayNow', { path: '/' });
+
           alert('주문이 완료되었습니다');
           navigate('/');
         })
@@ -299,20 +295,21 @@ const Payment = () => {
               <span>결제하실 도서와 금액은</span>
               <br />
               <br />
-              {booksToPay.map((v, i) => {
-                return (
-                  <span key={v.id}>
-                    {v.book.name} - {v.quantity} 권
-                    {i === booksToPay.length - 1 ? null : <span> / </span>}
-                  </span>
-                );
-              })}
-              <br />
-              <span>
-                배송비 3,000원, 총합{' '}
-                {totalPrice && (totalPrice + 3000).toLocaleString()}원
-              </span>
-              <br />
+
+              {cookieValue ? (
+                <>
+                  <div>
+                    {cookieValue.book.name} - {cookieValue.quantity} 권
+                  </div>
+                  <div>
+                    배송비 3,000원, 총합{' '}
+                    {(cookieValue.book.price + 3000).toLocaleString()}원
+                  </div>
+                </>
+              ) : (
+                <span>loading...</span>
+              )}
+
               <br />
               <span>입니다.</span>
             </Styled_Payment.BookInfo>
@@ -327,4 +324,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default PayNow;
