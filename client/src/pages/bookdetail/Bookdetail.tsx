@@ -25,23 +25,19 @@ const BookDetail = () => {
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
 
+    if (detailInfo) {
+      setIsClick(detailInfo.bookmark);
+    }
+
+    if (accessToken) {
+      getOrderList(setOrderList);
+    }
+
     // 쿠키 삭제
     // 결제 페이지에서 결제 하지 않고 페이지 이동 후 다시 바로결제 시도시
     // 이전 데이터 남아있는 현상 방지
     removeCookie('PayNow', { path: '/' });
-  }, [bookId]);
-
-  useEffect(() => {
-    if (detailInfo) {
-      setIsClick(detailInfo.bookmark);
-    }
-  }, [detailInfo]);
-
-  useEffect(() => {
-    if (accessToken) {
-      getOrderList(setOrderList);
-    }
-  }, [orderList]);
+  }, []);
 
   const date = new Date(detailInfo?.date as string);
   const price = detailInfo?.price as number;
