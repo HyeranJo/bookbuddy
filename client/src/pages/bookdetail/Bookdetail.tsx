@@ -16,18 +16,16 @@ const BookDetail = () => {
   const bookIdParams = useParams();
   const bookId = bookIdParams.id;
   const [detailInfo, setDetailInfo] = useState<Infotype>();
-  const [isClick, setIsClick] = useState(false);
+  const [isClick, setIsClick] = useState(detailInfo?.bookmark);
   const [orderList, setOrderList] = useRecoilState(OrderListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
   const accessToken = useRecoilValue(AccessTokenAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getBookDetail(setDetailInfo, bookId);
-
-    if (detailInfo) {
-      setIsClick(detailInfo.bookmark);
-    }
+    getBookDetail(setDetailInfo, bookId).then(detailInfoData => {
+      setIsClick(detailInfoData.bookmark);
+    });
 
     if (accessToken) {
       getOrderList(setOrderList);

@@ -91,8 +91,10 @@ export const getBookDetail = async (
     });
     const result = response.data;
     setDetailInfo(result);
+    return result;
   } catch (error) {
     alert(error);
+    throw error;
   }
 };
 
