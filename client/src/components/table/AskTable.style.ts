@@ -18,7 +18,8 @@ export const Styled_AskTable = {
   H1: styled.h1`
     font-size: var(--subtitle-font-size);
     margin-bottom: 20px;
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
 
     ${DeviceQuery.bigScreen`
       margin-bottom: calc(20px / ${screenScale.bigScreen});
@@ -32,6 +33,11 @@ export const Styled_AskTable = {
       margin-bottom: calc(20px / ${screenScale.tablet});
       font-size:calc(var(--subtitle-font-size) / ${screenScale.tablet});
     `}
+
+    & > div {
+      display: flex;
+      align-items: center;
+    }
   `,
   MessageSpan: styled.span`
     margin-left: 15px;

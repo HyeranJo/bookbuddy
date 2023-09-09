@@ -1,15 +1,33 @@
 import React from 'react';
 import { Styled_AskTable } from './AskTable.style';
+import RedButton from '../buttons/RedButton';
+import { useNavigate } from 'react-router-dom';
 
 interface AskTableProps {
   title: string;
 }
 
 const AskTable = ({ title }: AskTableProps) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Styled_AskTable.Container>
-        <Styled_AskTable.H1>{title}</Styled_AskTable.H1>
+        <div>
+          <Styled_AskTable.H1>
+            <span>{title}</span>
+            <div>
+              <RedButton
+                name="문의하기"
+                height={30}
+                width={100}
+                onClick={() => {
+                  navigate('/customer/apply');
+                }}
+              />
+            </div>
+          </Styled_AskTable.H1>
+        </div>
         <Styled_AskTable.Table>
           <colgroup>
             <col style={{ width: '20%' }}></col>
