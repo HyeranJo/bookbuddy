@@ -39,16 +39,19 @@ export const Styled_Detail = {
       width: 1300px;
       align-items: center;
       flex-flow: column;
-      gap: 20px;
+      gap: 65px;
 
       ${DeviceQuery.bigScreen`
         width: calc(1300px / ${screenScale.bigScreen});
+        gap: calc(65px / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
         width: calc(1300px / ${screenScale.desktop});
+        gap: calc(65px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
         width: calc(1300px / ${screenScale.tablet});
+        gap: calc(65px / ${screenScale.tablet});
       `}
 
       .detail {
@@ -74,23 +77,23 @@ export const Styled_Detail = {
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     display: inline-block;
     width: 1095px;
     align-items: start;
 
     ${DeviceQuery.bigScreen`
-     margin-bottom: calc(5px / ${screenScale.bigScreen});
+     margin-bottom: calc(20px / ${screenScale.bigScreen});
      font-size:calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
      width: calc(1095px / ${screenScale.bigScreen});
    `}
     ${DeviceQuery.desktop`
-     margin-bottom: calc(5px / ${screenScale.desktop});
+     margin-bottom: calc(20px / ${screenScale.desktop});
      font-size:calc(var(--subtitle-font-size) / ${screenScale.desktop});
      width: calc(1095px / ${screenScale.desktop});
    `}
    ${DeviceQuery.tablet`
-     margin-bottom: calc(5px / ${screenScale.tablet});
+     margin-bottom: calc(20px / ${screenScale.tablet});
      font-size:calc(var(--subtitle-font-size) / ${screenScale.tablet});
      width: calc(1095px / ${screenScale.tablet});
    `}
