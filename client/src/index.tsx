@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       { path: '/mypage/:email', element: <Mypage /> },
       { path: '/customer', element: <Customer /> },
       { path: '/search', element: <Search /> },
-      { path: '/apply', element: <Apply /> },
+      { path: '/customer/apply', element: <Apply /> },
       { path: '/customer/detail', element: <Detail /> },
     ],
   },
