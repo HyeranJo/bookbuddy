@@ -16,6 +16,7 @@ import Bookdetail from './pages/bookdetail/Bookdetail';
 import Customer from './pages/customer/Customer';
 import Search from './pages/search/Search';
 import Apply from './pages/apply/Apply';
+import Detail from './pages/customer/Detail';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: '/customer', element: <Customer /> },
       { path: '/search', element: <Search /> },
       { path: '/apply', element: <Apply /> },
+      { path: '/customer/detail', element: <Detail /> },
     ],
   },
 ]);
