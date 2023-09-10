@@ -7,6 +7,8 @@ import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -49,5 +51,9 @@ public class BoardService {
         Board findBoard = findVerifyBoard(boardId);
 
         boardRepository.delete(findBoard);
+    }
+
+    public Page<Board> findBoards(PageRequest pageRequest) {
+        return boardRepository.findAll(pageRequest);
     }
 }

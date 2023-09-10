@@ -5,6 +5,9 @@ import com.bookbuddy.demo.board.entity.Board;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface BoardMapper {
     default Board boardPostDtoToBoard(BoardDto.Post boardDto) {
@@ -29,5 +32,15 @@ public interface BoardMapper {
                 boardDto.getTitle(),
                 boardDto.getContent()
         );
+    }
+
+    default List<BoardDto.Response> boardsToBoardResponseDtos(List<Board> boards) {
+        return boards.stream()
+                .map(e->new BoardDto.Response(
+                        e.getId(),
+                        e.getTitle(),
+                        e.getContent(),
+                        e.getMember().getId()
+                )).collect(Collectors.toList());
     }
 }
