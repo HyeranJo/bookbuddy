@@ -2,6 +2,7 @@ package com.bookbuddy.demo.book.controller;
 
 import com.bookbuddy.demo.book.dto.BookDto;
 import com.bookbuddy.demo.book.entity.Book;
+import com.bookbuddy.demo.book.entity.Book.BOOK_SORT;
 import com.bookbuddy.demo.book.mapper.BookMapper;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.bookmark.service.BookmarkService;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -34,14 +36,14 @@ public class BookController {
     @GetMapping("/list")
     public ResponseEntity getBooks(@RequestParam("page") @Positive int page,
                                    @RequestParam("size") @Positive int size,
+                                   @RequestParam(value = "order", required = false) String order,
                                    Authentication authentication) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Book> findBook = bookService.findBooks(pageRequest);
+        Page<Book> findBook = bookService.findBooks(pageRequest, BOOK_SORT.of(order));
 
         // set isBookmark
         List<BookDto.Response> responses = mapper.BooksToBookResponseDtos(findBook.getContent());
-        for(BookDto.Response response:responses) {
-
+        for(BookDto.Response response : responses) {
             response.setBookmark(
                     bookmarkService.getIsBookmark(
                             response.getId(),
@@ -58,9 +60,10 @@ public class BookController {
     public ResponseEntity getBooksByCategory(@PathVariable("category-id") @Positive long categoryId,
                                              @RequestParam("page") @Positive int page,
                                              @RequestParam("size") @Positive int size,
+                                             @RequestParam(value = "order",required = false) String order,
                                              Authentication authentication) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Book> findBook = bookService.findBooksByCategory(pageRequest, categoryId);
+        Page<Book> findBook = bookService.findBooksByCategory(pageRequest, BOOK_SORT.of(order), categoryId);
 
         List<BookDto.Response> responses = mapper.BooksToBookResponseDtos(findBook.getContent());
         for(BookDto.Response response:responses) {
