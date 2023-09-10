@@ -46,7 +46,7 @@ public class Book {
         BOOK_SORT_DEFAULT("default"),
         BOOK_SORT_NAME("name"),
         BOOK_SORT_PRICE("price"),
-        BOOK_SORT_BOOKMARK("name");
+        BOOK_SORT_BOOKMARK("bookmark");
 
         private String name;
         BOOK_SORT(String name) {

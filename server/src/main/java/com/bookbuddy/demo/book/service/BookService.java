@@ -37,7 +37,7 @@ public class BookService {
         } else if(order.isPrice()) {
             pageRequest = pageRequest.withSort(Sort.by("price").ascending());
         } else if(order.isBookmark()) {
-            log.info("# bookmark");
+            return bookRepository.findAllByBookmark(pageRequest);
         }
 
         return bookRepository.findAll(pageRequest);
@@ -45,15 +45,16 @@ public class BookService {
 
 
     public Page<Book> findBooksByCategory(PageRequest pageRequest, BOOK_SORT order, long categoryId) {
+        Category category = categoryService.findVerifyCategory(categoryId);
+
         if(order.isName()) {
             pageRequest = pageRequest.withSort(Sort.by("name").ascending());
         } else if(order.isPrice()) {
             pageRequest = pageRequest.withSort(Sort.by("price").ascending());
         } else if(order.isBookmark()) {
-            log.info("# bookmark");
+            return bookRepository.findAllByBookmarkAndCategory(category, pageRequest);
         }
 
-        Category category = categoryService.findVerifyCategory(categoryId);
         return bookRepository.findAllByCategory(category, pageRequest);
     }
 
