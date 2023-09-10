@@ -22,4 +22,12 @@ public interface BoardMapper {
                 board.getMember().getId()
         );
     }
+
+    default Board boardPatchDtoToBoard(BoardDto.Patch boardDto) {
+        return new Board(
+                boardDto.getId(),
+                boardDto.getTitle(),
+                boardDto.getContent()
+        );
+    }
 }

@@ -24,4 +24,16 @@ public class BoardDto {
         private String content;
         private long memberId;
     }
+
+    @Getter
+    @AllArgsConstructor
+    public static class Patch {
+        private long id;
+        private String title;
+        private String content;
+
+        public void setId(long id) {
+            this.id = id;
+        }
+    }
 }

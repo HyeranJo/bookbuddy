@@ -37,4 +37,18 @@ public class Board extends Auditable {
         this.title = title;
         this.content = content;
     }
+
+    public Board(long id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
