@@ -44,4 +44,10 @@ public class BoardService {
 
         return boardRepository.save(findBoard);
     }
+
+    public void deleteBoard(long boardId) {
+        Board findBoard = findVerifyBoard(boardId);
+
+        boardRepository.delete(findBoard);
+    }
 }
