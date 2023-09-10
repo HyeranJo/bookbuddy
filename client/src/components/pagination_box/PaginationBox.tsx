@@ -11,7 +11,7 @@ const PaginationBox = () => {
       <Pagination
         activePage={page}
         itemsCountPerPage={20}
-        totalItemsCount={500}
+        totalItemsCount={60}
         pageRangeDisplayed={5}
         prevPageText={'<'}
         nextPageText={'>'}

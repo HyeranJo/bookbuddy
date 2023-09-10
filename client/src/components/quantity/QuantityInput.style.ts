@@ -35,14 +35,17 @@ export const Styled_QuantityInput = {
     ${DeviceQuery.bigScreen`
       width: calc(27px / ${screenScale.bigScreen});
       height: calc(27px / ${screenScale.bigScreen});
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(27px / ${screenScale.desktop});
       height: calc(27px / ${screenScale.desktop});
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       width: calc(27px / ${screenScale.tablet});
       height: calc(27px / ${screenScale.tablet});
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
     `}
 
     background-color: var(--category-color);

@@ -49,6 +49,7 @@ const List = () => {
                       name={v.name}
                       price={v.price}
                       image={v.imgSrc}
+                      bookmark={v.bookmark}
                     />
                   );
                 })

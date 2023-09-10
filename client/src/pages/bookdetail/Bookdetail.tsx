@@ -4,15 +4,20 @@ import RedButton from '../../components/buttons/RedButton';
 import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import { useEffect, useState } from 'react';
 import { Infotype } from '../../model/Bookdetail';
-import { getBookDetail } from '../../api/GetApi';
+import { getBookDetail, getOrderList } from '../../api/GetApi';
 import { postBookDetail } from '../../api/PostApi';
 import { useParams } from 'react-router-dom';
+import { getCookie } from '../../utils/cookie';
+import { useRecoilState } from 'recoil';
+import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
 
 const BookDetail = () => {
   const bookIdParams = useParams();
   const bookId = bookIdParams.id;
   const [detailInfo, setDetailInfo] = useState<Infotype>();
   const [isClick, setIsClick] = useState(false);
+  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
+  const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
 
   const ClickBookmark = () => {
     setIsClick(isClick => !isClick);
@@ -21,6 +26,12 @@ const BookDetail = () => {
   useEffect(() => {
     getBookDetail(setDetailInfo, bookId);
   }, [bookId]);
+
+  useEffect(() => {
+    if (getCookie('accessToken')) {
+      getOrderList(setOrderList);
+    }
+  }, [orderList]);
 
   const date = new Date(detailInfo?.date as string);
   const price = detailInfo?.price as number;
@@ -88,11 +99,40 @@ const BookDetail = () => {
                     <RedButton
                       name="장바구니 담기"
                       onClick={() => {
-                        postBookDetail(detailInfo);
-                        alert('상품을 장바구니에 추가했습니다');
+                        if (getCookie('accessToken')) {
+                          if (
+                            orderList.filter(v => {
+                              return v.book.id === bookId;
+                            }).length > 0
+                          ) {
+                            alert('이미 추가한 상품입니다');
+                          } else {
+                            postBookDetail(detailInfo);
+                            bookId &&
+                              setQuantityList([
+                                ...quantityList,
+                                {
+                                  id: bookId,
+                                  quantity: 1,
+                                },
+                              ]);
+                            alert('상품을 장바구니에 추가했습니다');
+                          }
+                        } else {
+                          alert('⚠️ 먼저 로그인해 주세요');
+                        }
                       }}
                     />
-                    <RedButton name="바로 결제하기" />
+                    <RedButton
+                      name="바로 결제하기"
+                      onClick={() => {
+                        if (getCookie('accessToken')) {
+                          alert('ok');
+                        } else {
+                          alert('⚠️ 먼저 로그인해 주세요');
+                        }
+                      }}
+                    />
                   </Styled_Bookdetail.Horizontalitydiv>
                 </Styled_Bookdetail.ButtonContainer>
               </Styled_Bookdetail.InfoWrapper>

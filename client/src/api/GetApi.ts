@@ -23,7 +23,12 @@ export const getBookList = async ({
   try {
     const response = await axios.get(
       `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20`,
-      { headers: { 'ngrok-skip-browser-warning': true } },
+      {
+        headers: {
+          'ngrok-skip-browser-warning': true,
+          Authorization: getCookie('accessToken'),
+        },
+      },
     );
     const result = response.data.data;
     setListData(result);
@@ -42,12 +47,13 @@ export const getOrderList = async (
       // const response = await axios.get('./dummy.json', {
       headers: {
         'ngrok-skip-browser-warning': true,
-        // Authorization: getCookie('accessToken'),
+        Authorization: getCookie('accessToken'),
       },
     });
     setOrderList(response.data);
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };
 
@@ -116,6 +122,20 @@ export const getBookmarkmypage = async (
       },
     });
     setBookmarkList(response.data.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getLogout = async () => {
+  try {
+    await axios.get(`${SERVER_HOST}/logout`),
+      {
+        headers: {
+          'ngrok-skip-browser-warning': true,
+          Authorization: getCookie('accessToken'),
+        },
+      };
   } catch (err) {
     console.log(err);
   }

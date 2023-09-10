@@ -6,7 +6,7 @@ import MypageTable from '../../components/table/MypageTable';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/NavScroll';
-import { BookList, MyBookList } from '../../model/BookList';
+import { MyBookList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import AskTable from '../../components/table/AskTable';
 
@@ -94,6 +94,7 @@ const Mypage = () => {
                         name={v.book.name}
                         price={v.book.price}
                         image={v.book.imgSrc}
+                        bookmark={true}
                       />
                     </Styled_Mypage.Book>
                   );

@@ -114,5 +114,9 @@ export const Styled_InfoNav = {
     ${DeviceQuery.tablet`
       font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
     `}
+
+    &:hover {
+      color: var(--primary-background-color);
+    }
   `,
 };

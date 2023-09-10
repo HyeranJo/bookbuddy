@@ -23,7 +23,12 @@ const Order = () => {
 
   // ---------------------------------- api randering ------------------------------
   useEffect(() => {
-    getOrderList(setOrderList);
+    getOrderList(setOrderList).catch(err => {
+      if (err.message === 'Request failed with status code 403') {
+        alert('로그인한 사용자만 이용 가능합니다');
+        navigate('/');
+      }
+    });
   }, [orderList]);
 
   // ==================================== 함수 ====================================
