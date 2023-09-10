@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookie';
-import BookMarkIcon from '../../icons/BookMarkIcon';
+// import BookMarkIcon from '../../icons/BookMarkIcon';
 
 interface BookProps {
   id?: string;
@@ -18,6 +18,7 @@ const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
+
   const [isClick, setIsClick] = useState(props.bookmark);
 
   const postBookMark = async (id: string | undefined) => {
@@ -36,7 +37,7 @@ const Book = (props: BookProps) => {
       setIsClick(result);
       return result;
     } catch (error) {
-      alert(error);
+      alert('error');
     }
   };
 
