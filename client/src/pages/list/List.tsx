@@ -6,7 +6,7 @@ import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
 import { getBookList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
-import { PageAtom, SidebarIdAtom } from '../../recoil/BookList';
+import { PageAtom, SidebarIdAtom } from '../../recoil/Sidebars';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
 import category from '../../utils/SidebarCategory';
 

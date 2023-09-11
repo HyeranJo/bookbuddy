@@ -152,7 +152,9 @@ const CartTable = () => {
                     <td
                       className="delete"
                       onClick={() => {
-                        DeleteOrderItem(v.id);
+                        DeleteOrderItem(v.id).then(() => {
+                          location.reload();
+                        });
                       }}
                     >
                       삭제하기

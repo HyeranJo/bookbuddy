@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Styled_QuantityInput } from './QuantityInput.style';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { patchOrderQuantity } from '../../api/PatchApi';
@@ -12,6 +12,12 @@ interface QuantityType {
 const QuantityInput = ({ idx, id }: QuantityType) => {
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
   const orderList = useRecoilValue(OrderListAtom);
+
+  useEffect(() => {
+    if (quantityList[idx]?.quantity !== undefined) {
+      location.reload();
+    }
+  }, []);
 
   /** 클릭한 input의 order아이디를 검색 */
   const orderIdHandler = () => {
@@ -65,7 +71,7 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
       <Styled_QuantityInput.Input
         type="number"
         value={
-          quantityList.length !== 0
+          quantityList.length !== 0 && quantityList[idx]?.quantity !== undefined
             ? quantityList[idx].quantity
               ? quantityList[idx].quantity
               : '' // 직접 수정시 글자 지웠을 때 0 뜨는 현상 방지
