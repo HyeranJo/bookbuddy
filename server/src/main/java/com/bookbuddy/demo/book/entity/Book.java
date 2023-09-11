@@ -42,6 +42,36 @@ public class Book {
     @ManyToOne
     private Category category;
 
+    public enum BOOK_SORT {
+        BOOK_SORT_DEFAULT("default"),
+        BOOK_SORT_NAME("name"),
+        BOOK_SORT_PRICE("price"),
+        BOOK_SORT_BOOKMARK("bookmark");
+
+        private String name;
+        BOOK_SORT(String name) {
+            this.name = name;
+        }
+
+        public static BOOK_SORT of(String name) {
+            for(BOOK_SORT data : BOOK_SORT.values()) {
+                if(data.name.equals(name)) {
+                    return data;
+                }
+            }
+            return BOOK_SORT_DEFAULT;
+        }
+        public boolean isName() {
+            return this.name.equals(BOOK_SORT_NAME.name);
+        }
+        public boolean isPrice() {
+            return this.name.equals(BOOK_SORT_PRICE.name);
+        }
+        public boolean isBookmark() {
+            return this.name.equals(BOOK_SORT_BOOKMARK.name);
+        }
+    }
+
     public Book(String id) {
         this.id = id;
     }

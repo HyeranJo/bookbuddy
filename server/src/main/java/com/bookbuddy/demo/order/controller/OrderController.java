@@ -27,9 +27,6 @@ public class OrderController {
     @PostMapping
     public ResponseEntity postOrder(@RequestBody OrderDto.Post orderDto,
                                     Authentication authentication) {
-        if(authentication == null || ! authentication.isAuthenticated()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
         User user = (User) authentication.getPrincipal();
 
         Order createdOrder = orderService.createOrder(user.getUsername(), mapper.orderPostDtoToOrder(orderDto), orderDto);
@@ -46,10 +43,6 @@ public class OrderController {
     /* 장바구니 내역 */
     @GetMapping
     public ResponseEntity getOrders(Authentication authentication) {
-        if(authentication == null || ! authentication.isAuthenticated()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
-
         User user = (User) authentication.getPrincipal();
         List<Order> orders = orderService.findOrders(user.getUsername());
 

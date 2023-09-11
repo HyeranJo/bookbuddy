@@ -63,4 +63,10 @@ public class Member {
             order.addMember(this);
         }
     }
+    public void addBoard(Board board) {
+        boards.add(board);
+        if(board.getMember() != this) {
+            board.addMember(this);
+        }
+    }
 }
