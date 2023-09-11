@@ -1,7 +1,7 @@
 package com.bookbuddy.demo.payment.entity;
 
+import com.bookbuddy.demo.cart.entity.Cart;
 import com.bookbuddy.demo.member.entity.Member;
-import com.bookbuddy.demo.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -20,7 +20,7 @@ public class Payment {
     private long id;
     @JsonBackReference
     @OneToMany(mappedBy = "payment", cascade = {CascadeType.REMOVE})
-    private List<Order> orders = new ArrayList<>();
+    private List<Cart> carts = new ArrayList<>();
     @Column
     private String shipName;
     @Column
@@ -44,10 +44,10 @@ public class Payment {
     @ManyToOne
     private Member member;
 
-    public void addOrder(Order order) {
-        orders.add(order);
-        if(order.getPayment() != this) {
-            order.setPayment(this);
+    public void addCart(Cart cart) {
+        carts.add(cart);
+        if(cart.getPayment() != this) {
+            cart.setPayment(this);
         }
     }
     public void addMember(Member member) {

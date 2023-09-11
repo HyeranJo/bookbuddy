@@ -1,12 +1,9 @@
 package com.bookbuddy.demo.payment.dto;
 
-import com.bookbuddy.demo.order.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 public class PaymentDto {

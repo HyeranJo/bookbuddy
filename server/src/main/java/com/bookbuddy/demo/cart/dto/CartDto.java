@@ -1,14 +1,12 @@
-package com.bookbuddy.demo.order.dto;
+package com.bookbuddy.demo.cart.dto;
 
 import com.bookbuddy.demo.book.entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 
-public class OrderDto {
+public class CartDto {
     @Getter
     @AllArgsConstructor
     public static class Post {
