@@ -14,7 +14,7 @@ Quill.register('modules/imageActions', ImageActions);
 Quill.register('modules/imageFormats', ImageFormats);
 
 const toolbarOptions = [
-  ['link', 'image', 'video'],
+  // ['link', 'image', 'video'],
   [{ header: [1, 2, 3, false] }],
   ['bold', 'italic', 'underline', 'strike'],
   ['blockquote'],
@@ -55,6 +55,7 @@ const Editor = () => {
 
   useEffect(() => {
     setCSDetail({ ...csDetail, content: patchValue });
+    setValue('');
   }, [patchValue]);
 
   // const imageHandler = () => {
