@@ -86,12 +86,15 @@ export const getBookDetail = async (
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
       },
     });
     const result = response.data;
     setDetailInfo(result);
+    return result;
   } catch (error) {
     alert(error);
+    throw error;
   }
 };
 

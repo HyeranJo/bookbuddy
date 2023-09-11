@@ -1,6 +1,6 @@
 import { Styled_MypageSidebar } from './MypageSidebar.style';
 import { useSetRecoilState } from 'recoil';
-import { NavScrollAtom } from '../../recoil/NavScroll';
+import { NavScrollAtom } from '../../recoil/Sidebars';
 
 const MypageSidebar = () => {
   const setNavScroll = useSetRecoilState(NavScrollAtom);

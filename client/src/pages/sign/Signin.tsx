@@ -59,8 +59,8 @@ const Signin = () => {
           console.log(accessToken);
         }
       })
-      .catch(err => {
-        alert(`${err}`);
+      .catch(() => {
+        alert('아이디 비밀번호가 일치하지 않습니다.');
       });
   };
   const { mutate } = useMutation(signinUser);

@@ -14,13 +14,15 @@ export const OrderListAtom = atom<OrderListType[]>({
   default: [],
 });
 
-/** Quantity Input 수량 */
+/** Quantity Input 장바구니 수량 리스트
+ * @id : 도서 id
+ */
 export const QuantityListAtom = atom<{ id: string; quantity: number }[]>({
   key: 'QuantitListAtom',
   default: [],
 });
 
-/** 최종 결제할 도서,수량 리스트 */
+/** 최종 결제할 도서 '장바구니 id' 리스트 */
 export const FinalPaymentDetailsAtom = selector({
   key: 'FinalPaymentDetailsAtom',
   get: ({ get }) => {
@@ -68,14 +70,16 @@ export const TotalPriceSelector = selector({
         }
       }
     }
+
     // 수량*금액한 arr을 다 더해서 총합에 리턴
     if (arr.length !== 0) {
-      return arr.reduce((acc: number, cur: number) => {
-        setCookie('totalPrice', JSON.stringify({ data: acc + cur }), {
-          path: '/',
-        }); // 새로고침시 데이터 유실 방지
+      const price = arr.reduce((acc: number, cur: number) => {
         return acc + cur;
       });
+      setCookie('totalPrice', JSON.stringify({ data: price }), {
+        path: '/',
+      }); // 새로고침시 데이터 유실 방지
+      return price;
     } else {
       return 0;
     }

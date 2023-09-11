@@ -156,31 +156,41 @@ export const Styled_Payment = {
       width: calc(453px / ${screenScale.tablet});
       margin-bottom: calc(20px / ${screenScale.tablet});
     `}
+
     & > h2 {
       margin: 15px 0;
+      font-size: var(--subtitle-font-size);
 
       ${DeviceQuery.bigScreen`
         margin: calc(15px / ${screenScale.bigScreen}) 0;
+        font-size: calc(var(--subtitle-font-size) / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
         margin: calc(15px / ${screenScale.desktop}) 0;
+        font-size: calc(var(--subtitle-font-size) / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
         margin: calc(15px / ${screenScale.tablet}) 0;
+        font-size: calc(var(--subtitle-font-size) / ${screenScale.tablet});
       `}
     }
+
     & input,
     label {
       margin-right: 10px;
+      font-size: var(--basic-font-size);
 
       ${DeviceQuery.bigScreen`
         margin-right: calc(10px / ${screenScale.bigScreen});
+        font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
         margin-right: calc(10px / ${screenScale.desktop});
+        font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
         margin-right: calc(10px / ${screenScale.tablet});
+        font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
       `}
     }
   `,
