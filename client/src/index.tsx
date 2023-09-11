@@ -15,7 +15,10 @@ import Payment from './pages/payment/Payment';
 import Bookdetail from './pages/bookdetail/Bookdetail';
 import Customer from './pages/customer/Customer';
 import Search from './pages/search/Search';
+import Apply from './pages/apply/Apply';
+import Detail from './pages/customer/Detail';
 import PayNow from './pages/payment/PayNow';
+
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,8 @@ const router = createBrowserRouter([
       { path: '/mypage/:email', element: <Mypage /> },
       { path: '/customer', element: <Customer /> },
       { path: '/search', element: <Search /> },
+      { path: '/customer/apply', element: <Apply /> },
+      { path: '/customer/detail', element: <Detail /> },
     ],
   },
 ]);
