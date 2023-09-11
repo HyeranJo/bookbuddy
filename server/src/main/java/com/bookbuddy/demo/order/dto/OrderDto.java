@@ -1,4 +1,4 @@
-package com.bookbuddy.demo.payment.dto;
+package com.bookbuddy.demo.order.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-public class PaymentDto {
+public class OrderDto {
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Post {
-        private List<Long> orders;
+        private List<Long> carts;
         private String shipName;
         private String address1;
         private String address2;
@@ -39,7 +39,7 @@ public class PaymentDto {
     @AllArgsConstructor
     public static class Response {
         private long id;
-        private List<Long> orders;
+        private List<Long> carts;
         private String shipName;
         private String address1;
         private String address2;

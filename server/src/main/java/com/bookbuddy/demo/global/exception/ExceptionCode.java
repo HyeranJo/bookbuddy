@@ -6,7 +6,8 @@ public enum ExceptionCode {
     ORDER_NOT_FOUND(404,"Order not found"),
     CATEGORY_NOT_FOUND(404,"Category not found"),
     PAYMENT_NOT_FOUND(404, "Payment not found"),
-    BOARD_NOT_FOUND(404, "Board not found");
+    BOARD_NOT_FOUND(404, "Board not found"),
+    CART_NOT_FOUND(404, "Cart not found");
     
     private int status;
     private String message;

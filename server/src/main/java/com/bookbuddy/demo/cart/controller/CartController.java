@@ -34,7 +34,7 @@ public class CartController {
     }
     /* 장바구니 수량 업데이트 */
     @PatchMapping("/{cart-id}")
-    public ResponseEntity patchOrder(@PathVariable("cart-id") @Positive long cartId,
+    public ResponseEntity patchCart(@PathVariable("cart-id") @Positive long cartId,
                                      @RequestBody @Valid CartDto.Patch cartDto) {
         cartDto.setId(cartId);
         Cart cart = cartService.updateCart(mapper.cartPatchDtoToCart(cartDto));

@@ -1,4 +1,4 @@
-package com.bookbuddy.demo.payment.entity;
+package com.bookbuddy.demo.order.entity;
 
 import com.bookbuddy.demo.cart.entity.Cart;
 import com.bookbuddy.demo.member.entity.Member;
@@ -12,14 +12,15 @@ import java.util.List;
 
 @ToString
 @Getter
+@Table(name="ORDERS")
 @Entity
 @NoArgsConstructor
-public class Payment {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @JsonBackReference
-    @OneToMany(mappedBy = "payment", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.REMOVE})
     private List<Cart> carts = new ArrayList<>();
     @Column
     private String shipName;
@@ -46,18 +47,18 @@ public class Payment {
 
     public void addCart(Cart cart) {
         carts.add(cart);
-        if(cart.getPayment() != this) {
-            cart.setPayment(this);
+        if(cart.getOrder() != this) {
+            cart.setOrder(this);
         }
     }
     public void addMember(Member member) {
         this.member = member;
-        if(! member.getPayments().contains(this)) {
-            member.getPayments().add(this);
+        if(! member.getOrders().contains(this)) {
+            member.getOrders().add(this);
         }
     }
 
-    public Payment(String shipName, String address1, String address2, String shipMobile, String shipTel, String cstmrName, String cstmrMobile, String cstmrTel, String email) {
+    public Order(String shipName, String address1, String address2, String shipMobile, String shipTel, String cstmrName, String cstmrMobile, String cstmrTel, String email) {
         this.shipName = shipName;
         this.address1 = address1;
         this.address2 = address2;

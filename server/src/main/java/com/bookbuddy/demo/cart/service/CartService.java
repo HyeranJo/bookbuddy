@@ -59,6 +59,6 @@ public class CartService {
 
     private Cart findVerifyCart(long cartId) {
         return cartRepository.findById(cartId)
-                .orElseThrow(()->new BusinessException(ExceptionCode.ORDER_NOT_FOUND));
+                .orElseThrow(()->new BusinessException(ExceptionCode.CART_NOT_FOUND));
     }
 }

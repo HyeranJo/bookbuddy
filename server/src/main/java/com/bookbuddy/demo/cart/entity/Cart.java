@@ -2,7 +2,7 @@ package com.bookbuddy.demo.cart.entity;
 
 import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.member.entity.Member;
-import com.bookbuddy.demo.payment.entity.Payment;
+import com.bookbuddy.demo.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @ToString
 @Getter
-@Table(name="ORDERS")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,9 +26,9 @@ public class Cart {
     @Column
     private int price;
     @JsonManagedReference
-    @JoinColumn(name="PAYMENT_ID")
+    @JoinColumn(name="ORDER_ID")
     @ManyToOne
-    private Payment payment;
+    private Order order;
     @JsonManagedReference
     @JoinColumn(name="MEMBER_ID")
     @ManyToOne
@@ -52,10 +51,10 @@ public class Cart {
         }
     }
 
-    public void addPayment(Payment payment) {
-        this.payment = payment;
-        if(! payment.getCarts().contains(this)) {
-            payment.getCarts().add(this);
+    public void addOrder(Order order) {
+        this.order = order;
+        if(! order.getCarts().contains(this)) {
+            order.getCarts().add(this);
         }
     }
 
@@ -66,8 +65,8 @@ public class Cart {
         }
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public void setQuantity(int quantity) {
