@@ -4,9 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { getCSDetail, getCSList } from '../../api/GetApi';
 import { useEffect, useState } from 'react';
 import { CSListType } from '../../model/CStype';
-import { DeleteCSItem } from '../../api/DeleteApi';
-import { CSDetailAtom, CSPatchClickedAtom } from '../../recoil/CS';
+import {
+  AskDeleteModal,
+  CSDetailAtom,
+  CSPatchClickedAtom,
+} from '../../recoil/CS';
 import { useSetRecoilState } from 'recoil';
+import ApplyDeleteModal from '../modal/AskDeleteModal';
 
 interface AskTableProps {
   title: string;
@@ -15,9 +19,11 @@ interface AskTableProps {
 const AskTable = ({ title }: AskTableProps) => {
   const navigate = useNavigate();
   const [csList, setCSList] = useState<CSListType[]>();
-  const [deleteClicked, setDeleteClicked] = useState(false);
+  const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
   const setCSDetail = useSetRecoilState(CSDetailAtom);
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
+  const setIsOpen = useSetRecoilState(AskDeleteModal);
+  const [id, setId] = useState('');
 
   useEffect(() => {
     getCSList().then(data => {
@@ -29,8 +35,8 @@ const AskTable = ({ title }: AskTableProps) => {
   }, [deleteClicked]);
 
   const deleteHandler = (id: string) => {
-    DeleteCSItem(id);
-    setDeleteClicked(true);
+    setIsOpen(true);
+    setId(id);
   };
 
   const PatchHandler = (id: string) => {
@@ -98,6 +104,7 @@ const AskTable = ({ title }: AskTableProps) => {
                     >
                       삭제
                     </Styled_AskTable.DeletePatchBtn>
+                    /
                     <Styled_AskTable.DeletePatchBtn
                       onClick={() => {
                         PatchHandler(v.id);
@@ -122,6 +129,7 @@ const AskTable = ({ title }: AskTableProps) => {
           )}
         </Styled_AskTable.Table>
       </Styled_AskTable.Container>
+      <ApplyDeleteModal id={id} setDeleteClicked={setDeleteClicked} />
     </div>
   );
 };
