@@ -67,8 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signin").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/order/**").hasRole("USER")
-//                .antMatchers(HttpMethod.GET,"/bookmark/**").hasRole("USER")
-//                .antMatchers(HttpMethod.POST,"/bookmark/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/order/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/board/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/bookmark/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST,"/bookmark/**").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .apply(new CustomFilterConfigurer());
