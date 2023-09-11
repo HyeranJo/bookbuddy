@@ -19,7 +19,6 @@ import Apply from './pages/apply/Apply';
 import Detail from './pages/customer/Detail';
 import PayNow from './pages/payment/PayNow';
 
-
 const router = createBrowserRouter([
   {
     path: '/',

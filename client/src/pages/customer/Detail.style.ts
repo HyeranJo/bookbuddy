@@ -40,18 +40,22 @@ export const Styled_Detail = {
       align-items: center;
       flex-flow: column;
       gap: 65px;
+      margin-bottom: 200px;
 
       ${DeviceQuery.bigScreen`
         width: calc(1300px / ${screenScale.bigScreen});
         gap: calc(65px / ${screenScale.bigScreen});
+        margin-bottom: calc(200px / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
         width: calc(1300px / ${screenScale.desktop});
         gap: calc(65px / ${screenScale.desktop});
+        margin-bottom: calc(200px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
         width: calc(1300px / ${screenScale.tablet});
         gap: calc(65px / ${screenScale.tablet});
+        margin-bottom: calc(200px / ${screenScale.tablet});
       `}
 
       .detail {

@@ -83,6 +83,28 @@ export const Styled_AskTable = {
     & .title-body {
       text-align: left;
     }
+
+    & > tbody {
+      & tr > td:last-child {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 4px;
+
+        ${DeviceQuery.bigScreen`
+          gap: calc(10px / ${screenScale.bigScreen});
+          margin-top:calc(4px / ${screenScale.bigScreen});
+        `}
+        ${DeviceQuery.desktop`
+          gap: calc(10px / ${screenScale.desktop});
+          margin-top:calc(4px / ${screenScale.desktop});
+        `}
+        ${DeviceQuery.tablet`
+          gap: calc(10px / ${screenScale.tablet});
+          margin-top:calc(4px / ${screenScale.tablet});
+        `}
+      }
+    }
   `,
   Th: styled.th`
     background-color: var(--category-color);
@@ -98,5 +120,11 @@ export const Styled_AskTable = {
     white-space: nowrap; //줄바꿈 방지
     overflow: hidden; //넘치는 텍스트 숨기기
     text-overflow: ellipsis; //말줄임 기호(...)넣기
+  `,
+
+  DeletePatchBtn: styled.button`
+    &:hover {
+      cursor: pointer;
+    }
   `,
 };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { BookList, MyBookList } from '../model/BookList';
 import { getCookie } from '../utils/cookie';
 import { OrderListType } from '../model/OrderList';
+import { CSDetailType } from '../model/CStype';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -141,5 +142,41 @@ export const getLogout = async () => {
       };
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getCSList = async () => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/board/cs?page=1&size=20`, {
+      headers: {
+        'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    const result = response.data.data;
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const getCSDetail = async (
+  boardId: string,
+  setCSDetail: (CSDetail: CSDetailType) => void,
+) => {
+  try {
+    const response = await axios.get(`${SERVER_HOST}/board/cs/${boardId}`, {
+      headers: {
+        'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    const result = response.data;
+    setCSDetail(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };

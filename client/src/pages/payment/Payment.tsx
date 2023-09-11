@@ -24,6 +24,7 @@ import {
   PostCodeModalAtom,
 } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';
+import { DeleteOrderItem } from '../../api/DeleteApi';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -117,6 +118,7 @@ const Payment = () => {
         .then((data: any) => {
           console.log(data);
           alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
+          OrderIdsToPay.map(v => DeleteOrderItem(v));
           navigate('/');
         })
         .catch(error => {
