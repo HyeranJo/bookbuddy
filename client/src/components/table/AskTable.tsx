@@ -1,7 +1,12 @@
-import React from 'react';
 import { Styled_AskTable } from './AskTable.style';
 import RedButton from '../buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
+import { getCSDetail, getCSList } from '../../api/GetApi';
+import { useEffect, useState } from 'react';
+import { CSListType } from '../../model/CStype';
+import { DeleteCSItem } from '../../api/DeleteApi';
+import { CSDetailAtom, CSPatchClickedAtom } from '../../recoil/CS';
+import { useSetRecoilState } from 'recoil';
 
 interface AskTableProps {
   title: string;
@@ -9,6 +14,34 @@ interface AskTableProps {
 
 const AskTable = ({ title }: AskTableProps) => {
   const navigate = useNavigate();
+  const [csList, setCSList] = useState<CSListType[]>();
+  const [deleteClicked, setDeleteClicked] = useState(false);
+  const setCSDetail = useSetRecoilState(CSDetailAtom);
+  const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
+
+  useEffect(() => {
+    getCSList().then(data => {
+      setCSList(data);
+    });
+    if (deleteClicked === true) {
+      setDeleteClicked(false);
+    }
+  }, [deleteClicked]);
+
+  const deleteHandler = (id: string) => {
+    DeleteCSItem(id);
+    setDeleteClicked(true);
+  };
+
+  const PatchHandler = (id: string) => {
+    getCSDetail(id, setCSDetail).then(() => navigate('/customer/apply'));
+    setCSPatchClicked(true);
+  };
+
+  const titleHandler = (id: string) => {
+    getCSDetail(id, setCSDetail);
+    navigate('/customer/detail');
+  };
 
   return (
     <div>
@@ -31,26 +64,61 @@ const AskTable = ({ title }: AskTableProps) => {
         <Styled_AskTable.Table>
           <colgroup>
             <col style={{ width: '20%' }}></col>
-            <col style={{ width: '60%' }}></col>
-            <col style={{ width: '20%' }}></col>
+            <col style={{ width: '50%' }}></col>
+            <col style={{ width: '15%' }}></col>
+            <col style={{ width: '15%' }}></col>
           </colgroup>
           <thead>
-            <Styled_AskTable.Th className="date">날짜</Styled_AskTable.Th>
-            <Styled_AskTable.Th className="title">제목</Styled_AskTable.Th>
-            <Styled_AskTable.Th className="status">상태</Styled_AskTable.Th>
+            <tr>
+              <Styled_AskTable.Th className="date">날짜</Styled_AskTable.Th>
+              <Styled_AskTable.Th className="title">제목</Styled_AskTable.Th>
+              <Styled_AskTable.Th className="status">상태</Styled_AskTable.Th>
+              <Styled_AskTable.Th className="delete-patch">
+                삭제 / 수정
+              </Styled_AskTable.Th>
+            </tr>
           </thead>
-          <tbody>
-            <Styled_AskTable.Tr>
-              <td>2023.08.15</td>
-              <Styled_AskTable.Td className="title-body">
-                문의 드립니다.문의 드립니다.문의 드립니다.문의 드립니다.문의
-                드립니다.문의 드립니다.문의 드립니다.문의 드립니다.문의
-                드립니다.문의 드립니다.문의 드립니다.문의 드립니다.문의
-                드립니다.문의 드립니다.문의 드립니다.
-              </Styled_AskTable.Td>
-              <td>답변완료</td>
-            </Styled_AskTable.Tr>
-          </tbody>
+          {csList && csList.length > 0 ? (
+            <tbody>
+              {csList.map((v, i) => (
+                <Styled_AskTable.Tr key={i}>
+                  <td>{v.date}</td>
+                  <Styled_AskTable.Td className="title-body">
+                    <button onClick={() => titleHandler(v.id)}>
+                      {v.title}
+                    </button>
+                  </Styled_AskTable.Td>
+                  <td>접수중</td>
+                  <td>
+                    <Styled_AskTable.DeletePatchBtn
+                      onClick={() => {
+                        deleteHandler(v.id);
+                      }}
+                    >
+                      삭제
+                    </Styled_AskTable.DeletePatchBtn>
+                    <Styled_AskTable.DeletePatchBtn
+                      onClick={() => {
+                        PatchHandler(v.id);
+                      }}
+                    >
+                      수정
+                    </Styled_AskTable.DeletePatchBtn>
+                  </td>
+                </Styled_AskTable.Tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <Styled_AskTable.Tr>
+                <td></td>
+                <Styled_AskTable.Td className="title-body">
+                  등록된 문의내역이 없습니다
+                </Styled_AskTable.Td>
+                <td></td>
+              </Styled_AskTable.Tr>
+            </tbody>
+          )}
         </Styled_AskTable.Table>
       </Styled_AskTable.Container>
     </div>

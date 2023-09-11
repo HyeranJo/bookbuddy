@@ -11,3 +11,13 @@ export const DeleteOrderItem = async (orderId: string) => {
     throw err;
   }
 };
+
+export const DeleteCSItem = async (boardId: string) => {
+  try {
+    await axios.delete(`${SERVER_HOST}/board/cs/${boardId}`);
+    return 'success';
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
