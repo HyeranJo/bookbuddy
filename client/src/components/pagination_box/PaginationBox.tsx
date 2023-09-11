@@ -1,7 +1,7 @@
 import Pagination from 'react-js-pagination';
 import { Styled_PaginationBox } from './PaginationBox.style';
 import { useRecoilState } from 'recoil';
-import { PageAtom } from '../../recoil/BookList';
+import { PageAtom } from '../../recoil/Sidebars';
 
 const PaginationBox = () => {
   const [page, setPage] = useRecoilState(PageAtom);

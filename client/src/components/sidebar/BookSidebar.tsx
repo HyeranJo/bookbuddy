@@ -1,6 +1,6 @@
 import React from 'react';
 import { Styled_Sidebar } from './BookSidebar.style';
-import { SidebarIdAtom } from '../../recoil/BookList';
+import { SidebarIdAtom } from '../../recoil/Sidebars';
 import { useSetRecoilState } from 'recoil';
 import category from '../../utils/SidebarCategory';
 import { useNavigate } from 'react-router-dom';

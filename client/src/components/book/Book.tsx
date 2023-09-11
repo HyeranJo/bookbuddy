@@ -1,10 +1,14 @@
-import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import Styled_Book from './Book.style';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BookMarkIcon from '../../icons/BookMarkIcon';
+import { postBookMark } from '../../api/PostApi';
+import { useState } from 'react';
+import { AccessTokenAtom } from '../../recoil/UserInfo';
+import { useRecoilValue } from 'recoil';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookie';
-import BookMarkIcon from '../../icons/BookMarkIcon';
+// import BookMarkIcon from '../../icons/BookMarkIcon';
+
 
 interface BookProps {
   id?: string;
@@ -14,11 +18,12 @@ interface BookProps {
   bookmark?: boolean;
 }
 
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
-
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
+
   const [isClick, setIsClick] = useState(props.bookmark);
+  const accessToken = useRecoilValue(AccessTokenAtom);
+
 
   const postBookMark = async (id: string | undefined) => {
     try {
@@ -36,9 +41,10 @@ const Book = (props: BookProps) => {
       setIsClick(result);
       return result;
     } catch (error) {
-      alert(error);
+      alert('error');
     }
   };
+
 
   return (
     <Styled_Book.container>
@@ -52,7 +58,11 @@ const Book = (props: BookProps) => {
       </Styled_Book.wrapper>
       <Styled_Book.icon
         onClick={() => {
-          postBookMark(props.id);
+          if (accessToken) {
+            postBookMark(props.id, setIsClick);
+          } else {
+            alert('로그인 후 이용 가능합니다');
+          }
         }}
       >
         <BookMarkIcon

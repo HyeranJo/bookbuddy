@@ -5,7 +5,7 @@ import { Styled_Mypage } from './Mypage.style';
 import MypageTable from '../../components/table/MypageTable';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
-import { NavScrollAtom } from '../../recoil/NavScroll';
+import { NavScrollAtom } from '../../recoil/Sidebars';
 import { MyBookList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import AskTable from '../../components/table/AskTable';
@@ -85,20 +85,22 @@ const Mypage = () => {
                 </Styled_Mypage.H2>
               </Styled_Mypage.BookmarkTitle>
               <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
-                {bookmarkList.map((v: MyBookList) => {
-                  return (
-                    <Styled_Mypage.Book key={v.id}>
-                      <Book
-                        key={v.book.id}
-                        id={v.book.id}
-                        name={v.book.name}
-                        price={v.book.price}
-                        image={v.book.imgSrc}
-                        bookmark={true}
-                      />
-                    </Styled_Mypage.Book>
-                  );
-                })}
+                {bookmarkList
+                  .map((v: MyBookList) => {
+                    return (
+                      <Styled_Mypage.Book key={v.id}>
+                        <Book
+                          key={v.book.id}
+                          id={v.book.id}
+                          name={v.book.name}
+                          price={v.book.price}
+                          image={v.book.imgSrc}
+                          bookmark={true}
+                        />
+                      </Styled_Mypage.Book>
+                    );
+                  })
+                  .reverse()}
               </Styled_Mypage.Books>
             </Styled_Mypage.BookmarkList>
           </Styled_Mypage.Detail>

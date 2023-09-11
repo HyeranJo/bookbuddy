@@ -14,8 +14,7 @@ import { getOrderList } from '../../api/GetApi';
 
 const Order = () => {
   const navigate = useNavigate();
-  const quantityList =
-    useRecoilValue<{ id: string; quantity: number }[]>(QuantityListAtom);
+  const quantityList = useRecoilValue(QuantityListAtom);
   const finalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
   const [orderList, setOrderList] = useRecoilState(OrderListAtom);
 
@@ -29,7 +28,7 @@ const Order = () => {
         navigate('/');
       }
     });
-  }, [orderList]);
+  }, []);
 
   // ==================================== 함수 ====================================
   /** 주문하기 버튼 함수 */
