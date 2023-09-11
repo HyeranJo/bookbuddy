@@ -9,6 +9,8 @@ import com.bookbuddy.demo.payment.entity.Payment;
 import com.bookbuddy.demo.payment.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,5 +40,9 @@ public class PaymentService {
     private Payment findVerifyPayment(long id) {
         return paymentRepository.findById(id)
                 .orElseThrow(()->new BusinessException(ExceptionCode.PAYMENT_NOT_FOUND));
+    }
+
+    public Page<Payment> findPayments(PageRequest pageRequest, String email) {
+        return paymentRepository.findAllByEmail(pageRequest, email);
     }
 }

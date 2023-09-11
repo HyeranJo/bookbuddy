@@ -38,4 +38,24 @@ public interface PaymentMapper {
                 payment.getCstmrTel(),
                 payment.getEmail());
     }
+
+    default List<PaymentDto.Response> paymentsToPaymentResponseDtos(List<Payment> payments) {
+        return payments.stream().map(e-> {
+            List<Long> orders = e.getOrders().stream()
+                    .map(order -> order.getId()).collect(Collectors.toList());
+
+            return new PaymentDto.Response(
+                    e.getId(),
+                    orders,
+                    e.getShipName(),
+                    e.getAddress1(),
+                    e.getAddress2(),
+                    e.getShipMobile(),
+                    e.getShipTel(),
+                    e.getCstmrName(),
+                    e.getCstmrMobile(),
+                    e.getCstmrTel(),
+                    e.getEmail());
+        }).collect(Collectors.toList());
+    }
 }
