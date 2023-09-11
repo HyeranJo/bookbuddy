@@ -22,7 +22,8 @@ public interface BoardMapper {
                 board.getId(),
                 board.getTitle(),
                 board.getContent(),
-                board.getMember().getId()
+                board.getMember().getId(),
+                board.getCreatedAt()
         );
     }
 
@@ -40,7 +41,8 @@ public interface BoardMapper {
                         e.getId(),
                         e.getTitle(),
                         e.getContent(),
-                        e.getMember().getId()
+                        e.getMember().getId(),
+                        e.getCreatedAt()
                 )).collect(Collectors.toList());
     }
 }

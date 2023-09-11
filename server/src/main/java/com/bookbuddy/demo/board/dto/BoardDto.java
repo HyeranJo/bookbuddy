@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 public class BoardDto {
     @Getter
@@ -23,6 +24,7 @@ public class BoardDto {
         private String title;
         private String content;
         private long memberId;
+        private LocalDateTime createdAt;
     }
 
     @Getter
