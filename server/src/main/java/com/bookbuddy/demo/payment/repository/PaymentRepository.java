@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
-    @Query("SELECT p FROM Payment p LEFT JOIN Order o ON o.payment = p.id WHERE o.member.email = :email")
+    @Query(value = "SELECT p FROM Payment p LEFT JOIN Order o ON o.payment = p.id WHERE o.member.email = :email",
+        countName = "SELECT (p) FROM Payment p LEFT JOIN Order o ON o.payment = p.id WHERE o.member.email = :email")
     Page<Payment> findAllByEmail(Pageable pageable, @Param("email") String email);
 }
