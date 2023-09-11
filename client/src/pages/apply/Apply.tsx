@@ -27,7 +27,7 @@ const Apply = () => {
       title: title,
       content: value,
     };
-    postCSData(data).then(data => console.log(data));
+    postCSData(data).then(data => navigate(`/customer/detail/${data.id}`));
   };
 
   const patchHandler = () => {
