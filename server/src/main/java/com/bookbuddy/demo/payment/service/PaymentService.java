@@ -2,6 +2,8 @@ package com.bookbuddy.demo.payment.service;
 
 import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.global.exception.ExceptionCode;
+import com.bookbuddy.demo.member.entity.Member;
+import com.bookbuddy.demo.member.service.MemberService;
 import com.bookbuddy.demo.order.entity.Order;
 import com.bookbuddy.demo.order.service.OrderService;
 import com.bookbuddy.demo.payment.dto.PaymentDto;
@@ -24,9 +26,10 @@ import java.util.stream.Collectors;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final OrderService orderService;
+    private final MemberService memberService;
 
     @Transactional
-    public Payment createPayment(Payment payment, PaymentDto.Post paymentDto) {
+    public Payment createPaymentOrder(Payment payment, PaymentDto.Post paymentDto, String email) {
         paymentDto.getOrders().stream().map(e->{
             Order order = orderService.findOrder(e);
             payment.addOrder(order);
@@ -34,9 +37,16 @@ public class PaymentService {
             return order;
         }).collect(Collectors.toList());
 
+        return createPayment(payment, email);
+    }
+    @Transactional
+    public Payment createPayment(Payment payment, String email) {
+        Member member = memberService.findMember(email);
+        payment.addMember(member);
+        member.addPayment(payment);
+
         return paymentRepository.save(payment);
     }
-
     private Payment findVerifyPayment(long id) {
         return paymentRepository.findById(id)
                 .orElseThrow(()->new BusinessException(ExceptionCode.PAYMENT_NOT_FOUND));

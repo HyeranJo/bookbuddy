@@ -18,23 +18,36 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("/payment/ship")
+@RequestMapping("/payment")
 @RequiredArgsConstructor
 public class PaymentController {
     private final PaymentService paymentService;
     private final PaymentMapper mapper;
-    @PostMapping
-    public ResponseEntity createPayment(@RequestBody @Valid PaymentDto.Post paymentDto) {
-        Payment payment = paymentService.createPayment(mapper.paymentPostDtoToPayment(paymentDto), paymentDto);
+    /* 장바구니 결제 */
+    @PostMapping("/ship")
+    public ResponseEntity createPayment(@RequestBody @Valid PaymentDto.Post paymentDto,
+                                        Authentication authentication) {
+        User principal = (User) authentication.getPrincipal();
+        Payment payment = paymentService.createPaymentOrder(mapper.paymentPostDtoToPayment(paymentDto), paymentDto, principal.getUsername());
+
         return new ResponseEntity<>(mapper.paymentToPaymentResponseDto(payment), HttpStatus.CREATED);
     }
-    @GetMapping
+    /* 바로 결제 */
+    @PostMapping("/buy")
+    public ResponseEntity createPaymentBuy(@RequestBody @Valid PaymentDto.Post paymentDto,
+                                           Authentication authentication) {
+        User principal = (User) authentication.getPrincipal();
+        Payment payment = paymentService.createPayment(mapper.paymentPostDtoToPayment(paymentDto), principal.getUsername());
+
+        return new ResponseEntity<>(mapper.paymentToPaymentResponseDto(payment), HttpStatus.CREATED);
+    }
+    @GetMapping("/ship")
     public ResponseEntity getPayments(@RequestParam("page") @Positive int page,
                                       @RequestParam("size") @Positive int size,
                                       Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User principal = (User) authentication.getPrincipal();
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Payment> payments = paymentService.findPayments(pageRequest, user.getUsername());
+        Page<Payment> payments = paymentService.findPayments(pageRequest, principal.getUsername());
         return new ResponseEntity(new MultiResponseDto(mapper.paymentsToPaymentResponseDtos(payments.getContent()), payments), HttpStatus.OK);
     }
 }

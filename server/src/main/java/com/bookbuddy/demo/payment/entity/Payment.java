@@ -1,7 +1,9 @@
 package com.bookbuddy.demo.payment.entity;
 
+import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,11 +39,21 @@ public class Payment {
     private String cstmrTel;
     @Column
     private String email;
+    @JsonManagedReference
+    @JoinColumn(name="MEMBER_ID")
+    @ManyToOne
+    private Member member;
 
     public void addOrder(Order order) {
         orders.add(order);
         if(order.getPayment() != this) {
             order.setPayment(this);
+        }
+    }
+    public void addMember(Member member) {
+        this.member = member;
+        if(! member.getPayments().contains(this)) {
+            member.getPayments().add(this);
         }
     }
 
