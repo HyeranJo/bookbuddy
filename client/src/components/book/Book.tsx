@@ -5,10 +5,7 @@ import { postBookMark } from '../../api/PostApi';
 import { useState } from 'react';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
 import { useRecoilValue } from 'recoil';
-import axios from 'axios';
-import { getCookie } from '../../utils/cookie';
 // import BookMarkIcon from '../../icons/BookMarkIcon';
-
 
 interface BookProps {
   id?: string;
@@ -20,31 +17,8 @@ interface BookProps {
 
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
-
   const [isClick, setIsClick] = useState(props.bookmark);
   const accessToken = useRecoilValue(AccessTokenAtom);
-
-
-  const postBookMark = async (id: string | undefined) => {
-    try {
-      const response = await axios.post(
-        `${SERVER_HOST}/bookmark/${id}`,
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: getCookie('accessToken'),
-          },
-        },
-      );
-      const result = response.data;
-      setIsClick(result);
-      return result;
-    } catch (error) {
-      alert('error');
-    }
-  };
-
 
   return (
     <Styled_Book.container>
