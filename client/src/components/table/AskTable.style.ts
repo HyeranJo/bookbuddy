@@ -82,6 +82,19 @@ export const Styled_AskTable = {
 
     & .title-body {
       text-align: left;
+
+      button {
+        border: 0px;
+        background-color: white;
+
+        &:hover {
+          cursor: pointer;
+          font-weight: bold;
+        }
+        &:focus {
+          font-weight: bold;
+        }
+      }
     }
 
     & > tbody {

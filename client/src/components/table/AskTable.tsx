@@ -39,8 +39,9 @@ const AskTable = ({ title }: AskTableProps) => {
   };
 
   const titleHandler = (id: string) => {
-    getCSDetail(id, setCSDetail);
-    navigate('/customer/detail');
+    getCSDetail(id, setCSDetail).then(() => {
+      navigate(`/customer/detail/${id}`);
+    });
   };
 
   return (
