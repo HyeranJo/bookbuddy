@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Transactional(readOnly = true)
 @Slf4j
 @Service
 public class BookmarkService {
@@ -32,6 +34,7 @@ public class BookmarkService {
         this.bookmarkRepository = bookmarkRepository;
     }
 
+    @Transactional
     public boolean createBookmark(String email, String bookId) {
         // 북마크가 이미 있다면 해지
         // 없다면 생성

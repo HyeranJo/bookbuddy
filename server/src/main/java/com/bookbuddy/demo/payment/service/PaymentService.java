@@ -9,16 +9,23 @@ import com.bookbuddy.demo.payment.entity.Payment;
 import com.bookbuddy.demo.payment.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
+
+@Transactional(readOnly = true)
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final OrderService orderService;
+
+    @Transactional
     public Payment createPayment(Payment payment, PaymentDto.Post paymentDto) {
         paymentDto.getOrders().stream().map(e->{
             Order order = orderService.findOrder(e);
@@ -33,5 +40,9 @@ public class PaymentService {
     private Payment findVerifyPayment(long id) {
         return paymentRepository.findById(id)
                 .orElseThrow(()->new BusinessException(ExceptionCode.PAYMENT_NOT_FOUND));
+    }
+
+    public Page<Payment> findPayments(PageRequest pageRequest, String email) {
+        return paymentRepository.findAllByEmail(pageRequest, email);
     }
 }

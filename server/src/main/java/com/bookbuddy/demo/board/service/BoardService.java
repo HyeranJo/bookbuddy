@@ -10,14 +10,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class BoardService {
     private final MemberService memberService;
     private final BoardRepository boardRepository;
+
+    @Transactional
     public Board createBoard(Board board, String email) {
         Member member = memberService.findMember(email);
         member.addBoard(board);
@@ -36,6 +40,7 @@ public class BoardService {
                 new BusinessException(ExceptionCode.BOARD_NOT_FOUND));
     }
 
+    @Transactional
     public Board updateBoard(Board board) {
         Board findBoard = findVerifyBoard(board.getId());
 
@@ -47,6 +52,7 @@ public class BoardService {
         return boardRepository.save(findBoard);
     }
 
+    @Transactional
     public void deleteBoard(long boardId) {
         Board findBoard = findVerifyBoard(boardId);
 
