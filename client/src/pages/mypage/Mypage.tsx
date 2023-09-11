@@ -9,15 +9,18 @@ import { NavScrollAtom } from '../../recoil/Sidebars';
 import { MyBookList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import AskTable from '../../components/table/AskTable';
+import { getCookie } from '../../utils/cookie';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
   const navScrollListRef = useRef<any>([]);
   const navScrollIndex = useRecoilValue(NavScrollAtom);
   const [bookmarkList, setBookmarkList] = useState<MyBookList[]>([]);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
+    setUserName(getCookie('userInfo').email.split('@')[0]);
   }, []);
 
   useEffect(() => {
@@ -49,13 +52,13 @@ const Mypage = () => {
                 navScrollListRef.current[0] = el;
               }}
             >
-              <Styled_Mypage.H1>000님, 환영합니다</Styled_Mypage.H1>
+              <Styled_Mypage.H1>{userName}님, 환영합니다</Styled_Mypage.H1>
             </div>
             <Styled_Mypage.Point>포인트 1,000P</Styled_Mypage.Point>
           </Styled_Mypage.Title>
 
           <Styled_Mypage.Detail className="detail">
-            <MypageTable title="배송 정보" cancel={true} />
+            <MypageTable title="최근 주문 내역" cancel={true} />
             <div
               style={{ scrollMarginTop: '240px' }}
               ref={el => {

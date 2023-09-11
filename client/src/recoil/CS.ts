@@ -20,3 +20,8 @@ export const CSPatchClickedAtom = atom<boolean>({
   key: 'CSPatchClickedAtom',
   default: false,
 });
+
+export const AskDeleteModal = atom<boolean>({
+  key: 'AskDeleteModal',
+  default: false,
+});

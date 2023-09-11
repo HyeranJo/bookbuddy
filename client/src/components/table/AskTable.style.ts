@@ -82,6 +82,30 @@ export const Styled_AskTable = {
 
     & .title-body {
       text-align: left;
+
+      button {
+        border: 0px;
+        background-color: white;
+        font-size: var(--basic-font-size);
+
+        ${DeviceQuery.bigScreen`
+          font-size:calc(var(--basic-font-size) / ${screenScale.bigScreen});
+        `}
+        ${DeviceQuery.desktop`
+          font-size:calc(var(--basic-font-size) / ${screenScale.desktop});
+        `}
+        ${DeviceQuery.tablet`
+          font-size:calc(var(--basic-font-size) / ${screenScale.tablet});
+        `}
+
+        &:hover {
+          cursor: pointer;
+          font-weight: bold;
+        }
+        &:focus {
+          font-weight: bold;
+        }
+      }
     }
 
     & > tbody {
@@ -123,8 +147,29 @@ export const Styled_AskTable = {
   `,
 
   DeletePatchBtn: styled.button`
+    border: 0px;
+    background-color: white;
+    font-size: var(--basic-font-size);
+    margin-top: 3px;
+
+    ${DeviceQuery.bigScreen`
+      font-size:calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      margin-top:calc(3px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size:calc(var(--basic-font-size) / ${screenScale.desktop});
+      margin-top:calc(3px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size:calc(var(--basic-font-size) / ${screenScale.tablet});
+      margin-top:calc(3px / ${screenScale.tablet});
+    `}
+    &:first-child {
+      color: var(--primary-background-color);
+    }
     &:hover {
       cursor: pointer;
+      font-weight: bold;
     }
   `,
 };

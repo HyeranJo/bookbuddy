@@ -27,7 +27,7 @@ const Apply = () => {
       title: title,
       content: value,
     };
-    postCSData(data).then(data => console.log(data));
+    postCSData(data).then(data => navigate(`/customer/detail/${data.id}`));
   };
 
   const patchHandler = () => {
@@ -42,7 +42,7 @@ const Apply = () => {
     patchCS(data)
       .then(() => {
         alert('수정한 내용이 등록되었습니다');
-        navigate(-1);
+        navigate(`/customer/detail/${data.boardId}`);
       })
       .catch(err => alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`));
   };

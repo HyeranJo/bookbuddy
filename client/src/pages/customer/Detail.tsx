@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Detail } from './Detail.style';
 import AskTable from '../../components/table/AskTable';
 import { CSDetailAtom } from '../../recoil/CS';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { getCSDetail } from '../../api/GetApi';
+import { useParams } from 'react-router-dom';
 
 const Detail = () => {
-  const CSDetail = useRecoilValue(CSDetailAtom);
+  const params = useParams();
+  const boardId = params.boardId;
+  const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
+
+  useEffect(() => {
+    if (boardId) {
+      getCSDetail(boardId, setCSDetail);
+    }
+  }, []);
 
   return (
     <Styled_Layout.Container>
@@ -17,8 +27,10 @@ const Detail = () => {
           </div>
           <div className="body">
             <div>
-              <Styled_Detail.H1>{CSDetail.title}</Styled_Detail.H1>
-              <div className="detail">{CSDetail.content}</div>
+              <Styled_Detail.H1>{csDetail.title}</Styled_Detail.H1>
+              <div className="detail">
+                <pre dangerouslySetInnerHTML={{ __html: csDetail.content }} />
+              </div>
             </div>
             <div>
               <Styled_Detail.H1>답변</Styled_Detail.H1>
