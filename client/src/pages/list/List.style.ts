@@ -82,17 +82,6 @@ export const Styled_List = {
   SortList: styled.li`
     list-style: none;
     float: left;
-    font-size: var(--basic-font-size);
-
-    ${DeviceQuery.bigScreen`
-      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
-    `}
 
     &::after {
       content: '|';
@@ -103,6 +92,29 @@ export const Styled_List = {
     &:last-child::after {
       content: '';
       padding: 0px;
+    }
+
+    & > button {
+      font-size: var(--basic-font-size);
+      border: 0;
+      background-color: white;
+
+      ${DeviceQuery.bigScreen`
+      font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+    `}
+      ${DeviceQuery.desktop`
+      font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+    `}
+     &:hover {
+        cursor: pointer;
+        font-weight: bold;
+      }
+      &:focus {
+        font-weight: bold;
+      }
     }
   `,
   BookGroup: styled.div`

@@ -40,6 +40,29 @@ export const getBookList = async ({
   }
 };
 
+export const getSortedBookList = async (
+  { setListData, setIsLoading, sidebarId, page }: getBookListType,
+  order: 'name' | 'price' | 'bookmark',
+) => {
+  try {
+    const response = await axios.get(
+      `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20&order=${order}`,
+      {
+        headers: {
+          'ngrok-skip-browser-warning': true,
+          Authorization: getCookie('accessToken'),
+        },
+      },
+    );
+    const result = response.data.data;
+    setListData(result);
+    setIsLoading(false);
+  } catch (error) {
+    alert(error);
+    setIsLoading(false);
+  }
+};
+
 export const getOrderList = async (
   setOrderList: (orderList: OrderListType[]) => void,
 ) => {
