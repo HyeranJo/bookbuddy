@@ -18,6 +18,7 @@ import Search from './pages/search/Search';
 import Apply from './pages/apply/Apply';
 import Detail from './pages/customer/Detail';
 import PayNow from './pages/payment/PayNow';
+import CSAnswer from './pages/admin/CSAnswer';
 
 const router = createBrowserRouter([
   {
@@ -26,9 +27,6 @@ const router = createBrowserRouter([
     errorElement: 'Notfound',
     children: [
       { index: true, element: <List /> },
-      /* 예시
-      {path: '/signin', element: <SignIn/>}
-      */
       { path: '/signup', element: <Signup /> },
       { path: '/signin', element: <Signin /> },
       { path: '/list', element: <List /> },
@@ -41,6 +39,7 @@ const router = createBrowserRouter([
       { path: '/search', element: <Search /> },
       { path: '/customer/apply', element: <Apply /> },
       { path: '/customer/detail/:boardId', element: <Detail /> },
+      { path: '/admin/answer/:boardId', element: <CSAnswer /> },
     ],
   },
 ]);
