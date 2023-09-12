@@ -51,8 +51,7 @@ export const Styled_Apply = {
         display: flex;
       }
     }
-    & input,
-    textarea {
+    & input {
       font-size: var(--basic-font-size);
       flex-grow: 1;
 
@@ -68,20 +67,17 @@ export const Styled_Apply = {
     }
     #apply_title {
       height: 50px;
-      padding: 0 30px;
+      padding: 0 15px;
       border: 1.5px solid var(--light-gray-color);
 
       ${DeviceQuery.bigScreen`
         height: calc(50px / ${screenScale.bigScreen});
-        padding: 0 calc(30px / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
         height: calc(50px / ${screenScale.desktop});
-        padding: 0 calc(30px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
         height: calc(50px / ${screenScale.tablet});
-        padding: 0 calc(30px / ${screenScale.tablet});
       `}
     }
     #apply_body {

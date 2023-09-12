@@ -47,7 +47,7 @@ export const Styled_CSAnswer = {
         display: flex;
         flex-flow: column;
         align-items: center;
-        border-left: 2px solid var(--light-gray-color);
+        border-left: 5px solid var(--light-gray-color);
       }
 
       ${DeviceQuery.bigScreen`
@@ -118,6 +118,20 @@ export const Styled_CSAnswer = {
       ${DeviceQuery.tablet`
         width: calc(1095px / ${screenScale.tablet});
         height: calc(400px / ${screenScale.tablet});
+      `}
+    }
+
+    & .ql-toolbar {
+      width: 1095px;
+
+      ${DeviceQuery.bigScreen`
+        width: calc(1095px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        width: calc(1095px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        width: calc(1095px / ${screenScale.tablet});
       `}
     }
   `,
