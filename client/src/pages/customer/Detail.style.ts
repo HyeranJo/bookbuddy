@@ -70,22 +70,22 @@ export const Styled_Detail = {
         background-color: var(--category-color);
         width: 1095px;
         min-height: 250px;
-        padding: 20px 20px;
+        padding: 20px 70px;
 
         ${DeviceQuery.bigScreen`
           width: calc(1095px / ${screenScale.bigScreen});
           min-height: calc(250px / ${screenScale.bigScreen});
-          padding: calc(20px / ${screenScale.bigScreen}) calc(20px / ${screenScale.bigScreen});
+          padding: calc(20px / ${screenScale.bigScreen}) calc(70px / ${screenScale.bigScreen});
         `}
         ${DeviceQuery.desktop`
           width: calc(1095px / ${screenScale.desktop});
           min-height: calc(250px / ${screenScale.desktop});
-          padding: calc(20px / ${screenScale.desktop}) calc(20px / ${screenScale.desktop});
+          padding: calc(20px / ${screenScale.desktop}) calc(70px / ${screenScale.desktop});
         `}
         ${DeviceQuery.tablet`
           width: calc(1095px / ${screenScale.tablet});
           min-height: calc(250px / ${screenScale.tablet});
-          padding: calc(20px / ${screenScale.tablet}) calc(20px / ${screenScale.tablet});
+          padding: calc(20px / ${screenScale.tablet}) calc(70px / ${screenScale.tablet});
         `}
       }
     }

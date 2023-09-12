@@ -79,15 +79,15 @@ const Apply = () => {
               <label htmlFor="apply_body">내용 ►</label>
               <div id="apply_body">
                 <Editor />
+                <div className="submit">
+                  {csPatchClicked === true ? (
+                    <RedButton name="수정하기" onClick={patchHandler} />
+                  ) : (
+                    <RedButton name="등록하기" onClick={submitHandler} />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="submit">
-            {csPatchClicked === true ? (
-              <RedButton name="수정하기" onClick={patchHandler} />
-            ) : (
-              <RedButton name="등록하기" onClick={submitHandler} />
-            )}
           </div>
         </Styled_Apply.Container>
       </Styled_Layout.Div_WithNoSidebar>
