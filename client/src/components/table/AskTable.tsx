@@ -89,7 +89,7 @@ const AskTable = ({ title }: AskTableProps) => {
             <tbody>
               {csList.map((v, i) => (
                 <Styled_AskTable.Tr key={i}>
-                  <td>{v.date}</td>
+                  <td>{new Date(v.createdAt).toLocaleDateString()}</td>
                   <Styled_AskTable.Td className="title-body">
                     <button onClick={() => titleHandler(v.id)}>
                       {v.title}

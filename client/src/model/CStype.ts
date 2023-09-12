@@ -3,7 +3,7 @@ export interface CSListType {
   title: string;
   content: string;
   memberId: string;
-  date: string;
+  createdAt: string;
 }
 
 export interface PostCSType {
