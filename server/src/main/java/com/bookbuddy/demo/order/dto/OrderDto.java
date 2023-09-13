@@ -1,5 +1,7 @@
 package com.bookbuddy.demo.order.dto;
 
+import com.bookbuddy.demo.order.entity.Order;
+import com.bookbuddy.demo.order.entity.Order.ORDER_STATUS;
 import com.bookbuddy.demo.orderbook.OrderBookDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,5 +33,6 @@ public class OrderDto {
         private long id;
         private List<OrderBookDto.Response> orderBooks;
         private LocalDateTime createdAt;
+        private ORDER_STATUS status;
     }
 }

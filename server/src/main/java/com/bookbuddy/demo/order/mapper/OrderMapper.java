@@ -33,7 +33,8 @@ public interface OrderMapper {
         return new OrderDto.Response(
                 order.getId(),
                 orderBooks,
-                order.getCreatedAt());
+                order.getCreatedAt(),
+                order.getStatus());
     }
 
     default List<OrderDto.Response> ordersToOrderResponseDtos(List<Order> orders) {
@@ -45,7 +46,8 @@ public interface OrderMapper {
             return new OrderDto.Response(
                     order.getId(),
                     orderBooks,
-                    order.getCreatedAt());
+                    order.getCreatedAt(),
+                    order.getStatus());
         }).collect(Collectors.toList());
     }
 }
