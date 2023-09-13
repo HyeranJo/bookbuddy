@@ -45,7 +45,6 @@ const PayNow = () => {
       location.reload();
     } else {
       setCookieValue(getCookie('PayNow'));
-      console.log(cookieValue);
     }
   }, []);
 
@@ -104,10 +103,8 @@ const PayNow = () => {
         orderBooks: [{ bookId: cookieValue && cookieValue.id, quantity: 1 }],
         ...allDataCopy,
       };
-
-      postPaymentData(data) // api 전송
+      postPaymentData(data)
         .then((data: any) => {
-          console.log(data);
           // 쿠키 삭제
           removeCookie('PayNow', { path: '/' });
 
