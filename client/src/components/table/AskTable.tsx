@@ -40,12 +40,12 @@ const AskTable = ({ title }: AskTableProps) => {
   };
 
   const PatchHandler = (id: string) => {
-    getCSDetail(id, setCSDetail).then(() => navigate('/customer/apply'));
+    getCSDetail(id).then(() => navigate('/customer/apply'));
     setCSPatchClicked(true);
   };
 
   const titleHandler = (id: string) => {
-    getCSDetail(id, setCSDetail).then(() => {
+    getCSDetail(id).then(() => {
       navigate(`/customer/detail/${id}`);
     });
   };
@@ -103,8 +103,8 @@ const AskTable = ({ title }: AskTableProps) => {
                       }}
                     >
                       삭제
-                    </Styled_AskTable.DeletePatchBtn>
-                    /
+                    </Styled_AskTable.DeletePatchBtn>{' '}
+                    /{' '}
                     <Styled_AskTable.DeletePatchBtn
                       onClick={() => {
                         PatchHandler(v.id);

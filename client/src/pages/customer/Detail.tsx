@@ -14,7 +14,9 @@ const Detail = () => {
 
   useEffect(() => {
     if (boardId) {
-      getCSDetail(boardId, setCSDetail);
+      getCSDetail(boardId).then(data => {
+        setCSDetail(data);
+      });
     }
   }, []);
 
@@ -27,14 +29,24 @@ const Detail = () => {
           </div>
           <div className="body">
             <div>
-              <Styled_Detail.H1>{csDetail.title}</Styled_Detail.H1>
+              <Styled_Detail.H1>{csDetail.question.title}</Styled_Detail.H1>
               <div className="detail">
-                <pre dangerouslySetInnerHTML={{ __html: csDetail.content }} />
+                <pre
+                  dangerouslySetInnerHTML={{
+                    __html: csDetail.question.content,
+                  }}
+                />
               </div>
             </div>
             <div>
               <Styled_Detail.H1>답변</Styled_Detail.H1>
-              <div className="detail">답변입니다 어쩌구</div>
+              <div className="detail">
+                <pre
+                  dangerouslySetInnerHTML={{
+                    __html: csDetail.answer.content,
+                  }}
+                />
+              </div>
             </div>
             <AskTable title="1:1 문의 리스트" />
           </div>

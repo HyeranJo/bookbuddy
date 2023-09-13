@@ -107,28 +107,6 @@ export const Styled_AskTable = {
         }
       }
     }
-
-    & > tbody {
-      & tr > td:last-child {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 4px;
-
-        ${DeviceQuery.bigScreen`
-          gap: calc(10px / ${screenScale.bigScreen});
-          margin-top:calc(4px / ${screenScale.bigScreen});
-        `}
-        ${DeviceQuery.desktop`
-          gap: calc(10px / ${screenScale.desktop});
-          margin-top:calc(4px / ${screenScale.desktop});
-        `}
-        ${DeviceQuery.tablet`
-          gap: calc(10px / ${screenScale.tablet});
-          margin-top:calc(4px / ${screenScale.tablet});
-        `}
-      }
-    }
   `,
   Th: styled.th`
     background-color: var(--category-color);
@@ -139,6 +117,17 @@ export const Styled_AskTable = {
   `,
   Tr: styled.tr`
     border-bottom: 1px solid gray;
+    height: 60px;
+
+    ${DeviceQuery.bigScreen`
+      height:calc(60px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height:calc(60px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height:calc(60px / ${screenScale.tablet});
+    `}
   `,
   Td: styled.td`
     white-space: nowrap; //줄바꿈 방지

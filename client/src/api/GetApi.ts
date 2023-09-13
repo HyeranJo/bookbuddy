@@ -184,20 +184,42 @@ export const getCSList = async () => {
   }
 };
 
-export const getCSDetail = async (
-  boardId: string,
-  setCSDetail: (CSDetail: CSDetailType) => void,
-) => {
-  try {
-    const response = await axios.get(`${SERVER_HOST}/board/cs/${boardId}`, {
+export const getCSDetail = async (boardId: string) => {
+  const getCsQuestion = axios
+    .get(`${SERVER_HOST}/board/cs/${boardId}`, {
       headers: {
         'ngrok-skip-browser-warning': true,
         Authorization: getCookie('accessToken'),
       },
+    })
+    .catch(error => {
+      console.error('getCsQuestion encountered an error:', error);
+      throw error;
     });
-    const result = response.data;
-    setCSDetail(result);
-    return result;
+
+  const getCsAnswer = axios
+    .get(`${SERVER_HOST}/admin/cs/${boardId}`, {
+      headers: {
+        'ngrok-skip-browser-warning': true,
+        Authorization: getCookie('accessToken'),
+      },
+    })
+    .catch(error => {
+      console.error('getCsAnswer encountered an error:', error);
+      throw error;
+    });
+
+  try {
+    const response = await axios.all([getCsQuestion, getCsAnswer]).then(
+      axios.spread((acct, perms) => {
+        const resQuestion = acct.data;
+        const resAnswer = perms.data;
+
+        return { resQuestion, resAnswer };
+      }),
+    );
+    const { resQuestion, resAnswer } = response;
+    return { question: resQuestion, answer: resAnswer };
   } catch (error) {
     console.log(error);
     throw error;
@@ -207,7 +229,7 @@ export const getCSDetail = async (
 export const getOrderHistoryList = async () => {
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/payment/ship?page=1&size=20`,
+      `${SERVER_HOST}/order/ship?page=1&size=20`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,

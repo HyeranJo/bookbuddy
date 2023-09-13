@@ -19,7 +19,7 @@ const Apply = () => {
   const [csPatchClicked, setCSPatchClicked] =
     useRecoilState(CSPatchClickedAtom);
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
-  const [patchValue, setPatchValue] = useState(csDetail.title);
+  const [patchValue, setPatchValue] = useState(csDetail.question.title);
   const navigate = useNavigate();
 
   const submitHandler = () => {
@@ -34,9 +34,9 @@ const Apply = () => {
     setCSPatchClicked(false);
 
     const data = {
-      boardId: csDetail.id,
-      title: csDetail.title,
-      content: csDetail.content,
+      boardId: csDetail.question.id,
+      title: csDetail.question.title,
+      content: csDetail.question.content,
     };
 
     patchCS(data)
@@ -50,7 +50,13 @@ const Apply = () => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (csPatchClicked === true) {
       setPatchValue(e.target.value);
-      setCSDetail({ ...csDetail, title: e.target.value });
+      setCSDetail({
+        ...csDetail,
+        question: {
+          ...csDetail.question,
+          title: e.target.value,
+        },
+      });
     } else {
       setTitle(e.target.value);
     }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PaymentType } from '../model/paymentType';
 import { getCookie } from '../utils/cookie';
-import { PostCSType } from '../model/CStype';
+import { PostCSType, PostCSAnswerType } from '../model/CStype';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -67,6 +67,22 @@ export const postBookMark = async (
 export const postCSData = async (data: PostCSType) => {
   try {
     const response = await axios.post(`${SERVER_HOST}/board/cs`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+        Authorization: getCookie('accessToken'),
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const postCSAnswerData = async (data: PostCSAnswerType) => {
+  try {
+    const response = await axios.post(`${SERVER_HOST}/admin/cs`, data, {
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': 'true',

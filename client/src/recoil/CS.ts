@@ -9,10 +9,16 @@ export const CSContentAtom = atom<string>({
 export const CSDetailAtom = atom<CSDetailType>({
   key: 'CSDetailAtom',
   default: {
-    id: '',
-    title: '',
-    content: '',
-    memberId: '',
+    answer: {
+      boardId: '',
+      content: '',
+    },
+    question: {
+      id: '',
+      title: '',
+      content: '',
+      memberId: '',
+    },
   },
 });
 

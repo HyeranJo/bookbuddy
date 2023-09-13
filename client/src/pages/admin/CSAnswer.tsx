@@ -7,6 +7,7 @@ import { getCSDetail } from '../../api/GetApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import Editor from '../../components/input/Editor';
 import RedButton from '../../components/buttons/RedButton';
+import { postCSAnswerData } from '../../api/PostApi';
 
 const CSAnswer = () => {
   const params = useParams();
@@ -17,16 +18,21 @@ const CSAnswer = () => {
 
   useEffect(() => {
     if (boardId) {
-      getCSDetail(boardId, setCSDetail);
+      getCSDetail(boardId).then(data => {
+        setCSDetail(data);
+      });
     }
   }, []);
 
   const submitHandler = () => {
     const data = {
+      boardId: boardId,
       content: value,
     };
-    /** @todo: api 전송 및 페이지 이동 */
-    // postCSData(data).then(data => navigate(`/customer/detail/${data.id}`));
+    /** api 전송 및 페이지 이동 */
+    postCSAnswerData(data).then(data =>
+      navigate(`/customer/detail/${data.boardId}`),
+    );
   };
 
   return (
@@ -38,9 +44,13 @@ const CSAnswer = () => {
           </div>
           <div className="body">
             <div>
-              <Styled_CSAnswer.H1>{csDetail.title}</Styled_CSAnswer.H1>
+              <Styled_CSAnswer.H1>{csDetail.question.title}</Styled_CSAnswer.H1>
               <div className="detail">
-                <pre dangerouslySetInnerHTML={{ __html: csDetail.content }} />
+                <pre
+                  dangerouslySetInnerHTML={{
+                    __html: csDetail.question.content,
+                  }}
+                />
               </div>
             </div>
             <div>

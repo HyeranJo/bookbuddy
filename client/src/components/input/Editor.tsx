@@ -51,10 +51,16 @@ const Editor = () => {
   const quillRef = useRef(null);
   const csPatchClicked = useRecoilValue(CSPatchClickedAtom);
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
-  const [patchValue, setPatchValue] = useState(csDetail.content);
+  const [patchValue, setPatchValue] = useState(csDetail.question.content);
 
   useEffect(() => {
-    setCSDetail({ ...csDetail, content: patchValue });
+    setCSDetail({
+      ...csDetail,
+      question: {
+        ...csDetail.question,
+        content: patchValue,
+      },
+    });
     setValue('');
   }, [patchValue]);
 

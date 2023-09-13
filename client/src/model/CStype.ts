@@ -12,14 +12,24 @@ export interface PostCSType {
 }
 
 export interface CSDetailType {
-  id: string;
-  title: string;
-  content: string;
-  memberId: string;
+  answer: {
+    boardId: string;
+    content: string;
+  };
+  question: {
+    id: string;
+    title: string;
+    content: string;
+    memberId: string;
+  };
 }
 
 export interface CSPatchType {
   boardId: string;
   title: string;
+  content: string;
+}
+
+export interface PostCSAnswerType {
   content: string;
 }
