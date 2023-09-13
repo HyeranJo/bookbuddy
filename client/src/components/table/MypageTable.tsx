@@ -61,7 +61,9 @@ const MypageTable = ({ cancel, title, message }: CategoryProps) => {
               );
             })
           ) : (
-            <Styled_MypageTable.Tr>주문 내역이 없습니다</Styled_MypageTable.Tr>
+            <Styled_MypageTable.Tr>
+              <td>주문 내역이 없습니다</td>
+            </Styled_MypageTable.Tr>
           )}
         </tbody>
       </Styled_MypageTable.Table>
