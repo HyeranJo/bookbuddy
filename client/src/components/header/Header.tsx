@@ -41,7 +41,8 @@ const Header = () => {
             >
               <Styled_Header.Span>고객센터</Styled_Header.Span>
             </Link>
-            {getCookie('userInfo').email === 'hello@gmail.com' ? (
+            {getCookie('userInfo') &&
+            getCookie('userInfo').email === 'hello@gmail.com' ? (
               <button
                 id="admin"
                 onClick={() => {
