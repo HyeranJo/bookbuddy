@@ -1,9 +1,13 @@
-export interface CSListType {
-  id: string;
-  title: string;
-  content: string;
-  memberId: string;
-  createdAt: string;
+import { PageInfo } from './Pagination';
+
+export interface CSType extends PageInfo {
+  data: {
+    id: string;
+    title: string;
+    content: string;
+    memberId: string;
+    createdAt: string;
+  }[];
 }
 
 export interface PostCSType {

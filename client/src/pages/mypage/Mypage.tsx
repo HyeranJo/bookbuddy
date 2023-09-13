@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import MypageSidebar from '../../components/sidebar/MypageSidebar';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Mypage } from './Mypage.style';
-import MypageTable from '../../components/table/MypageTable';
+import OrderHistory from '../../components/table/OrderHistory';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/Sidebars';
 import { MyBookList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
-import AskTable from '../../components/table/AskTable';
+import CSTable from '../../components/table/CSTable';
 import { getCookie } from '../../utils/cookie';
 
 const Mypage = () => {
@@ -57,14 +57,14 @@ const Mypage = () => {
           </Styled_Mypage.Title>
 
           <Styled_Mypage.Detail className="detail">
-            <MypageTable title="최근 주문 내역" cancel={true} />
+            <OrderHistory title="최근 주문 내역" cancel={true} />
             <div
               style={{ scrollMarginTop: '240px' }}
               ref={el => {
                 navScrollListRef.current[1] = el;
               }}
             >
-              <MypageTable title="전체 주문 내역" />
+              <OrderHistory title="전체 주문 내역" />
             </div>
             <div
               style={{ scrollMarginTop: '240px' }}
@@ -72,7 +72,7 @@ const Mypage = () => {
                 navScrollListRef.current[2] = el;
               }}
             >
-              <AskTable title="1:1 문의 내역" />
+              <CSTable title="1:1 문의 내역" />
             </div>
 
             <Styled_Mypage.BookmarkList>

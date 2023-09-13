@@ -11,7 +11,7 @@ import PaginationBox from '../../components/pagination_box/PaginationBox';
 import category from '../../utils/SidebarCategory';
 
 const List = () => {
-  const [listData, setListData] = useState<BookList[] | null>([]);
+  const [listData, setListData] = useState<BookList>();
   const [isLoading, setIsLoading] = useState(false);
   const sidebarId = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
@@ -69,7 +69,7 @@ const List = () => {
                 <Loading />
               ) : (
                 listData &&
-                listData.map((v: BookList) => {
+                listData.data.map(v => {
                   return (
                     <Book
                       key={v.id}
@@ -84,7 +84,9 @@ const List = () => {
               )}
             </Styled_List.Books>
           </Styled_List.BookGroup>
-          <PaginationBox />
+          <div className="pagination">
+            <PaginationBox itemsCountPerPage={20} totalItemsCount={60} />
+          </div>
         </Styled_List.Content>
       </Styled_List.Div>
     </Styled_List.Container>

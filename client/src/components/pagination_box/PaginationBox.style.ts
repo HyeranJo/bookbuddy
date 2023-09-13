@@ -9,7 +9,6 @@ export const Styled_PaginationBox = {
       align-items: center;
       list-style: none;
       gap: 30px;
-      margin: 100px 0px 200px 0px;
 
       ${DeviceQuery.bigScreen`
         gap: calc(30px / ${screenScale.bigScreen});

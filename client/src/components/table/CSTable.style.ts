@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
-export const Styled_AskTable = {
+export const Styled_CSTable = {
   Container: styled.div`
     width: 1095px;
 
@@ -14,6 +14,20 @@ export const Styled_AskTable = {
     ${DeviceQuery.tablet`
       width: calc(1095px / ${screenScale.tablet});
     `}
+
+    & > .pagination {
+      margin-top: 20px;
+
+      ${DeviceQuery.bigScreen`
+        margin-top: calc(20px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        margin-top: calc(20px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-top: calc(20px / ${screenScale.tablet});
+      `}
+    }
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);

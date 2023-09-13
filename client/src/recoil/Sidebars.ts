@@ -12,7 +12,7 @@ export const SidebarIdAtom = atom({
   default: 1,
 });
 
-// booklist 사이드바 현재 페이지 번호
+// pagenation box 현재 페이지 번호
 export const PageAtom = atom({
   key: 'PageAtom',
   default: 1,

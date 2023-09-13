@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Detail } from './Detail.style';
-import AskTable from '../../components/table/AskTable';
+import AskTable from '../../components/table/CSTable';
 import { CSDetailAtom } from '../../recoil/CS';
 import { useRecoilState } from 'recoil';
 import { getCSDetail } from '../../api/GetApi';

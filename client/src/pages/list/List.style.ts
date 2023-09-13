@@ -48,6 +48,10 @@ export const Styled_List = {
       padding-right: calc(53.5px / ${screenScale.tablet});
       padding-top: calc(44px / ${screenScale.tablet});
     `}
+
+    & > .pagination {
+      margin: 100px 0px 200px 0px;
+    }
   `,
   Title: styled.div`
     display: flex;

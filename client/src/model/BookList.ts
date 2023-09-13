@@ -1,4 +1,6 @@
-export interface BookList {
+import { PageInfo } from './Pagination';
+
+export interface BookInfo {
   id: string;
   author: string;
   date: string;
@@ -7,6 +9,10 @@ export interface BookList {
   price: number;
   publisher: string;
   bookmark: boolean;
+}
+
+export interface BookList extends PageInfo {
+  data: BookInfo[];
 }
 
 export interface MyBookList {

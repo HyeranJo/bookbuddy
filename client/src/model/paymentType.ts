@@ -1,3 +1,5 @@
+import { PageInfo } from './Pagination';
+
 export interface PaymentType {
   shipName: string;
   address1: string;
@@ -10,22 +12,10 @@ export interface PaymentType {
   email: string;
 }
 
-export interface OrderHistoryType {
+export interface OrderHistoryType extends PageInfo {
   data: {
     id: string;
     orderBooks: { bookName: string }[];
     createdAt: string;
   }[];
-  pageInfo: {
-    page: number;
-    size: number;
-    totalElements: number;
-    totalPages: number;
-  };
-}
-
-export interface IrderHistoryDataType {
-  id: string;
-  orderBooks: { bookName: string }[];
-  createdAt: string;
 }

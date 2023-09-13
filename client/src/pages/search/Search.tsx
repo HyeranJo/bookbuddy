@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Styled_Search from './Search.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
-import { BookList } from '../../model/BookList';
+import { BookInfo, BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
 import { getBookSearchList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
@@ -10,7 +10,7 @@ import SearchBar from '../../components/search/SearchBar';
 import { SearchValue } from '../../recoil/SearchValue';
 
 const Search = () => {
-  const [listData, setListData] = useState<BookList[] | null>([]);
+  const [listData, setListData] = useState<BookList>();
   const [isLoading, setIsLoading] = useState(false);
   const InputValue = useRecoilValue(SearchValue);
 
@@ -32,11 +32,11 @@ const Search = () => {
           <Styled_Search.Books>
             {isLoading ? (
               <Loading />
-            ) : listData && listData.length === 0 ? (
+            ) : listData && listData.data.length === 0 ? (
               <Styled_Search.Msg>검색결과를 찾지못했습니다🥲</Styled_Search.Msg>
             ) : (
               listData &&
-              listData.map((v: BookList) => {
+              listData.data.map((v: BookInfo) => {
                 return (
                   <Book
                     key={v.id}

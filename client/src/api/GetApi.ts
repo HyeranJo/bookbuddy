@@ -2,12 +2,11 @@ import axios from 'axios';
 import { BookList, MyBookList } from '../model/BookList';
 import { getCookie } from '../utils/cookie';
 import { CartListType } from '../model/CartList';
-import { CSDetailType } from '../model/CStype';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 interface getBookListType {
-  setListData: (result: BookList[]) => void;
+  setListData: (result: BookList) => void;
   setIsLoading: (isloading: boolean) => void;
   sidebarId?: number;
   page?: number;
@@ -31,7 +30,7 @@ export const getBookList = async ({
         },
       },
     );
-    const result = response.data.data;
+    const result = response.data;
     setListData(result);
     setIsLoading(false);
   } catch (error) {
@@ -44,6 +43,7 @@ export const getSortedBookList = async (
   { setListData, setIsLoading, sidebarId, page }: getBookListType,
   order: 'name' | 'price' | 'bookmark',
 ) => {
+  setIsLoading(true);
   try {
     const response = await axios.get(
       `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20&order=${order}`,
@@ -68,7 +68,6 @@ export const getCartList = async (
 ) => {
   try {
     const response = await axios.get(`${SERVER_HOST}/cart`, {
-      // const response = await axios.get('./dummy.json', {
       headers: {
         'ngrok-skip-browser-warning': true,
         Authorization: getCookie('accessToken'),
@@ -123,7 +122,7 @@ export const getBookDetail = async (
 };
 
 export const getBookmarkList = async (
-  setBookmarkList: (bookmarkList: BookList[]) => void,
+  setBookmarkList: (bookmarkList: BookList) => void,
 ) => {
   try {
     const response = await axios.get(`${SERVER_HOST}/bookmark`, {
@@ -168,15 +167,18 @@ export const getLogout = async () => {
   }
 };
 
-export const getCSList = async () => {
+export const getCSList = async (page: number) => {
   try {
-    const response = await axios.get(`${SERVER_HOST}/board/cs?page=1&size=20`, {
-      headers: {
-        'ngrok-skip-browser-warning': true,
-        Authorization: getCookie('accessToken'),
+    const response = await axios.get(
+      `${SERVER_HOST}/board/cs?page=${page}&size=10`,
+      {
+        headers: {
+          'ngrok-skip-browser-warning': true,
+          Authorization: getCookie('accessToken'),
+        },
       },
-    });
-    const result = response.data.data;
+    );
+    const result = response.data;
     return result;
   } catch (error) {
     console.log(error);
@@ -226,10 +228,10 @@ export const getCSDetail = async (boardId: string) => {
   }
 };
 
-export const getOrderHistoryList = async () => {
+export const getOrderHistory = async (page: number) => {
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/order/ship?page=1&size=20`,
+      `${SERVER_HOST}/order/ship?page=${page}&size=5`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,

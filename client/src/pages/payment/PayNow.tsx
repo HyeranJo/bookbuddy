@@ -21,7 +21,7 @@ import {
   PostCodeModalAtom,
 } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';
-import { BookList } from '../../model/BookList';
+import { BookInfo } from '../../model/BookList';
 
 // ================================================================================
 // 결제하지않고 페이지 이동하는 경우 쿠키 삭제 안 되는 상황 방지 위해 /ship(payment.tsx)컴포넌트와 분리
@@ -36,7 +36,7 @@ const PayNow = () => {
   const setIsOpen = useSetRecoilState(PostCodeModalAtom);
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
   const navigate = useNavigate();
-  const [cookieValue, setCookieValue] = useState<BookList>();
+  const [cookieValue, setCookieValue] = useState<BookInfo>();
 
   // ==================================== useEffect ================================
   // ----------------------------- 결제할 Book data 저장 ----------------------------

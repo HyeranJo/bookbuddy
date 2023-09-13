@@ -1,5 +1,5 @@
 import Styled_Customer from './Customer.style';
-import AskTable from '../../components/table/AskTable';
+import AskTable from '../../components/table/CSTable';
 import FAQ from '../../components/table/FAQ';
 
 const Customer = () => {
