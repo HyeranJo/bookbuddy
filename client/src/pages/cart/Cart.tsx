@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import CartTable from '../../components/table/CartTable';
 import { Styled_Layout } from '../BlankPageLayout';
-import { Styled_Order } from './Order.style';
+import { Styled_Order } from './Cart.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
