@@ -1,8 +1,9 @@
 package com.bookbuddy.demo.book.entity;
 
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
+import com.bookbuddy.demo.cart.entity.Cart;
 import com.bookbuddy.demo.category.entity.Category;
-import com.bookbuddy.demo.order.entity.Order;
+import com.bookbuddy.demo.orderbook.OrderBook;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -35,7 +36,10 @@ public class Book {
     private List<Bookmark> bookmarks;
     @JsonBackReference
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
-    private List<Order> orders;
+    private List<Cart> carts;
+    @JsonBackReference
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
+    private List<OrderBook> orderBooks;
 
     @JsonManagedReference
     @JoinColumn(name="CATEGORY_ID")
@@ -93,16 +97,23 @@ public class Book {
             bookmark.addBook(this);
         }
     }
-    public void addOrder(Order order) {
-        orders.add(order);
-        if(order.getBook() != this) {
-            order.addBook(this);
+    public void addCart(Cart cart) {
+        carts.add(cart);
+        if(cart.getBook() != this) {
+            cart.addBook(this);
         }
     }
     public void addCategory(Category category) {
         this.category = category;
         if(! category.getBook().contains(this)) {
             category.getBook().add(this);
+        }
+    }
+
+    public void addOrderBook(OrderBook orderBook) {
+        orderBooks.add(orderBook);
+        if(orderBook.getBook() != this) {
+            orderBook.addBook(this);
         }
     }
 

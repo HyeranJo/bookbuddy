@@ -1,40 +1,35 @@
 package com.bookbuddy.demo.order.dto;
 
-import com.bookbuddy.demo.book.entity.Book;
+import com.bookbuddy.demo.orderbook.OrderBookDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrderDto {
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
-        private String id;
-        private int quantity;
-        private int price;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    public static class Patch {
-        @Min(value=1)
-        private long id;
-        private int quantity;
-
-        public void setId(long id) {
-            this.id = id;
-        }
+        private List<OrderBookDto.Post> orderBooks;
+        private String shipName;
+        private String address1;
+        private String address2;
+        private String shipMobile;
+        private String shipTel;
+        private String cstmrName;
+        private String cstmrMobile;
+        private String cstmrTel;
+        private String email;
     }
 
     @Getter
     @AllArgsConstructor
     public static class Response {
         private long id;
-        private Book book;
-        private int quantity;
-        private int price;
+        private List<OrderBookDto.Response> orderBooks;
+        private LocalDateTime createdAt;
     }
 }

@@ -1,6 +1,9 @@
 package com.bookbuddy.demo.order.service;
 
+import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.service.BookService;
+import com.bookbuddy.demo.cart.entity.Cart;
+import com.bookbuddy.demo.cart.service.CartService;
 import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.member.entity.Member;
@@ -8,57 +11,53 @@ import com.bookbuddy.demo.member.service.MemberService;
 import com.bookbuddy.demo.order.dto.OrderDto;
 import com.bookbuddy.demo.order.entity.Order;
 import com.bookbuddy.demo.order.repository.OrderRepository;
+import com.bookbuddy.demo.orderbook.OrderBook;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 @Transactional(readOnly = true)
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final BookService bookService;
     private final MemberService memberService;
+    private final BookService bookService;
     @Transactional
-    public Order createOrder(String email, Order order, OrderDto.Post orderDto) {
-        String bookId = orderDto.getId();
+    public Order createOrder(Order order, OrderDto.Post orderDto, String email) {
         Member member = memberService.findMember(email);
-        order.addBook(bookService.findVerifyBook(bookId));
         order.addMember(member);
         member.addOrder(order);
 
-        return orderRepository.save(order);
+        List<OrderBook> orderBooks = orderDto.getOrderBooks().stream().map(e -> {
+            Book book = bookService.findVerifyBook(e.getBookId());
+            OrderBook orderBook = new OrderBook();
+
+            orderBook.addQuantity(e.getQuantity());
+            orderBook.addBook(book);
+            orderBook.addOrder(order);
+
+            return orderBook;
+        }).collect(Collectors.toList());
+        order.addOrderBooks(orderBooks);
+        Order saveOrder = orderRepository.save(order);
+
+        return saveOrder;
     }
-
-    @Transactional
-    public Order updateOrder(Order order) {
-        Order findOrder = findVerifyOrder(order.getId());
-
-        Optional.ofNullable(order.getQuantity())
-                        .ifPresent(quantity->findOrder.setQuantity(quantity));
-
-        return orderRepository.save(findOrder);
-    }
-
-    public List<Order> findOrders(String email) {
-        Member member = memberService.findMember(email);
-        return orderRepository.findAllByMember(member);
-    }
-    public Order findOrder(long orderId) {
-        return findVerifyOrder(orderId);
-    }
-
-    @Transactional
-    public void deleteOrder(long orderId) {
-        Order findOrder = findVerifyOrder(orderId);
-        orderRepository.delete(findOrder);
-    }
-
-    private Order findVerifyOrder(long orderId) {
-        return orderRepository.findById(orderId)
+    private Order findVerifyOrder(long id) {
+        return orderRepository.findById(id)
                 .orElseThrow(()->new BusinessException(ExceptionCode.ORDER_NOT_FOUND));
+    }
+
+    public Page<Order> findOrders(PageRequest pageRequest, String email) {
+        return orderRepository.findAllByEmail(pageRequest, email);
     }
 }
