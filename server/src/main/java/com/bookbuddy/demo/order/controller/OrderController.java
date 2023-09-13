@@ -23,19 +23,10 @@ import javax.validation.constraints.Positive;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
-    /* 장바구니 결제 */
+    /* 주문하기 */
     @PostMapping("/ship")
     public ResponseEntity createOrder(@RequestBody @Valid OrderDto.Post orderDto,
                                         Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-        Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto), orderDto, principal.getUsername());
-
-        return new ResponseEntity<>(mapper.orderToOrderResponseDto(order), HttpStatus.CREATED);
-    }
-    /* 바로 결제 */
-    @PostMapping("/buy")
-    public ResponseEntity createOrderBuy(@RequestBody @Valid OrderDto.Post orderDto,
-                                           Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
         Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto), orderDto, principal.getUsername());
 
