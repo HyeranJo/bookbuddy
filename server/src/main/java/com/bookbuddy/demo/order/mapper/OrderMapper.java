@@ -2,6 +2,7 @@ package com.bookbuddy.demo.order.mapper;
 
 import com.bookbuddy.demo.order.dto.OrderDto;
 import com.bookbuddy.demo.order.entity.Order;
+import com.bookbuddy.demo.orderbook.OrderBookDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
@@ -25,39 +26,26 @@ public interface OrderMapper {
     }
 
     default OrderDto.Response orderToOrderResponseDto(Order order) {
-        List<Long> carts = order.getCarts().stream()
-                .map(e -> e.getId()).collect(Collectors.toList());
+        List<OrderBookDto.Response> orderBooks = order.getOrderBooks().stream()
+                .map(e-> new OrderBookDto.Response(e.getBook().getName()))
+                .collect(Collectors.toList());
+
         return new OrderDto.Response(
                 order.getId(),
-                carts,
-                order.getShipName(),
-                order.getAddress1(),
-                order.getAddress2(),
-                order.getShipMobile(),
-                order.getShipTel(),
-                order.getCstmrName(),
-                order.getCstmrMobile(),
-                order.getCstmrTel(),
-                order.getEmail());
+                orderBooks,
+                order.getCreatedAt());
     }
 
     default List<OrderDto.Response> ordersToOrderResponseDtos(List<Order> orders) {
-        return orders.stream().map(e-> {
-            List<Long> carts = e.getCarts().stream()
-                    .map(cart -> cart.getId()).collect(Collectors.toList());
+        return orders.stream().map(order-> {
+            List<OrderBookDto.Response> orderBooks = order.getOrderBooks().stream()
+                    .map(e-> new OrderBookDto.Response(e.getBook().getName()))
+                    .collect(Collectors.toList());
 
             return new OrderDto.Response(
-                    e.getId(),
-                    carts,
-                    e.getShipName(),
-                    e.getAddress1(),
-                    e.getAddress2(),
-                    e.getShipMobile(),
-                    e.getShipTel(),
-                    e.getCstmrName(),
-                    e.getCstmrMobile(),
-                    e.getCstmrTel(),
-                    e.getEmail());
+                    order.getId(),
+                    orderBooks,
+                    order.getCreatedAt());
         }).collect(Collectors.toList());
     }
 }

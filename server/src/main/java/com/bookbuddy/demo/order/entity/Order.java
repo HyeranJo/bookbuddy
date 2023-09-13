@@ -1,27 +1,28 @@
 package com.bookbuddy.demo.order.entity;
 
+import com.bookbuddy.demo.audit.Auditable;
 import com.bookbuddy.demo.cart.entity.Cart;
 import com.bookbuddy.demo.member.entity.Member;
+import com.bookbuddy.demo.orderbook.OrderBook;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@ToString
+@Slf4j
 @Getter
 @Table(name="ORDERS")
 @Entity
 @NoArgsConstructor
-public class Order {
+public class Order extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @JsonBackReference
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.REMOVE})
-    private List<Cart> carts = new ArrayList<>();
     @Column
     private String shipName;
     @Column
@@ -45,12 +46,19 @@ public class Order {
     @ManyToOne
     private Member member;
 
-    public void addCart(Cart cart) {
-        carts.add(cart);
-        if(cart.getOrder() != this) {
-            cart.setOrder(this);
+    @JsonBackReference
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<OrderBook> orderBooks = new ArrayList<>();
+
+    public void addOrderBooks(List<OrderBook> orderBooks) {
+        this.orderBooks = orderBooks;
+        for(OrderBook orderBook : orderBooks) {
+            if (orderBook.getOrder() != this) {
+                orderBook.addOrder(this);
+            }
         }
     }
+
     public void addMember(Member member) {
         this.member = member;
         if(! member.getOrders().contains(this)) {
@@ -68,5 +76,23 @@ public class Order {
         this.cstmrMobile = cstmrMobile;
         this.cstmrTel = cstmrTel;
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", shipName='" + shipName + '\'' +
+                ", address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", shipMobile='" + shipMobile + '\'' +
+                ", shipTel='" + shipTel + '\'' +
+                ", cstmrName='" + cstmrName + '\'' +
+                ", cstmrMobile='" + cstmrMobile + '\'' +
+                ", cstmrTel='" + cstmrTel + '\'' +
+                ", email='" + email + '\'' +
+                ", member=" + member.getEmail() +
+                ", orderBooks=" + orderBooks.toString() +
+                '}';
     }
 }

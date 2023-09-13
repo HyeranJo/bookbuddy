@@ -8,7 +8,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
 @Getter
 @Entity
 @AllArgsConstructor
@@ -25,10 +24,7 @@ public class Cart {
     private int quantity;
     @Column
     private int price;
-    @JsonManagedReference
-    @JoinColumn(name="ORDER_ID")
-    @ManyToOne
-    private Order order;
+
     @JsonManagedReference
     @JoinColumn(name="MEMBER_ID")
     @ManyToOne
@@ -51,22 +47,11 @@ public class Cart {
         }
     }
 
-    public void addOrder(Order order) {
-        this.order = order;
-        if(! order.getCarts().contains(this)) {
-            order.getCarts().add(this);
-        }
-    }
-
     public void addMember(Member member) {
         this.member = member;
         if(! member.getCarts().contains(this)) {
             member.getCarts().add(this);
         }
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public void setQuantity(int quantity) {
