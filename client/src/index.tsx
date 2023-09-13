@@ -9,7 +9,7 @@ import Signup from './pages/sign/Signup';
 import Signin from './pages/sign/Signin';
 import { RecoilRoot } from 'recoil';
 import List from './pages/list/List';
-import Order from './pages/order/Order';
+import Cart from './pages/cart/Cart';
 import Mypage from './pages/mypage/Mypage';
 import Payment from './pages/payment/Payment';
 import Bookdetail from './pages/bookdetail/Bookdetail';
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       { path: '/signin', element: <Signin /> },
       { path: '/list', element: <List /> },
       { path: '/book/:id', element: <Bookdetail /> },
-      { path: '/order', element: <Order /> },
+      { path: '/cart', element: <Cart /> },
       { path: '/ship', element: <Payment /> },
       { path: '/paynow/ship', element: <PayNow /> },
       { path: '/mypage/:email', element: <Mypage /> },

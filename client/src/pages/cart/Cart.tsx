@@ -12,7 +12,7 @@ import {
 } from '../../recoil/CartItem';
 import { getCartList } from '../../api/GetApi';
 
-const Order = () => {
+const Cart = () => {
   const navigate = useNavigate();
   const quantityList = useRecoilValue(QuantityListAtom);
   const finalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
@@ -92,4 +92,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default Cart;
