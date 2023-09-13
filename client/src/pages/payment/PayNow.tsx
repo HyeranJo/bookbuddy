@@ -14,7 +14,6 @@ import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
 import { emailRegExp } from '../../utils/RegExp';
-import { CartListType } from '../../model/CartList';
 import { getCookie, removeCookie } from '../../utils/cookie';
 import PostCode from '../../components/input/PostCode';
 import {
@@ -22,7 +21,7 @@ import {
   PostCodeModalAtom,
 } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';
-import { DeleteCartItem } from '../../api/DeleteApi';
+import { BookList } from '../../model/BookList';
 
 // ================================================================================
 // 결제하지않고 페이지 이동하는 경우 쿠키 삭제 안 되는 상황 방지 위해 /ship(payment.tsx)컴포넌트와 분리
@@ -37,7 +36,7 @@ const PayNow = () => {
   const setIsOpen = useSetRecoilState(PostCodeModalAtom);
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
   const navigate = useNavigate();
-  const [cookieValue, setCookieValue] = useState<CartListType>();
+  const [cookieValue, setCookieValue] = useState<BookList>();
 
   // ==================================== useEffect ================================
   // ----------------------------- 결제할 Book data 저장 ----------------------------
@@ -46,6 +45,7 @@ const PayNow = () => {
       location.reload();
     } else {
       setCookieValue(getCookie('PayNow'));
+      console.log(cookieValue);
     }
   }, []);
 
@@ -101,14 +101,13 @@ const PayNow = () => {
     } else {
       // api 전송
       const data = {
-        orders: [getCookie('PayNow').id],
+        orderBooks: [{ bookId: cookieValue && cookieValue.id, quantity: 1 }],
         ...allDataCopy,
       };
+
       postPaymentData(data) // api 전송
         .then((data: any) => {
           console.log(data);
-          // 장바구니 삭제
-          DeleteCartItem(getCookie('PayNow').id);
           // 쿠키 삭제
           removeCookie('PayNow', { path: '/' });
 
@@ -298,12 +297,10 @@ const PayNow = () => {
 
               {cookieValue ? (
                 <>
-                  <div>
-                    {cookieValue.book.name} - {cookieValue.quantity} 권
-                  </div>
+                  <div>{cookieValue.name} - 1 권</div>
                   <div>
                     배송비 3,000원, 총합{' '}
-                    {(cookieValue.book.price + 3000).toLocaleString()}원
+                    {(cookieValue.price + 3000).toLocaleString()}원
                   </div>
                 </>
               ) : (

@@ -22,7 +22,7 @@ export const QuantityListAtom = atom<{ id: string; quantity: number }[]>({
   default: [],
 });
 
-/** 최종 결제할 도서 '장바구니 id' 리스트 */
+/** 최종 결제할 도서 'order id' 리스트 */
 export const FinalPaymentDetailsAtom = selector({
   key: 'FinalPaymentDetailsAtom',
   get: ({ get }) => {

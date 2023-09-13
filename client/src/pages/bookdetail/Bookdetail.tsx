@@ -76,13 +76,12 @@ const BookDetail = () => {
         // 장바구니에 도서가 없는 경우
         cartData.length === 0
       ) {
-        // 장바구니에 추가
-        // order Id를 포함한 데이터 얻어서 쿠키에 저장
-        await postCartItem(detailInfo).then(data => {
-          setCookie('PayNow', JSON.stringify(data), {
-            path: '/',
-          });
+        // 도서 데이터 얻어서 쿠키에 저장
+
+        setCookie('PayNow', JSON.stringify(detailInfo), {
+          path: '/',
         });
+
         bookId &&
           setQuantityList([
             ...quantityList,

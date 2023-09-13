@@ -110,7 +110,9 @@ const Payment = () => {
     } else {
       // api 전송
       let data = {
-        orders: [...OrderIdsToPay],
+        orderBooks: booksToPay.map(v => {
+          return { bookId: v.book.id, quantity: v.quantity };
+        }),
         ...allDataCopy,
       };
 
@@ -118,7 +120,7 @@ const Payment = () => {
         .then((data: any) => {
           console.log(data);
           alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
-          OrderIdsToPay.map(v => DeleteCartItem(v));
+          booksToPay.map(v => DeleteCartItem(v.id));
           navigate('/');
         })
         .catch(error => {

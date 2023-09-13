@@ -7,10 +7,11 @@ const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 export const postPaymentData = async (allData: PaymentType) => {
   try {
-    const response = await axios.post(`${SERVER_HOST}/payment/ship`, allData, {
+    const response = await axios.post(`${SERVER_HOST}/order/ship`, allData, {
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': 'true',
+        Authorization: getCookie('accessToken'),
       },
     });
     if (response.status === 201) {
