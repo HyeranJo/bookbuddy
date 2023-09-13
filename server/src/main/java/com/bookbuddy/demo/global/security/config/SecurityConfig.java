@@ -73,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/board/**").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/bookmark/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST,"/bookmark/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/admin/cs/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .apply(new CustomFilterConfigurer());

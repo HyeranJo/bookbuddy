@@ -1,5 +1,6 @@
 package com.bookbuddy.demo.board.entity;
 
+import com.bookbuddy.demo.admin.cs.reply.entity.Reply;
 import com.bookbuddy.demo.audit.Auditable;
 import com.bookbuddy.demo.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,11 +26,19 @@ public class Board extends Auditable {
     @ManyToOne
     @JoinColumn(name="MEMBER_ID")
     private Member member;
+    @OneToOne(mappedBy = "board")
+    private Reply reply;
 
     public void addMember(Member member) {
         this.member = member;
         if(! member.getBoards().contains(this)) {
             member.getBoards().add(this);
+        }
+    }
+    public void addReply(Reply reply) {
+        this.reply = reply;
+        if(this.reply.getBoard() != this) {
+            this.reply.addBoard(this);
         }
     }
 
