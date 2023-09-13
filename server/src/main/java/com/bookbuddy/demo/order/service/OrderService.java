@@ -67,6 +67,7 @@ public class OrderService {
         return orderRepository.findAll(pageRequest);
     }
 
+    @Transactional
     public List<Order> updateOrderStatus(AdminOrderStatusDto.Patch orderStatusDto) {
         Order.ORDER_STATUS status = Order.ORDER_STATUS.of(orderStatusDto.getOrderStatus());
         return orderStatusDto.getOrderIds().stream()
