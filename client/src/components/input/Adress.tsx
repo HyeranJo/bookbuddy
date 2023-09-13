@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_Layout } from '../../pages/BlankPageLayout';
 import { Styled_Payment } from '../../pages/payment/Payment.styled';
 import CallNumber from './CallNumber';
@@ -15,13 +15,29 @@ import {
 } from '../../recoil/PostCodeModal';
 
 const Adress = () => {
-  const setRadioValue = useSetRecoilState(radio_Atom);
+  const [radioValue, setRadioValue] = useRecoilState(radio_Atom);
   const [shipInputs, setShipInputs] = useRecoilState(ShipInputsAtom);
   const [cstmrInputs, setCstmrInputs] = useRecoilState(CstmrInputsAtom);
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
   const setIsOpen = useSetRecoilState(PostCodeModalAtom);
+  const [readOnly, setReadOnly] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState('white');
+
+  // ================================ useEffect ==================================
+
+  useEffect(() => {
+    if (radioValue === '배송정보와동일') {
+      setCstmrInputs({ ...cstmrInputs, cstmrName: shipName });
+      setReadOnly(true);
+      setBackgroundColor('var(--light-gray-color)');
+    } else {
+      setCstmrInputs({ ...cstmrInputs, cstmrName: '' });
+      setReadOnly(false);
+      setBackgroundColor('white');
+    }
+  }, [radioValue]);
 
   // ==================================== 함수 ====================================
 
@@ -140,7 +156,7 @@ const Adress = () => {
             <form>
               <input
                 type="radio"
-                name="newInput"
+                name="inputstyle"
                 id="새로입력"
                 value="새로입력"
                 onChange={e => {
@@ -148,17 +164,17 @@ const Adress = () => {
                 }}
                 defaultChecked
               />
-              <label htmlFor="newInput">새로 입력</label>
+              <label htmlFor="inputstyle">새로 입력</label>
               <input
                 type="radio"
-                name="sameAsShipInfo"
+                name="inputstyle"
                 id="배송정보와동일"
                 value="배송정보와동일"
                 onChange={e => {
                   radioHandleChange(e);
                 }}
               />
-              <label htmlFor="sameAsShipInfo">배송정보와 동일</label>
+              <label htmlFor="inputstyle">배송정보와 동일</label>
             </form>
           </Styled_Payment.SubTitle>
           {/* =================customer-info==================== */}
@@ -178,6 +194,8 @@ const Adress = () => {
                     height={40}
                     width={278}
                     onChange={handleChange}
+                    readOnly={readOnly}
+                    backgroundColor={backgroundColor}
                   />
                 </td>
               </tr>

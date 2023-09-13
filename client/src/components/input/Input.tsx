@@ -8,7 +8,8 @@ interface InputProps {
   width?: number;
   height?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  readOnly?: any;
+  readOnly?: boolean;
+  backgroundColor?: string;
 }
 
 const Input = ({
@@ -20,6 +21,7 @@ const Input = ({
   height,
   onChange,
   readOnly,
+  backgroundColor,
 }: InputProps) => {
   return (
     <Styled_Input.Input
@@ -31,6 +33,7 @@ const Input = ({
       height={height}
       onChange={onChange}
       readOnly={readOnly}
+      backgroundColor={backgroundColor}
     />
   );
 };
