@@ -122,5 +122,20 @@ export const Styled_MypageTable = {
   `,
   Tr: styled.tr`
     border-bottom: 1px solid gray;
+    height: 90px;
+    min-height: 90px;
+
+    ${DeviceQuery.bigScreen`
+      height:calc(90px / ${screenScale.bigScreen});
+      min-height:calc(90px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height:calc(90px / ${screenScale.desktop});
+      min-height:calc(90px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height:calc(90px / ${screenScale.tablet});
+      min-height:calc(90px / ${screenScale.tablet});
+    `}
   `,
 };

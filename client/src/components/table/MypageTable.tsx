@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_MypageTable } from './MypageTable.style';
+import { getOrderHistoryList } from '../../api/GetApi';
+import { IrderHistoryDataType } from '../../model/paymentType';
 
 interface CategoryProps {
   title: string;
@@ -8,6 +10,13 @@ interface CategoryProps {
 }
 
 const MypageTable = ({ cancel, title, message }: CategoryProps) => {
+  const [orderHistoryList, setOrderHistoryList] =
+    useState<IrderHistoryDataType[]>();
+
+  useEffect(() => {
+    getOrderHistoryList().then(data => setOrderHistoryList(data.data));
+  }, []);
+
   return (
     <Styled_MypageTable.Container>
       <Styled_MypageTable.H1>{title}</Styled_MypageTable.H1>
@@ -33,19 +42,27 @@ const MypageTable = ({ cancel, title, message }: CategoryProps) => {
           </tr>
         </thead>
         <tbody>
-          <Styled_MypageTable.Tr>
-            <td>2023.08.15</td>
-            <td>20230815-00000001</td>
-            <td>
-              <Styled_MypageTable.BookListDiv>
-                <span>이방인</span>
-                <span>나의 라임 오렌지 나무</span>
-                <span>지리의 힘</span>
-              </Styled_MypageTable.BookListDiv>
-            </td>
-            <td>배송완료</td>
-            <td>{cancel && cancel ? '상품취소' : null}</td>
-          </Styled_MypageTable.Tr>
+          {orderHistoryList && orderHistoryList.length > 0 ? (
+            orderHistoryList.map((v, i) => {
+              return (
+                <Styled_MypageTable.Tr key={i}>
+                  <td>{new Date(v.createdAt).toLocaleDateString()}</td>
+                  <td>{v.id}</td>
+                  <td>
+                    <Styled_MypageTable.BookListDiv>
+                      {v.orderBooks.map((v, i) => {
+                        return <span key={i}>{v.bookName}</span>;
+                      })}
+                    </Styled_MypageTable.BookListDiv>
+                  </td>
+                  <td>배송준비중</td>
+                  <td>{cancel && cancel ? '상품취소' : null}</td>
+                </Styled_MypageTable.Tr>
+              );
+            })
+          ) : (
+            <Styled_MypageTable.Tr>주문 내역이 없습니다</Styled_MypageTable.Tr>
+          )}
         </tbody>
       </Styled_MypageTable.Table>
     </Styled_MypageTable.Container>
