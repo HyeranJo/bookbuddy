@@ -6,7 +6,7 @@ import OrderHistory from '../../components/table/OrderHistory';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/Sidebars';
-import { MyBookList } from '../../model/BookList';
+import { BookMarkList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import CSTable from '../../components/table/CSTable';
 import { getCookie } from '../../utils/cookie';
@@ -15,7 +15,7 @@ const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
   const navScrollListRef = useRef<any>([]);
   const navScrollIndex = useRecoilValue(NavScrollAtom);
-  const [bookmarkList, setBookmarkList] = useState<MyBookList[]>([]);
+  const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const Mypage = () => {
               </Styled_Mypage.BookmarkTitle>
               <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
                 {bookmarkList
-                  .map((v: MyBookList) => {
+                  .map((v: BookMarkList) => {
                     return (
                       <Styled_Mypage.Book key={v.id}>
                         <Book

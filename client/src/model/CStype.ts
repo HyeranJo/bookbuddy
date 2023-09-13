@@ -28,10 +28,8 @@ export interface CSDetailType {
   };
 }
 
-export interface CSPatchType {
+export interface CSPatchType extends PostCSType {
   boardId: string;
-  title: string;
-  content: string;
 }
 
 export interface PostCSAnswerType {

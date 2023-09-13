@@ -1,15 +1,8 @@
+import { BookInfo } from './BookList';
+
 export interface CartListType {
   id: string;
-  book: {
-    id: string;
-    name: string;
-    author: string;
-    publisher: string;
-    price: number;
-    date: string;
-    imgSrc: string;
-    bookmarks: boolean;
-  };
+  book: BookInfo;
   quantity: number;
   price: number;
 }

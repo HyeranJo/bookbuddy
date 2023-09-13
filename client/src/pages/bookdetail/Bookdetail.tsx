@@ -2,7 +2,6 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useEffect, useState } from 'react';
-import { Infotype } from '../../model/Bookdetail';
 import { getBookDetail, getCartList } from '../../api/GetApi';
 import { postCartItem, postBookMark } from '../../api/PostApi';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,11 +10,12 @@ import { CartListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
 import { removeCookie, setCookie } from '../../utils/cookie';
+import { BookInfo } from '../../model/BookList';
 
 const BookDetail = () => {
   const bookIdParams = useParams();
   const bookId = bookIdParams.id;
-  const [detailInfo, setDetailInfo] = useState<Infotype>();
+  const [detailInfo, setDetailInfo] = useState<BookInfo>();
   const [isClick, setIsClick] = useState(detailInfo?.bookmark);
   const [cartList, setCartList] = useRecoilState(CartListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);

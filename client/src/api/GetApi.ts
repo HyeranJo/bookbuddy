@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BookList, MyBookList } from '../model/BookList';
+import { BookList, BookMarkList } from '../model/BookList';
 import { getCookie } from '../utils/cookie';
 import { CartListType } from '../model/CartList';
 
@@ -138,7 +138,7 @@ export const getBookmarkList = async (
 };
 
 export const getBookmarkmypage = async (
-  setBookmarkList: (bookmarkList: MyBookList[]) => void,
+  setBookmarkList: (bookmarkList: BookMarkList[]) => void,
 ) => {
   try {
     const response = await axios.get(`${SERVER_HOST}/bookmark`, {
