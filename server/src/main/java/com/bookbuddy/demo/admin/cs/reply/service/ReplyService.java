@@ -6,9 +6,13 @@ import com.bookbuddy.demo.admin.cs.reply.mapper.ReplyMapper;
 import com.bookbuddy.demo.admin.cs.reply.repository.ReplyRepository;
 import com.bookbuddy.demo.board.entity.Board;
 import com.bookbuddy.demo.board.service.BoardService;
+import com.bookbuddy.demo.global.exception.BusinessException;
+import com.bookbuddy.demo.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -22,5 +26,16 @@ public class ReplyService {
         reply.addBoard(board);
 
         return replyRepository.save(reply);
+    }
+
+    public Reply findReplyByBoardId(long boardId) {
+        return replyRepository.findByBoardId(boardId).get();
+    }
+
+    public void verifyReply(long boardId) {
+        Optional<Reply> reply = replyRepository.findByBoardId(boardId);
+        if(reply.isPresent()) {
+            reply.ifPresent(e->new BusinessException(ExceptionCode.REPLY_EXISTS));
+        }
     }
 }

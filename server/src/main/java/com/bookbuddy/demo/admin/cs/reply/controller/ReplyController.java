@@ -7,12 +7,10 @@ import com.bookbuddy.demo.admin.cs.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/admin/cs")
@@ -22,8 +20,15 @@ public class ReplyController {
     private final ReplyMapper mapper;
     @PostMapping
     public ResponseEntity createReply(@RequestBody @Valid ReplyDto.Post replyDto) {
+        replyService.verifyReply(replyDto.getBoardId());
         Reply reply = replyService.createReply(mapper.replyPostDtoToReply(replyDto), replyDto);
 
         return new ResponseEntity(mapper.replyToReplyResponseDto(reply), HttpStatus.CREATED);
+    }
+    @GetMapping("/{board-id}")
+    public ResponseEntity getReply(@PathVariable("board-id") @Positive long boardId) {
+        Reply reply = replyService.findReplyByBoardId(boardId);
+
+        return new ResponseEntity(mapper.replyToReplyResponseDto(reply), HttpStatus.OK);
     }
 }
