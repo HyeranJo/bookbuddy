@@ -53,6 +53,12 @@ export const Styled_Header = {
     ${DeviceQuery.tablet`
       gap: calc(30px / ${screenScale.tablet});
     `}
+
+    & > #admin {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   `,
   Span: styled.span`
     cursor: pointer;

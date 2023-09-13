@@ -19,6 +19,7 @@ import Apply from './pages/apply/Apply';
 import Detail from './pages/customer/Detail';
 import PayNow from './pages/payment/PayNow';
 import CSAnswer from './pages/admin/CSAnswer';
+import AdminMain from './pages/admin/AdminMain';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: '/customer/apply', element: <Apply /> },
       { path: '/customer/detail/:boardId', element: <Detail /> },
       { path: '/admin/answer/:boardId', element: <CSAnswer /> },
+      { path: '/admin', element: <AdminMain /> },
     ],
   },
 ]);
