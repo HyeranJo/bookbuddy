@@ -13,10 +13,10 @@ import Input from '../../components/input/Input';
 import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
-import { OrderListAtom } from '../../recoil/CartItem';
+import { CartListAtom } from '../../recoil/CartItem';
 import { emailRegExp } from '../../utils/RegExp';
-import { OrderListType } from '../../model/OrderList';
-import { getOrderList } from '../../api/GetApi';
+import { CartListType } from '../../model/CartList';
+import { getCartList } from '../../api/GetApi';
 import { getCookie } from '../../utils/cookie';
 import PostCode from '../../components/input/PostCode';
 import {
@@ -24,7 +24,7 @@ import {
   PostCodeModalAtom,
 } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';
-import { DeleteOrderItem } from '../../api/DeleteApi';
+import { DeleteCartItem } from '../../api/DeleteApi';
 
 const Payment = () => {
   const setRadioValue = useSetRecoilState(radio_Atom);
@@ -34,8 +34,8 @@ const Payment = () => {
   const { cstmrName, email } = cstmrInputs;
   const allData = useRecoilValue<PaymentType>(AllDataSelector);
   const [OrderIdsToPay, setOrderIdsToPay] = useState<string[]>([]);
-  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
-  const [booksToPay, setBooksToPay] = useState<OrderListType[]>([]);
+  const [orderList, setOrderList] = useRecoilState(CartListAtom);
+  const [booksToPay, setBooksToPay] = useState<CartListType[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>();
   const setIsOpen = useSetRecoilState(PostCodeModalAtom);
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
@@ -46,7 +46,7 @@ const Payment = () => {
   // ---------------------------------- api randering ------------------------------
   useEffect(() => {
     // 새로고침시 데이터 유지 위해 다시 api 요청
-    getOrderList(setOrderList);
+    getCartList(setOrderList);
     // Cookie에서 가져오는 데이터 저장 (무한 렌더링 방지)
     setOrderIdsToPay(getCookie('books').data);
     setTotalPrice(getCookie('totalPrice').data);
@@ -118,7 +118,7 @@ const Payment = () => {
         .then((data: any) => {
           console.log(data);
           alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
-          OrderIdsToPay.map(v => DeleteOrderItem(v));
+          OrderIdsToPay.map(v => DeleteCartItem(v));
           navigate('/');
         })
         .catch(error => {

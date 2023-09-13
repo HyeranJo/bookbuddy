@@ -3,11 +3,11 @@ import Styled_Bookdetail from './Bookdetail.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useEffect, useState } from 'react';
 import { Infotype } from '../../model/Bookdetail';
-import { getBookDetail, getOrderList } from '../../api/GetApi';
-import { postBookDetail, postBookMark } from '../../api/PostApi';
+import { getBookDetail, getCartList } from '../../api/GetApi';
+import { postCartItem, postBookMark } from '../../api/PostApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
+import { CartListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
 import { removeCookie, setCookie } from '../../utils/cookie';
@@ -17,7 +17,7 @@ const BookDetail = () => {
   const bookId = bookIdParams.id;
   const [detailInfo, setDetailInfo] = useState<Infotype>();
   const [isClick, setIsClick] = useState(detailInfo?.bookmark);
-  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
+  const [cartList, setCartList] = useRecoilState(CartListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
   const accessToken = useRecoilValue(AccessTokenAtom);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const BookDetail = () => {
     });
 
     if (accessToken) {
-      getOrderList(setOrderList);
+      getCartList(setCartList);
     }
 
     // 쿠키 삭제
@@ -44,13 +44,13 @@ const BookDetail = () => {
   const addCartHandler = () => {
     if (accessToken) {
       if (
-        orderList.filter(v => {
+        cartList.filter(v => {
           return v.book.id === bookId;
         }).length > 0
       ) {
         alert('이미 추가한 상품입니다');
       } else {
-        postBookDetail(detailInfo);
+        postCartItem(detailInfo);
         bookId &&
           setQuantityList([
             ...quantityList,
@@ -68,17 +68,17 @@ const BookDetail = () => {
 
   const payNowHandler = async () => {
     if (accessToken) {
-      const orderData = orderList.filter(v => {
+      const cartData = cartList.filter(v => {
         return v.book.id === bookId;
       });
 
       if (
         // 장바구니에 도서가 없는 경우
-        orderData.length === 0
+        cartData.length === 0
       ) {
         // 장바구니에 추가
         // order Id를 포함한 데이터 얻어서 쿠키에 저장
-        await postBookDetail(detailInfo).then(data => {
+        await postCartItem(detailInfo).then(data => {
           setCookie('PayNow', JSON.stringify(data), {
             path: '/',
           });
@@ -94,7 +94,7 @@ const BookDetail = () => {
       } else {
         // 장바구니에 이미 도서가 있는 경우
         // 장바구니 리스트에서 추출 후 쿠키 저장
-        setCookie('PayNow', JSON.stringify(orderData[0]), {
+        setCookie('PayNow', JSON.stringify(cartData[0]), {
           path: '/',
         });
       }

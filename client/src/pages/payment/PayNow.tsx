@@ -14,7 +14,7 @@ import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
 import { emailRegExp } from '../../utils/RegExp';
-import { OrderListType } from '../../model/OrderList';
+import { CartListType } from '../../model/CartList';
 import { getCookie, removeCookie } from '../../utils/cookie';
 import PostCode from '../../components/input/PostCode';
 import {
@@ -22,7 +22,7 @@ import {
   PostCodeModalAtom,
 } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';
-import { DeleteOrderItem } from '../../api/DeleteApi';
+import { DeleteCartItem } from '../../api/DeleteApi';
 
 // ================================================================================
 // 결제하지않고 페이지 이동하는 경우 쿠키 삭제 안 되는 상황 방지 위해 /ship(payment.tsx)컴포넌트와 분리
@@ -37,7 +37,7 @@ const PayNow = () => {
   const setIsOpen = useSetRecoilState(PostCodeModalAtom);
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
   const navigate = useNavigate();
-  const [cookieValue, setCookieValue] = useState<OrderListType>();
+  const [cookieValue, setCookieValue] = useState<CartListType>();
 
   // ==================================== useEffect ================================
   // ----------------------------- 결제할 Book data 저장 ----------------------------
@@ -108,7 +108,7 @@ const PayNow = () => {
         .then((data: any) => {
           console.log(data);
           // 장바구니 삭제
-          DeleteOrderItem(getCookie('PayNow').id);
+          DeleteCartItem(getCookie('PayNow').id);
           // 쿠키 삭제
           removeCookie('PayNow', { path: '/' });
 

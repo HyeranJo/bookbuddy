@@ -4,10 +4,10 @@ import { CSPatchType } from '../model/CStype';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
-export const patchOrderQuantity = async (orderId: string, quantity: number) => {
+export const patchCartQuantity = async (orderId: string, quantity: number) => {
   try {
     await axios.patch(
-      `${SERVER_HOST}/order/${orderId}`,
+      `${SERVER_HOST}/cart/${orderId}`,
       { id: orderId, quantity: quantity },
       {
         headers: {

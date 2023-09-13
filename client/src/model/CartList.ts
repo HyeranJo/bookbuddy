@@ -1,4 +1,4 @@
-export interface OrderListType {
+export interface CartListType {
   id: string;
   book: {
     id: string;

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Styled_QuantityInput } from './QuantityInput.style';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { patchOrderQuantity } from '../../api/PatchApi';
-import { OrderListAtom, QuantityListAtom } from '../../recoil/CartItem';
+import { patchCartQuantity } from '../../api/PatchApi';
+import { CartListAtom, QuantityListAtom } from '../../recoil/CartItem';
 
 interface QuantityType {
   idx: number;
@@ -11,7 +11,7 @@ interface QuantityType {
 
 const QuantityInput = ({ idx, id }: QuantityType) => {
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
-  const orderList = useRecoilValue(OrderListAtom);
+  const cartList = useRecoilValue(CartListAtom);
 
   useEffect(() => {
     if (quantityList[idx]?.quantity !== undefined) {
@@ -21,7 +21,7 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
 
   /** 클릭한 input의 order아이디를 검색 */
   const orderIdHandler = () => {
-    const orderId = orderList.filter(v => v.book.id === id)[0].id;
+    const orderId = cartList.filter(v => v.book.id === id)[0].id;
 
     return orderId;
   };
@@ -31,10 +31,10 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
     if (num > 1) {
       num -= 1;
       QuantityHandler(num);
-      patchOrderQuantity(orderIdHandler(), num);
+      patchCartQuantity(orderIdHandler(), num);
     } else {
       QuantityHandler(1);
-      patchOrderQuantity(orderIdHandler(), 1);
+      patchCartQuantity(orderIdHandler(), 1);
     }
   };
 
@@ -42,7 +42,7 @@ const QuantityInput = ({ idx, id }: QuantityType) => {
   const Plus = (num: number) => {
     num++;
     QuantityHandler(num);
-    patchOrderQuantity(orderIdHandler(), num);
+    patchCartQuantity(orderIdHandler(), num);
   };
 
   /** 입력한 숫자에 따라 quantityList 수정 */

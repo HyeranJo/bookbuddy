@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Styled_CartTable } from './CartTable.style';
 import QuantityInput from '../quantity/QuantityInput';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { OrderListType } from '../../model/OrderList';
+import { CartListType } from '../../model/CartList';
 import {
   CheckedListAtom,
-  OrderListAtom,
+  CartListAtom,
   QuantityListAtom,
   TotalPriceSelector,
 } from '../../recoil/CartItem';
-import { DeleteOrderItem } from '../../api/DeleteApi';
+import { DeleteCartItem } from '../../api/DeleteApi';
 
 const CartTable = () => {
   // ===============================================================================
-  const orderList = useRecoilValue(OrderListAtom);
+  const orderList = useRecoilValue(CartListAtom);
   const [checkedList, setCheckedList] = useRecoilState(CheckedListAtom);
   const [isChecked, setIsChecked] = useState(false); // input cheked 설정
   const [isMount, setIsMount] = useState(false); // 첫 렌더링 여부 확인
@@ -123,7 +123,7 @@ const CartTable = () => {
         </thead>
         <tbody>
           {orderList &&
-            orderList.map((v: OrderListType, i) => {
+            orderList.map((v: CartListType, i) => {
               return (
                 <React.Fragment key={v.book.id}>
                   <Styled_CartTable.Tr>
@@ -152,7 +152,7 @@ const CartTable = () => {
                     <td
                       className="delete"
                       onClick={() => {
-                        DeleteOrderItem(v.id).then(() => {
+                        DeleteCartItem(v.id).then(() => {
                           location.reload();
                         });
                       }}
