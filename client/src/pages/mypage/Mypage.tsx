@@ -54,7 +54,6 @@ const Mypage = () => {
             >
               <Styled_Mypage.H1>{userName}님, 환영합니다</Styled_Mypage.H1>
             </div>
-            <Styled_Mypage.Point>포인트 1,000P</Styled_Mypage.Point>
           </Styled_Mypage.Title>
 
           <Styled_Mypage.Detail className="detail">

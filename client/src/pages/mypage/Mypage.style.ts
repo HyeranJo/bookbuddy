@@ -51,37 +51,19 @@ export const Styled_Mypage = {
   H1: styled.h1`
     font-size: var(--title-font-size);
     display: inline-block;
+    margin-bottom: 70px;
 
     ${DeviceQuery.bigScreen`
       font-size:calc(var(--title-font-size) / ${screenScale.bigScreen});
+      margin-bottom:calc(70px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       font-size:calc(var(--title-font-size) / ${screenScale.desktop});
+      margin-bottom:calc(70px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       font-size:calc(var(--title-font-size) / ${screenScale.tablet});
-    `}
-  `,
-  Point: styled.div`
-    width: 1095px;
-    padding: 10px 0px;
-    font-size: var(--third-title-font-size);
-    text-align: end;
-
-    ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
-      padding: calc(10px / ${screenScale.bigScreen}) 0;
-      font-size:calc(var(--third-title-font-size) / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
-      padding: calc(10px / ${screenScale.desktop}) 0;
-      font-size:calc(var(--third-title-font-size) / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
-      padding: calc(10px / ${screenScale.tablet}) 0;
-      font-size:calc(var(--third-title-font-size) / ${screenScale.tablet});
+      margin-bottom:calc(70px / ${screenScale.tablet});
     `}
   `,
   Detail: styled.div`
