@@ -59,8 +59,12 @@ public class OrderService {
                 .orElseThrow(()->new BusinessException(ExceptionCode.ORDER_NOT_FOUND));
     }
 
-    public Page<Order> findOrders(PageRequest pageRequest, String email) {
+    public Page<Order> findOrdersByEmail(PageRequest pageRequest, String email) {
         return orderRepository.findAllByEmail(pageRequest, email);
+    }
+
+    public Page<Order> findOrders(PageRequest pageRequest) {
+        return orderRepository.findAll(pageRequest);
     }
 
     public List<Order> updateOrderStatus(AdminOrderStatusDto.Patch orderStatusDto) {

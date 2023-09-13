@@ -32,6 +32,7 @@ public class OrderController {
 
         return new ResponseEntity<>(mapper.orderToOrderResponseDto(order), HttpStatus.CREATED);
     }
+    /* 내 주문 내역 조회 */
     @GetMapping("/ship")
     public ResponseEntity getOrders(@RequestParam("page") @Positive int page,
                                       @RequestParam("size") @Positive int size,
@@ -39,7 +40,7 @@ public class OrderController {
         User principal = (User) authentication.getPrincipal();
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Order> orders = orderService.findOrders(pageRequest, principal.getUsername());
+        Page<Order> orders = orderService.findOrdersByEmail(pageRequest, principal.getUsername());
         return new ResponseEntity(new MultiResponseDto(mapper.ordersToOrderResponseDtos(orders.getContent()), orders), HttpStatus.OK);
     }
 }
