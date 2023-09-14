@@ -10,19 +10,25 @@ interface getBookListType {
   setIsLoading: (isloading: boolean) => void;
   sidebarId?: number;
   page?: number;
-  InputValue?: string;
+  size: number;
+}
+
+interface getBookSearchListType {
+  setListData: (result: BookList) => void;
+  setIsLoading: (isloading: boolean) => void;
+  InputValue: string;
 }
 
 export const getBookList = async (
-  { setListData, setIsLoading, sidebarId, page }: getBookListType,
-  order?: 'name' | 'price' | 'bookmark',
+  { setListData, setIsLoading, sidebarId, page, size }: getBookListType,
+  order?: 'name' | 'price' | 'bookmark' | 'new',
 ) => {
   setIsLoading(true);
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20${
-        order ? `&order=${order}` : ''
-      }`,
+      `${SERVER_HOST}/book/list${
+        sidebarId ? `/${sidebarId}` : ''
+      }?page=${page}&size=${size}${order ? `&order=${order}` : ''}`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,
@@ -61,7 +67,7 @@ export const getBookSearchList = async ({
   setListData,
   setIsLoading,
   InputValue,
-}: getBookListType) => {
+}: getBookSearchListType) => {
   setIsLoading(true);
   try {
     const response = await axios.get(
