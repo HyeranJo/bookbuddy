@@ -13,7 +13,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import ApplyDeleteModal from '../modal/AskDeleteModal';
 import { PageAtom } from '../../recoil/Sidebars';
 import PaginationBox from '../pagination_box/PaginationBox';
-import { PageInfo } from '../../model/Pagination';
 
 interface AskTableProps {
   title: string;
@@ -99,7 +98,7 @@ const CSTable = ({ title }: AskTableProps) => {
                       {v.title}
                     </button>
                   </Styled_CSTable.Td>
-                  <td>접수중</td>
+                  <td>{v.status}</td>
                   <td>
                     <Styled_CSTable.DeletePatchBtn
                       onClick={() => {

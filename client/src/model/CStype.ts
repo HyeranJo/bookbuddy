@@ -7,6 +7,7 @@ export interface CSType extends PageInfo {
     content: string;
     memberId: string;
     createdAt: string;
+    status: string;
   }[];
 }
 

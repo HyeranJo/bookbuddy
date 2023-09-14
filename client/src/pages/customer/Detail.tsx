@@ -41,11 +41,17 @@ const Detail = () => {
             <div>
               <Styled_Detail.H1>답변</Styled_Detail.H1>
               <div className="detail">
-                <pre
-                  dangerouslySetInnerHTML={{
-                    __html: csDetail.answer.content,
-                  }}
-                />
+                {csDetail.answer.content === undefined ? (
+                  <pre style={{ color: 'var(--light-border-color)' }}>
+                    <span>{'(※ 질문에 대한 응답을 준비하고 있습니다.)'}</span>
+                  </pre>
+                ) : (
+                  <pre
+                    dangerouslySetInnerHTML={{
+                      __html: csDetail.answer.content,
+                    }}
+                  />
+                )}
               </div>
             </div>
             <AskTable title="1:1 문의 리스트" />
