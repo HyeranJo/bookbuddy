@@ -67,6 +67,7 @@ const AdminFull = () => {
                       onChange={e => {
                         statusChangeHandler(e, v.id);
                       }}
+                      style={{ cursor: 'pointer' }}
                     >
                       <option defaultValue={v.status}>{v.status}</option>
                       <option value="주문완료">주문완료</option>
