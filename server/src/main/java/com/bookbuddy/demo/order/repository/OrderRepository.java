@@ -8,7 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    @Query(value = "SELECT o FROM Order o LEFT JOIN Member m ON o.member.id = m.id WHERE m.email = :email",
-        countName = "SELECT (o) FROM Order o LEFT JOIN Member m ON p.member.id = m.id WHERE m.email = :email")
+    @Query(value = "SELECT o FROM Order o LEFT JOIN Member m ON o.member.id = m.id WHERE m.email = :email ORDER BY o.createdAt DESC",
+        countName = "SELECT (o) FROM Order o LEFT JOIN Member m ON p.member.id = m.id WHERE m.email = :email ORDER BY o.createdAt DESC")
     Page<Order> findAllByEmail(Pageable pageable, @Param("email") String email);
+
+    @Query(value = "SELECT o FROM Order o ORDER BY o.createdAt DESC",
+            countName = "SELECT (o) FROM Order o ORDER BY o.createdAt DESC")
+    Page<Order> findAll(Pageable pageable);
 }
