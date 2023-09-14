@@ -1,5 +1,7 @@
 package com.bookbuddy.demo.board.dto;
 
+import com.bookbuddy.demo.board.entity.Board;
+import com.bookbuddy.demo.board.entity.Board.BOARD_STATUS;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -25,6 +27,7 @@ public class BoardDto {
         private String content;
         private long memberId;
         private LocalDateTime createdAt;
+        private BOARD_STATUS status;
     }
 
     @Getter
