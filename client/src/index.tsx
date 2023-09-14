@@ -4,11 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-// import Home from './pages/home/Home';
 import Signup from './pages/sign/Signup';
 import Signin from './pages/sign/Signin';
 import { RecoilRoot } from 'recoil';
-import List from './pages/list/List';
+import List from './pages/book_list/List';
 import Cart from './pages/cart/Cart';
 import Mypage from './pages/mypage/Mypage';
 import Payment from './pages/payment/Payment';
@@ -20,6 +19,8 @@ import Detail from './pages/customer/Detail';
 import PayNow from './pages/payment/PayNow';
 import CSAnswer from './pages/admin/CSAnswer';
 import AdminMain from './pages/admin/AdminMain';
+import NewBooks from './pages/book_list/NewBooks';
+import BestSeller from './pages/book_list/BestSeller';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,8 @@ const router = createBrowserRouter([
       { path: '/customer/detail/:boardId', element: <Detail /> },
       { path: '/admin/answer/:boardId', element: <CSAnswer /> },
       { path: '/admin', element: <AdminMain /> },
+      { path: '/new', element: <NewBooks /> },
+      { path: '/bestseller', element: <BestSeller /> },
     ],
   },
 ]);

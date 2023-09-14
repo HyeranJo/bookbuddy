@@ -5,7 +5,6 @@ import { postBookMark } from '../../api/PostApi';
 import { useState } from 'react';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
 import { useRecoilValue } from 'recoil';
-// import BookMarkIcon from '../../icons/BookMarkIcon';
 
 interface BookProps {
   id?: string;

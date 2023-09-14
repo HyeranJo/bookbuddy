@@ -11,8 +11,9 @@ export interface BookInfo {
   bookmark: boolean;
 }
 
-export interface BookList extends PageInfo {
+export interface BookList {
   data: BookInfo[];
+  pageInfo: PageInfo;
 }
 
 export interface BookMarkList {

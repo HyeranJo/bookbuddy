@@ -4,7 +4,7 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getBookList, getSortedBookList } from '../../api/GetApi';
+import { getBookList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/Sidebars';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
@@ -15,13 +15,14 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(false);
   const sidebarId = useRecoilValue(SidebarIdAtom);
   const page = useRecoilValue(PageAtom);
+  const size = 20;
 
   useEffect(() => {
-    getBookList({ setListData, setIsLoading, sidebarId, page });
+    getBookList({ setListData, setIsLoading, sidebarId, page, size });
   }, [page, sidebarId]);
 
   const sortHandler = (order: 'name' | 'price' | 'bookmark') => {
-    getSortedBookList({ setListData, setIsLoading, sidebarId, page }, order);
+    getBookList({ setListData, setIsLoading, sidebarId, page, size }, order);
   };
 
   return (
@@ -85,7 +86,12 @@ const List = () => {
             </Styled_List.Books>
           </Styled_List.BookGroup>
           <div className="pagination">
-            <PaginationBox itemsCountPerPage={20} totalItemsCount={60} />
+            {listData && (
+              <PaginationBox
+                itemsCountPerPage={20}
+                totalItemsCount={listData.pageInfo.totalElements}
+              />
+            )}
           </div>
         </Styled_List.Content>
       </Styled_List.Div>
