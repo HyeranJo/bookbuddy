@@ -1,9 +1,9 @@
-package com.bookbuddy.demo.admin.cs.reply.service;
+package com.bookbuddy.demo.admin.reply.service;
 
-import com.bookbuddy.demo.admin.cs.reply.dto.ReplyDto;
-import com.bookbuddy.demo.admin.cs.reply.entity.Reply;
-import com.bookbuddy.demo.admin.cs.reply.mapper.ReplyMapper;
-import com.bookbuddy.demo.admin.cs.reply.repository.ReplyRepository;
+import com.bookbuddy.demo.admin.reply.dto.ReplyDto;
+import com.bookbuddy.demo.admin.reply.entity.Reply;
+import com.bookbuddy.demo.admin.reply.mapper.ReplyMapper;
+import com.bookbuddy.demo.admin.reply.repository.ReplyRepository;
 import com.bookbuddy.demo.board.entity.Board;
 import com.bookbuddy.demo.board.service.BoardService;
 import com.bookbuddy.demo.global.exception.BusinessException;

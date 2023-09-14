@@ -1,6 +1,6 @@
 package com.bookbuddy.demo.board.controller;
 
-import com.bookbuddy.demo.admin.cs.reply.service.ReplyService;
+import com.bookbuddy.demo.admin.reply.service.ReplyService;
 import com.bookbuddy.demo.board.dto.BoardDto;
 import com.bookbuddy.demo.board.entity.Board;
 import com.bookbuddy.demo.board.mapper.BoardMapper;
@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
-import java.util.List;
 
 @RestController
 @RequestMapping("/board/cs")

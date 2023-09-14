@@ -1,15 +1,13 @@
 package com.bookbuddy.demo.board.entity;
 
-import com.bookbuddy.demo.admin.cs.reply.entity.Reply;
+import com.bookbuddy.demo.admin.reply.entity.Reply;
 import com.bookbuddy.demo.audit.Auditable;
 import com.bookbuddy.demo.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 import static com.bookbuddy.demo.board.entity.Board.BOARD_STATUS.BOARD_STATUS_RECEIPT;
 

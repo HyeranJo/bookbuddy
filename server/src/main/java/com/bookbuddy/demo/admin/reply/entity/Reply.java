@@ -1,4 +1,4 @@
-package com.bookbuddy.demo.admin.cs.reply.entity;
+package com.bookbuddy.demo.admin.reply.entity;
 
 import com.bookbuddy.demo.board.entity.Board;
 import lombok.AllArgsConstructor;

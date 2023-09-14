@@ -1,10 +1,9 @@
-package com.bookbuddy.demo.admin.cs.reply.controller;
+package com.bookbuddy.demo.admin.reply.controller;
 
-import com.bookbuddy.demo.admin.cs.reply.dto.ReplyDto;
-import com.bookbuddy.demo.admin.cs.reply.entity.Reply;
-import com.bookbuddy.demo.admin.cs.reply.mapper.ReplyMapper;
-import com.bookbuddy.demo.admin.cs.reply.service.ReplyService;
-import com.bookbuddy.demo.board.service.BoardService;
+import com.bookbuddy.demo.admin.reply.dto.ReplyDto;
+import com.bookbuddy.demo.admin.reply.entity.Reply;
+import com.bookbuddy.demo.admin.reply.mapper.ReplyMapper;
+import com.bookbuddy.demo.admin.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
-package com.bookbuddy.demo.admin.cs.reply.mapper;
+package com.bookbuddy.demo.admin.reply.mapper;
 
-import com.bookbuddy.demo.admin.cs.reply.dto.ReplyDto;
-import com.bookbuddy.demo.admin.cs.reply.entity.Reply;
+import com.bookbuddy.demo.admin.reply.dto.ReplyDto;
+import com.bookbuddy.demo.admin.reply.entity.Reply;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

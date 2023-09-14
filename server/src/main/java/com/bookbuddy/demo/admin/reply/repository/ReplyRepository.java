@@ -1,6 +1,6 @@
-package com.bookbuddy.demo.admin.cs.reply.repository;
+package com.bookbuddy.demo.admin.reply.repository;
 
-import com.bookbuddy.demo.admin.cs.reply.entity.Reply;
+import com.bookbuddy.demo.admin.reply.entity.Reply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

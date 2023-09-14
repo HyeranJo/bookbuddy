@@ -1,4 +1,4 @@
-package com.bookbuddy.demo.admin.cs.reply.dto;
+package com.bookbuddy.demo.admin.reply.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
