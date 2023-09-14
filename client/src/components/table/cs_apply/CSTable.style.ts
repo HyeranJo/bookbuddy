@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { DeviceQuery, screenScale } from '../../utils/Responsive';
+import { DeviceQuery, screenScale } from '../../../utils/Responsive';
 
 export const Styled_CSTable = {
   Container: styled.div`

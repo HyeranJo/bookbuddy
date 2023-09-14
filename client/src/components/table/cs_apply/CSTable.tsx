@@ -1,18 +1,18 @@
 import { Styled_CSTable } from './CSTable.style';
-import RedButton from '../buttons/RedButton';
+import RedButton from '../../buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
-import { getCSDetail, getCSList } from '../../api/GetApi';
+import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useEffect, useState } from 'react';
-import { CSType } from '../../model/CStype';
+import { CSType } from '../../../model/CStype';
 import {
   AskDeleteModal,
   CSDetailAtom,
   CSPatchClickedAtom,
-} from '../../recoil/CS';
+} from '../../../recoil/CS';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import ApplyDeleteModal from '../modal/AskDeleteModal';
-import { PageAtom } from '../../recoil/Sidebars';
-import PaginationBox from '../pagination_box/PaginationBox';
+import ApplyDeleteModal from '../../modal/AskDeleteModal';
+import { PageAtom } from '../../../recoil/Sidebars';
+import PaginationBox from '../../pagination_box/PaginationBox';
 
 interface AskTableProps {
   title: string;

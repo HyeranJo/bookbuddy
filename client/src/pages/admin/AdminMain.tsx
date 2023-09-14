@@ -1,11 +1,11 @@
-import AdminFull from '../../components/table/order_history/AdminFull';
+import OrderAdmin from '../../components/table/order_history/OrderAdmin';
 import { Styled_Layout } from '../BlankPageLayout';
 
 const AdminMain = () => {
   return (
     <Styled_Layout.Container>
       <Styled_Layout.Div_WithNoSidebar>
-        <AdminFull />
+        <OrderAdmin />
       </Styled_Layout.Div_WithNoSidebar>
     </Styled_Layout.Container>
   );
