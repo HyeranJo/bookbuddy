@@ -4,15 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useEffect, useState } from 'react';
 import { CSType } from '../../../model/CStype';
-import {
-  AskDeleteModal,
-  CSDetailAtom,
-  CSPatchClickedAtom,
-} from '../../../recoil/CS';
+import { AskDeleteModal, CSPatchClickedAtom } from '../../../recoil/CS';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import ApplyDeleteModal from '../../modal/AskDeleteModal';
 import { PageAtom } from '../../../recoil/Sidebars';
 import PaginationBox from '../../pagination_box/PaginationBox';
+import { Styled_History } from '../order_history/History.style';
 
 interface AskTableProps {
   title: string;
@@ -22,7 +19,6 @@ const CSTable = ({ title }: AskTableProps) => {
   const navigate = useNavigate();
   const [cs, setCS] = useState<CSType>();
   const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
-  const setCSDetail = useSetRecoilState(CSDetailAtom);
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
   const setIsOpen = useSetRecoilState(AskDeleteModal);
   const [id, setId] = useState('');
@@ -54,17 +50,24 @@ const CSTable = ({ title }: AskTableProps) => {
   };
 
   return (
-    <div>
+    <>
       <Styled_CSTable.Container>
         <div>
           <Styled_CSTable.H1>
-            <span>{title}</span>
+            <span>
+              {title}
+              <Styled_CSTable.MessageSpan>
+                답변완료된 문의는 수정이 불가능합니다
+              </Styled_CSTable.MessageSpan>
+            </span>
+
             <div>
               <RedButton
                 name="문의하기"
                 height={30}
                 width={100}
                 onClick={() => {
+                  setCSPatchClicked(false);
                   navigate('/customer/apply');
                 }}
               />
@@ -108,13 +111,21 @@ const CSTable = ({ title }: AskTableProps) => {
                       삭제
                     </Styled_CSTable.DeletePatchBtn>{' '}
                     /{' '}
-                    <Styled_CSTable.DeletePatchBtn
-                      onClick={() => {
-                        PatchHandler(v.id);
-                      }}
-                    >
-                      수정
-                    </Styled_CSTable.DeletePatchBtn>
+                    {v.status === '답변완료' ? (
+                      <Styled_CSTable.DeletePatchBtn
+                        style={{ color: 'var(--light-border-color)' }}
+                      >
+                        수정
+                      </Styled_CSTable.DeletePatchBtn>
+                    ) : (
+                      <Styled_CSTable.DeletePatchBtn
+                        onClick={() => {
+                          PatchHandler(v.id);
+                        }}
+                      >
+                        수정
+                      </Styled_CSTable.DeletePatchBtn>
+                    )}
                   </td>
                 </Styled_CSTable.Tr>
               ))}
@@ -141,7 +152,7 @@ const CSTable = ({ title }: AskTableProps) => {
         </div>
       </Styled_CSTable.Container>
       <ApplyDeleteModal id={id} setDeleteClicked={setDeleteClicked} />
-    </div>
+    </>
   );
 };
 

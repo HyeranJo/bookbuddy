@@ -56,6 +56,7 @@ export const Styled_CSTable = {
   MessageSpan: styled.span`
     margin-left: 15px;
     font-size: var(--message-font-size);
+    font-weight: normal;
 
     ${DeviceQuery.bigScreen`
       margin-left: calc(15px / ${screenScale.bigScreen});
