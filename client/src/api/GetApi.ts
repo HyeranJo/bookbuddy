@@ -13,16 +13,16 @@ interface getBookListType {
   InputValue?: string;
 }
 
-export const getBookList = async ({
-  setListData,
-  setIsLoading,
-  sidebarId,
-  page,
-}: getBookListType) => {
+export const getBookList = async (
+  { setListData, setIsLoading, sidebarId, page }: getBookListType,
+  order?: 'name' | 'price' | 'bookmark',
+) => {
   setIsLoading(true);
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20`,
+      `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20${
+        order ? `&order=${order}` : ''
+      }`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,
@@ -31,30 +31,7 @@ export const getBookList = async ({
       },
     );
     const result = response.data;
-    setListData(result);
-    setIsLoading(false);
-  } catch (error) {
-    alert(error);
-    setIsLoading(false);
-  }
-};
 
-export const getSortedBookList = async (
-  { setListData, setIsLoading, sidebarId, page }: getBookListType,
-  order: 'name' | 'price' | 'bookmark',
-) => {
-  setIsLoading(true);
-  try {
-    const response = await axios.get(
-      `${SERVER_HOST}/book/list/${sidebarId}?page=${page}&size=20&order=${order}`,
-      {
-        headers: {
-          'ngrok-skip-browser-warning': true,
-          Authorization: getCookie('accessToken'),
-        },
-      },
-    );
-    const result = response.data.data;
     setListData(result);
     setIsLoading(false);
   } catch (error) {

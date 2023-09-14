@@ -4,7 +4,7 @@ import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
 import { BookList } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
-import { getBookList, getSortedBookList } from '../../api/GetApi';
+import { getBookList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/Sidebars';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
@@ -21,7 +21,7 @@ const List = () => {
   }, [page, sidebarId]);
 
   const sortHandler = (order: 'name' | 'price' | 'bookmark') => {
-    getSortedBookList({ setListData, setIsLoading, sidebarId, page }, order);
+    getBookList({ setListData, setIsLoading, sidebarId, page }, order);
   };
 
   return (
