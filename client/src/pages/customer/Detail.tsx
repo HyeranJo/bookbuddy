@@ -18,7 +18,7 @@ const Detail = () => {
         setCSDetail(data);
       });
     }
-  }, []);
+  }, [boardId]);
 
   return (
     <Styled_Layout.Container>
@@ -54,7 +54,9 @@ const Detail = () => {
                 )}
               </div>
             </div>
-            <AskTable title="1:1 문의 리스트" />
+            <div>
+              <AskTable title="1:1 문의 리스트" />
+            </div>
           </div>
         </Styled_Detail.Container>
       </Styled_Layout.Div_WithNoSidebar>
