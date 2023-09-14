@@ -9,7 +9,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import ApplyDeleteModal from '../../modal/AskDeleteModal';
 import { PageAtom } from '../../../recoil/Sidebars';
 import PaginationBox from '../../pagination_box/PaginationBox';
-import { Styled_History } from '../order_history/History.style';
 
 interface AskTableProps {
   title: string;

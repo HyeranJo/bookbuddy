@@ -12,7 +12,7 @@ export interface PaymentType {
   email: string;
 }
 
-export interface OrderHistoryType extends PageInfo {
+export interface OrderHistoryType {
   data: {
     id: string;
     orderBooks: { bookName: string }[];
@@ -25,6 +25,7 @@ export interface OrderHistoryType extends PageInfo {
       | '배송완료'
       | '취소';
   }[];
+  pageInfo: PageInfo;
 }
 
 export interface patchOrderStatusType {
