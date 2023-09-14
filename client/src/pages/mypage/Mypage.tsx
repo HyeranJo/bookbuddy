@@ -10,7 +10,7 @@ import { BookMarkList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import CSTable from '../../components/table/cs_apply/CSTable';
 import { getCookie } from '../../utils/cookie';
-import Recent from '../../components/table/order_history/ Recent';
+import Recent from '../../components/table/order_history/Recent';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
