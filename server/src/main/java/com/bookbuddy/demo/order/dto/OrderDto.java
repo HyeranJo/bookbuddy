@@ -33,6 +33,6 @@ public class OrderDto {
         private long id;
         private List<OrderBookDto.Response> orderBooks;
         private LocalDateTime createdAt;
-        private ORDER_STATUS status;
+        private String status;
     }
 }

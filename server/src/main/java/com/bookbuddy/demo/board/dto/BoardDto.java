@@ -27,7 +27,7 @@ public class BoardDto {
         private String content;
         private long memberId;
         private LocalDateTime createdAt;
-        private BOARD_STATUS status;
+        private String status;
     }
 
     @Getter

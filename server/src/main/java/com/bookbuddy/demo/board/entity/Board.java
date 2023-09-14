@@ -31,13 +31,14 @@ public class Board extends Auditable {
     @Enumerated(value=EnumType.ORDINAL)
     private BOARD_STATUS status = BOARD_STATUS_RECEIPT;
 
+    @Getter
     public enum BOARD_STATUS {
         BOARD_STATUS_RECEIPT("접수"),
         BOARD_STATUS_COMPLETED("답변완료");
 
-        private String status;
-        BOARD_STATUS(String status) {
-            this.status = status;
+        private String message;
+        BOARD_STATUS(String message) {
+            this.message = message;
         }
     }
 

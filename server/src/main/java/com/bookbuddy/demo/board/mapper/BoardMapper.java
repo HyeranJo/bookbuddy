@@ -24,7 +24,7 @@ public interface BoardMapper {
                 board.getContent(),
                 board.getMember().getId(),
                 board.getCreatedAt(),
-                board.getStatus()
+                board.getStatus().getMessage()
         );
     }
 
@@ -44,7 +44,7 @@ public interface BoardMapper {
                         e.getContent(),
                         e.getMember().getId(),
                         e.getCreatedAt(),
-                        e.getStatus()
+                        e.getStatus().getMessage()
                 )).collect(Collectors.toList());
     }
 }
