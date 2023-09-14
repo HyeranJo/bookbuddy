@@ -32,7 +32,7 @@ public class OrderController {
 
         return new ResponseEntity<>(mapper.orderToOrderResponseDto(order), HttpStatus.CREATED);
     }
-    /* 내 주문 내역 조회 */
+    /* 회원의 주문 내역 조회 */
     @GetMapping("/ship")
     public ResponseEntity getOrders(@RequestParam("page") @Positive int page,
                                       @RequestParam("size") @Positive int size,

@@ -72,4 +72,8 @@ public class BoardService {
         findBoard.setStatus(Board.BOARD_STATUS.BOARD_STATUS_COMPLETED);
         boardRepository.save(findBoard);
     }
+
+    public Page<Board> findBoards(PageRequest pageRequest, String username) {
+        return boardRepository.findAllByEmail(pageRequest, username);
+    }
 }

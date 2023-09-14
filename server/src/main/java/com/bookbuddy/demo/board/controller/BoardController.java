@@ -49,11 +49,15 @@ public class BoardController {
 
         return new ResponseEntity(mapper.boardToBoardResponseDto(board), HttpStatus.OK);
     }
+    /* 회원의 주문 내역 */
     @GetMapping
-    public ResponseEntity getBoards(@RequestParam("page") @Positive int page,
-                                    @RequestParam("size") @Positive int size) {
+    public ResponseEntity getBoardsByUser(@RequestParam("page") @Positive int page,
+                                          @RequestParam("size") @Positive int size,
+                                          Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Board> boards = boardService.findBoards(pageRequest);
+        Page<Board> boards = boardService.findBoards(pageRequest, user.getUsername());
 
         return new ResponseEntity(new MultiResponseDto(mapper.boardsToBoardResponseDtos(boards.getContent()), boards), HttpStatus.OK);
     }
