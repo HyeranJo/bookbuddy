@@ -38,6 +38,8 @@ public class BookService {
             pageRequest = pageRequest.withSort(Sort.by("price").ascending());
         } else if(order.isBookmark()) {
             return bookRepository.findAllByBookmark(pageRequest);
+        } else {
+            pageRequest = pageRequest.withSort(Sort.by("date").descending());
         }
 
         return bookRepository.findAll(pageRequest);
@@ -53,6 +55,8 @@ public class BookService {
             pageRequest = pageRequest.withSort(Sort.by("price").ascending());
         } else if(order.isBookmark()) {
             return bookRepository.findAllByBookmarkAndCategory(category, pageRequest);
+        } else if(order.isNew()) {
+            pageRequest = pageRequest.withSort(Sort.by("date").descending());
         }
 
         return bookRepository.findAllByCategory(category, pageRequest);
