@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import MypageSidebar from '../../components/sidebar/MypageSidebar';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Mypage } from './Mypage.style';
-import OrderHistory from '../../components/table/OrderHistory';
+import Full from '../../components/table/order_history/Full';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/Sidebars';
@@ -10,6 +10,7 @@ import { BookMarkList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import CSTable from '../../components/table/CSTable';
 import { getCookie } from '../../utils/cookie';
+import Recent from '../../components/table/order_history/ Recent';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,7 @@ const Mypage = () => {
   const navScrollIndex = useRecoilValue(NavScrollAtom);
   const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
   const [userName, setUserName] = useState('');
+  const [deleteClicked, setDeleteClicked] = useState(false);
 
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
@@ -57,14 +59,18 @@ const Mypage = () => {
           </Styled_Mypage.Title>
 
           <Styled_Mypage.Detail className="detail">
-            <OrderHistory title="최근 주문 내역" cancel={true} />
+            <Recent
+              message="주문완료 단계의 내역만 표시됩니다"
+              deleteClicked={deleteClicked}
+              setDeleteClicked={setDeleteClicked}
+            />
             <div
               style={{ scrollMarginTop: '240px' }}
               ref={el => {
                 navScrollListRef.current[1] = el;
               }}
             >
-              <OrderHistory title="전체 주문 내역" />
+              <Full deleteClicked={deleteClicked} />
             </div>
             <div
               style={{ scrollMarginTop: '240px' }}

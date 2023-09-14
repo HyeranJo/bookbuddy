@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import { DeviceQuery, screenScale } from '../../utils/Responsive';
+import { DeviceQuery, screenScale } from '../../../utils/Responsive';
 
-export const Styled_OrderHistory = {
+export const Styled_History = {
   Container: styled.div`
     width: 1095px;
 
