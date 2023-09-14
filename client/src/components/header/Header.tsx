@@ -8,7 +8,6 @@ import { getCookie } from '../../utils/cookie';
 
 const Header = () => {
   const navigate = useNavigate();
-  const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
 
   return (
     <>
@@ -43,7 +42,7 @@ const Header = () => {
               <Styled_Header.Span>고객센터</Styled_Header.Span>
             </Link>
             {getCookie('userInfo') &&
-            getCookie('userInfo').email === ADMIN_ID ? (
+            getCookie('userInfo').email === 'admin@gmail.com' ? (
               <button
                 id="admin"
                 onClick={() => {
