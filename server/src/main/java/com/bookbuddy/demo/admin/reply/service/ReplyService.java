@@ -31,8 +31,8 @@ public class ReplyService {
         return savedReply;
     }
 
-    public Reply findReplyByBoardId(long boardId) {
-        return replyRepository.findByBoardId(boardId).get();
+    public Optional<Reply> findReplyByBoardId(long boardId) {
+        return replyRepository.findByBoardId(boardId);
     }
 
     public void verifyReply(long boardId) {

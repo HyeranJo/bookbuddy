@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin/cs")
@@ -27,8 +28,11 @@ public class ReplyController {
     }
     @GetMapping("/{board-id}")
     public ResponseEntity getReply(@PathVariable("board-id") @Positive long boardId) {
-        Reply reply = replyService.findReplyByBoardId(boardId);
+        Optional<Reply> reply = replyService.findReplyByBoardId(boardId);
+        if(! reply.isPresent()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
 
-        return new ResponseEntity(mapper.replyToReplyResponseDto(reply), HttpStatus.OK);
+        return new ResponseEntity(mapper.replyToReplyResponseDto(reply.get()), HttpStatus.OK);
     }
 }
