@@ -1,6 +1,6 @@
 import { PageInfo } from './Pagination';
 
-export interface CSType extends PageInfo {
+export interface CSType {
   data: {
     id: string;
     title: string;
@@ -9,6 +9,7 @@ export interface CSType extends PageInfo {
     createdAt: string;
     status: string;
   }[];
+  pageInfo: PageInfo;
 }
 
 export interface PostCSType {
