@@ -11,6 +11,8 @@ import org.springframework.security.core.parameters.P;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static com.bookbuddy.demo.board.entity.Board.BOARD_STATUS.BOARD_STATUS_RECEIPT;
+
 @Getter
 @Entity
 @NoArgsConstructor
@@ -28,6 +30,18 @@ public class Board extends Auditable {
     private Member member;
     @OneToOne(mappedBy = "board")
     private Reply reply;
+    @Enumerated(value=EnumType.ORDINAL)
+    private BOARD_STATUS status = BOARD_STATUS_RECEIPT;
+
+    public enum BOARD_STATUS {
+        BOARD_STATUS_RECEIPT("접수"),
+        BOARD_STATUS_COMPLETED("답변완료");
+
+        private String status;
+        BOARD_STATUS(String status) {
+            this.status = status;
+        }
+    }
 
     public void addMember(Member member) {
         this.member = member;
@@ -51,6 +65,10 @@ public class Board extends Auditable {
         this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    public void setStatus(BOARD_STATUS status) {
+        this.status = status;
     }
 
     public void setTitle(String title) {

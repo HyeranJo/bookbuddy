@@ -25,7 +25,10 @@ public class ReplyService {
         Board board = boardService.findBoard(replyDto.getBoardId());
         reply.addBoard(board);
 
-        return replyRepository.save(reply);
+        Reply savedReply = replyRepository.save(reply);
+        boardService.updateBoardStatus(replyDto.getBoardId());
+
+        return savedReply;
     }
 
     public Reply findReplyByBoardId(long boardId) {

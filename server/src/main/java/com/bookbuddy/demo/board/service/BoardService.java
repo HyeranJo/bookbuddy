@@ -64,4 +64,12 @@ public class BoardService {
     public Page<Board> findBoards(PageRequest pageRequest) {
         return boardRepository.findAll(pageRequest);
     }
+
+    @Transactional
+    public void updateBoardStatus(long boardId) {
+        Board findBoard = findVerifyBoard(boardId);
+
+        findBoard.setStatus(Board.BOARD_STATUS.BOARD_STATUS_COMPLETED);
+        boardRepository.save(findBoard);
+    }
 }

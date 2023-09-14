@@ -2,6 +2,7 @@ package com.bookbuddy.demo.admin.order.controller;
 
 import com.bookbuddy.demo.admin.order.dto.AdminOrderStatusDto;
 import com.bookbuddy.demo.global.dto.response.MultiResponseDto;
+import com.bookbuddy.demo.global.dto.response.SingleResponseDto;
 import com.bookbuddy.demo.order.entity.Order;
 import com.bookbuddy.demo.order.mapper.OrderMapper;
 import com.bookbuddy.demo.order.service.OrderService;
@@ -25,7 +26,7 @@ public class AdminOrderController {
     @PatchMapping("/status")
     public ResponseEntity patchOrderStatus(@RequestBody AdminOrderStatusDto.Patch orderStatusDto) {
         List<Order> orders = orderService.updateOrderStatus(orderStatusDto);
-        return new ResponseEntity(mapper.ordersToOrderResponseDtos(orders), HttpStatus.OK);
+        return new ResponseEntity(new SingleResponseDto<>(mapper.ordersToOrderResponseDtos(orders)), HttpStatus.OK);
     }
     /* 전체 주문 내역 조회 */
     @GetMapping
