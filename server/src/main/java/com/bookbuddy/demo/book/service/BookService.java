@@ -38,7 +38,7 @@ public class BookService {
             pageRequest = pageRequest.withSort(Sort.by("price").ascending());
         } else if(order.isBookmark()) {
             return bookRepository.findAllByBookmark(pageRequest);
-        } else {
+        } else if(order.isNew()){
             pageRequest = pageRequest.withSort(Sort.by("date").descending());
         }
 
