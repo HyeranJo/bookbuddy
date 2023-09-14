@@ -1,17 +1,25 @@
 import Pagination from 'react-js-pagination';
 import { Styled_PaginationBox } from './PaginationBox.style';
 import { useRecoilState } from 'recoil';
-import { PageAtom } from '../../recoil/BookList';
+import { PageAtom } from '../../recoil/Sidebars';
 
-const PaginationBox = () => {
+interface PaginationBox {
+  itemsCountPerPage: number;
+  totalItemsCount: number;
+}
+
+const PaginationBox = ({
+  itemsCountPerPage,
+  totalItemsCount,
+}: PaginationBox) => {
   const [page, setPage] = useRecoilState(PageAtom);
 
   return (
     <Styled_PaginationBox.Div>
       <Pagination
         activePage={page}
-        itemsCountPerPage={20}
-        totalItemsCount={500}
+        itemsCountPerPage={itemsCountPerPage}
+        totalItemsCount={totalItemsCount}
         pageRangeDisplayed={5}
         prevPageText={'<'}
         nextPageText={'>'}

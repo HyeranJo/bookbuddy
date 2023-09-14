@@ -1,64 +1,23 @@
-import { ReactComponent as Bookmark } from '../../icons/icon.svg';
 import Styled_Book from './Book.style';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { getCookie } from '../../utils/cookie';
+import BookMarkIcon from '../../icons/BookMarkIcon';
+import { postBookMark } from '../../api/PostApi';
+import { useState } from 'react';
+import { AccessTokenAtom } from '../../recoil/UserInfo';
+import { useRecoilValue } from 'recoil';
 
 interface BookProps {
   id?: string;
   name?: string;
   price?: number;
   image?: string;
+  bookmark?: boolean;
 }
-
-const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
 const Book = (props: BookProps) => {
   const navigate = useNavigate();
-  const [isClick, setIsClick] = useState(false);
-
-  function ClickBookmark() {
-    setIsClick(isClick => !isClick);
-  }
-
-  const postBookMark = async (id: string | undefined) => {
-    try {
-      if (isClick === false) {
-        const response = await axios.post(
-          `${SERVER_HOST}/bookmark/${id}`,
-          {},
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: getCookie('accessToken'),
-            },
-          },
-        );
-        const result = response.data;
-        return result;
-      }
-    } catch (error) {
-      alert('error');
-    }
-  };
-
-  const deleteBookMark = async (id: string | undefined) => {
-    try {
-      if (isClick === true) {
-        const response = await axios.delete(`${SERVER_HOST}/bookmark/${id}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: getCookie('accessToken'),
-          },
-        });
-        const result = response.data;
-        return result;
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
+  const [isClick, setIsClick] = useState(props.bookmark);
+  const accessToken = useRecoilValue(AccessTokenAtom);
 
   return (
     <Styled_Book.container>
@@ -72,13 +31,14 @@ const Book = (props: BookProps) => {
       </Styled_Book.wrapper>
       <Styled_Book.icon
         onClick={() => {
-          ClickBookmark;
-          postBookMark(props.id);
-          deleteBookMark(props.id);
-          console.log(isClick);
+          if (accessToken) {
+            postBookMark(props.id, setIsClick);
+          } else {
+            alert('로그인 후 이용 가능합니다');
+          }
         }}
       >
-        <Bookmark
+        <BookMarkIcon
           fill={
             isClick
               ? 'var(--primary-background-color)'

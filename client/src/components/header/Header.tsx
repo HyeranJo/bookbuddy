@@ -2,11 +2,14 @@ import React from 'react';
 import { Styled_Header } from './Header.style';
 import Logo from '../../icons/Logo';
 import SearchBar from '../search/SearchBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import InfoNav from '../info_nav/InfoNav';
 import { getCookie } from '../../utils/cookie';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const ADMIN_ID = process.env.REACT_APP_ADMIN_ID;
+
   return (
     <>
       <Styled_Header.Container>
@@ -39,6 +42,17 @@ const Header = () => {
             >
               <Styled_Header.Span>고객센터</Styled_Header.Span>
             </Link>
+            {getCookie('userInfo') &&
+            getCookie('userInfo').email === ADMIN_ID ? (
+              <button
+                id="admin"
+                onClick={() => {
+                  navigate('/admin');
+                }}
+              >
+                admin
+              </button>
+            ) : null}
           </Styled_Header.Menu>
         </Styled_Header.Div>
       </Styled_Header.Container>

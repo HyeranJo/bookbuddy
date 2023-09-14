@@ -2,22 +2,27 @@ import React, { useEffect, useRef, useState } from 'react';
 import MypageSidebar from '../../components/sidebar/MypageSidebar';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Mypage } from './Mypage.style';
-import MypageTable from '../../components/table/MypageTable';
+import Full from '../../components/table/order_history/Full';
 import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
-import { NavScrollAtom } from '../../recoil/NavScroll';
-import { BookList, MyBookList } from '../../model/BookList';
+import { NavScrollAtom } from '../../recoil/Sidebars';
+import { BookMarkList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
-import AskTable from '../../components/table/AskTable';
+import CSTable from '../../components/table/cs_apply/CSTable';
+import { getCookie } from '../../utils/cookie';
+import Recent from '../../components/table/order_history/Recent';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
   const navScrollListRef = useRef<any>([]);
   const navScrollIndex = useRecoilValue(NavScrollAtom);
-  const [bookmarkList, setBookmarkList] = useState<MyBookList[]>([]);
+  const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
+  const [userName, setUserName] = useState('');
+  const [deleteClicked, setDeleteClicked] = useState(false);
 
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
+    setUserName(getCookie('userInfo').email.split('@')[0]);
   }, []);
 
   useEffect(() => {
@@ -49,20 +54,23 @@ const Mypage = () => {
                 navScrollListRef.current[0] = el;
               }}
             >
-              <Styled_Mypage.H1>000님, 환영합니다</Styled_Mypage.H1>
+              <Styled_Mypage.H1>{userName}님, 환영합니다</Styled_Mypage.H1>
             </div>
-            <Styled_Mypage.Point>포인트 1,000P</Styled_Mypage.Point>
           </Styled_Mypage.Title>
 
           <Styled_Mypage.Detail className="detail">
-            <MypageTable title="배송 정보" cancel={true} />
+            <Recent
+              message="주문완료 단계의 내역만 표시됩니다"
+              deleteClicked={deleteClicked}
+              setDeleteClicked={setDeleteClicked}
+            />
             <div
               style={{ scrollMarginTop: '240px' }}
               ref={el => {
                 navScrollListRef.current[1] = el;
               }}
             >
-              <MypageTable title="전체 주문 내역" />
+              <Full deleteClicked={deleteClicked} />
             </div>
             <div
               style={{ scrollMarginTop: '240px' }}
@@ -70,7 +78,7 @@ const Mypage = () => {
                 navScrollListRef.current[2] = el;
               }}
             >
-              <AskTable title="1:1 문의 내역" />
+              <CSTable title="1:1 문의 내역" />
             </div>
 
             <Styled_Mypage.BookmarkList>
@@ -85,19 +93,22 @@ const Mypage = () => {
                 </Styled_Mypage.H2>
               </Styled_Mypage.BookmarkTitle>
               <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
-                {bookmarkList.map((v: MyBookList) => {
-                  return (
-                    <Styled_Mypage.Book key={v.id}>
-                      <Book
-                        key={v.book.id}
-                        id={v.book.id}
-                        name={v.book.name}
-                        price={v.book.price}
-                        image={v.book.imgSrc}
-                      />
-                    </Styled_Mypage.Book>
-                  );
-                })}
+                {bookmarkList
+                  .map((v: BookMarkList) => {
+                    return (
+                      <Styled_Mypage.Book key={v.id}>
+                        <Book
+                          key={v.book.id}
+                          id={v.book.id}
+                          name={v.book.name}
+                          price={v.book.price}
+                          image={v.book.imgSrc}
+                          bookmark={true}
+                        />
+                      </Styled_Mypage.Book>
+                    );
+                  })
+                  .reverse()}
               </Styled_Mypage.Books>
             </Styled_Mypage.BookmarkList>
           </Styled_Mypage.Detail>

@@ -1,11 +1,12 @@
 import React from 'react';
+import { Styled_Search } from './Search.style';
 
 interface SearchProps {
   $iconSize: number;
 }
 const Search = ({ $iconSize }: SearchProps) => {
   return (
-    <svg
+    <Styled_Search.Svg
       width={`${$iconSize}`}
       height={`${$iconSize}`}
       viewBox="0 0 28 28"
@@ -19,7 +20,7 @@ const Search = ({ $iconSize }: SearchProps) => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
+    </Styled_Search.Svg>
   );
 };
 

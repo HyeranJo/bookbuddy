@@ -1,4 +1,6 @@
-export interface BookList {
+import { PageInfo } from './Pagination';
+
+export interface BookInfo {
   id: string;
   author: string;
   date: string;
@@ -6,9 +8,15 @@ export interface BookList {
   name: string;
   price: number;
   publisher: string;
+  bookmark: boolean;
 }
 
-export interface MyBookList {
+export interface BookList {
+  data: BookInfo[];
+  pageInfo: PageInfo;
+}
+
+export interface BookMarkList {
   id: number;
   book: {
     id: string;
@@ -25,21 +33,3 @@ export interface MyBookList {
     };
   };
 }
-
-// export interface BookList {
-//   data: {
-//     id: string;
-//     author: string;
-//     date: string;
-//     imgSrc: string;
-//     name: string;
-//     price: number;
-//     publisher: string;
-//   }[];
-//   pageInfo: {
-//     page: number;
-//     size: number;
-//     totalElements: number;
-//     totalPages: number;
-//   };
-// }
