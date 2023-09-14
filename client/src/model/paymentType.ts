@@ -1,3 +1,5 @@
+import { PageInfo } from './Pagination';
+
 export interface PaymentType {
   shipName: string;
   address1: string;
@@ -8,4 +10,30 @@ export interface PaymentType {
   cstmrMobile: string;
   cstmrTel?: string;
   email: string;
+}
+
+export interface OrderHistoryType extends PageInfo {
+  data: {
+    id: string;
+    orderBooks: { bookName: string }[];
+    createdAt: string;
+    status:
+      | '주문완료'
+      | '결제완료'
+      | '배송준비중'
+      | '배송중'
+      | '배송완료'
+      | '취소';
+  }[];
+}
+
+export interface patchOrderStatusType {
+  orderIds: string[];
+  orderStatus:
+    | '주문완료'
+    | '결제완료'
+    | '배송준비중'
+    | '배송중'
+    | '배송완료'
+    | '취소';
 }

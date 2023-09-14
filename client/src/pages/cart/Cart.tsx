@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react';
 import CartTable from '../../components/table/CartTable';
 import { Styled_Layout } from '../BlankPageLayout';
-import { Styled_Order } from './Order.style';
+import { Styled_Order } from './Cart.style';
 import RedButton from '../../components/buttons/RedButton';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   FinalPaymentDetailsAtom,
-  OrderListAtom,
+  CartListAtom,
   QuantityListAtom,
 } from '../../recoil/CartItem';
-import { getOrderList } from '../../api/GetApi';
+import { getCartList } from '../../api/GetApi';
 
-const Order = () => {
+const Cart = () => {
   const navigate = useNavigate();
   const quantityList = useRecoilValue(QuantityListAtom);
   const finalPaymentDetail = useRecoilValue(FinalPaymentDetailsAtom);
-  const [orderList, setOrderList] = useRecoilState(OrderListAtom);
+  const [orderList, setOrderList] = useRecoilState(CartListAtom);
 
   // ==================================== useEffect ================================
 
   // ---------------------------------- api randering ------------------------------
   useEffect(() => {
-    getOrderList(setOrderList).catch(err => {
+    getCartList(setOrderList).catch(err => {
       if (err.message === 'Request failed with status code 403') {
         alert('로그인한 사용자만 이용 가능합니다');
         navigate('/');
@@ -92,4 +92,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default Cart;

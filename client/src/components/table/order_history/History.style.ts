@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import { DeviceQuery, screenScale } from '../../utils/Responsive';
+import { DeviceQuery, screenScale } from '../../../utils/Responsive';
 
-export const Styled_MypageTable = {
+export const Styled_History = {
   Container: styled.div`
     width: 1095px;
 
@@ -14,6 +14,20 @@ export const Styled_MypageTable = {
     ${DeviceQuery.tablet`
       width: calc(1095px / ${screenScale.tablet});
     `}
+
+    & > .pagination {
+      margin-top: 20px;
+
+      ${DeviceQuery.bigScreen`
+        margin-top: calc(20px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        margin-top: calc(20px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-top: calc(20px / ${screenScale.tablet});
+      `}
+    }
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);
@@ -122,5 +136,20 @@ export const Styled_MypageTable = {
   `,
   Tr: styled.tr`
     border-bottom: 1px solid gray;
+    height: 90px;
+    min-height: 90px;
+
+    ${DeviceQuery.bigScreen`
+      height:calc(90px / ${screenScale.bigScreen});
+      min-height:calc(90px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height:calc(90px / ${screenScale.desktop});
+      min-height:calc(90px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height:calc(90px / ${screenScale.tablet});
+      min-height:calc(90px / ${screenScale.tablet});
+    `}
   `,
 };

@@ -51,8 +51,7 @@ export const Styled_Apply = {
         display: flex;
       }
     }
-    & input,
-    textarea {
+    & input {
       font-size: var(--basic-font-size);
       flex-grow: 1;
 
@@ -68,20 +67,17 @@ export const Styled_Apply = {
     }
     #apply_title {
       height: 50px;
-      padding: 0 30px;
+      padding: 0 15px;
       border: 1.5px solid var(--light-gray-color);
 
       ${DeviceQuery.bigScreen`
         height: calc(50px / ${screenScale.bigScreen});
-        padding: 0 calc(30px / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
         height: calc(50px / ${screenScale.desktop});
-        padding: 0 calc(30px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
         height: calc(50px / ${screenScale.tablet});
-        padding: 0 calc(30px / ${screenScale.tablet});
       `}
     }
     #apply_body {
@@ -116,6 +112,21 @@ export const Styled_Apply = {
           font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
         `}
       }
+      .submit {
+        display: flex;
+        justify-content: end;
+        margin-top: 42px;
+
+        ${DeviceQuery.bigScreen`
+        margin-top: calc(42px / ${screenScale.bigScreen});
+      `}
+        ${DeviceQuery.desktop`
+        margin-top: calc(42px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-top: calc(42px / ${screenScale.tablet});
+      `}
+      }
     }
     & label {
       font-size: var(--third-title-font-size);
@@ -137,21 +148,6 @@ export const Styled_Apply = {
         width: calc(100px / ${screenScale.tablet});
         padding-top: calc(10px / ${screenScale.tablet});
         font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
-      `}
-    }
-    .submit {
-      display: flex;
-      justify-content: end;
-      margin-top: 42px;
-
-      ${DeviceQuery.bigScreen`
-        margin-top: calc(42px / ${screenScale.bigScreen});
-      `}
-      ${DeviceQuery.desktop`
-        margin-top: calc(42px / ${screenScale.desktop});
-      `}
-      ${DeviceQuery.tablet`
-        margin-top: calc(42px / ${screenScale.tablet});
       `}
     }
   `,

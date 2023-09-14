@@ -29,7 +29,7 @@ const InfoNav = () => {
           <Styled_InfoNav.Span>마이페이지</Styled_InfoNav.Span>
         </Link>
         <Link
-          to={'/order'}
+          to={'/cart'}
           style={{ textDecorationLine: 'none', color: 'black' }}
         >
           <Styled_InfoNav.Span>장바구니</Styled_InfoNav.Span>
