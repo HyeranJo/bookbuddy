@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BookList, BookMarkList } from '../model/BookList';
+import { BookList, BookMarkList, BookInfo } from '../model/BookList';
 import { getCookie } from '../utils/cookie';
 import { CartListType } from '../model/CartList';
 
@@ -14,7 +14,7 @@ interface getBookListType {
 }
 
 interface getBookSearchListType {
-  setListData: (result: BookList) => void;
+  setListData: (result: BookInfo[]) => void;
   setIsLoading: (isloading: boolean) => void;
   InputValue: string;
 }
@@ -77,8 +77,8 @@ export const getBookSearchList = async ({
     const result = response.data;
     setListData(result);
     setIsLoading(false);
-  } catch (error) {
-    alert(error);
+  } catch {
+    alert('잘못된 검색입니다.');
     setIsLoading(false);
   }
 };

@@ -122,6 +122,15 @@ const Styled_Search = {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+    ${DeviceQuery.bigScreen`
+      font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      font-size: calc(var(--title-font-size) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      font-size: calc(var(--title-font-size) / ${screenScale.tablet});
+    `}
   `,
 };
 export default Styled_Search;
