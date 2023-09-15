@@ -5,17 +5,6 @@ const Styled_Signin = {
   Wrapper: styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-
-    ${DeviceQuery.bigScreen`
-      margin-top: calc(50px / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      margin-top: calc(50px / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      margin-top: calc(50px / ${screenScale.tablet});
-    `}
   `,
   Form: styled.form`
     display: flex;
@@ -24,16 +13,16 @@ const Styled_Signin = {
   `,
   InputContainer: styled.div``,
   SubmitBtn: styled.div`
-    margin: 0 20px;
+    margin: 0 0 0 20px;
 
     ${DeviceQuery.bigScreen`
-      margin: 0 calc(20px / ${screenScale.bigScreen});
+      margin: 0 0 0 calc(20px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      margin: 0 calc(20px / ${screenScale.desktop});
+      margin: 0 0 0 calc(20px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      margin: 0 calc(20px / ${screenScale.tablet});
+      margin: 0 0 0 calc(20px / ${screenScale.tablet});
     `}
   `,
   TextWrapper: styled.div`
