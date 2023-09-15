@@ -101,22 +101,37 @@ const CSTable = ({ title }: AskTableProps) => {
                     </button>
                   </Styled_CSTable.Td>
                   <td>{v.status}</td>
-                  <td>
-                    <Styled_CSTable.DeletePatchBtn
-                      onClick={() => {
-                        deleteHandler(v.id);
-                      }}
-                    >
-                      삭제
-                    </Styled_CSTable.DeletePatchBtn>{' '}
-                    /{' '}
-                    {v.status === '답변완료' ? (
+
+                  {v.status === '답변완료' ? (
+                    <td>
                       <Styled_CSTable.DeletePatchBtn
                         style={{ color: 'var(--light-border-color)' }}
+                        onClick={() => {
+                          alert('⚠️ 답변완료된 문의글은 수정할 수 없습니다');
+                        }}
+                      >
+                        삭제
+                      </Styled_CSTable.DeletePatchBtn>{' '}
+                      /{' '}
+                      <Styled_CSTable.DeletePatchBtn
+                        style={{ color: 'var(--light-border-color)' }}
+                        onClick={() => {
+                          alert('⚠️ 답변완료된 문의글은 수정할 수 없습니다');
+                        }}
                       >
                         수정
                       </Styled_CSTable.DeletePatchBtn>
-                    ) : (
+                    </td>
+                  ) : (
+                    <td>
+                      <Styled_CSTable.DeletePatchBtn
+                        onClick={() => {
+                          deleteHandler(v.id);
+                        }}
+                      >
+                        삭제
+                      </Styled_CSTable.DeletePatchBtn>{' '}
+                      /{' '}
                       <Styled_CSTable.DeletePatchBtn
                         onClick={() => {
                           PatchHandler(v.id);
@@ -124,8 +139,8 @@ const CSTable = ({ title }: AskTableProps) => {
                       >
                         수정
                       </Styled_CSTable.DeletePatchBtn>
-                    )}
-                  </td>
+                    </td>
+                  )}
                 </Styled_CSTable.Tr>
               ))}
             </tbody>
