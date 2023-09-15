@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Styled_Sidebar } from './BookSidebar.style';
 import { SidebarIdAtom } from '../../recoil/Sidebars';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import category from '../../utils/SidebarCategory';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const BookSidebar = () => {
   const categoryKeys = Object.keys(category);
   const categoryValues = Object.values(category);
-  const setSidebarId = useSetRecoilState(SidebarIdAtom);
+  const [sidebarId, setSidebarId] = useRecoilState(SidebarIdAtom);
   const navigate = useNavigate();
   const location = useLocation();
   // focus 상태 유지 (사이드바 외 다른 위치 클릭시 focus 유지)
@@ -17,12 +17,12 @@ const BookSidebar = () => {
   useEffect(() => {
     // 페이지 첫 진입시 (다른 페이지에선 focus out)
     if (location.pathname === '/list') {
-      // clickedList [0] => true 나머지 => false
+      // clickedList index(sidebarId - 1) => true 나머지 => false
       setClickedList(
         Array(categoryKeys.length)
           .fill(false)
           .map((v, i) => {
-            if (i === 0) {
+            if (i === sidebarId - 1) {
               return true;
             } else {
               return false;
