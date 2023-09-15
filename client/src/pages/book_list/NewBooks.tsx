@@ -33,7 +33,7 @@ const NewBooks = () => {
                 <Loading />
               ) : (
                 listData &&
-                listData.data.map(v => {
+                listData.data.map((v, i) => {
                   return (
                     <Book2
                       key={v.id}
@@ -45,6 +45,7 @@ const NewBooks = () => {
                       publisher={v.publisher}
                       author={v.author}
                       date={v.date}
+                      elementNumber={i + 1}
                     />
                   );
                 })
