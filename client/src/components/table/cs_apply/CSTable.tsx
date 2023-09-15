@@ -38,8 +38,8 @@ const CSTable = ({ title }: AskTableProps) => {
   };
 
   const PatchHandler = (id: string) => {
-    getCSDetail(id).then(() => navigate('/customer/apply'));
     setCSPatchClicked(true);
+    getCSDetail(id).then(() => navigate('/customer/apply'));
   };
 
   const titleHandler = (id: string) => {
