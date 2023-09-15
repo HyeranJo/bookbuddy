@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_Sidebar } from './BookSidebar.style';
 import { SidebarIdAtom } from '../../recoil/Sidebars';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import category from '../../utils/SidebarCategory';
 import { useLocation, useNavigate } from 'react-router-dom';
 
