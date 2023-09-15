@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Styled_Search from './Search.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
-import { BookInfo, BookList } from '../../model/BookList';
+import { BookInfo } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
 import { getBookSearchList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
