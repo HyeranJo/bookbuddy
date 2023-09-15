@@ -10,26 +10,47 @@ const BookSidebar = () => {
   const categoryValues = Object.values(category);
   const setSidebarId = useSetRecoilState(SidebarIdAtom);
   const navigate = useNavigate();
-  const firstCategoryRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
+  // focus 상태 유지 (사이드바 외 다른 위치 클릭시 focus 유지)
+  const [clickedList, setClickedList] = useState<boolean[]>([]);
 
   useEffect(() => {
-    // 페이지 첫 진입시 사이드바 첫 번째 메뉴에 focus
-    if (firstCategoryRef.current && location.pathname === '/list') {
-      firstCategoryRef.current.focus();
+    // 페이지 첫 진입시 (다른 페이지에선 focus out)
+    if (location.pathname === '/list') {
+      // clickedList [0] => true 나머지 => false
+      setClickedList(
+        Array(categoryKeys.length)
+          .fill(false)
+          .map((v, i) => {
+            if (i === 0) {
+              return true;
+            } else {
+              return false;
+            }
+          }),
+      );
     }
   }, []);
 
-  /** 클릭한 사이드 메뉴 id를 recoil에 저장하는 함수 */
+  /** click handler  */
   const onClickHandler = (value: number) => {
+    // 클릭한 사이드 메뉴 id를 recoil에 저장하는 함수
     setSidebarId(value);
+
+    // 클릭한 사이드 메뉴를 true 로 변환, 나머지는 false로 변환
+    const copyClicked = [...clickedList].map((v, i) => {
+      if (v === true) return false;
+      if (i === value - 1) return true;
+      else return v;
+    });
+    setClickedList(copyClicked);
   };
 
   return (
     <Styled_Sidebar.Container>
       <Styled_Sidebar.Div>
         {categoryKeys.map((v, i) => {
-          if (i === 0) {
+          if (i === clickedList.indexOf(true)) {
             return (
               <Styled_Sidebar.Button
                 key={i}
@@ -37,7 +58,14 @@ const BookSidebar = () => {
                   onClickHandler(categoryValues[i]);
                   navigate('/list');
                 }}
-                ref={firstCategoryRef}
+                style={
+                  clickedList
+                    ? {
+                        color: 'var(--primary-background-color)',
+                        fontWeight: 'bold',
+                      }
+                    : {}
+                }
               >
                 {v}
               </Styled_Sidebar.Button>
