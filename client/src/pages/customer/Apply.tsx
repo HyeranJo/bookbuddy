@@ -8,7 +8,7 @@ import {
   CSPatchClickedAtom,
   CSDetailAtom,
   CharacterCount,
-  AskDeleteModal,
+  IsOpenModalAtom,
 } from '../../recoil/CS';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import YesOrNoModal from '../../components/modal/YesOrNoModal';
@@ -21,14 +21,14 @@ const Apply = () => {
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
   const [patchValue, setPatchValue] = useState(csDetail.question.title);
   const characterCount = useRecoilValue(CharacterCount);
-  const setIsOpen = useSetRecoilState(AskDeleteModal);
+  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
   const [finalData, setFinalData] = useState<{
     boardId?: string;
     title: string;
     content: string;
   }>();
   const [finalPatchData, setFinalPatchData] = useState<CSPatchType>();
-  console.log(characterCount);
+
   const submitHandler = () => {
     if (characterCount <= 5) {
       alert('⚠️ 내용은 5글자 이상 입력하셔야 합니다');

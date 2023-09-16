@@ -11,6 +11,9 @@ import { getBookmarkmypage } from '../../api/GetApi';
 import CSTable from '../../components/table/cs_apply/CSTable';
 import { getCookie } from '../../utils/cookie';
 import Recent from '../../components/table/order_history/Recent';
+import YesOrNoModal from '../../components/modal/YesOrNoModal';
+import { CSDeleteId, ModalNameAtom } from '../../recoil/CS';
+import { DeleteOrderDataAtom } from '../../recoil/Payment';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
@@ -21,6 +24,9 @@ const Mypage = () => {
   const [deleteClicked, setDeleteClicked] = useState(false);
   const containerElement = useRef<HTMLDivElement>(null);
   const [elementHeight, setElementHeight] = useState<number>();
+  const deleteId = useRecoilValue(CSDeleteId);
+  const modalName = useRecoilValue(ModalNameAtom);
+  const deleteOrderData = useRecoilValue(DeleteOrderDataAtom);
 
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
@@ -48,83 +54,105 @@ const Mypage = () => {
   }, [bookmarkScrollRef, navScrollIndex]);
 
   return (
-    <Styled_Mypage.Container
-      className="container"
-      ref={containerElement}
-      $elementHeight={elementHeight}
-    >
-      <Styled_Layout.Div_WithSidebar>
-        <MypageSidebar />
-        <Styled_Mypage.Content>
-          <Styled_Mypage.Title>
-            <div
-              style={{ scrollMarginTop: '240px' }}
-              ref={el => {
-                navScrollListRef.current[0] = el;
-              }}
-            >
-              <Styled_Mypage.H1>{userName}님, 환영합니다</Styled_Mypage.H1>
-            </div>
-          </Styled_Mypage.Title>
-
-          <Styled_Mypage.Detail className="detail">
-            <Recent
-              message="주문완료 단계의 내역만 표시됩니다"
-              deleteClicked={deleteClicked}
-              setDeleteClicked={setDeleteClicked}
-              width={1095}
-            />
-            <div
-              style={{ scrollMarginTop: '240px' }}
-              ref={el => {
-                navScrollListRef.current[1] = el;
-              }}
-            >
-              <Full deleteClicked={deleteClicked} width={1095} />
-            </div>
-            <div
-              style={{ scrollMarginTop: '240px' }}
-              ref={el => {
-                navScrollListRef.current[2] = el;
-              }}
-            >
-              <CSTable title="1:1 문의 내역" width={1095} />
-            </div>
-
-            <Styled_Mypage.BookmarkList>
-              <Styled_Mypage.BookmarkTitle
+    <>
+      <Styled_Mypage.Container
+        className="container"
+        ref={containerElement}
+        $elementHeight={elementHeight}
+      >
+        <Styled_Layout.Div_WithSidebar>
+          <MypageSidebar />
+          <Styled_Mypage.Content>
+            <Styled_Mypage.Title>
+              <div
                 style={{ scrollMarginTop: '240px' }}
                 ref={el => {
-                  navScrollListRef.current[3] = el;
+                  navScrollListRef.current[0] = el;
                 }}
               >
-                <Styled_Mypage.H2 className="bookmarklist">
-                  북마크 리스트
-                </Styled_Mypage.H2>
-              </Styled_Mypage.BookmarkTitle>
-              <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
-                {bookmarkList
-                  .map((v: BookMarkList) => {
-                    return (
-                      <Styled_Mypage.Book key={v.id}>
-                        <Book
-                          key={v.book.id}
-                          id={v.book.id}
-                          name={v.book.name}
-                          price={v.book.price}
-                          image={v.book.imgSrc}
-                          bookmark={true}
-                        />
-                      </Styled_Mypage.Book>
-                    );
-                  })
-                  .reverse()}
-              </Styled_Mypage.Books>
-            </Styled_Mypage.BookmarkList>
-          </Styled_Mypage.Detail>
-        </Styled_Mypage.Content>
-      </Styled_Layout.Div_WithSidebar>
-    </Styled_Mypage.Container>
+                <Styled_Mypage.H1>{userName}님, 환영합니다</Styled_Mypage.H1>
+              </div>
+            </Styled_Mypage.Title>
+
+            <Styled_Mypage.Detail className="detail">
+              <Recent
+                message="주문완료 단계의 내역만 표시됩니다"
+                deleteClicked={deleteClicked}
+                setDeleteClicked={setDeleteClicked}
+                width={1095}
+              />
+              <div
+                style={{ scrollMarginTop: '240px' }}
+                ref={el => {
+                  navScrollListRef.current[1] = el;
+                }}
+              >
+                <Full deleteClicked={deleteClicked} width={1095} />
+              </div>
+              <div
+                style={{ scrollMarginTop: '240px' }}
+                ref={el => {
+                  navScrollListRef.current[2] = el;
+                }}
+              >
+                <CSTable
+                  title="1:1 문의 내역"
+                  width={1095}
+                  deleteClicked={deleteClicked}
+                  setDeleteClicked={setDeleteClicked}
+                />
+              </div>
+
+              <Styled_Mypage.BookmarkList>
+                <Styled_Mypage.BookmarkTitle
+                  style={{ scrollMarginTop: '240px' }}
+                  ref={el => {
+                    navScrollListRef.current[3] = el;
+                  }}
+                >
+                  <Styled_Mypage.H2 className="bookmarklist">
+                    북마크 리스트
+                  </Styled_Mypage.H2>
+                </Styled_Mypage.BookmarkTitle>
+                <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
+                  {bookmarkList
+                    .map((v: BookMarkList) => {
+                      return (
+                        <Styled_Mypage.Book key={v.id}>
+                          <Book
+                            key={v.book.id}
+                            id={v.book.id}
+                            name={v.book.name}
+                            price={v.book.price}
+                            image={v.book.imgSrc}
+                            bookmark={true}
+                          />
+                        </Styled_Mypage.Book>
+                      );
+                    })
+                    .reverse()}
+                </Styled_Mypage.Books>
+              </Styled_Mypage.BookmarkList>
+            </Styled_Mypage.Detail>
+          </Styled_Mypage.Content>
+        </Styled_Layout.Div_WithSidebar>
+      </Styled_Mypage.Container>
+      {modalName === 'orderDelete' ? (
+        <YesOrNoModal
+          message="정말 삭제하시겠습니까?"
+          modalName="orderDelete"
+          deleteOrderData={deleteOrderData}
+          setOrderDeleteClicked={setDeleteClicked}
+        />
+      ) : (
+        <YesOrNoModal
+          id={deleteId}
+          setDeleteClicked={setDeleteClicked}
+          message="정말 삭제하시겠습니까?"
+          modalName="applyDelete"
+        />
+      )}
+    </>
   );
 };
 

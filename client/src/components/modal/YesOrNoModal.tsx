@@ -1,13 +1,14 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { AskDeleteModal, CSPatchClickedAtom } from '../../recoil/CS';
+import { IsOpenModalAtom, CSPatchClickedAtom } from '../../recoil/CS';
 import { DeleteCSItem } from '../../api/DeleteApi';
 import { Styled_CSDeleteModal } from './AskDeleteModal.style';
 import { postCSData } from '../../api/PostApi';
 import { useNavigate } from 'react-router-dom';
-import { patchCS } from '../../api/PatchApi';
+import { patchCS, patchOrderStatus } from '../../api/PatchApi';
 import { CSPatchType } from '../../model/CStype';
+import { patchOrderStatusType } from '../../model/paymentType';
 
 interface YesOrNoModalType {
   message: string;
@@ -22,6 +23,9 @@ interface YesOrNoModalType {
   };
   // applyPatch
   finalPatchData?: CSPatchType;
+  // orderDelete
+  deleteOrderData?: patchOrderStatusType;
+  setOrderDeleteClicked?: (deleteClicked: boolean) => void;
 }
 
 const YesOrNoModal = ({
@@ -31,8 +35,10 @@ const YesOrNoModal = ({
   setDeleteClicked,
   finalData,
   finalPatchData,
+  deleteOrderData,
+  setOrderDeleteClicked,
 }: YesOrNoModalType) => {
-  const [isOpen, setIsOpen] = useRecoilState(AskDeleteModal);
+  const [isOpen, setIsOpen] = useRecoilState(IsOpenModalAtom);
   const navigate = useNavigate();
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
 
@@ -81,6 +87,12 @@ const YesOrNoModal = ({
           .catch(err =>
             alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`),
           );
+    }
+    // orderDelete 주문 내역 삭제
+    else if (modalName === 'orderDelete') {
+      console.log(deleteOrderData);
+      deleteOrderData && patchOrderStatus(deleteOrderData);
+      setOrderDeleteClicked && setOrderDeleteClicked(true);
     }
   };
 

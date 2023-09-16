@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useEffect, useState } from 'react';
 import { CSType } from '../../../model/CStype';
-import { AskDeleteModal, CSPatchClickedAtom } from '../../../recoil/CS';
+import {
+  IsOpenModalAtom,
+  CSPatchClickedAtom,
+  CSDeleteId,
+} from '../../../recoil/CS';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import YesOrNoModal from '../../modal/YesOrNoModal';
 import { PageAtom } from '../../../recoil/Sidebars';
@@ -13,15 +17,22 @@ import PaginationBox from '../../pagination_box/PaginationBox';
 interface AskTableProps {
   title: string;
   width: number;
+  deleteClicked?: boolean;
+  setDeleteClicked?: (deleteClicked: boolean) => void;
 }
 
-const CSTable = ({ title, width }: AskTableProps) => {
+const CSTable = ({
+  title,
+  width,
+  deleteClicked,
+  setDeleteClicked,
+}: AskTableProps) => {
   const navigate = useNavigate();
   const [cs, setCS] = useState<CSType>();
-  const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
+  // const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
-  const setIsOpen = useSetRecoilState(AskDeleteModal);
-  const [id, setId] = useState('');
+  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
+  const setId = useSetRecoilState(CSDeleteId);
   const page = useRecoilValue(PageAtom);
 
   useEffect(() => {
@@ -29,7 +40,7 @@ const CSTable = ({ title, width }: AskTableProps) => {
       setCS(data);
     });
     if (deleteClicked === true) {
-      setDeleteClicked(false);
+      setDeleteClicked && setDeleteClicked(false);
     }
   }, [deleteClicked, page]);
 
@@ -167,12 +178,6 @@ const CSTable = ({ title, width }: AskTableProps) => {
           )}
         </div>
       </Styled_CSTable.Container>
-      <YesOrNoModal
-        id={id}
-        setDeleteClicked={setDeleteClicked}
-        message="정말 삭제하시겠습니까?"
-        modalName="applyDelete"
-      />
     </>
   );
 };

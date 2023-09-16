@@ -166,6 +166,28 @@ export const Styled_History = {
       height:calc(90px / ${screenScale.tablet});
       min-height:calc(90px / ${screenScale.tablet});
     `}
+
+    & button {
+      border: 0px;
+      background-color: white;
+      font-size: var(--basic-font-size);
+      cursor: pointer;
+
+      ${DeviceQuery.bigScreen`
+        font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+      `}
+
+      &:hover {
+        font-weight: bold;
+        color: var(--primary-background-color);
+      }
+    }
   `,
   NoList: styled.td`
     height: 300px;
