@@ -16,8 +16,8 @@ const FAQ = () => {
           console.log(isDown);
         };
         return (
-          <>
-            <Styled_FQA.Question key={idx}>
+          <div key={idx}>
+            <Styled_FQA.Question>
               <Styled_FQA.QuestionTitle>{el.title}</Styled_FQA.QuestionTitle>
               <Styled_FQA.ArrowWrapper onClick={handleDropdownToggle}>
                 {isDown ? <ArrowUp /> : <ArrowDown />}
@@ -28,7 +28,7 @@ const FAQ = () => {
                 <Styled_FQA.Answer>{el.answer}</Styled_FQA.Answer>
               </Styled_FQA.AnswerContainer>
             )}
-          </>
+          </div>
         );
       })}
     </Styled_FQA.Container>
