@@ -4,10 +4,10 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { IsOpenModalAtom, CSPatchClickedAtom } from '../../recoil/CS';
 import { DeleteCSItem } from '../../api/DeleteApi';
 import { Styled_CSDeleteModal } from './YesOrNoModal.style';
-import { postCSData } from '../../api/PostApi';
+import { postCSAnswerData, postCSData } from '../../api/PostApi';
 import { useNavigate } from 'react-router-dom';
 import { patchCS, patchOrderStatus } from '../../api/PatchApi';
-import { CSPatchType } from '../../model/CStype';
+import { CSPatchType, PostCSAnswerType } from '../../model/CStype';
 import { patchOrderStatusType } from '../../model/paymentType';
 
 interface YesOrNoModalType {
@@ -26,6 +26,8 @@ interface YesOrNoModalType {
   // orderDelete
   deleteOrderData?: patchOrderStatusType;
   setOrderDeleteClicked?: (deleteClicked: boolean) => void;
+  // adminAnswerPost
+  finalAnswerData?: PostCSAnswerType;
 }
 
 const YesOrNoModal = ({
@@ -37,6 +39,7 @@ const YesOrNoModal = ({
   finalPatchData,
   deleteOrderData,
   setOrderDeleteClicked,
+  finalAnswerData,
 }: YesOrNoModalType) => {
   const [isOpen, setIsOpen] = useRecoilState(IsOpenModalAtom);
   const navigate = useNavigate();
@@ -50,6 +53,7 @@ const YesOrNoModal = ({
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      width: '280px',
     },
   };
 
@@ -92,6 +96,13 @@ const YesOrNoModal = ({
     else if (modalName === 'orderDelete') {
       deleteOrderData && patchOrderStatus(deleteOrderData);
       setOrderDeleteClicked && setOrderDeleteClicked(true);
+    }
+    // adminAnswerPost 문의답변 등록
+    else if (modalName === 'adminAnswerPost') {
+      finalAnswerData &&
+        postCSAnswerData(finalAnswerData).then(data =>
+          navigate(`/customer/detail/${data.boardId}`),
+        );
     }
   };
 
