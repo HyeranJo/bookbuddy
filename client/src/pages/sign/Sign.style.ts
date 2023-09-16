@@ -51,6 +51,34 @@ const Styled_Sign = {
           padding: calc(50px / ${screenScale.tablet});
           gap: calc(20px / ${screenScale.tablet});
         `}
+
+        & h3 {
+          font-size: var(--third-title-font-size);
+
+          ${DeviceQuery.bigScreen`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+          `}
+          ${DeviceQuery.desktop`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});    
+          `}
+          ${DeviceQuery.tablet`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
+          `}
+        }
+
+        & p {
+          font-size: var(--basic-font-size);
+
+          ${DeviceQuery.bigScreen`
+            font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+          `}
+          ${DeviceQuery.desktop`
+            font-size: calc(var(--basic-font-size) / ${screenScale.desktop});    
+          `}
+          ${DeviceQuery.tablet`
+            font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+          `}
+        }
       }
     }
   `,
