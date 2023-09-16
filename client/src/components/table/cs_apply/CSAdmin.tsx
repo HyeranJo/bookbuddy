@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_CSTable } from './CSTable.style';
-import PaginationBox from '../../pagination_box/PaginationBox';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 import { CSType } from '../../../model/CStype';
-import { PageAtom } from '../../../recoil/Sidebars';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
 const CSAdmin = ({ width }: { width: number }) => {
   const navigate = useNavigate();
-  const page = useRecoilValue(PageAtom);
   const [cs, setCS] = useState<CSType>();
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getCSList(page).then(data => {
+    getCSList(page, itemsCountPerPage).then(data => {
       setCS(data);
     });
   }, [page]);
@@ -84,7 +84,7 @@ const CSAdmin = ({ width }: { width: number }) => {
           ) : (
             <tbody>
               <Styled_CSTable.Tr>
-                <Styled_CSTable.NoList className="title-body" colSpan={4}>
+                <Styled_CSTable.NoList colSpan={4}>
                   <span style={{ color: 'var(--light-border-color)' }}>
                     등록된 문의내역이 없습니다
                   </span>
@@ -93,14 +93,21 @@ const CSAdmin = ({ width }: { width: number }) => {
             </tbody>
           )}
         </Styled_CSTable.Table>
-        <div className="pagination">
+        <Styled_PaginationBox.Div>
           {cs && (
-            <PaginationBox
-              itemsCountPerPage={10}
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsCountPerPage}
               totalItemsCount={cs.pageInfo.totalElements}
+              pageRangeDisplayed={5}
+              prevPageText={'<'}
+              nextPageText={'>'}
+              onChange={page => {
+                setPage(page);
+              }}
             />
           )}
-        </div>
+        </Styled_PaginationBox.Div>
       </Styled_CSTable.Container>
     </>
   );

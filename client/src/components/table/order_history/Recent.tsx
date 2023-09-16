@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_History } from './History.style';
-import PaginationBox from '../../pagination_box/PaginationBox';
 import { OrderHistoryType } from '../../../model/paymentType';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { PageAtom } from '../../../recoil/Sidebars';
+import { useSetRecoilState } from 'recoil';
 import { getOrderHistory } from '../../../api/GetApi';
 import { IsOpenModalAtom, ModalNameAtom } from '../../../recoil/CS';
 import { DeleteOrderDataAtom } from '../../../recoil/Payment';
+import Pagination from 'react-js-pagination';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
 
 interface RecentType {
   message?: string;
@@ -22,15 +22,16 @@ const Recent = ({
   width,
 }: RecentType) => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
-  const page = useRecoilValue(PageAtom);
   const historyFilter =
     orderHistory && orderHistory.data.filter(v => v.status === '주문완료');
   const setDeleteOrderData = useSetRecoilState(DeleteOrderDataAtom);
   const setModalName = useSetRecoilState(ModalNameAtom);
   const setIsOpen = useSetRecoilState(IsOpenModalAtom);
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 5;
 
   useEffect(() => {
-    getOrderHistory(page).then((data: OrderHistoryType) => {
+    getOrderHistory(page, itemsCountPerPage).then((data: OrderHistoryType) => {
       setOrderHistory(data);
       setDeleteClicked(false);
     });
@@ -95,14 +96,21 @@ const Recent = ({
             )}
           </tbody>
         </Styled_History.Table>
-        <div className="pagination">
+        <Styled_PaginationBox.Div>
           {historyFilter && (
-            <PaginationBox
-              itemsCountPerPage={5}
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsCountPerPage}
               totalItemsCount={historyFilter.length}
+              pageRangeDisplayed={5}
+              prevPageText={'<'}
+              nextPageText={'>'}
+              onChange={page => {
+                setPage(page);
+              }}
             />
           )}
-        </div>
+        </Styled_PaginationBox.Div>
       </Styled_History.Container>
     </>
   );

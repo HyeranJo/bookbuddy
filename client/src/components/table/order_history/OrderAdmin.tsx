@@ -1,21 +1,23 @@
-import { useRecoilValue } from 'recoil';
-import { PageAtom } from '../../../recoil/Sidebars';
 import { useEffect, useState } from 'react';
 import { getAdminOrderHistory } from '../../../api/GetApi';
-import PaginationBox from '../../pagination_box/PaginationBox';
 import { Styled_History } from './History.style';
 import {
   OrderHistoryType,
   patchOrderStatusType,
 } from '../../../model/paymentType';
 import { patchOrderStatus } from '../../../api/PatchApi';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
 const OrderAdmin = ({ width }: { width: number }) => {
-  const page = useRecoilValue(PageAtom);
   const [adminfull, setAdminFull] = useState<OrderHistoryType>();
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getAdminOrderHistory(page).then(data => setAdminFull(data));
+    getAdminOrderHistory(page, itemsCountPerPage).then(data =>
+      setAdminFull(data),
+    );
   }, [page]);
 
   const statusChangeHandler = (
@@ -92,14 +94,21 @@ const OrderAdmin = ({ width }: { width: number }) => {
           )}
         </tbody>
       </Styled_History.Table>
-      <div className="pagination">
+      <Styled_PaginationBox.Div>
         {adminfull && (
-          <PaginationBox
-            itemsCountPerPage={5}
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={itemsCountPerPage}
             totalItemsCount={adminfull.pageInfo.totalElements}
+            pageRangeDisplayed={5}
+            prevPageText={'<'}
+            nextPageText={'>'}
+            onChange={page => {
+              setPage(page);
+            }}
           />
         )}
-      </div>
+      </Styled_PaginationBox.Div>
     </Styled_History.Container>
   );
 };

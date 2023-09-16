@@ -23,20 +23,6 @@ export const Styled_CSTable = {
         screenScale.tablet
       });
     `}
-
-    & > .pagination {
-      margin-top: 20px;
-
-      ${DeviceQuery.bigScreen`
-        margin-top: calc(20px / ${screenScale.bigScreen});
-      `}
-      ${DeviceQuery.desktop`
-        margin-top: calc(20px / ${screenScale.desktop});
-      `}
-      ${DeviceQuery.tablet`
-        margin-top: calc(20px / ${screenScale.tablet});
-      `}
-    }
   `,
   H1: styled.h1`
     font-size: var(--subtitle-font-size);

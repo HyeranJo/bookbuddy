@@ -9,9 +9,9 @@ import {
   CSPatchClickedAtom,
   CSDeleteId,
 } from '../../../recoil/CS';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { PageAtom } from '../../../recoil/Sidebars';
-import PaginationBox from '../../pagination_box/PaginationBox';
+import { useSetRecoilState } from 'recoil';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
 interface AskTableProps {
   title: string;
@@ -28,14 +28,14 @@ const CSTable = ({
 }: AskTableProps) => {
   const navigate = useNavigate();
   const [cs, setCS] = useState<CSType>();
-  // const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
   const setIsOpen = useSetRecoilState(IsOpenModalAtom);
   const setId = useSetRecoilState(CSDeleteId);
-  const page = useRecoilValue(PageAtom);
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getCSList(page).then(data => {
+    getCSList(page, itemsCountPerPage).then(data => {
       setCS(data);
     });
     if (deleteClicked === true) {
@@ -168,14 +168,21 @@ const CSTable = ({
             </tbody>
           )}
         </Styled_CSTable.Table>
-        <div className="pagination">
+        <Styled_PaginationBox.Div>
           {cs && (
-            <PaginationBox
-              itemsCountPerPage={10}
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsCountPerPage}
               totalItemsCount={cs.pageInfo.totalElements}
+              pageRangeDisplayed={5}
+              prevPageText={'<'}
+              nextPageText={'>'}
+              onChange={page => {
+                setPage(page);
+              }}
             />
           )}
-        </div>
+        </Styled_PaginationBox.Div>
       </Styled_CSTable.Container>
     </>
   );

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Styled_History } from './History.style';
 import { getOrderHistory } from '../../../api/GetApi';
 import { OrderHistoryType } from '../../../model/paymentType';
-import PaginationBox from '../../pagination_box/PaginationBox';
-import { useRecoilValue } from 'recoil';
-import { PageAtom } from '../../../recoil/Sidebars';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
 interface FullType {
   message?: string;
@@ -14,10 +13,11 @@ interface FullType {
 
 const Full = ({ message, deleteClicked, width }: FullType) => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
-  const page = useRecoilValue(PageAtom);
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 5;
 
   useEffect(() => {
-    getOrderHistory(page).then(data => {
+    getOrderHistory(page, itemsCountPerPage).then(data => {
       setOrderHistory(data);
     });
   }, [page, deleteClicked]);
@@ -64,14 +64,21 @@ const Full = ({ message, deleteClicked, width }: FullType) => {
           )}
         </tbody>
       </Styled_History.Table>
-      <div className="pagination">
+      <Styled_PaginationBox.Div>
         {orderHistory && (
-          <PaginationBox
-            itemsCountPerPage={5}
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={itemsCountPerPage}
             totalItemsCount={orderHistory.pageInfo.totalElements}
+            pageRangeDisplayed={5}
+            prevPageText={'<'}
+            nextPageText={'>'}
+            onChange={page => {
+              setPage(page);
+            }}
           />
         )}
-      </div>
+      </Styled_PaginationBox.Div>
     </Styled_History.Container>
   );
 };
