@@ -1,7 +1,30 @@
 import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
+interface MypageProps {
+  $elementHeight: number | undefined;
+}
 export const Styled_Mypage = {
+  Container: styled.div<MypageProps>`
+    display: flex;
+    justify-content: center;
+    // 북마크 리스트 길이 포함
+    height: calc(${props => props.$elementHeight}px + 1000px);
+
+    ${DeviceQuery.bigScreen`
+      height: calc((${(props: MypageProps) =>
+        props.$elementHeight}px + 1000px) / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height: calc((${(props: MypageProps) =>
+        props.$elementHeight}px + 1000px) / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height: calc((${(props: MypageProps) =>
+        props.$elementHeight}px + 1000px) / ${screenScale.tablet});
+    `}
+  `,
+
   Content: styled.section`
     margin-left: 200px;
     padding-left: 53.5px;
@@ -15,6 +38,7 @@ export const Styled_Mypage = {
       padding-left: calc(53.5px / ${screenScale.bigScreen});
       padding-right: calc(53.5px / ${screenScale.bigScreen});
       padding-top: calc(22px / ${screenScale.bigScreen});
+      height: calc((100% + 350px) / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(1512px / ${screenScale.desktop});
@@ -22,14 +46,16 @@ export const Styled_Mypage = {
       padding-left: calc(53.5px / ${screenScale.desktop});
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(22px / ${screenScale.desktop});
-    `}
+      height: calc((100% + 350px) / ${screenScale.desktop});
+    `} 
     ${DeviceQuery.tablet`
       width: calc(1512px / ${screenScale.tablet});
       margin-left: calc(200px / ${screenScale.tablet});
       padding-left: calc(53.5px / ${screenScale.tablet});
       padding-right: calc(53.5px / ${screenScale.tablet});
       padding-top: calc(22px / ${screenScale.tablet});
-    `}
+      height: calc((100% + 350px) / ${screenScale.tablet});
+    `};
   `,
   Title: styled.div`
     display: flex;

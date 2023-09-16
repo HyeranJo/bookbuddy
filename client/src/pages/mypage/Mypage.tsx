@@ -19,10 +19,15 @@ const Mypage = () => {
   const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
   const [userName, setUserName] = useState('');
   const [deleteClicked, setDeleteClicked] = useState(false);
+  const containerElement = useRef<HTMLDivElement>(null);
+  const [elementHeight, setElementHeight] = useState<number>();
 
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
     setUserName(getCookie('userInfo').email.split('@')[0]);
+    if (containerElement.current !== null) {
+      setElementHeight(containerElement.current.clientHeight);
+    }
   }, []);
 
   useEffect(() => {
@@ -43,7 +48,11 @@ const Mypage = () => {
   }, [bookmarkScrollRef, navScrollIndex]);
 
   return (
-    <Styled_Layout.Container>
+    <Styled_Mypage.Container
+      className="container"
+      ref={containerElement}
+      $elementHeight={elementHeight}
+    >
       <Styled_Layout.Div_WithSidebar>
         <MypageSidebar />
         <Styled_Mypage.Content>
@@ -114,7 +123,7 @@ const Mypage = () => {
           </Styled_Mypage.Detail>
         </Styled_Mypage.Content>
       </Styled_Layout.Div_WithSidebar>
-    </Styled_Layout.Container>
+    </Styled_Mypage.Container>
   );
 };
 
