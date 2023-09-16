@@ -78,7 +78,9 @@ const Recent = ({ message, deleteClicked, setDeleteClicked }: RecentType) => {
             })
           ) : (
             <Styled_History.Tr>
-              <td>최근 주문 내역이 없습니다</td>
+              <Styled_History.NoList colSpan={5}>
+                최근 주문 내역이 없습니다
+              </Styled_History.NoList>
             </Styled_History.Tr>
           )}
         </tbody>

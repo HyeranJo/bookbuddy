@@ -54,7 +54,9 @@ const Full = ({ message, deleteClicked }: FullType) => {
             })
           ) : (
             <Styled_History.Tr>
-              <td>주문 내역이 없습니다</td>
+              <Styled_History.NoList colSpan={4}>
+                주문 내역이 없습니다
+              </Styled_History.NoList>
             </Styled_History.Tr>
           )}
         </tbody>

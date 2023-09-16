@@ -176,4 +176,18 @@ export const Styled_CSTable = {
       font-weight: bold;
     }
   `,
+
+  NoList: styled.td`
+    height: 300px;
+
+    ${DeviceQuery.bigScreen`
+      height:calc(300px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height:calc(300px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height:calc(300px / ${screenScale.tablet});
+    `}
+  `,
 };

@@ -147,11 +147,9 @@ const CSTable = ({ title }: AskTableProps) => {
           ) : (
             <tbody>
               <Styled_CSTable.Tr>
-                <td></td>
-                <Styled_CSTable.Td className="title-body">
+                <Styled_CSTable.NoList colSpan={4}>
                   등록된 문의내역이 없습니다
-                </Styled_CSTable.Td>
-                <td></td>
+                </Styled_CSTable.NoList>
               </Styled_CSTable.Tr>
             </tbody>
           )}

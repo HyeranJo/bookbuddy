@@ -152,4 +152,17 @@ export const Styled_History = {
       min-height:calc(90px / ${screenScale.tablet});
     `}
   `,
+  NoList: styled.td`
+    height: 300px;
+
+    ${DeviceQuery.bigScreen`
+      height:calc(300px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height:calc(300px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height:calc(300px / ${screenScale.tablet});
+    `}
+  `,
 };
