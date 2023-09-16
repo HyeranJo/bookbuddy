@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { CSType } from '../../../model/CStype';
 import { AskDeleteModal, CSPatchClickedAtom } from '../../../recoil/CS';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import ApplyDeleteModal from '../../modal/AskDeleteModal';
+import YesOrNoModal from '../../modal/YesOrNoModal';
 import { PageAtom } from '../../../recoil/Sidebars';
 import PaginationBox from '../../pagination_box/PaginationBox';
 
@@ -167,7 +167,7 @@ const CSTable = ({ title, width }: AskTableProps) => {
           )}
         </div>
       </Styled_CSTable.Container>
-      <ApplyDeleteModal
+      <YesOrNoModal
         id={id}
         setDeleteClicked={setDeleteClicked}
         message="정말 삭제하시겠습니까?"

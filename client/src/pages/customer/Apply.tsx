@@ -11,7 +11,7 @@ import {
   AskDeleteModal,
 } from '../../recoil/CS';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import ApplyDeleteModal from '../../components/modal/AskDeleteModal';
+import YesOrNoModal from '../../components/modal/YesOrNoModal';
 import { CSPatchType } from '../../model/CStype';
 
 const Apply = () => {
@@ -112,13 +112,13 @@ const Apply = () => {
         </Styled_Layout.Div_WithNoSidebar>
       </Styled_Layout.Container>
       {csPatchClicked ? (
-        <ApplyDeleteModal
+        <YesOrNoModal
           message="수정한 내용을 등록하시겠습니까?"
           modalName="applyPatch"
           finalPatchData={finalPatchData}
         />
       ) : (
-        <ApplyDeleteModal
+        <YesOrNoModal
           message="작성한 내용을 등록하시겠습니까?"
           modalName="applyPost"
           finalData={finalData}

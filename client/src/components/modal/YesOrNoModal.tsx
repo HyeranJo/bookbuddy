@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { patchCS } from '../../api/PatchApi';
 import { CSPatchType } from '../../model/CStype';
 
-interface ApplyDeleteModalType {
+interface YesOrNoModalType {
   message: string;
   modalName: string;
   // applyDelete
@@ -24,14 +24,14 @@ interface ApplyDeleteModalType {
   finalPatchData?: CSPatchType;
 }
 
-const ApplyDeleteModal = ({
+const YesOrNoModal = ({
   message,
   modalName,
   id,
   setDeleteClicked,
   finalData,
   finalPatchData,
-}: ApplyDeleteModalType) => {
+}: YesOrNoModalType) => {
   const [isOpen, setIsOpen] = useRecoilState(AskDeleteModal);
   const navigate = useNavigate();
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
@@ -108,4 +108,4 @@ const ApplyDeleteModal = ({
   );
 };
 
-export default ApplyDeleteModal;
+export default YesOrNoModal;
