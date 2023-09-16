@@ -123,7 +123,7 @@ const Adress = () => {
               </tr>
               <tr>
                 <td></td>
-                <td>지번 주소*</td>
+                <td>상세 주소*</td>
                 <td>
                   <Input
                     type="text"
@@ -195,7 +195,7 @@ const Adress = () => {
                     width={278}
                     onChange={handleChange}
                     readOnly={readOnly}
-                    backgroundColor={backgroundColor}
+                    $backgroundColor={backgroundColor}
                   />
                 </td>
               </tr>

@@ -3,7 +3,7 @@ import { DeviceQuery, screenScale } from '../../utils/Responsive';
 interface Styled_InputProps {
   width?: number;
   height?: number;
-  backgroundColor?: string;
+  $backgroundColor?: string;
 }
 
 const Styled_Input = {
@@ -14,7 +14,7 @@ const Styled_Input = {
     padding: 10px;
     border: 1px solid var(--light-gray-color);
     background-color: ${props =>
-      props.backgroundColor ? props.backgroundColor : 'white'};
+      props.$backgroundColor ? props.$backgroundColor : 'white'};
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--input-font-size) / ${screenScale.bigScreen});
