@@ -12,7 +12,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App">
         {/* 컨텐츠 짧을 경우 footer 하단 고정 */}
-        <div style={{ height: 'auto', minHeight: 'calc(100vh - 100px)' }}>
+        <div style={{ height: 'auto', minHeight: 'calc(100vh - 150px)' }}>
           <Header />
           <Nav />
           <Outlet />
