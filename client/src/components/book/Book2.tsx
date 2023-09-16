@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Styled_Book2 } from './Book2.style';
 import { BookInfo } from '../../model/BookList';
 
+interface Book2Type extends BookInfo {
+  elementNumber: number;
+}
+
 const Book2 = ({
   id,
   name,
@@ -11,11 +15,13 @@ const Book2 = ({
   author,
   date,
   publisher,
-}: BookInfo) => {
+  elementNumber,
+}: Book2Type) => {
   const navigate = useNavigate();
 
   return (
     <Styled_Book2.container>
+      <span>{elementNumber}</span>
       <Styled_Book2.wrapper>
         <Styled_Book2.img
           src={imgSrc}
