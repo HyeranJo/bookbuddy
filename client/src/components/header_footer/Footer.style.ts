@@ -11,9 +11,10 @@ export const Styled_Footer = {
     display: flex;
     flex-flow: column;
     height: 100px;
-    width: 1512px;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
 
     z-index: 99;
     background-color: wheat;
