@@ -28,7 +28,7 @@ const Apply = () => {
     content: string;
   }>();
   const [finalPatchData, setFinalPatchData] = useState<CSPatchType>();
-
+  console.log(characterCount);
   const submitHandler = () => {
     if (characterCount <= 5) {
       alert('⚠️ 내용은 5글자 이상 입력하셔야 합니다');
@@ -45,8 +45,8 @@ const Apply = () => {
   };
 
   const patchHandler = () => {
-    if (characterCount <= 5) {
-      alert('⚠️ 내용은 5글자 이상 입력하셔야 합니다');
+    if (characterCount <= 1) {
+      alert('⚠️ 내용을 수정해주세요');
     } else if (csDetail.question.title.length === 0) {
       alert('⚠️ 제목을 입력하세요');
     } else {
