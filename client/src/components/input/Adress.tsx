@@ -3,16 +3,14 @@ import { Styled_Layout } from '../../pages/BlankPageLayout';
 import { Styled_Payment } from '../../pages/payment/Payment.styled';
 import CallNumber from './CallNumber';
 import Input from './Input';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   CstmrInputsAtom,
   ShipInputsAtom,
   radio_Atom,
 } from '../../recoil/Payment';
-import {
-  PostCodeAdrsAtom,
-  PostCodeModalAtom,
-} from '../../recoil/PostCodeModal';
+import { PostCodeAdrsAtom } from '../../recoil/PostCodeModal';
+import PharmAddress from './PostCodePopup';
 
 const Adress = () => {
   const [radioValue, setRadioValue] = useRecoilState(radio_Atom);
@@ -21,7 +19,6 @@ const Adress = () => {
   const { shipName, address1, address2 } = shipInputs;
   const { cstmrName, email } = cstmrInputs;
   const postCodeAdrs = useRecoilValue(PostCodeAdrsAtom);
-  const setIsOpen = useSetRecoilState(PostCodeModalAtom);
   const [readOnly, setReadOnly] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState('white');
 
@@ -62,11 +59,6 @@ const Adress = () => {
     }
   };
 
-  /** 주소검색 api handler */
-  const postCodeHandler = () => {
-    setIsOpen(true);
-  };
-
   return (
     <>
       <Styled_Layout.H1>배송주소</Styled_Layout.H1>
@@ -102,9 +94,7 @@ const Adress = () => {
                     placeholder="주소검색 버튼을 눌러주세요"
                     readOnly
                   />
-                  <Styled_Payment.AdrBtn onClick={postCodeHandler}>
-                    주소검색
-                  </Styled_Payment.AdrBtn>
+                  <PharmAddress />
                 </td>
               </tr>
               <tr>
