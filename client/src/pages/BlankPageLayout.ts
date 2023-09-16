@@ -27,38 +27,38 @@ export const Styled_Layout = {
     display: flex;
     justify-content: center;
     width: 1300px;
-    padding-top: 44px;
+    padding-top: 60px;
 
     ${DeviceQuery.bigScreen`
       width: calc(1300px / ${screenScale.bigScreen});
-      padding-top: calc(44px / ${screenScale.bigScreen});
+      padding-top: calc(60px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(1300px / ${screenScale.desktop});
-      padding-top: calc(44px / ${screenScale.desktop});
+      padding-top: calc(60px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       width: calc(1300px / ${screenScale.tablet});
-      padding-top: calc(44px / ${screenScale.tablet});
+      padding-top: calc(60px / ${screenScale.tablet});
     `}
   `,
   // H1
   H1: styled.h1`
     font-size: var(--title-font-size);
-    margin-bottom: 20px;
+    margin-bottom: 100px;
     display: inline-block;
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--title-font-size) / ${screenScale.bigScreen});
-      margin-bottom: calc(20px / ${screenScale.bigScreen});
+      margin-bottom: calc(100px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       font-size: calc(var(--title-font-size) / ${screenScale.desktop});
-      margin-bottom: calc(20px / ${screenScale.desktop});
+      margin-bottom: calc(100px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       font-size: calc(var(--title-font-size) / ${screenScale.tablet});
-      margin-bottom: calc(20px / ${screenScale.tablet});
+      margin-bottom: calc(100px / ${screenScale.tablet});
     `}
 
     &.noOrderItem {

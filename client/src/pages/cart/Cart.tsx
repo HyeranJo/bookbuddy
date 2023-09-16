@@ -56,7 +56,7 @@ const Cart = () => {
   // ==================================== HTML ====================================
   return (
     <Styled_Layout.Container>
-      <Styled_Order.Div>
+      <Styled_Layout.Div_WithNoSidebar>
         <Styled_Order.Content>
           {orderList.length !== 0 ? (
             <>
@@ -86,7 +86,7 @@ const Cart = () => {
             </>
           )}
         </Styled_Order.Content>
-      </Styled_Order.Div>
+      </Styled_Layout.Div_WithNoSidebar>
     </Styled_Layout.Container>
   );
 };

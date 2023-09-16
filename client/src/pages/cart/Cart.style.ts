@@ -2,36 +2,10 @@ import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 export const Styled_Order = {
-  Div: styled.div`
-    display: flex;
-    justify-content: center;
-    width: 1300px;
-
-    ${DeviceQuery.bigScreen`
-      width: calc(1300px / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      width: calc(1300px / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      width: calc(1300px / ${screenScale.tablet});
-    `}
-  `,
   Content: styled.div`
     display: flex;
     flex-flow: column;
     justify-content: center;
-    padding-top: 44px;
-
-    ${DeviceQuery.bigScreen`
-      padding-top: calc(44px / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      padding-top: calc(44px / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      padding-top: calc(44px / ${screenScale.tablet});
-    `}
 
     & > .submit {
       display: flex;
