@@ -7,6 +7,7 @@ import {
   CSContentAtom,
   CSPatchClickedAtom,
   CSDetailAtom,
+  CharacterCount,
 } from '../../recoil/CS';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { postCSData } from '../../api/PostApi';
@@ -21,30 +22,46 @@ const Apply = () => {
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
   const [patchValue, setPatchValue] = useState(csDetail.question.title);
   const navigate = useNavigate();
+  const characterCount = useRecoilValue(CharacterCount);
 
   const submitHandler = () => {
-    const data = {
-      title: title,
-      content: value,
-    };
-    postCSData(data).then(data => navigate(`/customer/detail/${data.id}`));
+    if (characterCount <= 5) {
+      alert('⚠️ 내용은 5글자 이상 입력하셔야 합니다');
+      console.log(value);
+    } else if (title.length === 0) {
+      alert('⚠️ 제목을 입력하세요');
+    } else {
+      const data = {
+        title: title,
+        content: value,
+      };
+      postCSData(data).then(data => navigate(`/customer/detail/${data.id}`));
+    }
   };
 
   const patchHandler = () => {
     setCSPatchClicked(false);
 
-    const data = {
-      boardId: csDetail.question.id,
-      title: csDetail.question.title,
-      content: csDetail.question.content,
-    };
+    if (characterCount <= 5) {
+      alert('⚠️ 내용은 5글자 이상 입력하셔야 합니다');
+    } else if (csDetail.question.title.length === 0) {
+      alert('⚠️ 제목을 입력하세요');
+    } else {
+      const data = {
+        boardId: csDetail.question.id,
+        title: csDetail.question.title,
+        content: csDetail.question.content,
+      };
 
-    patchCS(data)
-      .then(() => {
-        alert('수정한 내용이 등록되었습니다');
-        navigate(`/customer/detail/${data.boardId}`);
-      })
-      .catch(err => alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`));
+      patchCS(data)
+        .then(() => {
+          alert('수정한 내용이 등록되었습니다');
+          navigate(`/customer/detail/${data.boardId}`);
+        })
+        .catch(err =>
+          alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`),
+        );
+    }
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

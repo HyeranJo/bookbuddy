@@ -31,3 +31,8 @@ export const AskDeleteModal = atom<boolean>({
   key: 'AskDeleteModal',
   default: false,
 });
+
+export const CharacterCount = atom<number>({
+  key: 'CharacterCount',
+  default: 0,
+});

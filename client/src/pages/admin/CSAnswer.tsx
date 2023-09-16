@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_CSAnswer } from './CSAnswer.style';
-import { CSContentAtom, CSDetailAtom } from '../../recoil/CS';
+import { CSContentAtom, CSDetailAtom, CharacterCount } from '../../recoil/CS';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { getCSDetail } from '../../api/GetApi';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -15,6 +15,7 @@ const CSAnswer = () => {
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
   const value = useRecoilValue(CSContentAtom);
   const navigate = useNavigate();
+  const characterCount = useRecoilValue(CharacterCount);
 
   useEffect(() => {
     if (boardId) {
@@ -25,14 +26,18 @@ const CSAnswer = () => {
   }, []);
 
   const submitHandler = () => {
-    const data = {
-      boardId: boardId,
-      content: value,
-    };
-    /** api 전송 및 페이지 이동 */
-    postCSAnswerData(data).then(data =>
-      navigate(`/customer/detail/${data.boardId}`),
-    );
+    if (characterCount > 5) {
+      const data = {
+        boardId: boardId,
+        content: value,
+      };
+      /** api 전송 및 페이지 이동 */
+      postCSAnswerData(data).then(data =>
+        navigate(`/customer/detail/${data.boardId}`),
+      );
+    } else {
+      alert('⚠️ 5글자 이상 입력하셔야 합니다');
+    }
   };
 
   return (

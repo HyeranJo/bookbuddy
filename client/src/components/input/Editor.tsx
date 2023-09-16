@@ -7,8 +7,9 @@ import {
   CSContentAtom,
   CSPatchClickedAtom,
   CSDetailAtom,
+  CharacterCount,
 } from '../../recoil/CS';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 Quill.register('modules/imageActions', ImageActions);
 Quill.register('modules/imageFormats', ImageFormats);
@@ -48,10 +49,19 @@ export const formats = [
 
 const Editor = () => {
   const [value, setValue] = useRecoilState(CSContentAtom);
-  const quillRef = useRef(null);
+  const quillRef = useRef<any>(null);
   const csPatchClicked = useRecoilValue(CSPatchClickedAtom);
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
   const [patchValue, setPatchValue] = useState(csDetail.question.content);
+  const setCharacterCount = useSetRecoilState(CharacterCount);
+  const unprivilegedEditor =
+    quillRef.current && quillRef.current.unprivilegedEditor;
+
+  useEffect(() => {
+    if (unprivilegedEditor) {
+      setCharacterCount(unprivilegedEditor.getLength());
+    }
+  }, [value, patchValue]);
 
   useEffect(() => {
     setCSDetail({
