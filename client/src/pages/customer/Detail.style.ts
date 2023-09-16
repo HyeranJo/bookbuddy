@@ -20,17 +20,6 @@ export const Styled_Detail = {
     .header {
       display: flex;
       justify-content: left;
-      margin-bottom: 30px;
-
-      ${DeviceQuery.bigScreen`
-        margin-bottom: calc(30px / ${screenScale.bigScreen});
-      `}
-      ${DeviceQuery.desktop`
-        margin-bottom: calc(30px / ${screenScale.desktop});
-      `}
-      ${DeviceQuery.tablet`
-        margin-bottom: calc(30px / ${screenScale.tablet});
-      `}
     }
 
     .body {

@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { PageAtom, SidebarIdAtom } from '../../recoil/Sidebars';
 import PaginationBox from '../../components/pagination_box/PaginationBox';
 import category from '../../constants/SidebarCategory';
+import { Styled_Layout } from '../BlankPageLayout';
 
 const List = () => {
   const [listData, setListData] = useState<BookList>();

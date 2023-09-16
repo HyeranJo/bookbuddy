@@ -22,8 +22,6 @@ const Mypage = () => {
   const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
   const [userName, setUserName] = useState('');
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const containerElement = useRef<HTMLDivElement>(null);
-  const [elementHeight, setElementHeight] = useState<number>();
   const deleteId = useRecoilValue(CSDeleteId);
   const modalName = useRecoilValue(ModalNameAtom);
   const deleteOrderData = useRecoilValue(DeleteOrderDataAtom);
@@ -31,9 +29,6 @@ const Mypage = () => {
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
     setUserName(getCookie('userInfo').email.split('@')[0]);
-    if (containerElement.current !== null) {
-      setElementHeight(containerElement.current.clientHeight);
-    }
   }, []);
 
   useEffect(() => {
@@ -55,11 +50,7 @@ const Mypage = () => {
 
   return (
     <>
-      <Styled_Mypage.Container
-        className="container"
-        ref={containerElement}
-        $elementHeight={elementHeight}
-      >
+      <Styled_Mypage.Container className="container">
         <Styled_Layout.Div_WithSidebar>
           <MypageSidebar />
           <Styled_Mypage.Content>

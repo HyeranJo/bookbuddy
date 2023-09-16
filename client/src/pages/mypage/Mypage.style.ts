@@ -1,28 +1,10 @@
 import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
-interface MypageProps {
-  $elementHeight: number | undefined;
-}
 export const Styled_Mypage = {
-  Container: styled.div<MypageProps>`
+  Container: styled.div`
     display: flex;
     justify-content: center;
-    // 북마크 리스트 길이 포함
-    height: calc(${props => props.$elementHeight}px + 1000px);
-
-    ${DeviceQuery.bigScreen`
-      height: calc((${(props: MypageProps) =>
-        props.$elementHeight}px + 1000px) / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      height: calc((${(props: MypageProps) =>
-        props.$elementHeight}px + 1000px) / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      height: calc((${(props: MypageProps) =>
-        props.$elementHeight}px + 1000px) / ${screenScale.tablet});
-    `}
   `,
 
   Content: styled.section`
@@ -110,6 +92,17 @@ export const Styled_Mypage = {
   `,
   BookmarkList: styled.div`
     position: relative;
+    height: 380px;
+
+    ${DeviceQuery.bigScreen`
+      height: calc(380px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height: calc(380px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height: calc(380px / ${screenScale.tablet});
+    `}
   `,
   BookmarkTitle: styled.div`
     display: flex;
@@ -173,14 +166,14 @@ export const Styled_Mypage = {
       top: calc(-325px / ${screenScale.tablet});
       right: calc(370px / ${screenScale.tablet});
       padding: calc(50px / ${screenScale.tablet}) 0;
-    `}
-
+    `} // 
+    
     // 스크롤바 숨기기
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera*/
-    }
+    // -ms-overflow-style: none; /* IE and Edge */
+    // scrollbar-width: none; /* Firefox */
+    // &::-webkit-scrollbar {
+    //   display: none; /* Chrome, Safari, Opera*/
+    // }
   `,
   Book: styled.div`
     transform: rotate(-90deg);
