@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { IsOpenModalAtom, CSPatchClickedAtom } from '../../recoil/CS';
 import { DeleteCSItem } from '../../api/DeleteApi';
-import { Styled_CSDeleteModal } from './AskDeleteModal.style';
+import { Styled_CSDeleteModal } from './YesOrNoModal.style';
 import { postCSData } from '../../api/PostApi';
 import { useNavigate } from 'react-router-dom';
 import { patchCS, patchOrderStatus } from '../../api/PatchApi';
