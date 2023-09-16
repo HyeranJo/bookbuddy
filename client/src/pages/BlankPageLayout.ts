@@ -6,17 +6,6 @@ export const Styled_Layout = {
   Container: styled.div`
     display: flex;
     justify-content: center;
-    margin-bottom: 100px;
-
-    ${DeviceQuery.bigScreen`
-      margin-bottom: calc(100px / ${screenScale.bigScreen});
-    `}
-    ${DeviceQuery.desktop`
-      margin-bottom: calc(100px / ${screenScale.desktop});
-    `}
-    ${DeviceQuery.tablet`
-      margin-bottom: calc(100px / ${screenScale.tablet});
-    `}
   `,
   // 선택(sidebar 있는 경우)
   Div_WithSidebar: styled.div`
