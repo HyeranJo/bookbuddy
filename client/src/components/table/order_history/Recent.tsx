@@ -86,10 +86,10 @@ const Recent = ({ message, deleteClicked, setDeleteClicked }: RecentType) => {
         </tbody>
       </Styled_History.Table>
       <div className="pagination">
-        {orderHistory && (
+        {historyFilter && (
           <PaginationBox
             itemsCountPerPage={5}
-            totalItemsCount={orderHistory.pageInfo.totalElements}
+            totalItemsCount={historyFilter.length}
           />
         )}
       </div>
