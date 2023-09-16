@@ -2,7 +2,7 @@ import Styled_FQA from './FAQ.style';
 import { ReactComponent as ArrowDown } from '../.././icons/arrowDown.svg';
 import { ReactComponent as ArrowUp } from '../.././icons/arrowUp.svg';
 import { useState } from 'react';
-import { FAQdata } from './faqData';
+import { FAQdata } from '../../constants/faqData';
 
 const FAQ = () => {
   return (

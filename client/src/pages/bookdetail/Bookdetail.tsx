@@ -9,7 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { CartListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
-import { removeCookie, setCookie } from '../../utils/cookie';
+import { removeCookie, setCookie } from '../../utils/Cookie';
 import { BookInfo } from '../../model/BookList';
 
 const BookDetail = () => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BookList, BookMarkList, BookInfo } from '../model/BookList';
-import { getCookie } from '../utils/cookie';
+import { getCookie } from '../utils/Cookie';
 import { CartListType } from '../model/CartList';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;

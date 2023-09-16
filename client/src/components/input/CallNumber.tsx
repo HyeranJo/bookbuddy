@@ -8,7 +8,7 @@ import {
   Cstmr_Tel_Atom,
   radio_Atom,
 } from '../../recoil/Payment';
-import { AreaCode } from '../../utils/AreaCode';
+import { AreaCode } from '../../constants/AreaCode';
 
 interface CallNumberProps {
   // 휴대폰일경우
