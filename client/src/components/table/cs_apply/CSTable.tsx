@@ -149,7 +149,9 @@ const CSTable = ({ title }: AskTableProps) => {
             <tbody>
               <Styled_CSTable.Tr>
                 <Styled_CSTable.NoList colSpan={4}>
-                  등록된 문의내역이 없습니다
+                  <span style={{ color: 'var(--light-border-color)' }}>
+                    등록된 문의내역이 없습니다
+                  </span>
                 </Styled_CSTable.NoList>
               </Styled_CSTable.Tr>
             </tbody>

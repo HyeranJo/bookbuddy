@@ -83,7 +83,11 @@ const AdminFull = () => {
             })
           ) : (
             <Styled_History.Tr>
-              <td>주문 내역이 없습니다</td>
+              <Styled_History.NoList colSpan={4}>
+                <span style={{ color: 'var(--light-border-color)' }}>
+                  주문 내역이 없습니다
+                </span>
+              </Styled_History.NoList>
             </Styled_History.Tr>
           )}
         </tbody>

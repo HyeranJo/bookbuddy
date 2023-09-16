@@ -84,11 +84,11 @@ const CSAdmin = () => {
           ) : (
             <tbody>
               <Styled_CSTable.Tr>
-                <td></td>
-                <Styled_CSTable.Td className="title-body">
-                  등록된 문의내역이 없습니다
-                </Styled_CSTable.Td>
-                <td></td>
+                <Styled_CSTable.NoList className="title-body" colSpan={4}>
+                  <span style={{ color: 'var(--light-border-color)' }}>
+                    등록된 문의내역이 없습니다
+                  </span>
+                </Styled_CSTable.NoList>
               </Styled_CSTable.Tr>
             </tbody>
           )}
