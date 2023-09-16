@@ -7,7 +7,7 @@ import Input from '../../components/input/Input';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCookie } from '../../utils/Cookie';
+import { setCookie } from '../../utils/ReactCookie';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 

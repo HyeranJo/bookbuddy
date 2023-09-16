@@ -10,7 +10,7 @@ import { CartListAtom } from '../../recoil/CartItem';
 import { emailRegExp } from '../../utils/RegExp';
 import { CartListType } from '../../model/CartList';
 import { getCartList } from '../../api/GetApi';
-import { getCookie } from '../../utils/Cookie';
+import { getCookie } from '../../utils/ReactCookie';
 import PostCode from '../../components/input/PostCode';
 import { PostCodeAdrsAtom } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';

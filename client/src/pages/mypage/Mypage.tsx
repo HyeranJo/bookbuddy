@@ -9,7 +9,7 @@ import { NavScrollAtom } from '../../recoil/Sidebars';
 import { BookMarkList } from '../../model/BookList';
 import { getBookmarkmypage } from '../../api/GetApi';
 import CSTable from '../../components/table/cs_apply/CSTable';
-import { getCookie } from '../../utils/Cookie';
+import { getCookie } from '../../utils/ReactCookie';
 import Recent from '../../components/table/order_history/Recent';
 import YesOrNoModal from '../../components/modal/YesOrNoModal';
 import { CSDeleteId, ModalNameAtom } from '../../recoil/CS';

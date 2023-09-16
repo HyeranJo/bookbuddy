@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from '../utils/Cookie';
+import { getCookie } from '../utils/ReactCookie';
 import { CSPatchType } from '../model/CStype';
 import { patchOrderStatusType } from '../model/paymentType';
 
