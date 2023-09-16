@@ -45,6 +45,7 @@ const CSTable = ({ title }: AskTableProps) => {
   const titleHandler = (id: string) => {
     getCSDetail(id).then(() => {
       navigate(`/customer/detail/${id}`);
+      location.reload(); // 컴포넌트 변화 알려주기 위한 새로고침
     });
   };
 
