@@ -14,7 +14,7 @@ import Payment from './pages/payment/Payment';
 import Bookdetail from './pages/bookdetail/Bookdetail';
 import Customer from './pages/customer/Customer';
 import Search from './pages/search/Search';
-import Apply from './pages/apply/Apply';
+import Apply from './pages/customer/Apply';
 import Detail from './pages/customer/Detail';
 import PayNow from './pages/payment/PayNow';
 import CSAnswer from './pages/admin/CSAnswer';
