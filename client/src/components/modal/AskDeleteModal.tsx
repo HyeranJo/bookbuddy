@@ -1,18 +1,40 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { useRecoilState } from 'recoil';
-import { AskDeleteModal } from '../../recoil/CS';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { AskDeleteModal, CSPatchClickedAtom } from '../../recoil/CS';
 import { DeleteCSItem } from '../../api/DeleteApi';
 import { Styled_CSDeleteModal } from './AskDeleteModal.style';
+import { postCSData } from '../../api/PostApi';
+import { useNavigate } from 'react-router-dom';
+import { patchCS } from '../../api/PatchApi';
+import { CSPatchType } from '../../model/CStype';
 
 interface ApplyDeleteModalType {
-  // 1:1 문의 내역 삭제
+  message: string;
+  modalName: string;
+  // applyDelete
   id?: string;
   setDeleteClicked?: (deleteClicked: boolean) => void;
+  // applyPost
+  finalData?: {
+    title: string;
+    content: string;
+  };
+  // applyPatch
+  finalPatchData?: CSPatchType;
 }
 
-const ApplyDeleteModal = ({ id, setDeleteClicked }: ApplyDeleteModalType) => {
+const ApplyDeleteModal = ({
+  message,
+  modalName,
+  id,
+  setDeleteClicked,
+  finalData,
+  finalPatchData,
+}: ApplyDeleteModalType) => {
   const [isOpen, setIsOpen] = useRecoilState(AskDeleteModal);
+  const navigate = useNavigate();
+  const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
 
   const customStyles = {
     content: {
@@ -29,14 +51,36 @@ const ApplyDeleteModal = ({ id, setDeleteClicked }: ApplyDeleteModalType) => {
     setIsOpen(false);
   }
 
-  /** 예 클릭(삭제) 함수 */
+  /** 예 클릭 함수 */
   const clickYesHandler = () => {
     setIsOpen(false);
 
-    // 1:1 문의 내역 삭제
-    if (id && setDeleteClicked) {
-      DeleteCSItem(id);
-      setDeleteClicked(true);
+    // applyDelete 1:1 문의 내역 삭제
+    if (modalName === 'applyDelete') {
+      if (id && setDeleteClicked) {
+        DeleteCSItem(id);
+        setDeleteClicked(true);
+      }
+    }
+    // applyPost 1:1 문의 등록
+    else if (modalName === 'applyPost') {
+      finalData &&
+        postCSData(finalData).then(data =>
+          navigate(`/customer/detail/${data.id}`),
+        );
+    }
+    // applyPatch 1:1 문의 수정
+    else if (modalName === 'applyPatch') {
+      setCSPatchClicked(false);
+      finalPatchData &&
+        patchCS(finalPatchData)
+          .then(() => {
+            alert('수정한 내용이 등록되었습니다');
+            navigate(`/customer/detail/${finalPatchData.boardId}`);
+          })
+          .catch(err =>
+            alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`),
+          );
     }
   };
 
@@ -54,7 +98,7 @@ const ApplyDeleteModal = ({ id, setDeleteClicked }: ApplyDeleteModalType) => {
         contentLabel="PostCode Modal"
         appElement={document.getElementById('root') || undefined}
       >
-        <div>정말 삭제하시겠습니까?</div>
+        <div>{message}</div>
         <Styled_CSDeleteModal.Buttons>
           <button onClick={clickYesHandler}>예</button>
           <button onClick={clickNoHandler}>아니오</button>

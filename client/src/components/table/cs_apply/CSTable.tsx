@@ -167,7 +167,12 @@ const CSTable = ({ title, width }: AskTableProps) => {
           )}
         </div>
       </Styled_CSTable.Container>
-      <ApplyDeleteModal id={id} setDeleteClicked={setDeleteClicked} />
+      <ApplyDeleteModal
+        id={id}
+        setDeleteClicked={setDeleteClicked}
+        message="정말 삭제하시겠습니까?"
+        modalName="applyDelete"
+      />
     </>
   );
 };
