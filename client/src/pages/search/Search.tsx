@@ -34,7 +34,7 @@ const Search = () => {
             {isLoading ? (
               <Loading />
             ) : listData && listData.length === 0 ? (
-              <Styled_Search.Msg>검색결과를 찾지못했습니다🥲</Styled_Search.Msg>
+              <Styled_Search.Msg>검색결과를 찾지못했습니다</Styled_Search.Msg>
             ) : (
               listData &&
               listData.map((v: BookInfo) => {

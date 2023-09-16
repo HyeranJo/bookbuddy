@@ -74,7 +74,6 @@ const Cart = () => {
                 <span style={{ color: 'var(--light-border-color)' }}>
                   장바구니에 담긴 상품이 없습니다
                 </span>
-                🥲
               </div>
               <div className="submit">
                 <RedButton
