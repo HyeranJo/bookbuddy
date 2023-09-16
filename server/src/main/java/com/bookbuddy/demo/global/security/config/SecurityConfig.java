@@ -1,5 +1,7 @@
 package com.bookbuddy.demo.global.security.config;
 
+import com.bookbuddy.demo.global.security.handler.JwtAccessDeniedHandler;
+import com.bookbuddy.demo.global.security.handler.JwtAuthenticationEntryPoint;
 import com.bookbuddy.demo.global.security.jwt.JwtAuthenticationFilter;
 import com.bookbuddy.demo.global.security.jwt.JwtTokenizer;
 import com.bookbuddy.demo.global.security.jwt.JwtVerifyFilter;
@@ -77,6 +79,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .apply(new CustomFilterConfigurer());
+
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                .accessDeniedHandler(new JwtAccessDeniedHandler());
 
         http
                 .formLogin().disable()
