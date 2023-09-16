@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Styled_Sidebar } from './BookSidebar.style';
 import { SidebarIdAtom } from '../../recoil/Sidebars';
 import { useRecoilState } from 'recoil';
-import category from '../../utils/SidebarCategory';
+import category from '../../constants/SidebarCategory';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const BookSidebar = () => {

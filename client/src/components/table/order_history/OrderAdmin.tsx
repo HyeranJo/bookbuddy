@@ -1,21 +1,23 @@
-import { useRecoilValue } from 'recoil';
-import { PageAtom } from '../../../recoil/Sidebars';
 import { useEffect, useState } from 'react';
 import { getAdminOrderHistory } from '../../../api/GetApi';
-import PaginationBox from '../../pagination_box/PaginationBox';
 import { Styled_History } from './History.style';
 import {
   OrderHistoryType,
   patchOrderStatusType,
 } from '../../../model/paymentType';
 import { patchOrderStatus } from '../../../api/PatchApi';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
-const AdminFull = () => {
-  const page = useRecoilValue(PageAtom);
+const OrderAdmin = ({ width }: { width: number }) => {
   const [adminfull, setAdminFull] = useState<OrderHistoryType>();
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getAdminOrderHistory(page).then(data => setAdminFull(data));
+    getAdminOrderHistory(page, itemsCountPerPage).then(data =>
+      setAdminFull(data),
+    );
   }, [page]);
 
   const statusChangeHandler = (
@@ -36,10 +38,10 @@ const AdminFull = () => {
   };
 
   return (
-    <Styled_History.Container>
+    <Styled_History.Container width={width}>
       <Styled_History.H1>전체 주문 상태 관리</Styled_History.H1>
 
-      <Styled_History.Table>
+      <Styled_History.Table width={width}>
         <thead>
           <tr>
             <Styled_History.Th className="date">주문일자</Styled_History.Th>
@@ -83,21 +85,32 @@ const AdminFull = () => {
             })
           ) : (
             <Styled_History.Tr>
-              <td>주문 내역이 없습니다</td>
+              <Styled_History.NoList colSpan={4}>
+                <span style={{ color: 'var(--light-border-color)' }}>
+                  주문 내역이 없습니다
+                </span>
+              </Styled_History.NoList>
             </Styled_History.Tr>
           )}
         </tbody>
       </Styled_History.Table>
-      <div className="pagination">
+      <Styled_PaginationBox.Div>
         {adminfull && (
-          <PaginationBox
-            itemsCountPerPage={5}
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={itemsCountPerPage}
             totalItemsCount={adminfull.pageInfo.totalElements}
+            pageRangeDisplayed={5}
+            prevPageText={'<'}
+            nextPageText={'>'}
+            onChange={page => {
+              setPage(page);
+            }}
           />
         )}
-      </div>
+      </Styled_PaginationBox.Div>
     </Styled_History.Container>
   );
 };
 
-export default AdminFull;
+export default OrderAdmin;

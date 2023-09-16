@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+import { patchOrderStatusType } from '../model/paymentType';
 
 /** 라디오버튼값(새로입력 or 배송정보와동일) */
 export const radio_Atom = atom({
@@ -65,4 +66,10 @@ export const AllDataSelector = selector({
       email: email,
     };
   },
+});
+
+/** 삭제할 주문 정보 */
+export const DeleteOrderDataAtom = atom<patchOrderStatusType>({
+  key: 'DeleteOrderDataAtom',
+  default: { orderIds: [], orderStatus: '취소' },
 });
