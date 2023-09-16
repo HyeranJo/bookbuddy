@@ -90,7 +90,6 @@ const YesOrNoModal = ({
     }
     // orderDelete 주문 내역 삭제
     else if (modalName === 'orderDelete') {
-      console.log(deleteOrderData);
       deleteOrderData && patchOrderStatus(deleteOrderData);
       setOrderDeleteClicked && setOrderDeleteClicked(true);
     }
