@@ -72,6 +72,7 @@ const Mypage = () => {
               message="주문완료 단계의 내역만 표시됩니다"
               deleteClicked={deleteClicked}
               setDeleteClicked={setDeleteClicked}
+              width={1095}
             />
             <div
               style={{ scrollMarginTop: '240px' }}
@@ -79,7 +80,7 @@ const Mypage = () => {
                 navScrollListRef.current[1] = el;
               }}
             >
-              <Full deleteClicked={deleteClicked} />
+              <Full deleteClicked={deleteClicked} width={1095} />
             </div>
             <div
               style={{ scrollMarginTop: '240px' }}
@@ -87,7 +88,7 @@ const Mypage = () => {
                 navScrollListRef.current[2] = el;
               }}
             >
-              <CSTable title="1:1 문의 내역" />
+              <CSTable title="1:1 문의 내역" width={1095} />
             </div>
 
             <Styled_Mypage.BookmarkList>

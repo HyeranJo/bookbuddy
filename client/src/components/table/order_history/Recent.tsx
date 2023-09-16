@@ -14,9 +14,15 @@ interface RecentType {
   message?: string;
   deleteClicked: boolean;
   setDeleteClicked: (deleteClicked: boolean) => void;
+  width: number;
 }
 
-const Recent = ({ message, deleteClicked, setDeleteClicked }: RecentType) => {
+const Recent = ({
+  message,
+  deleteClicked,
+  setDeleteClicked,
+  width,
+}: RecentType) => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
   const page = useRecoilValue(PageAtom);
   const historyFilter =
@@ -36,10 +42,10 @@ const Recent = ({ message, deleteClicked, setDeleteClicked }: RecentType) => {
   };
 
   return (
-    <Styled_History.Container>
+    <Styled_History.Container width={width}>
       <Styled_History.H1>최근 주문 내역</Styled_History.H1>
       <Styled_History.MessageSpan>{message}</Styled_History.MessageSpan>
-      <Styled_History.Table>
+      <Styled_History.Table width={width}>
         <thead>
           <tr>
             <Styled_History.Th className="date">주문일자</Styled_History.Th>

@@ -14,7 +14,7 @@ const Customer = () => {
           <Styled_Customer.Title>고객센터</Styled_Customer.Title>
           <Styled_Customer.Warpper>
             <FAQ />
-            {accessToken && <AskTable title="1:1 문의내역" />}
+            {accessToken && <AskTable title="1:1 문의내역" width={1300} />}
           </Styled_Customer.Warpper>
         </Styled_Customer.Section>
       </Styled_Customer.Main>

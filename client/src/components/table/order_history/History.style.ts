@@ -1,18 +1,27 @@
 import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../../utils/Responsive';
 
+interface HistroyProps {
+  width: number;
+}
 export const Styled_History = {
-  Container: styled.div`
-    width: 1095px;
+  Container: styled.div<HistroyProps>`
+    width: ${props => props.width};
 
     ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
+      width: calc(${(props: HistroyProps) => props.width} / ${
+        screenScale.bigScreen
+      });
     `}
     ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
+      width: calc(${(props: HistroyProps) => props.width} / ${
+        screenScale.desktop
+      });
     `}
     ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
+      width: calc(${(props: HistroyProps) => props.width} / ${
+        screenScale.tablet
+      });
     `}
 
     & > .pagination {
@@ -64,25 +73,31 @@ export const Styled_History = {
       font-size: calc(var(--message-font-size) / ${screenScale.tablet});
     `}
   `,
-  Table: styled.table`
-    width: 1095px;
+  Table: styled.table<HistroyProps>`
+    width: ${props => props.width}px;
     font-size: var(--basic-font-size);
     text-align: center;
     line-height: 34px;
     border-collapse: collapse; //표 테두리 삭제
 
     ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
+      width: calc(${(props: HistroyProps) => props.width}px / ${
+        screenScale.bigScreen
+      });
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
       line-height: calc(34px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
+      width: calc(${(props: HistroyProps) => props.width}px / ${
+        screenScale.desktop
+      });
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
       line-height: calc(34px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
+      width: calc(${(props: HistroyProps) => props.width}px / ${
+        screenScale.tablet
+      });
       font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
       line-height: calc(34px / ${screenScale.tablet});
     `}

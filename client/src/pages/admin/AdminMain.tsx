@@ -8,8 +8,8 @@ const AdminMain = () => {
     <Styled_Layout.Container>
       <Styled_Layout.Div_WithNoSidebar>
         <Styled_AdminMain.Container>
-          <OrderAdmin />
-          <CSAdmin />
+          <OrderAdmin width={1300} />
+          <CSAdmin width={1300} />
         </Styled_AdminMain.Container>
       </Styled_Layout.Div_WithNoSidebar>
     </Styled_Layout.Container>

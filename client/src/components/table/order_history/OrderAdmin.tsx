@@ -10,7 +10,7 @@ import {
 } from '../../../model/paymentType';
 import { patchOrderStatus } from '../../../api/PatchApi';
 
-const AdminFull = () => {
+const OrderAdmin = ({ width }: { width: number }) => {
   const page = useRecoilValue(PageAtom);
   const [adminfull, setAdminFull] = useState<OrderHistoryType>();
 
@@ -36,10 +36,10 @@ const AdminFull = () => {
   };
 
   return (
-    <Styled_History.Container>
+    <Styled_History.Container width={width}>
       <Styled_History.H1>전체 주문 상태 관리</Styled_History.H1>
 
-      <Styled_History.Table>
+      <Styled_History.Table width={width}>
         <thead>
           <tr>
             <Styled_History.Th className="date">주문일자</Styled_History.Th>
@@ -104,4 +104,4 @@ const AdminFull = () => {
   );
 };
 
-export default AdminFull;
+export default OrderAdmin;

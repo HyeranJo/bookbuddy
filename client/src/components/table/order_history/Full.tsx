@@ -9,9 +9,10 @@ import { PageAtom } from '../../../recoil/Sidebars';
 interface FullType {
   message?: string;
   deleteClicked: boolean;
+  width: number;
 }
 
-const Full = ({ message, deleteClicked }: FullType) => {
+const Full = ({ message, deleteClicked, width }: FullType) => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
   const page = useRecoilValue(PageAtom);
 
@@ -22,10 +23,10 @@ const Full = ({ message, deleteClicked }: FullType) => {
   }, [page, deleteClicked]);
 
   return (
-    <Styled_History.Container>
+    <Styled_History.Container width={width}>
       <Styled_History.H1>전체 주문 내역</Styled_History.H1>
       <Styled_History.MessageSpan>{message}</Styled_History.MessageSpan>
-      <Styled_History.Table>
+      <Styled_History.Table width={width}>
         <thead>
           <tr>
             <Styled_History.Th className="date">주문일자</Styled_History.Th>

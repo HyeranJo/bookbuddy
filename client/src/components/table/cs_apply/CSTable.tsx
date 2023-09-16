@@ -12,9 +12,10 @@ import PaginationBox from '../../pagination_box/PaginationBox';
 
 interface AskTableProps {
   title: string;
+  width: number;
 }
 
-const CSTable = ({ title }: AskTableProps) => {
+const CSTable = ({ title, width }: AskTableProps) => {
   const navigate = useNavigate();
   const [cs, setCS] = useState<CSType>();
   const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
@@ -51,7 +52,7 @@ const CSTable = ({ title }: AskTableProps) => {
 
   return (
     <>
-      <Styled_CSTable.Container>
+      <Styled_CSTable.Container width={width}>
         <div>
           <Styled_CSTable.H1>
             <span>
@@ -74,7 +75,7 @@ const CSTable = ({ title }: AskTableProps) => {
             </div>
           </Styled_CSTable.H1>
         </div>
-        <Styled_CSTable.Table>
+        <Styled_CSTable.Table width={width}>
           <colgroup>
             <col style={{ width: '20%' }}></col>
             <col style={{ width: '50%' }}></col>

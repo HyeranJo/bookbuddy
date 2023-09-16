@@ -1,18 +1,27 @@
 import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../../utils/Responsive';
 
+interface CSTableProps {
+  width: number;
+}
 export const Styled_CSTable = {
-  Container: styled.div`
-    width: 1095px;
+  Container: styled.div<CSTableProps>`
+    width: ${props => props.width}px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
+      width: calc( ${(props: CSTableProps) => props.width}px / ${
+        screenScale.bigScreen
+      });
     `}
     ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
+      width: calc( ${(props: CSTableProps) => props.width}px / ${
+        screenScale.desktop
+      });
     `}
     ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
+      width: calc( ${(props: CSTableProps) => props.width}px / ${
+        screenScale.tablet
+      });
     `}
 
     & > .pagination {
@@ -71,8 +80,8 @@ export const Styled_CSTable = {
       font-size:calc(var(--message-font-size) / ${screenScale.tablet});
     `}
   `,
-  Table: styled.table`
-    width: 1095px;
+  Table: styled.table<CSTableProps>`
+    width: ${props => props.width}px;
     font-size: var(--basic-font-size);
     text-align: center;
     line-height: 34px;
@@ -80,17 +89,23 @@ export const Styled_CSTable = {
     table-layout: fixed; //테이블 크기 고정
 
     ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
+      width: calc(${(props: CSTableProps) => props.width}px / ${
+        screenScale.bigScreen
+      });
       font-size:calc(var(--basic-font-size) / ${screenScale.bigScreen});
       line-height: calc(34px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
+      width: calc(${(props: CSTableProps) => props.width}px / ${
+        screenScale.desktop
+      });
       font-size:calc(var(--basic-font-size) / ${screenScale.desktop});
       line-height: calc(34px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
+      width: calc(${(props: CSTableProps) => props.width}px / ${
+        screenScale.tablet
+      });
       font-size:calc(var(--basic-font-size) / ${screenScale.tablet});
       line-height: calc(34px / ${screenScale.tablet});
     `}

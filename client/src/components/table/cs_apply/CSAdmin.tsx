@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { CSType } from '../../../model/CStype';
 import { PageAtom } from '../../../recoil/Sidebars';
 
-const CSAdmin = () => {
+const CSAdmin = ({ width }: { width: number }) => {
   const navigate = useNavigate();
   const page = useRecoilValue(PageAtom);
   const [cs, setCS] = useState<CSType>();
@@ -30,13 +30,13 @@ const CSAdmin = () => {
 
   return (
     <>
-      <Styled_CSTable.Container>
+      <Styled_CSTable.Container width={width}>
         <div>
           <Styled_CSTable.H1>
             <span>1:1 문의 상태 관리</span>
           </Styled_CSTable.H1>
         </div>
-        <Styled_CSTable.Table>
+        <Styled_CSTable.Table width={width}>
           <colgroup>
             <col style={{ width: '20%' }}></col>
             <col style={{ width: '50%' }}></col>
