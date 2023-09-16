@@ -10,7 +10,6 @@ import {
   CSDeleteId,
 } from '../../../recoil/CS';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import YesOrNoModal from '../../modal/YesOrNoModal';
 import { PageAtom } from '../../../recoil/Sidebars';
 import PaginationBox from '../../pagination_box/PaginationBox';
 
