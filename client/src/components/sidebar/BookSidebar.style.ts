@@ -58,6 +58,7 @@ export const Styled_Sidebar = {
     background-color: white;
     font-size: var(--basic-font-size);
     cursor: pointer;
+    outline: none;
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});

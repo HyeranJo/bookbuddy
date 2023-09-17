@@ -4,6 +4,83 @@ const Styled_Sign = {
   Main: styled.main`
     /* max-width: 1512px; */
     width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 50px;
+
+    ${DeviceQuery.bigScreen`
+      gap: calc(50px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      gap: calc(50px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(50px / ${screenScale.tablet});
+    `}
+
+    & > section {
+      width: 627px;
+      background-color: var(--category-color);
+
+      ${DeviceQuery.bigScreen`
+        width: calc(627px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        width: calc(627px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        width: calc(627px / ${screenScale.tablet});
+      `}
+
+      & > div {
+        display: flex;
+        flex-flow: column;
+        padding: 50px;
+        gap: 20px;
+
+        ${DeviceQuery.bigScreen`
+          padding: calc(50px / ${screenScale.bigScreen});
+          gap: calc(20px / ${screenScale.bigScreen});
+        `}
+        ${DeviceQuery.desktop`
+          padding: calc(50px / ${screenScale.desktop});
+          gap: calc(20px / ${screenScale.desktop});
+        `}
+        ${DeviceQuery.tablet`
+          padding: calc(50px / ${screenScale.tablet});
+          gap: calc(20px / ${screenScale.tablet});
+        `}
+
+        & h3 {
+          font-size: var(--third-title-font-size);
+
+          ${DeviceQuery.bigScreen`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
+          `}
+          ${DeviceQuery.desktop`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});    
+          `}
+          ${DeviceQuery.tablet`
+            font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
+          `}
+        }
+
+        & p {
+          font-size: var(--basic-font-size);
+
+          ${DeviceQuery.bigScreen`
+            font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+          `}
+          ${DeviceQuery.desktop`
+            font-size: calc(var(--basic-font-size) / ${screenScale.desktop});    
+          `}
+          ${DeviceQuery.tablet`
+            font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+          `}
+        }
+      }
+    }
   `,
   Title: styled.h1`
     display: flex;

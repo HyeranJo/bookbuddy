@@ -8,7 +8,7 @@ export const Styled_CSAnswer = {
     width: 1300px;
 
     ${DeviceQuery.bigScreen`
-    width: calc(1300px / ${screenScale.bigScreen});
+      width: calc(1300px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(1300px / ${screenScale.desktop});
@@ -42,14 +42,6 @@ export const Styled_CSAnswer = {
       gap: 65px;
       margin-bottom: 200px;
 
-      & > div:not(:last-child) {
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        border-left: 5px solid var(--light-gray-color);
-      }
-
       ${DeviceQuery.bigScreen`
         width: calc(1300px / ${screenScale.bigScreen});
         gap: calc(65px / ${screenScale.bigScreen});
@@ -68,20 +60,20 @@ export const Styled_CSAnswer = {
 
       .detail {
         background-color: var(--category-color);
-        width: 1095px;
+        width: 1300px;
         min-height: 100px;
         padding: 20px 20px;
 
         ${DeviceQuery.bigScreen`
-          width: calc(1095px / ${screenScale.bigScreen});
+          width: calc(1300px / ${screenScale.bigScreen});
           padding: calc(20px / ${screenScale.bigScreen}) calc(20px / ${screenScale.bigScreen});
         `}
         ${DeviceQuery.desktop`
-          width: calc(1095px / ${screenScale.desktop});
+          width: calc(1300px / ${screenScale.desktop});
           padding: calc(20px / ${screenScale.desktop}) calc(20px / ${screenScale.desktop});
         `}
         ${DeviceQuery.tablet`
-          width: calc(1095px / ${screenScale.tablet});
+          width: calc(1300px / ${screenScale.tablet});
           padding: calc(20px / ${screenScale.tablet}) calc(20px / ${screenScale.tablet});
         `}
       }
@@ -89,49 +81,49 @@ export const Styled_CSAnswer = {
       .submit {
         display: flex;
         justify-content: end;
-        width: 1095px;
+        width: 1300px;
 
         ${DeviceQuery.bigScreen`
-        width: calc(1095px / ${screenScale.bigScreen});
+        width: calc(1300px / ${screenScale.bigScreen});
       `}
         ${DeviceQuery.desktop`
-        width: calc(1095px / ${screenScale.desktop});
+        width: calc(1300px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
-        width: calc(1095px / ${screenScale.tablet});
+        width: calc(1300px / ${screenScale.tablet});
       `}
       }
     }
 
     & .ql-container {
       height: 400px;
-      width: 1095px;
+      width: 1300px;
 
       ${DeviceQuery.bigScreen`
-        width: calc(1095px / ${screenScale.bigScreen});
+        width: calc(1300px / ${screenScale.bigScreen});
         height: calc(400px / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
-        width: calc(1095px / ${screenScale.desktop});
+        width: calc(1300px / ${screenScale.desktop});
         height: calc(400px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
-        width: calc(1095px / ${screenScale.tablet});
+        width: calc(1300px / ${screenScale.tablet});
         height: calc(400px / ${screenScale.tablet});
       `}
     }
 
     & .ql-toolbar {
-      width: 1095px;
+      width: 1300px;
 
       ${DeviceQuery.bigScreen`
-        width: calc(1095px / ${screenScale.bigScreen});
+        width: calc(1300px / ${screenScale.bigScreen});
       `}
       ${DeviceQuery.desktop`
-        width: calc(1095px / ${screenScale.desktop});
+        width: calc(1300px / ${screenScale.desktop});
       `}
       ${DeviceQuery.tablet`
-        width: calc(1095px / ${screenScale.tablet});
+        width: calc(1300px / ${screenScale.tablet});
       `}
     }
   `,

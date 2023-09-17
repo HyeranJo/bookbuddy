@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_CSTable } from './CSTable.style';
-import PaginationBox from '../../pagination_box/PaginationBox';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 import { CSType } from '../../../model/CStype';
-import { PageAtom } from '../../../recoil/Sidebars';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
-const CSAdmin = () => {
+const CSAdmin = ({ width }: { width: number }) => {
   const navigate = useNavigate();
-  const page = useRecoilValue(PageAtom);
   const [cs, setCS] = useState<CSType>();
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getCSList(page).then(data => {
+    getCSList(page, itemsCountPerPage).then(data => {
       setCS(data);
     });
   }, [page]);
@@ -30,13 +30,13 @@ const CSAdmin = () => {
 
   return (
     <>
-      <Styled_CSTable.Container>
+      <Styled_CSTable.Container width={width}>
         <div>
           <Styled_CSTable.H1>
             <span>1:1 문의 상태 관리</span>
           </Styled_CSTable.H1>
         </div>
-        <Styled_CSTable.Table>
+        <Styled_CSTable.Table width={width}>
           <colgroup>
             <col style={{ width: '20%' }}></col>
             <col style={{ width: '50%' }}></col>
@@ -84,23 +84,30 @@ const CSAdmin = () => {
           ) : (
             <tbody>
               <Styled_CSTable.Tr>
-                <td></td>
-                <Styled_CSTable.Td className="title-body">
-                  등록된 문의내역이 없습니다
-                </Styled_CSTable.Td>
-                <td></td>
+                <Styled_CSTable.NoList colSpan={4}>
+                  <span style={{ color: 'var(--light-border-color)' }}>
+                    등록된 문의내역이 없습니다
+                  </span>
+                </Styled_CSTable.NoList>
               </Styled_CSTable.Tr>
             </tbody>
           )}
         </Styled_CSTable.Table>
-        <div className="pagination">
+        <Styled_PaginationBox.Div>
           {cs && (
-            <PaginationBox
-              itemsCountPerPage={10}
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsCountPerPage}
               totalItemsCount={cs.pageInfo.totalElements}
+              pageRangeDisplayed={5}
+              prevPageText={'<'}
+              nextPageText={'>'}
+              onChange={page => {
+                setPage(page);
+              }}
             />
           )}
-        </div>
+        </Styled_PaginationBox.Div>
       </Styled_CSTable.Container>
     </>
   );

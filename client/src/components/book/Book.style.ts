@@ -128,15 +128,19 @@ const Styled_Book = {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
+    padding-right: 10px;
 
     ${DeviceQuery.bigScreen`
       width: calc(140px / ${screenScale.bigScreen});
+      padding-right: calc(10px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(140px / ${screenScale.desktop});
+      padding-right: calc(10px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       width: calc(140px / ${screenScale.tablet});
+      padding-right: calc(10px / ${screenScale.tablet});
     `}
   `,
   price: styled.p`

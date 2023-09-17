@@ -2,6 +2,11 @@ import { styled } from 'styled-components';
 import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 export const Styled_Mypage = {
+  Container: styled.div`
+    display: flex;
+    justify-content: center;
+  `,
+
   Content: styled.section`
     margin-left: 200px;
     padding-left: 53.5px;
@@ -15,6 +20,7 @@ export const Styled_Mypage = {
       padding-left: calc(53.5px / ${screenScale.bigScreen});
       padding-right: calc(53.5px / ${screenScale.bigScreen});
       padding-top: calc(22px / ${screenScale.bigScreen});
+      height: calc((100% + 350px) / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(1512px / ${screenScale.desktop});
@@ -22,14 +28,16 @@ export const Styled_Mypage = {
       padding-left: calc(53.5px / ${screenScale.desktop});
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(22px / ${screenScale.desktop});
-    `}
+      height: calc((100% + 350px) / ${screenScale.desktop});
+    `} 
     ${DeviceQuery.tablet`
       width: calc(1512px / ${screenScale.tablet});
       margin-left: calc(200px / ${screenScale.tablet});
       padding-left: calc(53.5px / ${screenScale.tablet});
       padding-right: calc(53.5px / ${screenScale.tablet});
       padding-top: calc(22px / ${screenScale.tablet});
-    `}
+      height: calc((100% + 350px) / ${screenScale.tablet});
+    `};
   `,
   Title: styled.div`
     display: flex;
@@ -84,6 +92,17 @@ export const Styled_Mypage = {
   `,
   BookmarkList: styled.div`
     position: relative;
+    height: 380px;
+
+    ${DeviceQuery.bigScreen`
+      height: calc(380px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      height: calc(380px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      height: calc(380px / ${screenScale.tablet});
+    `}
   `,
   BookmarkTitle: styled.div`
     display: flex;
@@ -147,14 +166,14 @@ export const Styled_Mypage = {
       top: calc(-325px / ${screenScale.tablet});
       right: calc(370px / ${screenScale.tablet});
       padding: calc(50px / ${screenScale.tablet}) 0;
-    `}
-
+    `} // 
+    
     // 스크롤바 숨기기
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera*/
-    }
+    // -ms-overflow-style: none; /* IE and Edge */
+    // scrollbar-width: none; /* Firefox */
+    // &::-webkit-scrollbar {
+    //   display: none; /* Chrome, Safari, Opera*/
+    // }
   `,
   Book: styled.div`
     transform: rotate(-90deg);

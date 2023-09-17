@@ -6,11 +6,26 @@ export const Styled_Book2 = {
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    & > span {
+      font-family: 'Black Ops One', cursive;
+      font-size: 100px;
+      color: var(--light-gray-color);
+
+      ${DeviceQuery.bigScreen`
+        font-size: calc(100px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        font-size: calc(100px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        font-size: calc(100px / ${screenScale.tablet});
+      `}
+    }
   `,
   wrapper: styled.div`
     width: 220px;
     height: 270px;
-    /* background-color: var(--category-color); */
 
     display: flex;
     justify-content: center;

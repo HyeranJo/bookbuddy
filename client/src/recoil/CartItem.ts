@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import { CartListType } from '../model/CartList';
-import { setCookie } from '../utils/cookie';
+import { setCookie } from '../utils/ReactCookie';
 
 /** 장바구니 선택 리스트 */
 export const CheckedListAtom = atom<string[]>({

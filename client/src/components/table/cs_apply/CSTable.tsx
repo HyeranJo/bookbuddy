@@ -4,31 +4,42 @@ import { useNavigate } from 'react-router-dom';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useEffect, useState } from 'react';
 import { CSType } from '../../../model/CStype';
-import { AskDeleteModal, CSPatchClickedAtom } from '../../../recoil/CS';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import ApplyDeleteModal from '../../modal/AskDeleteModal';
-import { PageAtom } from '../../../recoil/Sidebars';
-import PaginationBox from '../../pagination_box/PaginationBox';
+import {
+  IsOpenModalAtom,
+  CSPatchClickedAtom,
+  CSDeleteId,
+} from '../../../recoil/CS';
+import { useSetRecoilState } from 'recoil';
+import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import Pagination from 'react-js-pagination';
 
 interface AskTableProps {
   title: string;
+  width: number;
+  deleteClicked?: boolean;
+  setDeleteClicked?: (deleteClicked: boolean) => void;
 }
 
-const CSTable = ({ title }: AskTableProps) => {
+const CSTable = ({
+  title,
+  width,
+  deleteClicked,
+  setDeleteClicked,
+}: AskTableProps) => {
   const navigate = useNavigate();
   const [cs, setCS] = useState<CSType>();
-  const [deleteClicked, setDeleteClicked] = useState<boolean>(false); // 페이지 리렌더링
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
-  const setIsOpen = useSetRecoilState(AskDeleteModal);
-  const [id, setId] = useState('');
-  const page = useRecoilValue(PageAtom);
+  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
+  const setId = useSetRecoilState(CSDeleteId);
+  const [page, setPage] = useState<number>(1);
+  const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getCSList(page).then(data => {
+    getCSList(page, itemsCountPerPage).then(data => {
       setCS(data);
     });
     if (deleteClicked === true) {
-      setDeleteClicked(false);
+      setDeleteClicked && setDeleteClicked(false);
     }
   }, [deleteClicked, page]);
 
@@ -38,19 +49,20 @@ const CSTable = ({ title }: AskTableProps) => {
   };
 
   const PatchHandler = (id: string) => {
-    getCSDetail(id).then(() => navigate('/customer/apply'));
     setCSPatchClicked(true);
+    getCSDetail(id).then(() => navigate('/customer/apply'));
   };
 
   const titleHandler = (id: string) => {
     getCSDetail(id).then(() => {
       navigate(`/customer/detail/${id}`);
+      location.reload(); // 컴포넌트 변화 알려주기 위한 새로고침
     });
   };
 
   return (
     <>
-      <Styled_CSTable.Container>
+      <Styled_CSTable.Container width={width}>
         <div>
           <Styled_CSTable.H1>
             <span>
@@ -73,7 +85,7 @@ const CSTable = ({ title }: AskTableProps) => {
             </div>
           </Styled_CSTable.H1>
         </div>
-        <Styled_CSTable.Table>
+        <Styled_CSTable.Table width={width}>
           <colgroup>
             <col style={{ width: '20%' }}></col>
             <col style={{ width: '50%' }}></col>
@@ -101,22 +113,37 @@ const CSTable = ({ title }: AskTableProps) => {
                     </button>
                   </Styled_CSTable.Td>
                   <td>{v.status}</td>
-                  <td>
-                    <Styled_CSTable.DeletePatchBtn
-                      onClick={() => {
-                        deleteHandler(v.id);
-                      }}
-                    >
-                      삭제
-                    </Styled_CSTable.DeletePatchBtn>{' '}
-                    /{' '}
-                    {v.status === '답변완료' ? (
+
+                  {v.status === '답변완료' ? (
+                    <td>
                       <Styled_CSTable.DeletePatchBtn
                         style={{ color: 'var(--light-border-color)' }}
+                        onClick={() => {
+                          alert('⚠️ 답변완료된 문의글은 수정할 수 없습니다');
+                        }}
+                      >
+                        삭제
+                      </Styled_CSTable.DeletePatchBtn>{' '}
+                      /{' '}
+                      <Styled_CSTable.DeletePatchBtn
+                        style={{ color: 'var(--light-border-color)' }}
+                        onClick={() => {
+                          alert('⚠️ 답변완료된 문의글은 수정할 수 없습니다');
+                        }}
                       >
                         수정
                       </Styled_CSTable.DeletePatchBtn>
-                    ) : (
+                    </td>
+                  ) : (
+                    <td>
+                      <Styled_CSTable.DeletePatchBtn
+                        onClick={() => {
+                          deleteHandler(v.id);
+                        }}
+                      >
+                        삭제
+                      </Styled_CSTable.DeletePatchBtn>{' '}
+                      /{' '}
                       <Styled_CSTable.DeletePatchBtn
                         onClick={() => {
                           PatchHandler(v.id);
@@ -124,33 +151,39 @@ const CSTable = ({ title }: AskTableProps) => {
                       >
                         수정
                       </Styled_CSTable.DeletePatchBtn>
-                    )}
-                  </td>
+                    </td>
+                  )}
                 </Styled_CSTable.Tr>
               ))}
             </tbody>
           ) : (
             <tbody>
               <Styled_CSTable.Tr>
-                <td></td>
-                <Styled_CSTable.Td className="title-body">
-                  등록된 문의내역이 없습니다
-                </Styled_CSTable.Td>
-                <td></td>
+                <Styled_CSTable.NoList colSpan={4}>
+                  <span style={{ color: 'var(--light-border-color)' }}>
+                    등록된 문의내역이 없습니다
+                  </span>
+                </Styled_CSTable.NoList>
               </Styled_CSTable.Tr>
             </tbody>
           )}
         </Styled_CSTable.Table>
-        <div className="pagination">
+        <Styled_PaginationBox.Div>
           {cs && (
-            <PaginationBox
-              itemsCountPerPage={10}
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={itemsCountPerPage}
               totalItemsCount={cs.pageInfo.totalElements}
+              pageRangeDisplayed={5}
+              prevPageText={'<'}
+              nextPageText={'>'}
+              onChange={page => {
+                setPage(page);
+              }}
             />
           )}
-        </div>
+        </Styled_PaginationBox.Div>
       </Styled_CSTable.Container>
-      <ApplyDeleteModal id={id} setDeleteClicked={setDeleteClicked} />
     </>
   );
 };

@@ -7,7 +7,7 @@ import RedButton from '../../components/buttons/RedButton';
 import { postPaymentData } from '../../api/PostApi';
 import { PaymentType } from '../../model/paymentType';
 import { emailRegExp } from '../../utils/RegExp';
-import { getCookie, removeCookie } from '../../utils/cookie';
+import { getCookie, removeCookie } from '../../utils/ReactCookie';
 import PostCode from '../../components/input/PostCode';
 import { PostCodeAdrsAtom } from '../../recoil/PostCodeModal';
 import { useNavigate } from 'react-router-dom';

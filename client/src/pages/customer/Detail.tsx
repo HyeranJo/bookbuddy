@@ -55,7 +55,7 @@ const Detail = () => {
               </div>
             </div>
             <div>
-              <AskTable title="1:1 문의 리스트" />
+              <AskTable title="1:1 문의 리스트" width={1300} />
             </div>
           </div>
         </Styled_Detail.Container>

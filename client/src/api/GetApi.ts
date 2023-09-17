@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { BookList, BookMarkList } from '../model/BookList';
-import { getCookie } from '../utils/cookie';
+import { BookList, BookMarkList, BookInfo } from '../model/BookList';
+import { getCookie } from '../utils/ReactCookie';
 import { CartListType } from '../model/CartList';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
@@ -14,7 +14,7 @@ interface getBookListType {
 }
 
 interface getBookSearchListType {
-  setListData: (result: BookList) => void;
+  setListData: (result: BookInfo[]) => void;
   setIsLoading: (isloading: boolean) => void;
   InputValue: string;
 }
@@ -77,8 +77,8 @@ export const getBookSearchList = async ({
     const result = response.data;
     setListData(result);
     setIsLoading(false);
-  } catch (error) {
-    alert(error);
+  } catch {
+    alert('잘못된 검색입니다.');
     setIsLoading(false);
   }
 };
@@ -150,10 +150,10 @@ export const getLogout = async () => {
   }
 };
 
-export const getCSList = async (page: number) => {
+export const getCSList = async (page: number, itemsCountPerPage: number) => {
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/board/cs?page=${page}&size=10`,
+      `${SERVER_HOST}/board/cs?page=${page}&size=${itemsCountPerPage}`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,
@@ -211,10 +211,13 @@ export const getCSDetail = async (boardId: string) => {
   }
 };
 
-export const getOrderHistory = async (page: number) => {
+export const getOrderHistory = async (
+  page: number,
+  itemsCountPerPage: number,
+) => {
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/order/ship?page=${page}&size=5`,
+      `${SERVER_HOST}/order/ship?page=${page}&size=${itemsCountPerPage}`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,
@@ -230,10 +233,13 @@ export const getOrderHistory = async (page: number) => {
   }
 };
 
-export const getAdminOrderHistory = async (page: number) => {
+export const getAdminOrderHistory = async (
+  page: number,
+  itemsCountPerPage: number,
+) => {
   try {
     const response = await axios.get(
-      `${SERVER_HOST}/admin/order?page=${page}&size=10`,
+      `${SERVER_HOST}/admin/order?page=${page}&size=${itemsCountPerPage}`,
       {
         headers: {
           'ngrok-skip-browser-warning': true,

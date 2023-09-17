@@ -50,7 +50,16 @@ export const Styled_List = {
     `}
 
     & > .pagination {
-      margin: 100px 0px 200px 0px;
+      margin-top: 60px;
+      ${DeviceQuery.bigScreen`
+        margin-top: calc(60px / ${screenScale.bigScreen});
+      `}
+      ${DeviceQuery.desktop`
+        margin-top: calc(60px / ${screenScale.desktop});
+      `}
+      ${DeviceQuery.tablet`
+        margin-top: calc(60px / ${screenScale.tablet});
+      `}
     }
   `,
   Title: styled.div`

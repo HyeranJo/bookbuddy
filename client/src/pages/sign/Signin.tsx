@@ -7,7 +7,7 @@ import Input from '../../components/input/Input';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCookie } from '../../utils/cookie';
+import { setCookie } from '../../utils/ReactCookie';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -73,6 +73,7 @@ const Signin = () => {
     <>
       <Styled_Sign.Main>
         <Styled_Sign.Title>로그인</Styled_Sign.Title>
+
         <Styled_Signin.Wrapper>
           <Styled_Signin.Form onSubmit={handleSubmit(onSubmit)}>
             <Styled_Signin.InputContainer>
@@ -145,6 +146,32 @@ const Signin = () => {
             <Styled_Signin.Signup>회원가입하기</Styled_Signin.Signup>
           </Link>
         </Styled_Signin.TextWrapper>
+        <section>
+          <div>
+            <div>
+              <h3>admin 계정 체험하기(관리자)</h3>
+              <p>
+                id: admin@gmail.com
+                <br />
+                password: admin12345!
+              </p>
+            </div>
+            <div>
+              <h3>test 계정 체험하기(일반 소비자)</h3>
+              <p>
+                id: test@gmail.com
+                <br />
+                password: test12345!
+              </p>
+            </div>
+            <div>
+              <p>
+                ⚠️ admin 계정 체험시 본인의 것이 아닌 다른 계정의 주문, 문의글
+                상태를 변경하지 않도록 주의 바랍니다
+              </p>
+            </div>
+          </div>
+        </section>
       </Styled_Sign.Main>
     </>
   );

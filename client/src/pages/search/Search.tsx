@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Styled_Search from './Search.style';
 import BookSidebar from '../../components/sidebar/BookSidebar';
 import Book from '../../components/book/Book';
-import { BookInfo, BookList } from '../../model/BookList';
+import { BookInfo } from '../../model/BookList';
 import Loading from '../../components/loading/Loading';
 import { getBookSearchList } from '../../api/GetApi';
 import { useRecoilValue } from 'recoil';
@@ -10,9 +10,10 @@ import SearchBar from '../../components/search/SearchBar';
 import { SearchValue } from '../../recoil/SearchValue';
 
 const Search = () => {
-  const [listData, setListData] = useState<BookList>();
+  const [listData, setListData] = useState<BookInfo[]>();
   const [isLoading, setIsLoading] = useState(false);
   const InputValue = useRecoilValue(SearchValue);
+  console.log(listData);
 
   useEffect(() => {
     getBookSearchList({ setListData, setIsLoading, InputValue });
@@ -32,11 +33,11 @@ const Search = () => {
           <Styled_Search.Books>
             {isLoading ? (
               <Loading />
-            ) : listData && listData.data.length === 0 ? (
-              <Styled_Search.Msg>검색결과를 찾지못했습니다🥲</Styled_Search.Msg>
+            ) : listData && listData.length === 0 ? (
+              <Styled_Search.Msg>검색결과를 찾지못했습니다</Styled_Search.Msg>
             ) : (
               listData &&
-              listData.data.map((v: BookInfo) => {
+              listData.map((v: BookInfo) => {
                 return (
                   <Book
                     key={v.id}
@@ -44,6 +45,7 @@ const Search = () => {
                     name={v.name}
                     price={v.price}
                     image={v.imgSrc}
+                    bookmark={v.bookmark}
                   />
                 );
               })
