@@ -22,7 +22,8 @@ export const Styled_Footer = {
     & > div {
       width: 1512px;
       display: flex;
-      justify-content: end;
+      /* justify-content: end; */
+      justify-content: center;
       padding: 0 50px;
 
       ${DeviceQuery.bigScreen`
