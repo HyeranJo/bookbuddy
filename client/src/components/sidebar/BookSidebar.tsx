@@ -16,7 +16,7 @@ const BookSidebar = () => {
 
   useEffect(() => {
     // 페이지 첫 진입시 (다른 페이지에선 focus out)
-    if (location.pathname === '/list') {
+    if (location.pathname === '/') {
       // clickedList index(sidebarId - 1) => true 나머지 => false
       setClickedList(
         Array(categoryKeys.length)
