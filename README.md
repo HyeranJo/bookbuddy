@@ -39,10 +39,16 @@
 
 # 📝 문서
 
+### [API 명세서](https://purple-broker-064.notion.site/API-1ebe8150df5143b88a61a7d582995d95?pvs=4)
+
 ### ERD
 ![image](https://github.com/HyeranJo/bookbuddy/assets/124690890/beca0263-75ba-4e2a-b884-f72b014141e5)
 
-### 기술 스택
-![BookBuddy (1)](https://github.com/HyeranJo/bookbuddy/assets/120698922/fd4ca92a-c7f1-459f-9465-d999cd4b62ba)
+<br />
 
+# 기술 스택
+<br />
+<div align="center">
+  <img src="https://github.com/HyeranJo/bookbuddy/assets/120698922/fd4ca92a-c7f1-459f-9465-d999cd4b62ba.png" width="800">
+</div>
 
