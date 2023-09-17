@@ -56,7 +56,7 @@ const BookSidebar = () => {
                 key={i}
                 onClick={() => {
                   onClickHandler(categoryValues[i]);
-                  navigate('/list');
+                  navigate('/');
                 }}
                 style={
                   clickedList
@@ -76,7 +76,7 @@ const BookSidebar = () => {
                 key={i}
                 onClick={() => {
                   onClickHandler(categoryValues[i]);
-                  navigate('/list');
+                  navigate('/');
                 }}
               >
                 {v}
