@@ -18,8 +18,8 @@
   <thead>
     <tr>
       <th width="200">조혜란</th>
-      <th width="200">이도현</th>
-      <th width="200"">최연동</th>
+      <th width="300">이도현</th>
+      <th width="300"">최연동</th>
     </tr>
   </thead>
   <tbody>
@@ -30,8 +30,16 @@
     </tr>
     <tr>
       <th>백엔드 전반</th>
-      <th></th>
+      <th>로그인, 회원가입, Search 외<br />프론트엔드 전반</th>
       <th>로그인, 회원가입, Search</th>
     </tr>
   </thead>
 </table>
+<br />
+
+# 📝 문서
+
+### ERD
+![image](https://github.com/HyeranJo/bookbuddy/assets/124690890/beca0263-75ba-4e2a-b884-f72b014141e5)
+
+
