@@ -46,7 +46,7 @@
 
 <br />
 
-# 기술 스택
+# 🔧 기술 스택
 <br />
 <div align="center">
   <img src="https://github.com/HyeranJo/bookbuddy/assets/120698922/fd4ca92a-c7f1-459f-9465-d999cd4b62ba.png" width="800">
