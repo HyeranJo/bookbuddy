@@ -10,7 +10,7 @@
 <br />
 
 # 🔗 배포 주소
-[bookbuddy](https://bookbuddyy.netlify.app/)
+[bookbuddy](https://bookbuddy-cook.netlify.app/)
 <br /><br /><br /><br />
 
 # 👨‍👩‍👧‍👧 팀원 소개
@@ -39,7 +39,16 @@
 
 # 📝 문서
 
+### [API 명세서](https://purple-broker-064.notion.site/API-1ebe8150df5143b88a61a7d582995d95?pvs=4)
+
 ### ERD
 ![image](https://github.com/HyeranJo/bookbuddy/assets/124690890/beca0263-75ba-4e2a-b884-f72b014141e5)
 
+<br />
+
+# 🔧 기술 스택
+<br />
+<div align="center">
+  <img src="https://github.com/HyeranJo/bookbuddy/assets/120698922/fd4ca92a-c7f1-459f-9465-d999cd4b62ba.png" width="800">
+</div>
 
