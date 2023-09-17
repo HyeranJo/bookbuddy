@@ -21,6 +21,7 @@ import CSAnswer from './pages/admin/CSAnswer';
 import AdminMain from './pages/admin/AdminMain';
 import NewBooks from './pages/book_list/NewBooks';
 import BestSeller from './pages/book_list/BestSeller';
+import BookMarks from './pages/book_list/BookMarks';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,6 @@ const router = createBrowserRouter([
       { index: true, element: <List /> },
       { path: '/signup', element: <Signup /> },
       { path: '/signin', element: <Signin /> },
-      { path: '/list', element: <List /> },
       { path: '/book/:id', element: <Bookdetail /> },
       { path: '/cart', element: <Cart /> },
       { path: '/ship', element: <Payment /> },
@@ -45,6 +45,7 @@ const router = createBrowserRouter([
       { path: '/admin', element: <AdminMain /> },
       { path: '/new', element: <NewBooks /> },
       { path: '/bestseller', element: <BestSeller /> },
+      { path: '/bookmarks', element: <BookMarks /> },
     ],
   },
 ]);

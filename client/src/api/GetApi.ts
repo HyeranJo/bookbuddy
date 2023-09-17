@@ -104,23 +104,7 @@ export const getBookDetail = async (
   }
 };
 
-export const getBookmarkList = async (
-  setBookmarkList: (bookmarkList: BookList) => void,
-) => {
-  try {
-    const response = await axios.get(`${SERVER_HOST}/bookmark`, {
-      headers: {
-        'ngrok-skip-browser-warning': true,
-        Authorization: getCookie('accessToken'),
-      },
-    });
-    setBookmarkList(response.data);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getBookmarkmypage = async (
+export const getBookmark = async (
   setBookmarkList: (bookmarkList: BookMarkList[]) => void,
 ) => {
   try {

@@ -10,7 +10,7 @@ const Nav = () => {
         <Styled_Nav.SpanDiv>
           <Styled_Nav.Span
             onClick={() => {
-              navigate('/list');
+              navigate('/');
             }}
           >
             도서목록

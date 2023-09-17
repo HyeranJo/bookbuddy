@@ -64,6 +64,12 @@ export const Styled_Detail = {
           min-height: calc(250px / ${screenScale.tablet});
           padding: calc(20px / ${screenScale.tablet}) calc(70px / ${screenScale.tablet});
         `}
+
+        & > pre {
+          white-space: pre-wrap;
+          word-break: break-all;
+          overflow: auto;
+        }
       }
     }
   `,

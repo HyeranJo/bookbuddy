@@ -44,15 +44,19 @@ const Apply = () => {
             navigate(`/customer/detail/${finalPatchData.boardId}`);
           })
           .catch(err =>
-            alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`),
+            alert(
+              `수정한 내용이 등록되지 않았습니다. 글자수를 줄여보세요. ${err}`,
+            ),
           );
       setIsYesClicked(false);
       setCSPatchClicked(false);
     } else if (csPatchClicked === false && isYesClicked === true) {
       finalData &&
-        postCSData(finalData).then(data =>
-          navigate(`/customer/detail/${data.id}`),
-        );
+        postCSData(finalData)
+          .then(data => navigate(`/customer/detail/${data.id}`))
+          .catch(err =>
+            alert(`내용이 등록되지 않았습니다. 글자수를 줄여보세요. ${err}`),
+          );
       setIsYesClicked(false);
     }
   }, [isYesClicked]);
@@ -126,6 +130,14 @@ const Apply = () => {
                 <label htmlFor="apply_body">내용 ►</label>
                 <div id="apply_body">
                   <Editor />
+                  <div id="message">
+                    {
+                      '(글자 효과를 적용하면 기준보다 적게 입력해야 할 수도 있습니다)'
+                    }
+                  </div>
+                  <div id="counter">
+                    {characterCount > 100 ? 100 : characterCount}/100
+                  </div>
                   <div className="submit">
                     {csPatchClicked === true ? (
                       <RedButton name="수정하기" onClick={patchHandler} />
