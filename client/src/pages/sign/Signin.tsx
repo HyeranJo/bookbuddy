@@ -7,7 +7,7 @@ import Input from '../../components/input/Input';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCookie } from '../../utils/cookie';
+import { setCookie } from '../../utils/ReactCookie';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 
@@ -149,7 +149,7 @@ const Signin = () => {
         <section>
           <div>
             <div>
-              <h4>admin 계정 체험하기(관리자)</h4>
+              <h3>admin 계정 체험하기(관리자)</h3>
               <p>
                 id: admin@gmail.com
                 <br />
@@ -157,7 +157,7 @@ const Signin = () => {
               </p>
             </div>
             <div>
-              <h4>test 계정 체험하기(일반 소비자)</h4>
+              <h3>test 계정 체험하기(일반 소비자)</h3>
               <p>
                 id: test@gmail.com
                 <br />

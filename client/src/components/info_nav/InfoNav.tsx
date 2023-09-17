@@ -1,7 +1,7 @@
 import React from 'react';
 import { Styled_InfoNav } from './InfoNav.style';
 import { Link, useNavigate } from 'react-router-dom';
-import { getCookie, removeCookie } from '../../utils/cookie';
+import { getCookie, removeCookie } from '../../utils/ReactCookie';
 import { getLogout } from '../../api/GetApi';
 
 const InfoNav = () => {

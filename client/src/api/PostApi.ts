@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PaymentType } from '../model/paymentType';
-import { getCookie } from '../utils/cookie';
+import { getCookie } from '../utils/ReactCookie';
 import { PostCSType, PostCSAnswerType } from '../model/CStype';
 
 const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;

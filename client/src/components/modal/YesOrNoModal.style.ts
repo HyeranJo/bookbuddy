@@ -8,7 +8,8 @@ export const Styled_CSDeleteModal = {
     margin-top: 20px;
 
     & > button {
-      width: 50px;
+      width: 60px;
+      cursor: pointer;
     }
   `,
 };

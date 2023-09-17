@@ -24,7 +24,7 @@ const Styled_FQA = {
     `}
   `,
   Question: styled.div`
-    width: 1095px;
+    width: 1300px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -32,34 +32,37 @@ const Styled_FQA = {
     padding-left: 25px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
+      width: calc(1300px / ${screenScale.bigScreen});
       height: calc(50px / ${screenScale.bigScreen});
-      padding-left: calc(25px / ${screenScale.bigScreen})
+      padding: calc(25px / ${screenScale.bigScreen})
     `}
     ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
+      width: calc(1300px / ${screenScale.desktop});
       height: calc(50px / ${screenScale.desktop});
-      padding-left: calc(25px / ${screenScale.desktop})
+      padding: calc(25px / ${screenScale.desktop})
     `}
     ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
+      width: calc(1300px / ${screenScale.tablet});
       height: calc(50px / ${screenScale.tablet});
-      padding-left: calc(25px / ${screenScale.tablet})
+      padding: calc(25px / ${screenScale.tablet})
     `}
   `,
   QuestionTitle: styled.h2`
     font-size: var(--third-title-font-size);
-    width: 1000px;
+    width: 1300px;
+    display: flex;
+    justify-content: space-between;
+
     ${DeviceQuery.bigScreen`
-      width: calc(1000px / ${screenScale.bigScreen});
+      width: calc(1300px / ${screenScale.bigScreen});
       font-size: calc(var(--third-title-font-size) / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1000px / ${screenScale.desktop});
+      width: calc(1300px / ${screenScale.desktop});
       font-size: calc(var(--third-title-font-size) / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(1000px / ${screenScale.tablet});
+      width: calc(1300px / ${screenScale.tablet});
       font-size: calc(var(--third-title-font-size) / ${screenScale.tablet});
     `}
   `,
@@ -67,16 +70,16 @@ const Styled_FQA = {
     cursor: pointer;
   `,
   AnswerContainer: styled.div`
-    width: 1095px;
+    width: 1300px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1095px / ${screenScale.bigScreen});
+      width: calc(1300px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1095px / ${screenScale.desktop});
+      width: calc(1300px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(1095px / ${screenScale.tablet});
+      width: calc(1300px / ${screenScale.tablet});
     `}
   `,
   Answer: styled.div`

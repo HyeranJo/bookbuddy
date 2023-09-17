@@ -9,18 +9,19 @@ export const Styled_PaginationBox = {
       align-items: center;
       list-style: none;
       gap: 30px;
+      margin-top: 10px;
 
       ${DeviceQuery.bigScreen`
         gap: calc(30px / ${screenScale.bigScreen});
-        mergin: calc(100px / ${screenScale.bigScreen}) 0px calc(200px / ${screenScale.bigScreen}) 0px ;
+        margin-top: calc(10px / ${screenScale.bigScreen}) 0px calc(200px / ${screenScale.bigScreen}) 0px ;
       `}
       ${DeviceQuery.desktop`
         gap: calc(30px / ${screenScale.desktop});
-        mergin: calc(100px / ${screenScale.desktop}) 0px calc(200px / ${screenScale.desktop}) 0px ;
+        margin-top: calc(10px / ${screenScale.desktop}) 0px calc(200px / ${screenScale.desktop}) 0px ;
       `}
       ${DeviceQuery.tablet`
         gap: calc(30px / ${screenScale.tablet});
-        mergin: calc(100px / ${screenScale.tablet}) 0px calc(200px / ${screenScale.tablet}) 0px ;
+        margin-top: calc(10px / ${screenScale.tablet}) 0px calc(200px / ${screenScale.tablet}) 0px ;
       `}
 
       li {

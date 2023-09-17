@@ -56,7 +56,7 @@ const Cart = () => {
   // ==================================== HTML ====================================
   return (
     <Styled_Layout.Container>
-      <Styled_Order.Div>
+      <Styled_Layout.Div_WithNoSidebar>
         <Styled_Order.Content>
           {orderList.length !== 0 ? (
             <>
@@ -74,7 +74,6 @@ const Cart = () => {
                 <span style={{ color: 'var(--light-border-color)' }}>
                   장바구니에 담긴 상품이 없습니다
                 </span>
-                🥲
               </div>
               <div className="submit">
                 <RedButton
@@ -87,7 +86,7 @@ const Cart = () => {
             </>
           )}
         </Styled_Order.Content>
-      </Styled_Order.Div>
+      </Styled_Layout.Div_WithNoSidebar>
     </Styled_Layout.Container>
   );
 };

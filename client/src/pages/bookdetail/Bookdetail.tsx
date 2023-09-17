@@ -9,7 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { CartListAtom, QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
-import { removeCookie, setCookie } from '../../utils/cookie';
+import { removeCookie, setCookie } from '../../utils/ReactCookie';
 import { BookInfo } from '../../model/BookList';
 
 const BookDetail = () => {
@@ -68,35 +68,19 @@ const BookDetail = () => {
 
   const payNowHandler = async () => {
     if (accessToken) {
-      const cartData = cartList.filter(v => {
-        return v.book.id === bookId;
+      // 도서 데이터 얻어서 쿠키에 저장
+      setCookie('PayNow', JSON.stringify(detailInfo), {
+        path: '/',
       });
 
-      if (
-        // 장바구니에 도서가 없는 경우
-        cartData.length === 0
-      ) {
-        // 도서 데이터 얻어서 쿠키에 저장
-
-        setCookie('PayNow', JSON.stringify(detailInfo), {
-          path: '/',
-        });
-
-        bookId &&
-          setQuantityList([
-            ...quantityList,
-            {
-              id: bookId,
-              quantity: 1,
-            },
-          ]);
-      } else {
-        // 장바구니에 이미 도서가 있는 경우
-        // 장바구니 리스트에서 추출 후 쿠키 저장
-        setCookie('PayNow', JSON.stringify(cartData[0]), {
-          path: '/',
-        });
-      }
+      bookId &&
+        setQuantityList([
+          ...quantityList,
+          {
+            id: bookId,
+            quantity: 1,
+          },
+        ]);
       navigate('/paynow/ship');
     } else {
       alert('⚠️ 먼저 로그인해 주세요');

@@ -6,15 +6,19 @@ export const Styled_Apply = {
     display: flex;
     flex-flow: column;
     width: 1300px;
+    height: 800px;
 
     ${DeviceQuery.bigScreen`
       width: calc(1300px / ${screenScale.bigScreen});
+      height: calc(800px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       width: calc(1300px / ${screenScale.desktop});
+      height: calc(800px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       width: calc(1300px / ${screenScale.tablet});
+      height: calc(800px / ${screenScale.tablet});
     `}
 
     .header {
