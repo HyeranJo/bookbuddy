@@ -8,31 +8,31 @@ export const Styled_Mypage = {
   `,
 
   Content: styled.section`
-    margin-left: 200px;
+    margin-left: 215px;
     padding-left: 53.5px;
     padding-right: 53.5px;
     padding-top: 22px;
-    width: 1512px;
+    width: 1297px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1512px / ${screenScale.bigScreen});
-      margin-left: calc(200px / ${screenScale.bigScreen});
+      width: calc(1297px / ${screenScale.bigScreen});
+      margin-left: calc(215px / ${screenScale.bigScreen});
       padding-left: calc(53.5px / ${screenScale.bigScreen});
       padding-right: calc(53.5px / ${screenScale.bigScreen});
       padding-top: calc(22px / ${screenScale.bigScreen});
       height: calc((100% + 350px) / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1512px / ${screenScale.desktop});
-      margin-left: calc(200px / ${screenScale.desktop});
+      width: calc(1297px / ${screenScale.desktop});
+      margin-left: calc(215px / ${screenScale.desktop});
       padding-left: calc(53.5px / ${screenScale.desktop});
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(22px / ${screenScale.desktop});
       height: calc((100% + 350px) / ${screenScale.desktop});
     `} 
     ${DeviceQuery.tablet`
-      width: calc(1512px / ${screenScale.tablet});
-      margin-left: calc(200px / ${screenScale.tablet});
+      width: calc(1297px / ${screenScale.tablet});
+      margin-left: calc(215px / ${screenScale.tablet});
       padding-left: calc(53.5px / ${screenScale.tablet});
       padding-right: calc(53.5px / ${screenScale.tablet});
       padding-top: calc(22px / ${screenScale.tablet});

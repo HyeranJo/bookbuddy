@@ -1,34 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_History } from './History.style';
-import { OrderHistoryType } from '../../../model/paymentType';
-import { useSetRecoilState } from 'recoil';
+import {
+  OrderHistoryType,
+  patchOrderStatusType,
+} from '../../../model/paymentType';
+import { useRecoilState } from 'recoil';
 import { getOrderHistory } from '../../../api/GetApi';
-import { IsOpenModalAtom, ModalNameAtom } from '../../../recoil/CS';
-import { DeleteOrderDataAtom } from '../../../recoil/Payment';
 import Pagination from 'react-js-pagination';
 import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
+import YesOrNo from '../../modal/YesOrNo';
+import { isYesClickedAtom } from '../../../recoil/Modal';
+import { patchOrderStatus } from '../../../api/PatchApi';
 
 interface RecentType {
   message?: string;
-  deleteClicked: boolean;
-  setDeleteClicked: (deleteClicked: boolean) => void;
   width: number;
+  setDeleteClicked: (deleteClicked: boolean) => void;
+  deleteClicked: boolean;
 }
 
 const Recent = ({
   message,
-  deleteClicked,
-  setDeleteClicked,
   width,
+  setDeleteClicked,
+  deleteClicked,
 }: RecentType) => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
   const historyFilter =
     orderHistory && orderHistory.data.filter(v => v.status === '주문완료');
-  const setDeleteOrderData = useSetRecoilState(DeleteOrderDataAtom);
-  const setModalName = useSetRecoilState(ModalNameAtom);
-  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
+  const [deleteOrderData, setDeleteOrderData] =
+    useState<patchOrderStatusType>();
   const [page, setPage] = useState<number>(1);
   const itemsCountPerPage = 5;
+  const [isYesClicked, setIsYesClicked] = useRecoilState(isYesClickedAtom);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     getOrderHistory(page, itemsCountPerPage).then((data: OrderHistoryType) => {
@@ -37,9 +42,16 @@ const Recent = ({
     });
   }, [page, deleteClicked]);
 
+  useEffect(() => {
+    if (isYesClicked === true) {
+      deleteOrderData && patchOrderStatus(deleteOrderData);
+      setDeleteClicked(true);
+      setIsYesClicked(false);
+    }
+  }, [isYesClicked]);
+
   const OrderDeleteHandler = (id: string) => {
     setDeleteOrderData({ orderIds: [id], orderStatus: '취소' });
-    setModalName('orderDelete');
     setIsOpen(true);
   };
 
@@ -112,6 +124,11 @@ const Recent = ({
           )}
         </Styled_PaginationBox.Div>
       </Styled_History.Container>
+      <YesOrNo
+        message="정말 취소하시겠습니까?"
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
     </>
   );
 };

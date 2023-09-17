@@ -18,12 +18,12 @@ export const Styled_Sidebar = {
   `,
 
   Div: styled.div`
-    width: 200px;
+    width: 215px;
     /* height: calc(100vh - 133px - 58px); */
     height: 100vh;
     background-color: white;
 
-    border-right: 2px solid var(--light-gray-color);
+    border-right: 1px solid var(--light-gray-color);
 
     display: flex;
     flex-flow: column;
@@ -35,19 +35,19 @@ export const Styled_Sidebar = {
 
     ${DeviceQuery.bigScreen`
       font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
-      width: calc(200px / ${screenScale.bigScreen});
+      width: calc(215px / ${screenScale.bigScreen});
       gap: calc(20px / ${screenScale.bigScreen});
       padding-top: calc(44px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
       font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
-      width: calc(200px / ${screenScale.desktop});
+      width: calc(215px / ${screenScale.desktop});
       gap: calc(20px / ${screenScale.desktop});
       padding-top: calc(44px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
       font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
-      width: calc(200px / ${screenScale.tablet});
+      width: calc(215px / ${screenScale.tablet});
       gap: calc(20px / ${screenScale.tablet});
       padding-top: calc(44px / ${screenScale.tablet});
     `}
