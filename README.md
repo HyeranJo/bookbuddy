@@ -10,7 +10,7 @@
 <br />
 
 # 🔗 배포 주소
-[bookbuddy](https://bookbuddyy.netlify.app/)
+[bookbuddy](https://bookbuddy-cook.netlify.app/)
 <br /><br /><br /><br />
 
 # 👨‍👩‍👧‍👧 팀원 소개
