@@ -13,7 +13,6 @@ const Search = () => {
   const [listData, setListData] = useState<BookInfo[]>();
   const [isLoading, setIsLoading] = useState(false);
   const InputValue = useRecoilValue(SearchValue);
-  console.log(listData);
 
   useEffect(() => {
     getBookSearchList({ setListData, setIsLoading, InputValue });

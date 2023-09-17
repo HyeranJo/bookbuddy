@@ -11,9 +11,6 @@ import { getBookmarkmypage } from '../../api/GetApi';
 import CSTable from '../../components/table/cs_apply/CSTable';
 import { getCookie } from '../../utils/ReactCookie';
 import Recent from '../../components/table/order_history/Recent';
-import YesOrNoModal from '../../components/modal/YesOrNoModal';
-import { CSDeleteId, ModalNameAtom } from '../../recoil/CS';
-import { DeleteOrderDataAtom } from '../../recoil/Payment';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
@@ -22,9 +19,6 @@ const Mypage = () => {
   const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
   const [userName, setUserName] = useState('');
   const [deleteClicked, setDeleteClicked] = useState(false);
-  const deleteId = useRecoilValue(CSDeleteId);
-  const modalName = useRecoilValue(ModalNameAtom);
-  const deleteOrderData = useRecoilValue(DeleteOrderDataAtom);
 
   useEffect(() => {
     getBookmarkmypage(setBookmarkList);
@@ -67,9 +61,9 @@ const Mypage = () => {
 
             <Styled_Mypage.Detail className="detail">
               <Recent
-                message="주문완료 단계의 내역만 표시됩니다"
-                deleteClicked={deleteClicked}
                 setDeleteClicked={setDeleteClicked}
+                deleteClicked={deleteClicked}
+                message="주문완료 단계의 내역만 표시됩니다"
                 width={1095}
               />
               <div
@@ -89,8 +83,8 @@ const Mypage = () => {
                 <CSTable
                   title="1:1 문의 내역"
                   width={1095}
-                  deleteClicked={deleteClicked}
                   setDeleteClicked={setDeleteClicked}
+                  deleteClicked={deleteClicked}
                 />
               </div>
 
@@ -128,21 +122,6 @@ const Mypage = () => {
           </Styled_Mypage.Content>
         </Styled_Layout.Div_WithSidebar>
       </Styled_Mypage.Container>
-      {modalName === 'orderDelete' ? (
-        <YesOrNoModal
-          message="정말 삭제하시겠습니까?"
-          modalName="orderDelete"
-          deleteOrderData={deleteOrderData}
-          setOrderDeleteClicked={setDeleteClicked}
-        />
-      ) : (
-        <YesOrNoModal
-          id={deleteId}
-          setDeleteClicked={setDeleteClicked}
-          message="정말 삭제하시겠습니까?"
-          modalName="applyDelete"
-        />
-      )}
     </>
   );
 };

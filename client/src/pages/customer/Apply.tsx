@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Apply } from './Apply.styled';
 import RedButton from '../../components/buttons/RedButton';
@@ -8,26 +8,54 @@ import {
   CSPatchClickedAtom,
   CSDetailAtom,
   CharacterCount,
-  IsOpenModalAtom,
 } from '../../recoil/CS';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import YesOrNoModal from '../../components/modal/YesOrNoModal';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { CSPatchType } from '../../model/CStype';
+import YesOrNo from '../../components/modal/YesOrNo';
+import { patchCS } from '../../api/PatchApi';
+import { useNavigate } from 'react-router-dom';
+import { isYesClickedAtom } from '../../recoil/Modal';
+import { postCSData } from '../../api/PostApi';
 
 const Apply = () => {
   const value = useRecoilValue(CSContentAtom);
   const [title, setTitle] = useState('');
-  const csPatchClicked = useRecoilValue(CSPatchClickedAtom);
+  const [csPatchClicked, setCSPatchClicked] =
+    useRecoilState(CSPatchClickedAtom);
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
   const [patchValue, setPatchValue] = useState(csDetail.question.title);
   const characterCount = useRecoilValue(CharacterCount);
-  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
   const [finalData, setFinalData] = useState<{
     boardId?: string;
     title: string;
     content: string;
   }>();
   const [finalPatchData, setFinalPatchData] = useState<CSPatchType>();
+  const navigate = useNavigate();
+  const [isYesClicked, setIsYesClicked] = useRecoilState(isYesClickedAtom);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (csPatchClicked === true && isYesClicked === true) {
+      finalPatchData &&
+        patchCS(finalPatchData)
+          .then(() => {
+            alert('수정한 내용이 등록되었습니다');
+            navigate(`/customer/detail/${finalPatchData.boardId}`);
+          })
+          .catch(err =>
+            alert(`수정한 내용이 등록되지 않았습니다. error : ${err}`),
+          );
+      setIsYesClicked(false);
+      setCSPatchClicked(false);
+    } else if (csPatchClicked === false && isYesClicked === true) {
+      finalData &&
+        postCSData(finalData).then(data =>
+          navigate(`/customer/detail/${data.id}`),
+        );
+      setIsYesClicked(false);
+    }
+  }, [isYesClicked]);
 
   const submitHandler = () => {
     if (characterCount <= 5) {
@@ -112,16 +140,16 @@ const Apply = () => {
         </Styled_Layout.Div_WithNoSidebar>
       </Styled_Layout.Container>
       {csPatchClicked ? (
-        <YesOrNoModal
+        <YesOrNo
           message="수정한 내용을 등록하시겠습니까?"
-          modalName="applyPatch"
-          finalPatchData={finalPatchData}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
         />
       ) : (
-        <YesOrNoModal
+        <YesOrNo
           message="작성한 내용을 등록하시겠습니까?"
-          modalName="applyPost"
-          finalData={finalData}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
         />
       )}
     </>
