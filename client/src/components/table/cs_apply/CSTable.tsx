@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useEffect, useState } from 'react';
 import { CSType } from '../../../model/CStype';
-import { CSPatchClickedAtom } from '../../../recoil/CS';
+import { CSDetailAtom, CSPatchClickedAtom } from '../../../recoil/CS';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
 import Pagination from 'react-js-pagination';
@@ -33,6 +33,7 @@ const CSTable = ({
   const [page, setPage] = useState<number>(1);
   const itemsCountPerPage = 10;
   const [isYesClicked, setIsYesClicked] = useRecoilState(isYesClickedAtom);
+  const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
 
   useEffect(() => {
     getCSList(page, itemsCountPerPage).then(data => {
@@ -57,8 +58,11 @@ const CSTable = ({
   };
 
   const PatchHandler = (id: string) => {
-    setCSPatchClicked(true);
-    getCSDetail(id).then(() => navigate('/customer/apply'));
+    getCSDetail(id).then(data => {
+      setCSDetail(data);
+      setCSPatchClicked(true);
+      navigate('/customer/apply');
+    });
   };
 
   const titleHandler = (id: string) => {
