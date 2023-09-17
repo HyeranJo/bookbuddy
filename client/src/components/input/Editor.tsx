@@ -74,6 +74,19 @@ const Editor = () => {
     setValue('');
   }, [patchValue]);
 
+  const CharacterLimit = (event: any) => {
+    if (unprivilegedEditor.getLength() > 98 && event.key !== 'Backspace') {
+      event.preventDefault();
+      if (event.key.match(/[^0-9]/g)) {
+        if (csPatchClicked === true) {
+          setPatchValue(patchValue.replace(/.....$/, ''));
+        } else {
+          setValue(value.replace(/.....$/, ''));
+        }
+      }
+    }
+  };
+
   // const imageHandler = () => {
   //   const input = document.createElement('input');
   //   input.setAttribute('type', 'file');
@@ -126,6 +139,7 @@ const Editor = () => {
       modules={modules}
       formats={formats}
       ref={quillRef}
+      onKeyDown={CharacterLimit}
     />
   );
 };

@@ -116,6 +116,37 @@ export const Styled_Apply = {
           font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
         `}
       }
+      #counter {
+        display: flex;
+        justify-content: end;
+        font-size: var(--basic-font-size);
+
+        ${DeviceQuery.bigScreen`
+          font-size: calc(var(--basic-font-size) / ${screenScale.bigScreen});
+        `}
+        ${DeviceQuery.desktop`
+          font-size: calc(var(--basic-font-size) / ${screenScale.desktop});
+        `}
+        ${DeviceQuery.tablet`
+          font-size: calc(var(--basic-font-size) / ${screenScale.tablet});
+        `}
+      }
+      #message {
+        display: flex;
+        justify-content: end;
+        font-size: var(--message-font-size);
+        color: var(--light-border-color);
+
+        ${DeviceQuery.bigScreen`
+          font-size: calc(var(--message-font-size) / ${screenScale.bigScreen});
+        `}
+        ${DeviceQuery.desktop`
+          font-size: calc(var(--message-font-size) / ${screenScale.desktop});
+        `}
+        ${DeviceQuery.tablet`
+          font-size: calc(var(--message-font-size) / ${screenScale.tablet});
+        `}
+      }
       .submit {
         display: flex;
         justify-content: end;
