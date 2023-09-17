@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/cart/**").hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/order/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/order/**").hasRole("USER")
-                .antMatchers(HttpMethod.POST, "/board/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/board/**").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.GET,"/bookmark/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST,"/bookmark/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/admin/cs/**").hasRole("ADMIN")
@@ -112,7 +112,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://bookbuddyy.netlify.app"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:3000",
+                "https://bookbuddyy.netlify.app",
+                "https://bookbuddy-cook.netlify.app"));
 
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.addExposedHeader("Authorization");
