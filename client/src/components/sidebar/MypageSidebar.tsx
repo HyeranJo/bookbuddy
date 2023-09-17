@@ -1,9 +1,11 @@
 import { Styled_MypageSidebar } from './MypageSidebar.style';
 import { useSetRecoilState } from 'recoil';
 import { NavScrollAtom } from '../../recoil/Sidebars';
+import { useNavigate } from 'react-router-dom';
 
 const MypageSidebar = () => {
   const setNavScroll = useSetRecoilState(NavScrollAtom);
+  const navigate = useNavigate();
 
   const handleScrollView = (e: any) => {
     const menu = e.target.innerText;
@@ -13,7 +15,7 @@ const MypageSidebar = () => {
       '1:1 문의 내역': 2,
       '북마크 리스트': 3,
     };
-
+    navigate('/mypage');
     setNavScroll(category[menu]);
   };
 
