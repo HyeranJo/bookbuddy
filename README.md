@@ -42,4 +42,6 @@
 ### ERD
 ![image](https://github.com/HyeranJo/bookbuddy/assets/124690890/beca0263-75ba-4e2a-b884-f72b014141e5)
 
+### 기술스택
+![BookBuddy](https://github.com/HyeranJo/bookbuddy/assets/120698922/7a5e2b41-3438-4bb9-bd91-f4fb02ab755d)
 
