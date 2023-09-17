@@ -7,10 +7,12 @@ import Book from '../../components/book/Book';
 import { useRecoilValue } from 'recoil';
 import { NavScrollAtom } from '../../recoil/Sidebars';
 import { BookMarkList } from '../../model/BookList';
-import { getBookmarkmypage } from '../../api/GetApi';
+import { getBookmark } from '../../api/GetApi';
 import CSTable from '../../components/table/cs_apply/CSTable';
 import { getCookie } from '../../utils/ReactCookie';
 import Recent from '../../components/table/order_history/Recent';
+import RedButton from '../../components/buttons/RedButton';
+import { useNavigate } from 'react-router-dom';
 
 const Mypage = () => {
   const bookmarkScrollRef = useRef<HTMLDivElement>(null);
@@ -19,9 +21,10 @@ const Mypage = () => {
   const [bookmarkList, setBookmarkList] = useState<BookMarkList[]>([]);
   const [userName, setUserName] = useState('');
   const [deleteClicked, setDeleteClicked] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getBookmarkmypage(setBookmarkList);
+    getBookmark(setBookmarkList);
     setUserName(getCookie('userInfo').email.split('@')[0]);
   }, []);
 
@@ -98,6 +101,14 @@ const Mypage = () => {
                   <Styled_Mypage.H2 className="bookmarklist">
                     북마크 리스트
                   </Styled_Mypage.H2>
+                  <RedButton
+                    name="전체보기"
+                    height={30}
+                    width={100}
+                    onClick={() => {
+                      navigate('/bookmarks');
+                    }}
+                  />
                 </Styled_Mypage.BookmarkTitle>
                 <Styled_Mypage.Books ref={bookmarkScrollRef} className="books">
                   {bookmarkList

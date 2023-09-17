@@ -106,7 +106,7 @@ export const Styled_Mypage = {
   `,
   BookmarkTitle: styled.div`
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     width: 1095px;
 
     ${DeviceQuery.bigScreen`
