@@ -152,6 +152,89 @@
 </table>
 <br />
 
+## 장바구니 & 결제
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">장바구니</th>
+      <th width="50%">일반결제 & 바로결제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>장바구니 및 결제 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+## 마이페이지
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">마이페이지</th>
+      <th width="50%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+### 마이페이지 기능
+
+<table>
+  <thead>
+    <tr>
+      <th width="25%">최근주문내역</th>
+      <th width="25%">전체주문내역</th>
+      <th width="25%">1:1문의내역</th>
+      <th width="25%">북마크리스트</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+       <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>마이페이지 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
 
 
 
