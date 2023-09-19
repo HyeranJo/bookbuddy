@@ -59,14 +59,14 @@
 <table>
   <thead>
     <tr>
-      <th width="50%">카테고리</th>
-      <th width="50%">정렬</th>
+      <th width="50%">도서 리스트</th>
+      <th width="50%">신간 & 베스트셀러</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/80191fb2-2d3e-48e8-8c43-29ef3ab6286a"></th>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/9c52f85e-f91e-4761-b079-cbfd94a3cf7b"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/c8904061-1d7b-49b2-99de-b9d64c4821a6"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/5f6f78d3-e63d-41c0-8022-4b5187524e9b"></th>
     </tr>
   </tbody>
 </table>
@@ -74,20 +74,18 @@
 <table>
   <thead>
     <tr>
-      <th width="50%">신간 & 베스트셀러</th>
-      <th width="50%"></th>
+      <th>Home 시연</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/a9218d94-9e7c-49fd-900c-737404b7d919"></th>
-      <th><img src=""></th>
+      <th><img src="" width="80%"></th>
     </tr>
   </tbody>
 </table>
 <br />
 
-## HOME
+## 로그인, 회원가입
 
 <table>
   <thead>
@@ -104,6 +102,56 @@
   </tbody>
 </table>
 <br />
+
+## 도서 상세
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">도서상세</th>
+      <th width="50%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/44cb6a5f-ae86-48d3-afdc-a11bcfa01410"></th>
+      <th></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+## 북마크
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">마이페이지-북마크리스트</th>
+      <th width="50%">북마크페이지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/0ca067c6-f2f3-4703-8e4c-8970cee7352e"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/a87279cc-ec88-4b4f-bc7e-4000f016a5f1"></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>북마크 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/81351137-89fb-4402-955b-f90ea521904b" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
 
 
 
