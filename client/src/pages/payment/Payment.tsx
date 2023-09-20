@@ -74,30 +74,33 @@ const Payment = () => {
       alert('이메일 형식에 맞게 작성해주세요');
     } else if (
       allData.cstmrMobile.length !== 11 ||
-      (allData.cstmrTel && allData.cstmrTel.length < 9) ||
+      (allData.cstmrTel &&
+        allData.cstmrTel.length < 9 &&
+        allData.cstmrTel.length > 3) ||
       allData.shipMobile.length !== 11 ||
-      (allData.shipTel && allData.shipTel.length < 9)
+      (allData.shipTel &&
+        allData.shipTel.length < 9 &&
+        allData.shipTel.length > 3)
     ) {
       alert('전화번호 전체를 입력해주세요');
     } else {
-      console.log(allData);
       // api 전송
-      // let data = {
-      //   orderBooks: booksToPay.map(v => {
-      //     return { bookId: v.book.id, quantity: v.quantity };
-      //   }),
-      //   ...allDataCopy,
-      // };
+      let data = {
+        orderBooks: booksToPay.map(v => {
+          return { bookId: v.book.id, quantity: v.quantity };
+        }),
+        ...allDataCopy,
+      };
 
-      // postPaymentData(data) // api 전송
-      //   .then((data: any) => {
-      //     alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
-      //     booksToPay.map(v => DeleteCartItem(v.id));
-      //     navigate('/');
-      //   })
-      //   .catch(error => {
-      //     console.log('An error occurred:', error);
-      //   });
+      postPaymentData(data) // api 전송
+        .then((data: any) => {
+          alert(`주문 완료되었습니다. 주문번호는 ${data.id} 입니다`);
+          booksToPay.map(v => DeleteCartItem(v.id));
+          navigate('/');
+        })
+        .catch(error => {
+          console.log('An error occurred:', error);
+        });
     }
   };
 
