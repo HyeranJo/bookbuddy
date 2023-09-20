@@ -6,18 +6,18 @@ import { getBookDetail, getCartList } from '../../api/GetApi';
 import { postCartItem, postBookMark } from '../../api/PostApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { CartListAtom, QuantityListAtom } from '../../recoil/CartItem';
+import { QuantityListAtom } from '../../recoil/CartItem';
 import BookMarkIcon from '../../icons/BookMarkIcon';
 import { AccessTokenAtom } from '../../recoil/UserInfo';
 import { removeCookie, setCookie } from '../../utils/ReactCookie';
 import { BookInfo } from '../../model/BookList';
+import { CartListType } from '../../model/CartList';
 
 const BookDetail = () => {
   const bookIdParams = useParams();
   const bookId = bookIdParams.id;
   const [detailInfo, setDetailInfo] = useState<BookInfo>();
   const [isClick, setIsClick] = useState(detailInfo?.bookmark);
-  const [cartList, setCartList] = useRecoilState(CartListAtom);
   const [quantityList, setQuantityList] = useRecoilState(QuantityListAtom);
   const accessToken = useRecoilValue(AccessTokenAtom);
   const navigate = useNavigate();
@@ -26,10 +26,6 @@ const BookDetail = () => {
     getBookDetail(setDetailInfo, bookId).then(detailInfoData => {
       setIsClick(detailInfoData.bookmark);
     });
-
-    if (accessToken) {
-      getCartList(setCartList);
-    }
 
     // 쿠키 삭제
     // 결제 페이지에서 결제 하지 않고 페이지 이동 후 다시 바로결제 시도시
@@ -43,24 +39,26 @@ const BookDetail = () => {
 
   const addCartHandler = () => {
     if (accessToken) {
-      if (
-        cartList.filter(v => {
-          return v.book.id === bookId;
-        }).length > 0
-      ) {
-        alert('이미 추가한 상품입니다');
-      } else {
-        postCartItem(detailInfo);
-        bookId &&
-          setQuantityList([
-            ...quantityList,
-            {
-              id: bookId,
-              quantity: 1,
-            },
-          ]);
-        alert('상품을 장바구니에 추가했습니다');
-      }
+      getCartList().then((data: CartListType[]) => {
+        if (
+          data.filter(v => {
+            return v.book.id === bookId;
+          }).length > 0
+        ) {
+          alert('이미 추가한 상품입니다');
+        } else {
+          postCartItem(detailInfo);
+          bookId &&
+            setQuantityList([
+              ...quantityList,
+              {
+                id: bookId,
+                quantity: 1,
+              },
+            ]);
+          alert('상품을 장바구니에 추가했습니다');
+        }
+      });
     } else {
       alert('⚠️ 먼저 로그인해 주세요');
     }
