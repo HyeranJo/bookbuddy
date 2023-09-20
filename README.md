@@ -157,14 +157,13 @@
 <table>
   <thead>
     <tr>
-      <th width="50%">마이페이지</th>
-      <th width="50%"></th>
+      <th width="50%" colSpan='2'>마이페이지</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/83a0c23f-c2c3-4a3e-8077-d95fe1b47963"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/3d96454a-19e7-4774-af39-a4e52813bef4"></th>
     </tr>
   </tbody>
 </table>
