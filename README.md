@@ -308,7 +308,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/228fe23e-cc5f-43d2-ab31-5f8c1deebab9"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/d99d93ff-477b-40cd-b71e-ce4375f94dfa"></th>
       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/1a889c7e-c6ba-48f5-bac6-611d2864f356"></th>
     </tr>
   </tbody>
@@ -323,7 +323,7 @@
   <tbody>
     <tr>
       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/a7e6ee6a-d8a1-49c1-91ec-bae61195a75f"></th>
-      <th><img src=""></th>
+      <th></th>
     </tr>
   </tbody>
 </table>
