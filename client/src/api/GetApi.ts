@@ -47,7 +47,7 @@ export const getBookList = async (
 };
 
 export const getCartList = async (
-  setCartList: (cartList: CartListType[]) => void,
+  setCartList?: (cartList: CartListType[]) => void,
 ) => {
   try {
     const response = await axios.get(`${SERVER_HOST}/cart`, {
@@ -56,7 +56,8 @@ export const getCartList = async (
         Authorization: getCookie('accessToken'),
       },
     });
-    setCartList(response.data);
+    setCartList && setCartList(response.data);
+    return response.data;
   } catch (err) {
     console.log(err);
     throw err;
