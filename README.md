@@ -30,7 +30,7 @@
     </tr>
     <tr>
       <th>백엔드 전반</th>
-      <th>로그인, 회원가입, Search 외<br />프론트엔드 전반</th>
+      <th>프론트엔드 전반<br />(로그인, 회원가입, Search 외)</th>
       <th>로그인, 회원가입, Search</th>
     </tr>
   </tbody>
@@ -132,8 +132,8 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/c68ee0d5-0123-4e67-b19c-948681f96452"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/c7647941-a52e-4fa6-810d-49c2b88d6b70"></th>
     </tr>
   </tbody>
 </table>
@@ -157,14 +157,13 @@
 <table>
   <thead>
     <tr>
-      <th width="50%">마이페이지</th>
-      <th width="50%"></th>
+      <th width="50%" colSpan='2'>마이페이지</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/c06f16eb-4637-4958-a740-5d0bb4c4f631"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7d71425e-8a96-436e-8d26-7c4232e7c040"></th>
     </tr>
   </tbody>
 </table>
@@ -182,10 +181,10 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
-       <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/097405a7-b799-4564-a1f8-fc155c70aa34"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/9ab0ed8c-3d8b-4ad1-b659-0a20b879cdb8"></th>
+       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/aee8bf52-8ad6-4aa4-8488-989cfc763aae"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/1dda156f-09dc-4613-aeed-d780a61fd558"></th>
     </tr>
   </tbody>
 </table>
@@ -202,8 +201,8 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/ade985b7-cabe-45c5-bdda-b48ee5fd606a"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/dc225956-0716-492f-8cf5-38f9ff34ab97"></th>
     </tr>
   </tbody>
 </table>
@@ -233,8 +232,8 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7270456d-5c53-4e25-bad1-9b661ba5bbb2"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7e8c82ca-006f-4f0a-b9b1-648348c3b5b1"></th>
     </tr>
   </tbody>
 </table>
@@ -247,8 +246,8 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/03119e37-5366-4fd0-b880-85134c140675"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/6775aa04-1e8c-45fe-984f-aaecc5ef19d2"></th>
     </tr>
   </tbody>
 </table>
@@ -309,8 +308,8 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/d99d93ff-477b-40cd-b71e-ce4375f94dfa"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/1a889c7e-c6ba-48f5-bac6-611d2864f356"></th>
     </tr>
   </tbody>
 </table>
@@ -323,8 +322,8 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src=""></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/a7e6ee6a-d8a1-49c1-91ec-bae61195a75f"></th>
+      <th></th>
     </tr>
   </tbody>
 </table>
