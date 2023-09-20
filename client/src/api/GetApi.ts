@@ -217,6 +217,28 @@ export const getOrderHistory = async (
   }
 };
 
+export const getAdminCSList = async (
+  page: number,
+  itemsCountPerPage: number,
+) => {
+  try {
+    const response = await axios.get(
+      `${SERVER_HOST}/admin/cs?page=${page}&size=${itemsCountPerPage}`,
+      {
+        headers: {
+          'ngrok-skip-browser-warning': true,
+          Authorization: getCookie('accessToken'),
+        },
+      },
+    );
+    const result = response.data;
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const getAdminOrderHistory = async (
   page: number,
   itemsCountPerPage: number,
