@@ -298,3 +298,48 @@
 </table>
 <br />
 
+## admin (관리자계정)
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">배송상태관리</th>
+      <th width="50%">1:1문의상태관리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th width="50%">1:1문의 답글 작성</th>
+      <th width="50%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>admin 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
