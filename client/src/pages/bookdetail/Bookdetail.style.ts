@@ -8,39 +8,40 @@ const Styled_Bookdetail = {
   Wrapper: styled.section`
     width: 100%;
     /* height: calc(100vh - 260px); */
-    margin-left: 200px;
+    margin-left: 215px;
     margin-top: 44px;
+    width: 1297px;
 
     ${DeviceQuery.bigScreen`
-      margin-left: calc(200px / ${screenScale.bigScreen});
+      margin-left: calc(215px / ${screenScale.bigScreen});
       margin-top: calc(44px / ${screenScale.bigScreen});
+      width: calc(1297px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      margin-left: calc(200px / ${screenScale.desktop});
+      margin-left: calc(215px / ${screenScale.desktop});
       margin-top: calc(44px / ${screenScale.desktop});
+      width: calc(1297px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      margin-left: calc(200px / ${screenScale.tablet});
+      margin-left: calc(215px / ${screenScale.tablet});
       margin-top: calc(44px / ${screenScale.tablet});
+      width: calc(1297px / ${screenScale.tablet});
     `}
   `,
   Container: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 100px;
+
     gap: 120px;
 
-    ${DeviceQuery.bigScreen`
-      margin-left: calc(100px / ${screenScale.bigScreen});
+    ${DeviceQuery.bigScreen` 
       gap: calc(120px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      margin-left: calc(100px / ${screenScale.desktop});
       gap: calc(120px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      margin-left: calc(100px / ${screenScale.tablet});
       gap: calc(120px / ${screenScale.tablet});
     `}
   `,

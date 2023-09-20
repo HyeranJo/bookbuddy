@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_CSAnswer } from './CSAnswer.style';
-import {
-  CSContentAtom,
-  CSDetailAtom,
-  CharacterCount,
-  IsOpenModalAtom,
-} from '../../recoil/CS';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { CSContentAtom, CSDetailAtom, CharacterCount } from '../../recoil/CS';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { getCSDetail } from '../../api/GetApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import Editor from '../../components/input/Editor';
 import RedButton from '../../components/buttons/RedButton';
 import { postCSAnswerData } from '../../api/PostApi';
-import YesOrNoModal from '../../components/modal/YesOrNoModal';
 import { PostCSAnswerType } from '../../model/CStype';
+import YesOrNo from '../../components/modal/YesOrNo';
+import { isYesClickedAtom } from '../../recoil/Modal';
 
 const CSAnswer = () => {
   const params = useParams();
@@ -23,8 +19,9 @@ const CSAnswer = () => {
   const value = useRecoilValue(CSContentAtom);
   const navigate = useNavigate();
   const characterCount = useRecoilValue(CharacterCount);
-  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
   const [finalAnswerData, setFinalAnswerData] = useState<PostCSAnswerType>();
+  const [isYesClicked, setIsYesClicked] = useRecoilState(isYesClickedAtom);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (boardId) {
@@ -33,6 +30,16 @@ const CSAnswer = () => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (isYesClicked === true) {
+      finalAnswerData &&
+        postCSAnswerData(finalAnswerData).then(data =>
+          navigate(`/customer/detail/${data.boardId}`),
+        );
+      setIsYesClicked(false);
+    }
+  }, [isYesClicked]);
 
   const submitHandler = () => {
     if (characterCount > 5) {
@@ -81,10 +88,10 @@ const CSAnswer = () => {
           </Styled_CSAnswer.Container>
         </Styled_Layout.Div_WithNoSidebar>
       </Styled_Layout.Container>
-      <YesOrNoModal
+      <YesOrNo
         message="등록 후에는 수정, 삭제할 수 없습니다. 작성한 내용을 등록하시겠습니까?"
-        modalName="adminAnswerPost"
-        finalAnswerData={finalAnswerData}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
       />
     </>
   );

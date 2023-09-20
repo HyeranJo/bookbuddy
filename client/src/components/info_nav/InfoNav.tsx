@@ -1,11 +1,10 @@
 import React from 'react';
 import { Styled_InfoNav } from './InfoNav.style';
 import { Link, useNavigate } from 'react-router-dom';
-import { getCookie, removeCookie } from '../../utils/ReactCookie';
+import { removeCookie } from '../../utils/ReactCookie';
 import { getLogout } from '../../api/GetApi';
 
 const InfoNav = () => {
-  const userInfo = getCookie('userInfo');
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -23,7 +22,7 @@ const InfoNav = () => {
     <>
       <Styled_InfoNav.Div>
         <Link
-          to={`/mypage/${userInfo?.email}`}
+          to={'/mypage'}
           style={{ textDecorationLine: 'none', color: 'black' }}
         >
           <Styled_InfoNav.Span>마이페이지</Styled_InfoNav.Span>

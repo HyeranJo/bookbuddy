@@ -21,29 +21,29 @@ export const Styled_List = {
     `}
   `,
   Content: styled.section`
-    width: 1312px;
-    margin-left: 200px;
+    width: 1297px;
+    margin-left: 215px;
     padding-left: 53.5px;
     padding-right: 53.5px;
     padding-top: 44px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1312px / ${screenScale.bigScreen});
-      margin-left: calc(200px / ${screenScale.bigScreen});
+      width: calc(1297px / ${screenScale.bigScreen});
+      margin-left: calc(215px / ${screenScale.bigScreen});
       padding-left: calc(53.5px / ${screenScale.bigScreen});
       padding-right: calc(53.5px / ${screenScale.bigScreen});
       padding-top: calc(44px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1312px / ${screenScale.desktop});
-      margin-left: calc(200px / ${screenScale.desktop});
+      width: calc(1297px / ${screenScale.desktop});
+      margin-left: calc(215px / ${screenScale.desktop});
       padding-left: calc(53.5px / ${screenScale.desktop});
       padding-right: calc(53.5px / ${screenScale.desktop});
       padding-top: calc(44px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(1312px / ${screenScale.tablet});
-      margin-left: calc(200px / ${screenScale.tablet});
+      width: calc(1297px / ${screenScale.tablet});
+      margin-left: calc(215px / ${screenScale.tablet});
       padding-left: calc(53.5px / ${screenScale.tablet});
       padding-right: calc(53.5px / ${screenScale.tablet});
       padding-top: calc(44px / ${screenScale.tablet});
@@ -132,7 +132,7 @@ export const Styled_List = {
   `,
   BookGroup: styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: start;
     padding: 0 37px;
 
     ${DeviceQuery.bigScreen`
@@ -149,17 +149,16 @@ export const Styled_List = {
     display: flex;
     flex-wrap: wrap;
 
-    /* gap: 36px; */
-    gap: 70px;
+    gap: 66px;
 
     ${DeviceQuery.bigScreen`
-      gap: calc(70px / ${screenScale.bigScreen});
+      gap: calc(66px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      gap: calc(70px / ${screenScale.desktop});
+      gap: calc(66px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      gap: calc(70px / ${screenScale.tablet});
+      gap: calc(66px / ${screenScale.tablet});
     `}
   `,
 };
