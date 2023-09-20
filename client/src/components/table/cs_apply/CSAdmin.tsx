@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Styled_CSTable } from './CSTable.style';
-import { getCSDetail, getCSList } from '../../../api/GetApi';
+import { getAdminCSList, getCSDetail } from '../../../api/GetApi';
 import { useNavigate } from 'react-router-dom';
 import { CSType } from '../../../model/CStype';
 import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
@@ -13,7 +13,7 @@ const CSAdmin = ({ width }: { width: number }) => {
   const itemsCountPerPage = 10;
 
   useEffect(() => {
-    getCSList(page, itemsCountPerPage).then(data => {
+    getAdminCSList(page, itemsCountPerPage).then(data => {
       setCS(data);
     });
   }, [page]);
