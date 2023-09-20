@@ -79,7 +79,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="" width="80%"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/764379bd-4517-40e3-81c2-81b6a49e0bcf" width="80%"></th>
     </tr>
   </tbody>
 </table>
@@ -108,14 +108,12 @@
 <table>
   <thead>
     <tr>
-      <th width="50%">도서상세</th>
-      <th width="50%"></th>
+      <th>도서상세</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/44cb6a5f-ae86-48d3-afdc-a11bcfa01410"></th>
-      <th></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/44cb6a5f-ae86-48d3-afdc-a11bcfa01410" width="80%"></th>
     </tr>
   </tbody>
 </table>
@@ -141,12 +139,25 @@
 <table>
   <thead>
     <tr>
-      <th>장바구니 및 결제 시연</th>
+      <th>장바구니 시연</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src="" width="80%"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/3c302589-0bb0-47b8-b71f-4fab5e496a63" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+<table>
+  <thead>
+    <tr>
+      <th>결제 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/345433aa-e8b4-40fa-bca9-9fd654e82f1e" width="80%"></th>
     </tr>
   </tbody>
 </table>
@@ -215,7 +226,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="" width="80%"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/bf96e6a7-48d0-41ec-88f3-5332f0f128a8" width="80%"></th>
     </tr>
   </tbody>
 </table>
@@ -232,7 +243,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7270456d-5c53-4e25-bad1-9b661ba5bbb2"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/ce39fe72-4ec9-4381-ab98-fded38da4b49"></th>
       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7e8c82ca-006f-4f0a-b9b1-648348c3b5b1"></th>
     </tr>
   </tbody>
@@ -241,13 +252,13 @@
   <thead>
     <tr>
       <th width="50%">문의 수정</th>
-      <th width="50%">문의 삭제</th>
+      <th width="50%">문의 상세보기</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/03119e37-5366-4fd0-b880-85134c140675"></th>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/6775aa04-1e8c-45fe-984f-aaecc5ef19d2"></th>
+      <th><img src=""></th>
     </tr>
   </tbody>
 </table>
