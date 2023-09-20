@@ -232,7 +232,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7270456d-5c53-4e25-bad1-9b661ba5bbb2"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/ce39fe72-4ec9-4381-ab98-fded38da4b49"></th>
       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/7e8c82ca-006f-4f0a-b9b1-648348c3b5b1"></th>
     </tr>
   </tbody>
