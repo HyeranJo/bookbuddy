@@ -49,7 +49,7 @@ public class BoardController {
 
         return new ResponseEntity(mapper.boardToBoardResponseDto(board), HttpStatus.OK);
     }
-    /* 회원의 주문 내역 */
+    /* 회원의 게시판 내역 */
     @GetMapping
     public ResponseEntity getBoardsByUser(@RequestParam("page") @Positive int page,
                                           @RequestParam("size") @Positive int size,
