@@ -121,37 +121,6 @@
 </table>
 <br />
 
-## 북마크
-
-<table>
-  <thead>
-    <tr>
-      <th width="50%">마이페이지-북마크리스트</th>
-      <th width="50%">북마크페이지</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/0ca067c6-f2f3-4703-8e4c-8970cee7352e"></th>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/a87279cc-ec88-4b4f-bc7e-4000f016a5f1"></th>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th>북마크 시연</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/81351137-89fb-4402-955b-f90ea521904b" width="80%"></th>
-    </tr>
-  </tbody>
-</table>
-<br />
-
 ## 장바구니 & 결제
 
 <table>
@@ -220,11 +189,29 @@
     </tr>
   </tbody>
 </table>
+<br />
+
+## 최근, 전체 주문내역
 
 <table>
   <thead>
     <tr>
-      <th>마이페이지 시연</th>
+      <th width="50%">마이페이지 - 최근주문내역</th>
+      <th width="50%">마이페이지 - 전체주문내역</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>주문내역 시연</th>
     </tr>
   </thead>
   <tbody>
@@ -235,6 +222,124 @@
 </table>
 <br />
 
+## 1:1 문의
 
+<table>
+  <thead>
+    <tr>
+      <th width="50%">마이페이지 - 1:1문의</th>
+      <th width="50%">문의 작성</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th width="50%">문의 수정</th>
+      <th width="50%">문의 삭제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
 
+<table>
+  <thead>
+    <tr>
+      <th>1:1문의 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+## 북마크
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">마이페이지-북마크리스트</th>
+      <th width="50%">북마크페이지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/0ca067c6-f2f3-4703-8e4c-8970cee7352e"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/a87279cc-ec88-4b4f-bc7e-4000f016a5f1"></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>북마크 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/81351137-89fb-4402-955b-f90ea521904b" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+## admin (관리자계정)
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">배송상태관리</th>
+      <th width="50%">1:1문의상태관리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th width="50%">1:1문의 답글 작성</th>
+      <th width="50%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>admin 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
 
