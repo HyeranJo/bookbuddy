@@ -183,6 +183,91 @@
 </table>
 <br />
 
+
+## 최근, 전체 주문내역
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">마이페이지 - 최근주문내역</th>
+      <th width="50%">마이페이지 - 전체주문내역</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>주문내역 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+## 1:1 문의
+
+<table>
+  <thead>
+    <tr>
+      <th width="50%">마이페이지 - 1:1문의</th>
+      <th width="50%">문의 작성</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th width="50%">문의 수정</th>
+      <th width="50%">문의 삭제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src=""></th>
+      <th><img src=""></th>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>1:1문의 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+
+
+
+
+
+
+
+
 ## 마이페이지
 
 <table>
@@ -220,21 +305,3 @@
     </tr>
   </tbody>
 </table>
-
-<table>
-  <thead>
-    <tr>
-      <th>마이페이지 시연</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th><img src="" width="80%"></th>
-    </tr>
-  </tbody>
-</table>
-<br />
-
-
-
-
