@@ -13,7 +13,7 @@ const Header = () => {
     <>
       <Styled_Header.Container>
         <Styled_Header.Div>
-          <Link to={'/list'}>
+          <Link to={'/'}>
             <Logo />
           </Link>
           <Styled_Header.Menu>

@@ -4,20 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { getCSDetail, getCSList } from '../../../api/GetApi';
 import { useEffect, useState } from 'react';
 import { CSType } from '../../../model/CStype';
-import {
-  IsOpenModalAtom,
-  CSPatchClickedAtom,
-  CSDeleteId,
-} from '../../../recoil/CS';
-import { useSetRecoilState } from 'recoil';
+import { CSDetailAtom, CSPatchClickedAtom } from '../../../recoil/CS';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Styled_PaginationBox } from '../../pagination_box/PaginationBox.style';
 import Pagination from 'react-js-pagination';
+import YesOrNo from '../../modal/YesOrNo';
+import { isYesClickedAtom } from '../../../recoil/Modal';
+import { DeleteCSItem } from '../../../api/DeleteApi';
 
 interface AskTableProps {
   title: string;
   width: number;
-  deleteClicked?: boolean;
-  setDeleteClicked?: (deleteClicked: boolean) => void;
+  deleteClicked: boolean;
+  setDeleteClicked: (deleteClicked: boolean) => void;
 }
 
 const CSTable = ({
@@ -29,10 +28,12 @@ const CSTable = ({
   const navigate = useNavigate();
   const [cs, setCS] = useState<CSType>();
   const setCSPatchClicked = useSetRecoilState(CSPatchClickedAtom);
-  const setIsOpen = useSetRecoilState(IsOpenModalAtom);
-  const setId = useSetRecoilState(CSDeleteId);
+  const [isOpen, setIsOpen] = useState(false);
+  const [id, setId] = useState<string>();
   const [page, setPage] = useState<number>(1);
   const itemsCountPerPage = 10;
+  const [isYesClicked, setIsYesClicked] = useRecoilState(isYesClickedAtom);
+  const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
 
   useEffect(() => {
     getCSList(page, itemsCountPerPage).then(data => {
@@ -43,14 +44,25 @@ const CSTable = ({
     }
   }, [deleteClicked, page]);
 
+  useEffect(() => {
+    if (isYesClicked === true && id) {
+      DeleteCSItem(id);
+      setDeleteClicked(true);
+      setIsYesClicked(false);
+    }
+  }, [isYesClicked]);
+
   const deleteHandler = (id: string) => {
     setIsOpen(true);
     setId(id);
   };
 
   const PatchHandler = (id: string) => {
-    setCSPatchClicked(true);
-    getCSDetail(id).then(() => navigate('/customer/apply'));
+    getCSDetail(id).then(data => {
+      setCSDetail(data);
+      setCSPatchClicked(true);
+      navigate('/customer/apply');
+    });
   };
 
   const titleHandler = (id: string) => {
@@ -184,6 +196,11 @@ const CSTable = ({
           )}
         </Styled_PaginationBox.Div>
       </Styled_CSTable.Container>
+      <YesOrNo
+        message="정말 삭제하시겠습니까?"
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
     </>
   );
 };

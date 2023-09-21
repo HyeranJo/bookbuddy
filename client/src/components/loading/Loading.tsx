@@ -28,7 +28,7 @@ const loading = () => {
 
 export const Styled_Loading = {
   Container: styled.div`
-    width: 1512px;
+    width: 1115px;
     min-height: calc(100vh - (344px * 2));
     display: flex;
     flex-flow: column;
@@ -37,17 +37,17 @@ export const Styled_Loading = {
     gap: 10px;
 
     ${DeviceQuery.bigScreen`
-      width: calc(1512px / ${screenScale.bigScreen});
+      width: calc(1115px / ${screenScale.bigScreen});
       min-height: calc(100vh - (344px * 2) / ${screenScale.bigScreen});
       gap: calc(10px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(1512px / ${screenScale.desktop});
+      width: calc(1115px / ${screenScale.desktop});
       min-height: calc(100vh - (344px * 2) / ${screenScale.desktop});
       gap: calc(10px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(1512px / ${screenScale.tablet});
+      width: calc(1115px / ${screenScale.tablet});
       min-height: calc(100vh - (344px * 2) / ${screenScale.tablet});
       gap: calc(10px / ${screenScale.tablet});
     `}

@@ -7,11 +7,11 @@ import Pagination from 'react-js-pagination';
 
 interface FullType {
   message?: string;
-  deleteClicked: boolean;
   width: number;
+  deleteClicked: boolean;
 }
 
-const Full = ({ message, deleteClicked, width }: FullType) => {
+const Full = ({ message, width, deleteClicked }: FullType) => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
   const [page, setPage] = useState<number>(1);
   const itemsCountPerPage = 5;

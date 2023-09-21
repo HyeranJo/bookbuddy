@@ -13,7 +13,6 @@ const FAQ = () => {
 
         const handleDropdownToggle = () => {
           setIsDown(!isDown);
-          console.log(isDown);
         };
         return (
           <div key={idx}>

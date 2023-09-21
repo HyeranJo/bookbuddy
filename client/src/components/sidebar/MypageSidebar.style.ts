@@ -17,22 +17,22 @@ export const Styled_MypageSidebar = {
     `}
   `,
   Div: styled.div`
-    width: 200px;
+    width: 215px;
     height: 100vh;
 
-    border-right: 2px solid var(--light-gray-color);
+    border-right: 1px solid var(--light-gray-color);
 
     display: flex;
     flex-flow: column;
 
     ${DeviceQuery.bigScreen`
-      width: calc(200px / ${screenScale.bigScreen});
+      width: calc(215px / ${screenScale.bigScreen});
     `}
     ${DeviceQuery.desktop`
-      width: calc(200px / ${screenScale.desktop});
+      width: calc(215px / ${screenScale.desktop});
     `}
     ${DeviceQuery.tablet`
-      width: calc(200px / ${screenScale.tablet});
+      width: calc(215px / ${screenScale.tablet});
     `}
   `,
   TitleDiv: styled.div`

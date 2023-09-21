@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Styled_Layout } from '../BlankPageLayout';
 import { Styled_Detail } from './Detail.style';
 import AskTable from '../../components/table/cs_apply/CSTable';
@@ -11,6 +11,7 @@ const Detail = () => {
   const params = useParams();
   const boardId = params.boardId;
   const [csDetail, setCSDetail] = useRecoilState(CSDetailAtom);
+  const [deleteClicked, setDeleteClicked] = useState(false);
 
   useEffect(() => {
     if (boardId) {
@@ -55,7 +56,12 @@ const Detail = () => {
               </div>
             </div>
             <div>
-              <AskTable title="1:1 문의 리스트" width={1300} />
+              <AskTable
+                title="1:1 문의 리스트"
+                width={1300}
+                setDeleteClicked={setDeleteClicked}
+                deleteClicked={deleteClicked}
+              />
             </div>
           </div>
         </Styled_Detail.Container>
