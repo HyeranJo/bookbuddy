@@ -25,21 +25,23 @@ const Recent = ({
   setDeleteClicked,
   deleteClicked,
 }: RecentType) => {
-  const [orderHistory, setOrderHistory] = useState<OrderHistoryType>();
-  const historyFilter =
-    orderHistory && orderHistory.data.filter(v => v.status === '주문완료');
+  const [filteredOrderHistory, setFilteredOrderHistory] =
+    useState<OrderHistoryType>();
   const [deleteOrderData, setDeleteOrderData] =
     useState<patchOrderStatusType>();
   const [page, setPage] = useState<number>(1);
   const itemsCountPerPage = 5;
   const [isYesClicked, setIsYesClicked] = useRecoilState(isYesClickedAtom);
   const [isOpen, setIsOpen] = useState(false);
+  const recent = true;
 
   useEffect(() => {
-    getOrderHistory(page, itemsCountPerPage).then((data: OrderHistoryType) => {
-      setOrderHistory(data);
-      setDeleteClicked(false);
-    });
+    getOrderHistory(page, itemsCountPerPage, recent).then(
+      (data: OrderHistoryType) => {
+        setFilteredOrderHistory(data);
+        setDeleteClicked(false);
+      },
+    );
   }, [page, deleteClicked]);
 
   useEffect(() => {
@@ -71,8 +73,8 @@ const Recent = ({
             </tr>
           </thead>
           <tbody>
-            {historyFilter && historyFilter.length > 0 ? (
-              historyFilter.map((v, i) => {
+            {filteredOrderHistory && filteredOrderHistory.data.length > 0 ? (
+              filteredOrderHistory.data.map((v, i) => {
                 return (
                   <Styled_History.Tr key={i}>
                     <td>{new Date(v.createdAt).toLocaleDateString()}</td>
@@ -109,11 +111,11 @@ const Recent = ({
           </tbody>
         </Styled_History.Table>
         <Styled_PaginationBox.Div>
-          {historyFilter && (
+          {filteredOrderHistory && (
             <Pagination
               activePage={page}
               itemsCountPerPage={itemsCountPerPage}
-              totalItemsCount={historyFilter.length}
+              totalItemsCount={filteredOrderHistory.pageInfo.totalElements}
               pageRangeDisplayed={5}
               prevPageText={'<'}
               nextPageText={'>'}
