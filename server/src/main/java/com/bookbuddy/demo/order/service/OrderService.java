@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bookbuddy.demo.order.entity.Order.ORDER_STATUS.ORDER_COMPLETED;
+
 
 @Transactional(readOnly = true)
 @Slf4j
@@ -76,5 +78,9 @@ public class OrderService {
                     order.setStatus(status);
                     return orderRepository.save(order);
                 }).collect(Collectors.toList());
+    }
+
+    public Page<Order> findOrdersCompletedByEmail(PageRequest pageRequest, String email) {
+        return orderRepository.findOrdersByEmailAndStatus(pageRequest, email, ORDER_COMPLETED);
     }
 }
