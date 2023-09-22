@@ -258,7 +258,7 @@
   <tbody>
     <tr>
       <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/03119e37-5366-4fd0-b880-85134c140675"></th>
-      <th><img src=""></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/4cbe8fae-bfae-4a32-bc76-986fbbc537c4"></th>
     </tr>
   </tbody>
 </table>
@@ -271,7 +271,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="" width="80%"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/27e57506-a203-4dec-bcac-26f148c10c6a" width="80%"></th>
     </tr>
   </tbody>
 </table>
@@ -342,12 +342,24 @@
 <table>
   <thead>
     <tr>
-      <th>admin 시연</th>
+      <th>admin 1:1 문의 답변 관리 시연</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th><img src="" width="80%"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/fe349693-ba64-4c27-98b0-b43a19abaf84" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th>admin 전체 배송 상태 관리 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/af63268d-bfc9-48af-b8f1-58c44aac80f6" width="80%"></th>
     </tr>
   </tbody>
 </table>
@@ -363,7 +375,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><img src="" width="80%"></th>
+      <th><img src="https://github.com/AngryDoggaebi/bookbuddy/assets/120698922/c1ed4c34-d309-4cb6-932c-254e8e489a02" width="80%"></th>
     </tr>
   </tbody>
 </table>
