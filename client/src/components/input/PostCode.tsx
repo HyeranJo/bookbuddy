@@ -1,6 +1,5 @@
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
-// import ReactModal from 'react-modal';
 import Modal from 'react-modal';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
@@ -35,21 +34,34 @@ const PostCode = () => {
   }
 
   return (
-    <>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="PostCode Modal"
-        appElement={document.getElementById('root') || undefined}
-      >
-        <DaumPostcode
-          onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
-          autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-          defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
-        />
-      </Modal>
-    </>
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel="PostCode Modal"
+      appElement={document.getElementById('root') || undefined}
+      portalClassName="portal"
+    >
+      <div style={{ display: 'flex', justifyContent: 'end' }}>
+        <button
+          onClick={closeModal}
+          style={{
+            border: '0px',
+            backgroundColor: 'white',
+            fontSize: 'var(--basic-font-size)',
+            cursor: 'pointer',
+          }}
+        >
+          X
+        </button>
+      </div>
+
+      <DaumPostcode
+        onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
+        autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
+        defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
+      />
+    </Modal>
   );
 };
 

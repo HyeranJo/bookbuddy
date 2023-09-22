@@ -50,7 +50,8 @@ public class Book {
         BOOK_SORT_DEFAULT("default"),
         BOOK_SORT_NAME("name"),
         BOOK_SORT_PRICE("price"),
-        BOOK_SORT_BOOKMARK("bookmark");
+        BOOK_SORT_BOOKMARK("bookmark"),
+        BOOK_SORT_NEW("new");
 
         private String name;
         BOOK_SORT(String name) {
@@ -73,6 +74,9 @@ public class Book {
         }
         public boolean isBookmark() {
             return this.name.equals(BOOK_SORT_BOOKMARK.name);
+        }
+        public boolean isNew() {
+            return this.name.equals(BOOK_SORT_NEW.name);
         }
     }
 

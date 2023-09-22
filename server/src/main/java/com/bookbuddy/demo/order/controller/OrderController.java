@@ -23,7 +23,7 @@ import javax.validation.constraints.Positive;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
-    /* 장바구니 결제 */
+    /* 주문하기 */
     @PostMapping("/ship")
     public ResponseEntity createOrder(@RequestBody @Valid OrderDto.Post orderDto,
                                         Authentication authentication) {
@@ -32,15 +32,7 @@ public class OrderController {
 
         return new ResponseEntity<>(mapper.orderToOrderResponseDto(order), HttpStatus.CREATED);
     }
-    /* 바로 결제 */
-    @PostMapping("/buy")
-    public ResponseEntity createOrderBuy(@RequestBody @Valid OrderDto.Post orderDto,
-                                           Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
-        Order order = orderService.createOrder(mapper.orderPostDtoToOrder(orderDto), orderDto, principal.getUsername());
-
-        return new ResponseEntity<>(mapper.orderToOrderResponseDto(order), HttpStatus.CREATED);
-    }
+    /* 회원의 주문내역 조회 */
     @GetMapping("/ship")
     public ResponseEntity getOrders(@RequestParam("page") @Positive int page,
                                       @RequestParam("size") @Positive int size,
@@ -48,7 +40,18 @@ public class OrderController {
         User principal = (User) authentication.getPrincipal();
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Order> orders = orderService.findOrders(pageRequest, principal.getUsername());
+        Page<Order> orders = orderService.findOrdersByEmail(pageRequest, principal.getUsername());
+        return new ResponseEntity(new MultiResponseDto(mapper.ordersToOrderResponseDtos(orders.getContent()), orders), HttpStatus.OK);
+    }
+    /* 주문상태가 주문완료인 주문내역 조회 */
+    @GetMapping("/ship/completed")
+    public ResponseEntity getOrdersCompleted(@RequestParam("page") @Positive int page,
+                                             @RequestParam("size") @Positive int size,
+                                             Authentication authentication) {
+        User principal = (User) authentication.getPrincipal();
+
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        Page<Order> orders = orderService.findOrdersCompletedByEmail(pageRequest, principal.getUsername());
         return new ResponseEntity(new MultiResponseDto(mapper.ordersToOrderResponseDtos(orders.getContent()), orders), HttpStatus.OK);
     }
 }

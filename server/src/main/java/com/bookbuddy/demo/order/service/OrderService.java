@@ -1,9 +1,8 @@
 package com.bookbuddy.demo.order.service;
 
+import com.bookbuddy.demo.admin.order.dto.AdminOrderStatusDto;
 import com.bookbuddy.demo.book.entity.Book;
 import com.bookbuddy.demo.book.service.BookService;
-import com.bookbuddy.demo.cart.entity.Cart;
-import com.bookbuddy.demo.cart.service.CartService;
 import com.bookbuddy.demo.global.exception.BusinessException;
 import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.member.entity.Member;
@@ -21,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.bookbuddy.demo.order.entity.Order.ORDER_STATUS.ORDER_COMPLETED;
 
 
 @Transactional(readOnly = true)
@@ -52,12 +53,34 @@ public class OrderService {
 
         return saveOrder;
     }
+    public Order findOrder(long id) {
+        return findVerifyOrder(id);
+    }
     private Order findVerifyOrder(long id) {
         return orderRepository.findById(id)
                 .orElseThrow(()->new BusinessException(ExceptionCode.ORDER_NOT_FOUND));
     }
 
-    public Page<Order> findOrders(PageRequest pageRequest, String email) {
+    public Page<Order> findOrdersByEmail(PageRequest pageRequest, String email) {
         return orderRepository.findAllByEmail(pageRequest, email);
+    }
+
+    public Page<Order> findOrders(PageRequest pageRequest) {
+        return orderRepository.findAll(pageRequest);
+    }
+
+    @Transactional
+    public List<Order> updateOrderStatus(AdminOrderStatusDto.Patch orderStatusDto) {
+        Order.ORDER_STATUS status = Order.ORDER_STATUS.of(orderStatusDto.getOrderStatus());
+        return orderStatusDto.getOrderIds().stream()
+                .map(e->{
+                    Order order = findOrder(e);
+                    order.setStatus(status);
+                    return orderRepository.save(order);
+                }).collect(Collectors.toList());
+    }
+
+    public Page<Order> findOrdersCompletedByEmail(PageRequest pageRequest, String email) {
+        return orderRepository.findOrdersByEmailAndStatus(pageRequest, email, ORDER_COMPLETED);
     }
 }

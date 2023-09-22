@@ -1,14 +1,15 @@
 package com.bookbuddy.demo.board.entity;
 
+import com.bookbuddy.demo.admin.reply.entity.Reply;
 import com.bookbuddy.demo.audit.Auditable;
 import com.bookbuddy.demo.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
+import static com.bookbuddy.demo.board.entity.Board.BOARD_STATUS.BOARD_STATUS_RECEIPT;
 
 @Getter
 @Entity
@@ -25,11 +26,32 @@ public class Board extends Auditable {
     @ManyToOne
     @JoinColumn(name="MEMBER_ID")
     private Member member;
+    @OneToOne(mappedBy = "board")
+    private Reply reply;
+    @Enumerated(value=EnumType.ORDINAL)
+    private BOARD_STATUS status = BOARD_STATUS_RECEIPT;
+
+    @Getter
+    public enum BOARD_STATUS {
+        BOARD_STATUS_RECEIPT("접수"),
+        BOARD_STATUS_COMPLETED("답변완료");
+
+        private String message;
+        BOARD_STATUS(String message) {
+            this.message = message;
+        }
+    }
 
     public void addMember(Member member) {
         this.member = member;
         if(! member.getBoards().contains(this)) {
             member.getBoards().add(this);
+        }
+    }
+    public void addReply(Reply reply) {
+        this.reply = reply;
+        if(this.reply.getBoard() != this) {
+            this.reply.addBoard(this);
         }
     }
 
@@ -42,6 +64,10 @@ public class Board extends Auditable {
         this.id = id;
         this.title = title;
         this.content = content;
+    }
+
+    public void setStatus(BOARD_STATUS status) {
+        this.status = status;
     }
 
     public void setTitle(String title) {

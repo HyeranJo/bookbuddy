@@ -2,7 +2,7 @@ import Styled_FQA from './FAQ.style';
 import { ReactComponent as ArrowDown } from '../.././icons/arrowDown.svg';
 import { ReactComponent as ArrowUp } from '../.././icons/arrowUp.svg';
 import { useState } from 'react';
-import { FAQdata } from './faqData';
+import { FAQdata } from '../../constants/faqData';
 
 const FAQ = () => {
   return (
@@ -13,11 +13,10 @@ const FAQ = () => {
 
         const handleDropdownToggle = () => {
           setIsDown(!isDown);
-          console.log(isDown);
         };
         return (
-          <>
-            <Styled_FQA.Question key={idx}>
+          <div key={idx}>
+            <Styled_FQA.Question>
               <Styled_FQA.QuestionTitle>{el.title}</Styled_FQA.QuestionTitle>
               <Styled_FQA.ArrowWrapper onClick={handleDropdownToggle}>
                 {isDown ? <ArrowUp /> : <ArrowDown />}
@@ -28,7 +27,7 @@ const FAQ = () => {
                 <Styled_FQA.Answer>{el.answer}</Styled_FQA.Answer>
               </Styled_FQA.AnswerContainer>
             )}
-          </>
+          </div>
         );
       })}
     </Styled_FQA.Container>

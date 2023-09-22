@@ -1,27 +1,26 @@
 import { styled } from 'styled-components';
-import { Styled_Layout } from '../BlankPageLayout';
+import { DeviceQuery, screenScale } from '../../utils/Responsive';
 
 const Styled_Customer = {
-  Main: styled(Styled_Layout.Container)`
-    /* flex-direction: column; */
-    padding-left: 200px;
-  `,
-  Section: styled(Styled_Layout.Div_WithNoSidebar)`
+  Container: styled.div`
     display: flex;
-    flex-direction: column;
-    margin-bottom: 200px;
-    gap: 100px;
-  `,
-  Title: styled.h1`
-    font-size: var(--title-font-size);
-    margin-bottom: 20px;
-    margin-top: 44px;
+    flex-flow: column;
   `,
   Warpper: styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 100px;
+    align-items: center;
+    gap: 150px;
+
+    ${DeviceQuery.bigScreen`
+      gap: calc(150px / ${screenScale.bigScreen});
+    `}
+    ${DeviceQuery.desktop`
+      gap: calc(150px / ${screenScale.desktop});
+    `}
+    ${DeviceQuery.tablet`
+      gap: calc(150px / ${screenScale.tablet});
+    `}
   `,
 };
 

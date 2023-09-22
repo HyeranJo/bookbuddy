@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.bookbuddy.demo.order.entity.Order.ORDER_STATUS.*;
+
 @Slf4j
 @Getter
 @Table(name="ORDERS")
@@ -45,10 +47,41 @@ public class Order extends Auditable {
     @JoinColumn(name="MEMBER_ID")
     @ManyToOne
     private Member member;
+    @Enumerated(value = EnumType.ORDINAL)
+    private ORDER_STATUS status = ORDER_COMPLETED;
 
     @JsonBackReference
     @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<OrderBook> orderBooks = new ArrayList<>();
+
+    public void setStatus(ORDER_STATUS status) {
+        this.status = status;
+    }
+
+    @Getter
+    public enum ORDER_STATUS {
+        ORDER_COMPLETED("주문완료"),
+        ORDER_PAYMENT_COMPLETED("결제완료"),
+        ORDER_DELIVERY_PREPARE("배송준비중"),
+        ORDER_DELIVERY("배송중"),
+        ORDER_DELIVERY_COMPLETE("배송완료"),
+        ORDER_CANCEL("취소");
+
+        private String message;
+
+        ORDER_STATUS(String message) {
+            this.message = message;
+        }
+
+        public static ORDER_STATUS of(String orderStatus) {
+            for(ORDER_STATUS status : ORDER_STATUS.values()) {
+                if(status.getMessage().equals(orderStatus)) {
+                    return status;
+                }
+            }
+            return ORDER_COMPLETED;
+        }
+    }
 
     public void addOrderBooks(List<OrderBook> orderBooks) {
         this.orderBooks = orderBooks;
