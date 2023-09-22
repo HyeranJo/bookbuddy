@@ -353,3 +353,19 @@
 </table>
 <br />
 
+## 반응형
+
+<table>
+  <thead>
+    <tr>
+      <th>반응형 시연</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><img src="" width="80%"></th>
+    </tr>
+  </tbody>
+</table>
+<br />
+
