@@ -199,19 +199,34 @@ export const getCSDetail = async (boardId: string) => {
 export const getOrderHistory = async (
   page: number,
   itemsCountPerPage: number,
+  recent?: boolean,
 ) => {
   try {
-    const response = await axios.get(
-      `${SERVER_HOST}/order/ship?page=${page}&size=${itemsCountPerPage}`,
-      {
-        headers: {
-          'ngrok-skip-browser-warning': true,
-          Authorization: getCookie('accessToken'),
+    if (recent === true) {
+      const response = await axios.get(
+        `${SERVER_HOST}/order/ship/completed?page=${page}&size=${itemsCountPerPage}`,
+        {
+          headers: {
+            'ngrok-skip-browser-warning': true,
+            Authorization: getCookie('accessToken'),
+          },
         },
-      },
-    );
-    const result = response.data;
-    return result;
+      );
+      const result = response.data;
+      return result;
+    } else {
+      const response = await axios.get(
+        `${SERVER_HOST}/order/ship?page=${page}&size=${itemsCountPerPage}`,
+        {
+          headers: {
+            'ngrok-skip-browser-warning': true,
+            Authorization: getCookie('accessToken'),
+          },
+        },
+      );
+      const result = response.data;
+      return result;
+    }
   } catch (error) {
     console.log(error);
     throw error;
