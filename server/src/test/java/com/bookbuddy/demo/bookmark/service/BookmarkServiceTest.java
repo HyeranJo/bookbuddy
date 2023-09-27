@@ -5,6 +5,8 @@ import com.bookbuddy.demo.book.repository.BookRepository;
 import com.bookbuddy.demo.book.service.BookService;
 import com.bookbuddy.demo.bookmark.entity.Bookmark;
 import com.bookbuddy.demo.bookmark.repository.BookmarkRepository;
+import com.bookbuddy.demo.global.exception.BusinessException;
+import com.bookbuddy.demo.global.exception.ExceptionCode;
 import com.bookbuddy.demo.member.entity.Member;
 import com.bookbuddy.demo.member.service.MemberService;
 import org.junit.jupiter.api.Assertions;
@@ -29,6 +31,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @Transactional
@@ -78,22 +82,19 @@ class BookmarkServiceTest {
     @DisplayName("북마크가 이미 존재할 때 북마크제거")
     void 북마크가이미존재할때북마크제거() {
         // given
-        memberService.createMember(new Member("test@test.com", "test1234!"));
-        Member findMember = memberService.findMember("test@test.com");
+        Member member = new Member("test@test.com", "test1234!");
+        Book book = new Book("test");
 
-        bookRepository.save(new Book("test"));
-        Book findBook = bookService.findBook("test");
+        given(bookmarkRepository.findByMemberAndBook(Mockito.any(Member.class), Mockito.any(Book.class)))
+                .willReturn(Optional.of(new Bookmark()));
 
         // when
-        bookmarkService.createBookmark("test@test.com", "test");
-        Optional<Bookmark> findBookmark = bookmarkRepository.findByMemberAndBook(findMember, findBook);
-        Bookmark result = null;
-        if(findBookmark.isPresent()) {
-            bookmarkRepository.delete(findBookmark.get());
+        Optional<Bookmark> bookmark = bookmarkRepository.findByMemberAndBook(member, book);
+        if(bookmark.isPresent()) {
+            bookmarkRepository.delete(bookmark.get());
         }
-
         // then
-        assertThat(result).isNull();
+        verify(bookmarkRepository, times(1)).delete(Mockito.any(Bookmark.class));
     }
 
     @Test
