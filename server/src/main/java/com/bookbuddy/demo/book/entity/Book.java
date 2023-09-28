@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Book {
     private String imgSrc;
     @JsonBackReference
     @OneToMany(mappedBy = "book")
-    private List<Bookmark> bookmarks;
+    private List<Bookmark> bookmarks = new ArrayList<>();
     @JsonBackReference
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Cart> carts;

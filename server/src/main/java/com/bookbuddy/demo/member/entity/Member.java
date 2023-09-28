@@ -31,7 +31,7 @@ public class Member {
     private List<String> roles = new ArrayList<>();
     @JsonBackReference
     @OneToMany(mappedBy = "member")
-    private List<Bookmark> bookmarks;
+    private List<Bookmark> bookmarks = new ArrayList<>();
     @JsonBackReference
     @OneToMany(mappedBy = "member")
     private List<Cart> carts;
