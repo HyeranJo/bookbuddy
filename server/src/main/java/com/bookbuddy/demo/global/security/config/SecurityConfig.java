@@ -105,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             http
                     .addFilter(jwtAuthenticationFilter)
-                    .addFilterBefore(jwtVerifyFilter, JwtAuthenticationFilter.class);
+                    .addFilterAfter(jwtVerifyFilter, JwtAuthenticationFilter.class);
         }
     }
 
